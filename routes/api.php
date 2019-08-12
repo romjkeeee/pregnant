@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('register', 'API\TokenAuthController@register');
+Route::post('authenticate', 'API\TokenAuthController@authenticate');
+Route::post('get_ads', 'API\TokenAuthController@get_ads', ['middleware' => 'jwt.auth']);
+
+
 Route::get('user/getUserList', 'UserApiController@getUserList');
 Route::get('user/userAdd', 'UserApiController@userAdd');
 Route::get('user/getGroupList', 'UserApiController@getGroupList');
@@ -31,3 +36,4 @@ Route::get('course/addCourse', 'CourseApiController@addCourse');
 Route::get('coupon/getCouponList', 'CouponApiController@getCouponList');
 
 Route::get('cat/getCateoryList', 'CatApiController@getCateoryList');
+
