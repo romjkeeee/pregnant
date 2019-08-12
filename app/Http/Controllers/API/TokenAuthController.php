@@ -32,6 +32,7 @@ class TokenAuthController extends Controller
         $credentials = $request->all();
         $credentials['password'] = Hash::make($request->input('password'));
         $new_user = User::create($credentials);
+        return response()->json(['success' => 'user registered'], 200);
     }
     public function authenticate(Request $request)
     {
