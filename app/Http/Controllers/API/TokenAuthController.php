@@ -54,17 +54,8 @@ class TokenAuthController extends Controller
     }
     public function get_ads(Request $request)
     {
-        if (!$request->email)
-            return response()->json(['error' => 'need email'], 400);
-        if (!$request->password)
-            return response()->json(['error' => 'need password'], 401);
-        if (!$request->token)
-            return response()->json(['error' => 'token'], 402);
-
         try {
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 403);
-            }
+            $user = JWTAuth::parseToken()->authenticate();
         } catch (TokenExpiredException $e) {
             return response()->json(['token_expired'], $e->getStatusCode());
         } catch (TokenInvalidException $e) {
