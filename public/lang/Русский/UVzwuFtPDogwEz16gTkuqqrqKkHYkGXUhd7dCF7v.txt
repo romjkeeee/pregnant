@@ -1,0 +1,5 @@
+/* RUSSIAN */<br>
+return [<br>
+	'var1' =&gt; 'translate12',<br>
+	'var2' =&gt; 'translate2',<br>
+];

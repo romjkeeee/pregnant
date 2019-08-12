@@ -1,0 +1,11 @@
+<!--?php<br /-->
+<br>
+/* RUSSIAN */<br>
+return [1<br>
+<br>
+	'var1' =&gt; 'translate',<br>
+	'var2' =&gt; 'translate',<br>
+<br>
+];<br>
+<br>
+?&gt;
