@@ -26,7 +26,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/users';
+    protected $redirectTo = '/admin/med';
 
     /**
      * Create a new controller instance.
@@ -35,7 +35,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-//		var_dump(Hash::make('123456'));
+		//var_dump(Hash::make('123456'));
         $this->middleware('guest')->except('logout');
     }
 }

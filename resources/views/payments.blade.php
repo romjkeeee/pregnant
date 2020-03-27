@@ -3,24 +3,11 @@
 @section('content')
         <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
-
         <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
 			<div class="navbar-header">
 				<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
 			</div>		
-            <ul class="nav navbar-top-links navbar-right">
-				<li>
-					<a href="/admin/trash"><i class="fa fa-trash"></i> Корзина</a>
-				</li>			
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-language"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li><a href="javascript:void(0);">Русский</a></li>
-                        <li><a href="javascript:void(0);">English</a></li>
-					</ul>
-				</li>
+            <ul class="nav navbar-top-links navbar-right">		
                 <li>
                     <a href="javascript:void(0);" class="logout_do">
                         <i class="fa fa-sign-out"></i> Выйти
@@ -31,7 +18,7 @@
         </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-8">
-                    <h2>Список платежей</h2>
+                    <h2>Платежи</h2>
 					@if (session('error'))
 						<div class="alert alert-danger">{{ session('error') }}</div>
 					@endif
@@ -40,10 +27,10 @@
 					@endif					
                     <ol class="breadcrumb">
                         <li>
-                            <a href="/admin/users">Панель администратора</a>
+                            <a href="/admin/arus">Панель администратора</a>
                         </li>
                         <li>
-                            <a href="/admin/payments/">Платежи</a>
+                            <a href="/admin/payments">Платежи</a>
                         </li>
                         <li class="active">
                             <strong>Список платежей</strong>
@@ -52,29 +39,45 @@
                 </div>
             </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-            <div class="row">		
+            <div class="row">	
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-content">
                             <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                 <thead>
                                 <tr>
-                                    <th data-toggle="true">ID</th>
-									<th data-toggle="true">Пользователь</th>
-									<th data-toggle="true">Объявление</th>
-									<th data-toggle="true">Дата оплаты</th>
-									<th data-toggle="true">Статус</th>
+                                    <th data-toggle="true">#</th>
+									<th data-toggle="true">Заявка</th>
+									<th data-toggle="true">Арендатор</th>
+									<th data-toggle="true">Сумма</th>
+									<th data-toggle="true">Дата</th>
                                     <th class="text-right" data-sort-ignore="true">Действия</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-									<tr>
-										<td colspan="6">Платежи не зарегистрированы</td>
-									</tr>
+									@if ($list->count())
+										@foreach ($list as $key => $record)
+											<tr class="footable-odd">
+												<td class="footable-visible">{{ $record->id }}</td>
+												<td class="footable-visible">{!! $record->order !!}</td>
+												<td class="footable-visible">{!! $record->arenus !!}</td>
+												<td class="footable-visible">{{ $record->amount }}</td>
+												<td class="footable-visible">{{ date('d.m.Y - H:i', strtotime($record->created_at)) }}</td>
+												<td class="text-right footable-visible footable-last-column">
+													<div class="btn-group">
+														<a href="/admin/payments/edit/{{ $record->id }}" class="btn-white btn btn-xs" style="display: none;"><i class="fa fa-pencil"></i></a>
+														<a href="/admin/delete_record/payments/{{ $record->id }}" class="btn-white btn btn-xs"><i class="fa fa-close"></i></a>
+													</div>
+												</td>
+											</tr>
+										@endforeach
+									@else
+										<tr><td colspan="6">Нет данных</td></tr>
+									@endif
                                 </tbody>
                                 <tfoot>
                                 <tr>
-                                    <td colspan="7">
+                                    <td colspan="10">
                                         <ul class="pagination pull-right"></ul>
                                     </td>
                                 </tr>
@@ -84,9 +87,6 @@
                         </div>
                     </div>
                 </div>
-				<div class="col-lg-12">
-					
-				</div>
             </div>
 
 

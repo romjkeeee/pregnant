@@ -6,66 +6,27 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 
-use App\Category;
-use App\User;
-use App\Ads;
+use App\Cat;
 
 class AdminCatsController extends Controller {
 	
     public function __construct() {
         $this->middleware('auth');
     }
-	
-	/* Генерация ID */
-	public function random_unique($length) {
-		
-		$symbols = '1234567890';
-		$return = '';
-		
-		for ($a = 0; $a < $length; $a++) {
-			$return .= substr($symbols, rand(0, strlen($symbols) - 1), 1);
-		}
-		
-		return $return;
-		
-	}	
-	
-	/* Список рубрик */
+
     public function index(Request $request) {
 		
-		$list = Category::orderBy('pos', 'asc')->get();
-		$search = '';
+		$list = Cat::orderBy('id', 'desc')->get();
+		$search = $request->input('query');
 		
-		if ($request->input('nr')) {
-			
-			$sq = $request->input('nr');
-			$sq = urldecode($sq);
-			
-			$list = Category::where('name', 'LIKE', '%'.$sq.'%');
-			$list = $list->get();
-
-			$search = $sq;
-			
+		if ($search) {
+			$list = Cat::where('name', 'LIKE', '%'.$search.'%')->get();
 		}
 		
-		if ($list->count()) {
-			foreach ($list as $rec) {
-				
-				$rec->count = 0;
-				/* Кол-во объявлений */
-				$ads = Ads::where(['category_id' => $rec->id])->get();
-				if ($ads->count()) {
-					$rec->count = $ads->count();
-				}
-			
-			}
-		}
-						
 		/* */
 		$return = [
 		
-			'page_title' => 'Список рубрик',
-			
+			'page_title' => 'Категории одежды',
 			'list' => $list,
 			'search' => $search,
 		
@@ -75,60 +36,14 @@ class AdminCatsController extends Controller {
 		
     }
 	
-	/* Информация о рубрике */
-	public function info($id) {
-		
-		/* Ищем категорию */
-		$rec = Category::find($id);
-		if (!$rec) {
-			return redirect('/admin/cats')->with('error', 'Рубрика не найдена');
-		}
-		
-		/* Объявления из рубрики */
-		$list = Ads::where(['category_id' => $id])->orderBy('id', 'desc')->get();
-		if ($list->count()) {
-			foreach ($list as $rec1) {
-				
-				/* Категория */
-				$rec1->category = 'не указана';
-				$category = Category::find($rec1->category_id);
-				if ($category) {
-					$rec1->category = '<a href="/admin/cats/info/'.$rec1->category_id.'">'.$category->name.'</a>';
-				}
-				
-				/* Кто разместил */
-				$rec1->author = 'не указано';
-				$author = User::find($rec1->user_id);
-				if ($author) {
-					$rec1->author = $author->name;
-				}
-				
-			}
-		}		
-		
-		/* */
-		$return = [
-		
-			'page_title' => 'Рубрика '.$rec->name,
-			
-			'rec' => $rec,
-			'list' => $list,
-		
-		];
-		
-		return view('cat_info', $return);
-		
-	}
-	
-	/* Добавить рубрику */
 	public function add(Request $request) {
 		
-		$rec = [
-			
-			'pos' => 0,
-			'name' => '',
-			'logo' => '',
-			'active' => 1,
+		$rec = [	
+		
+			'parent_id' => '',			
+			'name' => '',			
+			'icon' => '',	
+			'active' => 1,	
 			
 		];
 		
@@ -136,113 +51,102 @@ class AdminCatsController extends Controller {
 		if ($request->isMethod('post')) {
 						
 			/* Правила валидации */
-			$rules = [
-				'name' => ['required'],			
+			$rules = [			
+				'name' => ['required'],				
 			];
 			
-			$validator_msg = [ 
-				'name.required' => 'Поле "Название" обязательно для заполнения!',			
+			$validator_msg = [ 								
+				'name.required' => 'Поле "Название" обязательно для заполнения!',						
 			];
 			
 			$valid = Validator::make($request->all(), $rules, $validator_msg)->validate();
 			
-			/* Иконка */
-			$thumb = '';
-			
-			if ($request->file('thumb')) {
-				
-				$thumb = $request->file('logo')->store(
-					'thumb/'.rand(100000, 999999), 'thumb'
-				);
-
-			}			
+			/* Заливка иконки */
+			$icon = null;
+			if ($request->file('icon')) {
+				$icon = $request->file('icon')->store('cats/'.$request->input('token'), 'cats');
+			}
 			
 			/* */
-			$new = new Category;
+			$new = new Cat;		
 			
-			$new->unique_id = $this->random_unique(6);
-			$new->pos = $request->input('pos');
+			$new->parent_id = $request->input('parent_id');
 			$new->name = $request->input('name');
-			$new->thumb = $thumb;
+			$new->icon = $icon;
 			$new->active = $request->input('active');
 			
 			$new->save();
 			
-			return redirect('/admin/cats')->with('success', 'Рубрика добавлена');
+			return redirect('/admin/cats')->with('success', 'Категория добавлена');
 			
 		}
 		
 		/* */
 		$return = [
 		
-			'page_title' => 'Добавить рубрику',
+			'page_title' => 'Добавить категорию',
 			'rec' => (object)$rec,
+	    	'categories' => Cat::orderBy('name', 'asc')->get(),
 			
-		];
+		]; 
 		
 		return view('cat_form', $return);
 		
 	}
 	
-	/* Редактировать рубрику */
 	public function edit($id, Request $request) {
 				
-		$rec = Category::find($id);
+		$rec = Cat::find($id);
 		if (!$rec) {
-			return redirect('/admin/cats')->with('error', 'Рубрика не найдена');
+			return redirect('/admin/cats')->with('error', 'Категория не найдена!');
 		}
 		
 		/* Сохранение данных */
 		if ($request->isMethod('post')) {
 						
 			/* Правила валидации */
-			$rules = [
-				'name' => ['required'],			
+			$rules = [			
+				'name' => ['required'],				
 			];
 			
-			$validator_msg = [ 
-				'name.required' => 'Поле "Название" обязательно для заполнения!',			
+			$validator_msg = [ 								
+				'name.required' => 'Поле "Название" обязательно для заполнения!',						
 			];
 			
 			$valid = Validator::make($request->all(), $rules, $validator_msg)->validate();
 			
-			/* Иконка */
-			$thumb = $rec->thumb;
-			
-			if ($request->file('thumb')) {
-				
-				$thumb = $request->file('logo')->store(
-					'thumb/'.rand(100000, 999999), 'thumb'
-				);
-
-			}			
+			/* Заливка иконки */
+			$icon = $rec->icon;
+			if ($request->file('icon')) {
+				$icon = $request->file('icon')->store('cats/'.$request->input('token'), 'cats');
+			}
 			
 			/* */
-			$new = $rec;
+			$new = $rec;		
 			
-			$new->unique_id = $this->random_unique(6);
-			$new->pos = $request->input('pos');
+			$new->parent_id = $request->input('parent_id');
 			$new->name = $request->input('name');
-			$new->thumb = $thumb;
+			$new->icon = $icon;
 			$new->active = $request->input('active');
 			
 			$new->save();
 			
-			return redirect('/admin/cats')->with('success', 'Рубрика добавлена');
+			return redirect('/admin/cats')->with('success', 'Категория обновлена');
 			
 		}
 		
 		/* */
 		$return = [
 		
-			'page_title' => 'Редактировать рубрику',
-			'rec' => (object)$rec,
+			'page_title' => 'Редактировать категорию',
+			'rec' => $rec,
 			'id' => $id,
+	    	'categories' => Cat::orderBy('name', 'asc')->get(),
 			
-		];
+		]; 
 		
 		return view('cat_form', $return);
 		
 	}
-
+	
 }

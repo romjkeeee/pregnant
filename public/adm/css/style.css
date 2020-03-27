@@ -8620,3 +8620,42 @@ body.md-skin {
 	width: 60px;
 	height: 60px;
 }
+.avatar {
+	width: 60px;
+	height: 60px;
+	background: #f1f1f1;
+	border-radius: 4px;
+	display: block;
+	padding: 2px;
+	box-sizing: border-box;
+}
+.avatar.margin {
+	margin: 10px 0;
+}
+.avatar img {
+	width: 100%;
+	height: auto;
+}
+.rate_sel i.fa-star {
+	color: orange;
+}
+.rate_sel i.fa-star-o {
+	color: #e7e7e7;
+}
+.rate_select a i {
+	font-size: 18px;
+}
+.rate_select a i.fa-star {
+	color: orange;
+}
+.rate_select a i.fa-star-o {
+	color: #e7e7e7;
+}
+.ava_block {
+	display: block;
+	width: 100%;
+	background: white;
+	padding: 10px;
+	box-sizing: border-box;
+	margin-bottom: 20px;
+}

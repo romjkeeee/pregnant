@@ -45,6 +45,17 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+		
+        'doctor' => [
+            'driver' => 'session',
+            'provider' => 'doctors',
+        ],
+		
+        'patient' => [
+            'driver' => 'session',
+            'provider' => 'patients',
+        ],
+		
     ],
 
     /*
@@ -69,6 +80,16 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+		
+		'doctors' => [
+			'driver' => 'eloquent',
+			'model' => App\Doctor::class,
+		],
+
+		'patients' => [
+			'driver' => 'eloquent',
+			'model' => App\Patient::class,
+		],
 
         // 'users' => [
         //     'driver' => 'database',

@@ -25,7 +25,7 @@
 					@endif
                     <ol class="breadcrumb">
                         <li>
-                            <a href="/admin/users">Панель администратора</a>
+                            <a href="/admin/users/parents">Панель администратора</a>
                         </li>
                         <li class="active">
 							@if (!isset($id))
@@ -44,10 +44,10 @@
 			<form action="{{ route('admin_settings') }}" method="POST" class="form-horizontal">
 			@csrf
 			<div class="row">
-				<div class="col-lg-4">
+				<div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Настройка цен</h5>
+                            <h5>Настройки</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -56,25 +56,35 @@
                         </div>
                         <div class="ibox-content">
 							<div class="form-group">
-								<label class="col-sm-4 control-label">Цена за 1 месяц <span class="req">*</span></label>
+								<label class="col-sm-4 control-label">Разрешить регистрацию родителей <span class="req">*</span></label>
 								<div class="col-sm-8">
-									<input type="text" name="settings[month]" value="{{ old('month', $rec->month) }}" class="form-control">
+									<select name="parent_reg_av" class="form-control">
+										<option value="1">Да</option>
+										<option value="0">Нет</option>
+									</select>
 								</div>
 							</div>
 							<div class="hr-line-dashed"></div>	
 							<div class="form-group">
-								<label class="col-sm-4 control-label">Цена за 3 месяца <span class="req">*</span></label>
+								<label class="col-sm-4 control-label">Разрешить регистрацию детей <span class="req">*</span></label>
 								<div class="col-sm-8">
-									<input type="text" name="settings[month3]" value="{{ old('month3', $rec->month3) }}" class="form-control">
+									<select name="child_reg_av" class="form-control">
+										<option value="1">Да</option>
+										<option value="0">Нет</option>
+									</select>
 								</div>
 							</div>
 							<div class="hr-line-dashed"></div>								
 							<div class="form-group">
-								<label class="col-sm-4 control-label">Цена за год <span class="req">*</span></label>
+								<label class="col-sm-4 control-label">Разрешить регистрацию тренеров <span class="req">*</span></label>
 								<div class="col-sm-8">
-									<input type="text" name="settings[year]" value="{{ old('year', $rec->year) }}" class="form-control">
+									<select name="trainer_reg_av" class="form-control">
+										<option value="1">Да</option>
+										<option value="0">Нет</option>
+									</select>
 								</div>
-							</div>							
+							</div>
+							<div class="hr-line-dashed"></div>									
                         </div>
                     </div>				
 				</div>

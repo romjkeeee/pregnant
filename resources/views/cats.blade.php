@@ -8,11 +8,6 @@
 				<a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
 			</div>		
             <ul class="nav navbar-top-links navbar-right">		
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-language"></i>
-                    </a>
-				</li>
                 <li>
                     <a href="javascript:void(0);" class="logout_do">
                         <i class="fa fa-sign-out"></i> Выйти
@@ -23,7 +18,7 @@
         </div>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-8">
-                    <h2>Список рубрик</h2>
+                    <h2>Категории одежды</h2>
 					@if (session('error'))
 						<div class="alert alert-danger">{{ session('error') }}</div>
 					@endif
@@ -32,31 +27,28 @@
 					@endif					
                     <ol class="breadcrumb">
                         <li>
-                            <a href="/admin/users">Панель администратора</a>
-                        </li>
-                        <li>
-                            <a href="/admin/cats">Рубрики</a>
+                            <a href="{{ route('admin_dashboard') }}">Панель администратора</a>
                         </li>
                         <li class="active">
-                            <strong>Список рубрик</strong>
+                            <strong>Категории одежды</strong>
                         </li>
                     </ol>
                 </div>
                 <div class="col-lg-4 text-right">
-					<a href="/admin/cats/add" class="btn btn-danger" style="margin-top: 30px;">Добавить</a>
+					<a href="{{ route('admin_cadd') }}" class="btn btn-danger" style="margin-top: 30px;">Добавить</a>
                 </div>
             </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <div class="row">
-				<div class="col-lg-12">
-					<form action="/admin/cats" class="form form-inline">
-						<div class="form-group">
-							<input type="text" name="nr" placeholder="Название..." value="{{ $search }}" class="form-control">
-							<button type="submit" class="btn btn-default">Поиск</button>
-						</div>
-					</form>
-					<br />
-				</div>			
+                    <div class="col-lg-6">
+    					<form action="{{ route('admin_cats') }}" class="form form-inline">
+    						<div class="form-group">
+								<input type="text" name="query" value="{{ $search }}" placeholder="Название категории..." class="form-control">
+    							<button type="submit" class="btn btn-default">Поиск</button>
+    						</div>
+    					</form>
+    					<br>
+    				</div>    	
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-content">
@@ -64,9 +56,9 @@
                                 <thead>
                                 <tr>
                                     <th data-toggle="true">#</th>
+                                    <th data-toggle="true">Иконка</th>
 									<th data-toggle="true">Название</th>
-									<th data-toggle="true">Кол-во объявлений</th>
-									<th data-toggle="true">Статус</th> 
+									<th data-toggle="true">Активная</th>
                                     <th class="text-right" data-sort-ignore="true">Действия</th>
                                 </tr>
                                 </thead>
@@ -74,24 +66,30 @@
 									@if ($list->count())
 										@foreach ($list as $key => $record)
 											<tr class="footable-odd">
-												<td class="footable-visible">{{ ($key + 1) }}</td>		
-												<td class="footable-visible"><a href="/admin/cats/info/{{ $record->id }}">{{ $record->name }}</a></td>
-												<td class="footable-visible">{{ $record->count }}</td>
+												<td class="footable-visible">{{ $record->id }}</td>
 												<td class="footable-visible">
-													@if ($record->active)
-														<span class="badge badge-success">Активна</span>
-													@else
-														<span class="badge badge-warning">Неактивна</span>
+													@if ($record->icon)
+														<img src="/{{ $record->icon }}" style="max-height: 30px; width: auto;">
 													@endif
 												</td>
+												<td class="footable-visible">{{ $record->name }}</td>												
+												<td class="footable-visible">
+													@if ($record->active)
+														<span class="badge badge-success">Активная</span>
+													@else
+														<span class="badge badge-warning">Нет, не активная</span>
+													@endif
+												</td>												
 												<td class="text-right footable-visible footable-last-column">
 													<div class="btn-group">
-														<a href="/admin/cats/edit/{{ $record->id }}" class="btn-white btn btn-xs"><i class="fa fa-pencil"></i></a>
+														<a href="{{ route('admin_cedit', $record->id) }}" class="btn-white btn btn-xs"><i class="fa fa-pencil"></i></a>
 														<a href="/admin/delete_record/cats/{{ $record->id }}" class="btn-white btn btn-xs"><i class="fa fa-close"></i></a>
 													</div>
 												</td>
 											</tr>
 										@endforeach
+									@else
+										<tr><td colspan="5">Нет данных</td></tr>
 									@endif
                                 </tbody>
                                 <tfoot>

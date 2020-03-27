@@ -63,46 +63,38 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
         ],
-		
-		'ava' => [
-		
-			'driver' => 'local',
-			'root' => public_path(),
-			'url' => ''
-		
-		],
-		
-		'photos' => [
-		
-			'driver' => 'local',
-			'root' => public_path(),
-			'url' => ''
-		
-		],
 
-		'logo' => [
+		'photo' => [
 		
 			'driver' => 'local',
 			'root' => public_path(),
 			'url' => ''
 		
 		],
-
-		'thumb' => [
+		
+		'spec' => [
 		
 			'driver' => 'local',
 			'root' => public_path(),
 			'url' => ''
 		
-		],		
+		],
 		
-		'lang' => [
+		'langs' => [
 		
 			'driver' => 'local',
 			'root' => public_path(),
 			'url' => ''
 		
-		],	
+		],
+		
+		'files' => [
+		
+			'driver' => 'local',
+			'root' => public_path(),
+			'url' => ''
+		
+		],
 
     ],
 

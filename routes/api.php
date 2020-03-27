@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::post('register', 'API\TokenAuthController@register');
 Route::post('authenticate', 'API\TokenAuthController@authenticate');
-Route::post('get_ads', 'API\TokenAuthController@get_ads');
+Route::get('get_ads', 'API\TokenAuthController@get_ads');
 
 
 Route::get('user/getUserList', 'UserApiController@getUserList');

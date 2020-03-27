@@ -9,5 +9,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class City extends Authenticatable {
 	
 	protected $table = 'cities';
+	public $timestamps = false;
 	
 }
