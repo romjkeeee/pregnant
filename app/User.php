@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -33,7 +34,6 @@ class User extends Authenticatable implements JWTSubject
         'second_name',
         'phone',
     ];
-
 
     /**
      * The attributes that should be hidden for arrays.
@@ -81,6 +81,14 @@ class User extends Authenticatable implements JWTSubject
     public function patient(): HasOne
     {
         return $this->hasOne(Patient::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function smsCodes(): HasMany
+    {
+        return $this->hasMany(UserSmsCode::class, 'user_id', 'id');
     }
 
     /**

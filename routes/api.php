@@ -18,6 +18,7 @@ Route::group(['namespace' => 'API', 'as' => 'api'], function () {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('register', 'AuthController@register');
+    Route::post('verify', 'AuthController@verify');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 });
