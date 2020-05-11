@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,13 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('register', 'API\TokenAuthController@register');
-Route::post('authenticate', 'API\TokenAuthController@authenticate');
-Route::get('get_ads', 'API\TokenAuthController@get_ads');
-
+Route::group(['namespace' => 'API', 'as' => 'api'], function () {
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('register', 'AuthController@register');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
+});
 
 Route::get('user/getUserList', 'UserApiController@getUserList');
 Route::get('user/userAdd', 'UserApiController@userAdd');

@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -42,20 +42,20 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
-		
+
         'doctor' => [
             'driver' => 'session',
             'provider' => 'doctors',
         ],
-		
+
         'patient' => [
             'driver' => 'session',
             'provider' => 'patients',
         ],
-		
+
     ],
 
     /*
@@ -80,7 +80,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-		
+
 		'doctors' => [
 			'driver' => 'eloquent',
 			'model' => App\Doctor::class,
