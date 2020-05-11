@@ -15,8 +15,8 @@ class User extends Authenticatable implements JWTSubject
     use Notifiable;
 
     /** users role - doctor, patient */
-    const DOCTOR = 1;
-    const PATIENT = 2;
+    const DOCTOR = 'doctor';
+    const PATIENT = 'patient';
 
     /**
      * The attributes that are mass assignable.
