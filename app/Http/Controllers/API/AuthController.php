@@ -41,7 +41,11 @@ class AuthController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-        User::query()->create($request->validated());
+        /** @var $user User */
+        $user = User::query()->create($request->validated()['user']);
+        $request->get('role') == User::DOCTOR
+            ? $user->doctor()->create($request->validated()['doctor'])
+            : $user->patient()->create($request->validated()['patient']);
 
         return response(['Успешная регистрация']);
     }

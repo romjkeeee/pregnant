@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,6 +13,37 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
+
+    /** users role - doctor, patient */
+    const DOCTOR = 1;
+    const PATIENT = 2;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'role',
+        'verified',
+        'email',
+        'password',
+        'name',
+        'last_name',
+        'second_name',
+        'phone',
+    ];
+
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
     // Rest omitted for brevity
 
@@ -36,55 +68,62 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * @return HasOne
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
+    public function doctor(): HasOne
+    {
+        return $this->hasOne(Doctor::class, 'user_id', 'id');
+    }
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
+     * @return HasOne
      */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function patient(): HasOne
+    {
+        return $this->hasOne(Patient::class, 'user_id', 'id');
+    }
 
+    /**
+     * @param string|null $password
+     */
+    public function setPasswordAttribute(string $password = null): void
+    {
+        if ($password) {
+            $this->attributes['password'] = bcrypt($password);
+        }
+    }
 
-  public function isAdmin()
-  {
-  	return $this->unique_id === str_repeat('0', config('limits.user_personal_code_length'));
-  }
+    public function isAdmin()
+    {
+        return $this->unique_id === str_repeat('0', config('limits.user_personal_code_length'));
+    }
 
-	public function has_right($right) {
+    public function has_right($right)
+    {
 
-		$role_id = (int)Auth()->user()->role_id;
-		if ($role_id == 0 or $role_id == null) {
-			return false;
-		}
+        $role_id = (int)Auth()->user()->role_id;
+        if ($role_id == 0 or $role_id == null) {
+            return false;
+        }
 
-		if ($role_id > 0) {
+        if ($role_id > 0) {
 
-			$role = Role::find($role_id);
-			if (!$role) {
-				return false;
-			}
+            $role = Role::find($role_id);
+            if (!$role) {
+                return false;
+            }
 
-			$rights = json_decode($role->rights, true);
-			if (in_array($right, $rights)) {
-				return true;
-			}
+            $rights = json_decode($role->rights, true);
+            if (in_array($right, $rights)) {
+                return true;
+            }
 
-			return false;
+            return false;
 
-		}
+        }
 
-		return false;
+        return false;
 
-	}
+    }
 
 }
