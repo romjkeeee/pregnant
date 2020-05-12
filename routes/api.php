@@ -32,15 +32,18 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::get('cities', 'LocationController@cities');
     });
 
-    Route::apiResource('doctors', 'DoctorController');
-    Route::apiResource('specializations', 'SpecializationController');
-    Route::apiResource('clinics', 'ClinicController');
-    Route::apiResource('durations', 'DurationController');
-
     /** patient routes*/
     Route::apiResource('bellies', 'PatientBellyController');
     Route::apiResource('patients', 'PatientController');
     Route::apiResource('contractions', 'PatientContractionController');
+
+    /** doctor routes*/
+    Route::get('specializations/doctors', 'DoctorController@specialisationDoctors');
+    Route::apiResource('doctors', 'DoctorController');
+
+    Route::apiResource('specializations', 'SpecializationController');
+    Route::apiResource('clinics', 'ClinicController');
+    Route::apiResource('durations', 'DurationController');
 });
 
 Route::get('user/getUserList', 'UserApiController@getUserList');

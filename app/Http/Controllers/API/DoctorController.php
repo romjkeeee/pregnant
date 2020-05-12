@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Doctor;
 use App\Http\Controllers\Controller;
+use App\Specialization;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -21,7 +23,6 @@ class DoctorController extends Controller
         $this->middleware('auth:api', ['except' => ['index', 'show']]);
     }
 
-
     /**
      * get doctor paginate list 20 per page
      *
@@ -31,6 +32,20 @@ class DoctorController extends Controller
     public function index(Request $request)
     {
         return \response(Doctor::query()->with(['user', 'clinics', 'specialisations'])->paginate(20));
+    }
+
+    /**
+     * @param Request $request
+     * @return ResponseFactory|Application|Response
+     */
+    public function specialisationDoctors(Request $request)
+    {
+        return \response(Specialization::with('doctors.user')
+            ->whereHas('doctors', function (Builder $doctors) use ($request) {
+                $doctors->whereHas('clinics', function (Builder $clinic) use ($request) {
+                    $clinic->where('id', $request->get('clinic_id'));
+                });
+            })->get());
     }
 
     /**

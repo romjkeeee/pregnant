@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Clinic extends BaseModel
@@ -26,5 +27,13 @@ class Clinic extends BaseModel
     public function city(): HasOne
     {
         return $this->hasOne(City::class, 'id', 'city_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function departments(): HasMany
+    {
+        return $this->hasMany(ClinicDepartment::class, 'id', 'clinic_id');
     }
 }

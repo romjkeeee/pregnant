@@ -23,24 +23,20 @@ class ClinicController extends Controller
 
 
     /**
-     * get Clinic paginate list 20 per page
-     *
      * @param Request $request
      * @return ResponseFactory|Application|Response
      */
     public function index(Request $request)
     {
-        return \response(Clinic::query()->with(['city', 'region'])->filter($request->only(['type']))->paginate(20));
+        return \response(Clinic::query()->with(['city', 'region', 'departments'])->filter($request->only(['type']))->paginate(20));
     }
 
     /**
-     * find Clinic by id
-     *
      * @param $id
      * @return ResponseFactory|Application|Response
      */
     public function show($id)
     {
-        return \response(Clinic::query()->with(['city', 'region'])->findOrFail($id));
+        return \response(Clinic::query()->with(['city', 'region', 'departments'])->findOrFail($id));
     }
 }
