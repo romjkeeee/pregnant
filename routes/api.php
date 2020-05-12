@@ -33,10 +33,13 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     });
 
     Route::apiResource('doctors', 'DoctorController');
-    Route::apiResource('patients', 'PatientController');
     Route::apiResource('specializations', 'SpecializationController');
     Route::apiResource('clinics', 'ClinicController');
     Route::apiResource('durations', 'DurationController');
+
+    /** patient routes*/
+    Route::apiResource('bellies', 'PatientBellyController');
+    Route::apiResource('patients', 'PatientController');
 });
 
 Route::get('user/getUserList', 'UserApiController@getUserList');

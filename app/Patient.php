@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -74,4 +75,11 @@ class Patient extends Authenticatable
         return $this->hasOne(Duration::class, 'id', 'duration_id');
     }
 
+    /**
+     * @return HasMany
+     */
+    public function bellies(): HasMany
+    {
+        return $this->hasMany(PatientBelly::class, 'patient_id', 'id');
+    }
 }

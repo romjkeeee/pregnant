@@ -2,13 +2,10 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Duration extends Authenticatable {
-	
+class Duration extends BaseModel {
+
 	protected $table = 'durations';
 	public $timestamps = false;
-	
+
 }
