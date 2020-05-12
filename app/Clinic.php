@@ -44,4 +44,12 @@ class Clinic extends BaseModel
     {
         return $this->hasMany(ClinicSchedule::class, 'clinic_id', 'id');
     }
+
+    /**
+     * @return HasMany
+     */
+    public function prices(): HasMany
+    {
+        return $this->hasMany(ClinicPrice::class, 'clinic_id', 'id');
+    }
 }
