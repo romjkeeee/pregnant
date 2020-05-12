@@ -13,6 +13,8 @@ class Clinic extends BaseModel
     protected $table = 'clinics';
     public $timestamps = false;
 
+    protected $fillable = ['rate'];
+
     /**
      * @return HasOne
      */
@@ -51,5 +53,13 @@ class Clinic extends BaseModel
     public function prices(): HasMany
     {
         return $this->hasMany(ClinicPrice::class, 'clinic_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(ClinicReview::class, 'clinic_id', 'id');
     }
 }

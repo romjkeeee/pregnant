@@ -151,4 +151,19 @@ class User extends Authenticatable implements JWTSubject
 
     }
 
+    /**
+     * @return HasMany
+     */
+    public function clinicReviews(): HasMany
+    {
+        return $this->hasMany(ClinicReview::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function doctorReviews(): HasMany
+    {
+        return $this->hasMany(DoctorReview::class, 'user_id', 'id');
+    }
 }
