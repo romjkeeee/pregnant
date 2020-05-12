@@ -3,12 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Clinic extends Authenticatable
+class Clinic extends BaseModel
 {
+    const STATE = 'state';
+    const PRIVATE = 'private';
 
     protected $table = 'clinics';
     public $timestamps = false;

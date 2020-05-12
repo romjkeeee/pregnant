@@ -30,7 +30,7 @@ class ClinicController extends Controller
      */
     public function index(Request $request)
     {
-        return \response(Clinic::query()->with(['city', 'region'])->paginate(20));
+        return \response(Clinic::query()->with(['city', 'region'])->filter($request->only(['type']))->paginate(20));
     }
 
     /**
