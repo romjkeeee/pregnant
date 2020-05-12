@@ -3,10 +3,19 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Doctor extends BaseModel
 {
     protected $fillable = ['user_id'];
+
+    /**
+     * @return HasOne
+     */
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 
     /**
      * @return BelongsToMany
@@ -24,4 +33,5 @@ class Doctor extends BaseModel
     {
         return $this->belongsToMany(Spec::class, 'doctor_specializations', 'doctor_id', 'specialization_id');
     }
+
 }

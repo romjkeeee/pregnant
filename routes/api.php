@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +31,8 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::get('regions', 'LocationController@regions');
         Route::get('cities', 'LocationController@cities');
     });
+
+    Route::apiResource('doctors', 'DoctorController');
 });
 
 Route::get('user/getUserList', 'UserApiController@getUserList');
