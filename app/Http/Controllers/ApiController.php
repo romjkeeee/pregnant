@@ -95,25 +95,6 @@ class ApiController extends Controller {
     }
 
 
-    /* Список недель */
-    public function get_durations(Request $request) {
-
-        Self::check_token($request);
-
-		$list = Duration::get();
-		if ($list->count()) {
-			foreach ($list as $rec) {
-
-				$rec->photo = Self::$home.'/'.$rec->photo;
-				$rec->photo = trim(str_replace('photo//', 'photo/', $rec->photo));
-
-			}
-		}
-
-        Self::json_response(200, 'Success', $list->toArray());
-
-    }
-
     /* Список отзывов */
     public function get_reviews(Request $request) {
 
