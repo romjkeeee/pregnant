@@ -15,7 +15,7 @@ use App\Duration;
 use App\Patient;
 use App\Region;
 use App\Review;
-use App\Spec;
+use App\Specialization;
 
 class AdminController extends Controller {
 
@@ -30,7 +30,7 @@ class AdminController extends Controller {
 			$rec = Doctor::find($id);
 		}
 		if ($table == 'spec') {
-			$rec = Spec::find($id);
+			$rec = Specialization::find($id);
 		}
 		if ($table == 'clinic') {
 			$rec = Clinic::find($id);
@@ -53,42 +53,42 @@ class AdminController extends Controller {
 		if ($table == 'content') {
 			$rec = Content::find($id);
 		}
-		
+
 		$rec->delete();
 
 		return redirect()->back()->with('success', 'Запись удалена!');
 
 	}
-	
+
 	/* Дашборд */
 	public function dashboard(Request $request) {
-		
+
 		$list = [];
-		
+
 		/* */
 		$return = [
-		
+
 			'page_title' => 'Дашборд',
 			'list' => $list,
-		
+
 		];
-		
+
 		return view('dashboard', $return);
-		
+
 	}
-	
+
 	/* Страница настроек */
 	public function settings(Request $request) {
-		
+
 		/* */
 		$return = [
-		
+
 			'page_title' => 'Настройки',
-			
+
 		];
-		
+
 		return view('settings', $return);
-		
+
 	}
 
 }

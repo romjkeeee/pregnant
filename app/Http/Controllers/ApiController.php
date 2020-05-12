@@ -16,7 +16,7 @@ use App\Msg;
 use App\Patient;
 use App\Region;
 use App\Review;
-use App\Spec;
+use App\Specialization;
 use App\AuthHistory;
 
 class ApiController extends Controller {
@@ -106,57 +106,6 @@ class ApiController extends Controller {
 
 				$rec->photo = Self::$home.'/'.$rec->photo;
 				$rec->photo = trim(str_replace('photo//', 'photo/', $rec->photo));
-
-			}
-		}
-
-        Self::json_response(200, 'Success', $list->toArray());
-
-    }
-
-    /* Список специализаций */
-    public function get_spec(Request $request) {
-
-        Self::check_token($request);
-
-		$list = Spec::get();
-		if ($list->count()) {
-			foreach ($list as $rec) {
-
-				if (!$rec->photo) {
-					continue;
-				}
-
-				$rec->photo = Self::$home.'/'.$rec->photo;
-				$rec->photo = trim(str_replace('spec//', 'photo/', $rec->photo));
-
-			}
-		}
-
-        Self::json_response(200, 'Success', $list->toArray());
-
-    }
-
-    /* Список клиник */
-    public function get_clinics(Request $request) {
-
-        Self::check_token($request);
-
-		$list = Clinic::get();
-		if ($list->count()) {
-			foreach ($list as $rec) {
-
-				/* Регион */
-				$this_region = Region::find($rec->region_id);
-				if ($this_region) {
-					$rec->region_info = $this_region->toArray();
-				}
-
-				/* Город */
-				$this_city = City::find($rec->city_id);
-				if ($this_city) {
-					$rec->city_info = $this_city->toArray();
-				}
 
 			}
 		}
@@ -281,116 +230,6 @@ class ApiController extends Controller {
 		$new->save();
 
 		Self::json_response(200, 'Success', ['chat_id' => $chat_id]);
-
-	}
-
-	/* Информация о докторе */
-	public function doctor_info(Request $request) {
-
-		/* Обязательные */
-		$required = [
-
-			'doctor_id',
-
-		];
-
-		Self::check_required($required, $request);
-
-		$doctor = Doctor::find($request->input('doctor_id'));
-		if (!$doctor) {
-			Self::json_response(404, 'Doctor ID Wrong');
-		}
-
-		/* Специализации */
-		$this_spec = json_decode($doctor->specialization, true);
-		$spec = [];
-		if ($this_spec) {
-			foreach ($this_spec as $key => $spec_id) {
-
-				$this_s = Spec::find($spec_id);
-				if ($this_s) {
-					$spec[$spec_id] = $this_s->name;
-				}
-
-			}
-		}
-		$doctor->specialization = $spec;
-
-		/* Клиники */
-		$this_clin = json_decode($doctor->clinics, true);
-		$clin = [];
-		if ($this_clin) {
-			foreach ($this_clin as $key => $clin_id) {
-
-				$this_s = Clinic::find($clin_id);
-				if ($this_s) {
-					$clin[$clin_id] = $this_s->toArray();
-				}
-
-			}
-		}
-		$doctor->clinics = $clin;
-
-		$doctor = $doctor->toArray();
-		unset($doctor['code']);
-		unset($doctor['token']);
-
-		Self::json_response(200, 'Success', $doctor);
-
-	}
-
-	/* Информация о пациенте */
-	public function patient_info(Request $request) {
-
-		/* Обязательные */
-		$required = [
-
-			'patient_id',
-
-		];
-
-		Self::check_required($required, $request);
-
-		$patient = Patient::find($request->input('patient_id'));
-		if (!$patient) {
-			Self::json_response(404, 'Patient ID Wrong');
-		}
-
-		/* Регион */
-		$this_region = Region::find($patient->region_id);
-		if ($this_region) {
-			$patient->region = $this_region->toArray();
-		}
-
-		/* Город */
-		$this_city = City::find($patient->city_id);
-		if ($this_city) {
-			$patient->city = $this_city->toArray();
-		}
-
-		/* Клиника */
-		$this_clinic = Clinic::find($patient->clinic_id);
-		if ($this_clinic) {
-			$patient->clinic = $this_clinic->toArray();
-		}
-
-		/* Врач */
-		$this_doctor = Doctor::find($patient->doctor_id);
-		if ($this_doctor) {
-			$patient->doctor = $this_doctor->toArray();
-		}
-
-		/* Неделя */
-		$this_duration = Duration::find($patient->duration_id);
-		if ($this_duration) {
-			$patient->duration = $this_duration->toArray();
-		}
-
-		$patient = $patient->toArray();
-		unset($patient['code']);
-		unset($patient['token']);
-
-		Self::json_response(200, 'Success', $patient);
 
 	}
 
