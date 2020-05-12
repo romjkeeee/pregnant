@@ -82,4 +82,12 @@ class Patient extends Authenticatable
     {
         return $this->hasMany(PatientBelly::class, 'patient_id', 'id');
     }
+
+    /**
+     * @return HasMany
+     */
+    public function contractions(): HasMany
+    {
+        return $this->hasMany(PatientContraction::class, 'patient_id', 'id');
+    }
 }

@@ -40,6 +40,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     /** patient routes*/
     Route::apiResource('bellies', 'PatientBellyController');
     Route::apiResource('patients', 'PatientController');
+    Route::apiResource('contractions', 'PatientContractionController');
 });
 
 Route::get('user/getUserList', 'UserApiController@getUserList');
