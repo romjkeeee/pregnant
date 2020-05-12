@@ -34,6 +34,14 @@ class Clinic extends BaseModel
      */
     public function departments(): HasMany
     {
-        return $this->hasMany(ClinicDepartment::class, 'id', 'clinic_id');
+        return $this->hasMany(ClinicDepartment::class, 'clinic_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function schedules(): HasMany
+    {
+        return $this->hasMany(ClinicSchedule::class, 'clinic_id', 'id');
     }
 }

@@ -37,6 +37,6 @@ class ClinicController extends Controller
      */
     public function show($id)
     {
-        return \response(Clinic::query()->with(['city', 'region', 'departments'])->findOrFail($id));
+        return \response(Clinic::query()->with(['city', 'region', 'departments', 'schedules'])->findOrFail($id));
     }
 }
