@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
@@ -99,6 +100,22 @@ class User extends Authenticatable implements JWTSubject
         if ($password) {
             $this->attributes['password'] = bcrypt($password);
         }
+    }
+
+    /**
+     * @param array $doctor
+     * @param array $clinic
+     * @param array $specialisations
+     * @return Model|Doctor
+     */
+    public function createDoctor(array $doctor, array $clinic, array $specialisations)
+    {
+        /** @var $doc Doctor */
+        $doc = $this->doctor()->create($doctor);
+        $doc->clinics()->sync($clinic);
+        $doc->specialisations()->sync($specialisations);
+
+        return $doc;
     }
 
     public function isAdmin()

@@ -14,13 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['namespace' => 'API', 'as' => 'api'], function () {
+Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::post('login', 'AuthController@login');
     Route::post('logout', 'AuthController@logout');
     Route::post('register', 'AuthController@register');
     Route::post('verify', 'AuthController@verify');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+    Route::group(['prefix' => 'location', 'as' => 'location.'], function () {
+        Route::get('regions', 'LocationController@regions');
+        Route::get('cities', 'LocationController@cities');
+    });
 });
 
 Route::get('user/getUserList', 'UserApiController@getUserList');

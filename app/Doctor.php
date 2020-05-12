@@ -2,14 +2,26 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Doctor extends Authenticatable
+class Doctor extends BaseModel
 {
+    protected $fillable = ['user_id'];
 
-    protected $table = 'doctors';
-    protected $fillable = ['user_id', 'specialization', 'clinics'];
+    /**
+     * @return BelongsToMany
+     */
+    public function clinics(): BelongsToMany
+    {
+        return $this->belongsToMany(Clinic::class, 'doctor_clinics', 'doctor_id', 'clinic_id');
+    }
 
+
+    /**
+     * @return BelongsToMany
+     */
+    public function specialisations(): BelongsToMany
+    {
+        return $this->belongsToMany(Spec::class, 'doctor_specializations', 'doctor_id', 'specialization_id');
+    }
 }

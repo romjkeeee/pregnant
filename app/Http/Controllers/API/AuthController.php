@@ -12,6 +12,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 
@@ -44,14 +45,21 @@ class AuthController extends Controller
      */
     public function register(RegisterRequest $request)
     {
-        /** @var $user User */
-        $user = User::query()->create($request->validated()['user']);
-        $request->get('role') == User::DOCTOR
-            ? $user->doctor()->create($request->validated()['doctor'])
-            : $user->patient()->create($request->validated()['patient']);
-        $user->smsCodes()->create(['code' => Str::random(10)]);
+        try {
+            DB::transaction(function () use ($request) {
+                /** @var $user User */
+                $user = User::query()->create($request->validatedUser());
+                $request->get('role') == User::DOCTOR
+                    ? $user->createDoctor($request->validatedDoctor(), $request->validatedClinics(), $request->validatedSpecialisations())
+                    : $user->patient()->create($request->validatedPatient());
 
-        return response(['Успешная регистрация']);
+                $user->smsCodes()->create(['code' => Str::random(10)]);
+            });
+
+            return response(['Успешная регистрация']);
+        } catch (\Exception $exception) {
+            return response(['error' => $exception->getMessage()], 422);
+        }
     }
 
     /**

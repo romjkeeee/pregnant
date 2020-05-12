@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Services\Sms;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -49,8 +48,11 @@ class RegisterRequest extends FormRequest
     private function __doctor(): array
     {
         return [
-            'specialization' => 'required|min:2|max:192',
-            'clinics'        => 'required|min:2|max:192',
+            'specialization'    => 'required|min:2|max:192',
+            'clinics'           => 'required|array',
+            'clinics.*'         => 'required|exists:clinics,id',
+            'specialisations'   => 'required|array',
+            'specialisations.*' => 'required|exists:specializations,id',
         ];
     }
 
@@ -91,13 +93,40 @@ class RegisterRequest extends FormRequest
     /**
      * @return array
      */
-    public function validated(): array
+    public function validatedUser(): array
     {
-        $user = ['user' => collect(parent::validated())->only(array_keys($this->__user()))->toArray()];
-        if ($this->get('role') == User::DOCTOR) {
-            return $user + ['doctor' => collect(parent::validated())->only(array_keys($this->__doctor()))->toArray()];
-        }
+        return $this->only(array_keys($this->__user()));
+    }
 
-        return $user + ['patient' => collect(parent::validated())->only(array_keys($this->__patient()))->toArray()];
+    /**
+     * @return array
+     */
+    public function validatedDoctor(): array
+    {
+        return $this->only(['specialization']);
+    }
+
+    /**
+     * @return array
+     */
+    public function validatedClinics(): array
+    {
+        return $this->get('clinics') ?? [];
+    }
+
+    /**
+     * @return array
+     */
+    public function validatedSpecialisations(): array
+    {
+        return $this->get('specialisations') ?? [];
+    }
+
+    /**
+     * @return array
+     */
+    public function validatedPatient(): array
+    {
+        return $this->only(array_keys($this->__patient()));
     }
 }
