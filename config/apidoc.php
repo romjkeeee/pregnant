@@ -83,7 +83,7 @@ return [
              * Note that the route must be referenced by name here (wildcards are supported).
              */
             'include' => [
-                // 'users.index', 'healthcheck*'
+                 'api/*',
             ],
 
             /*
@@ -92,7 +92,7 @@ return [
              * Note that the route must be referenced by name here (wildcards are supported).
              */
             'exclude' => [
-                // 'users.create', 'admin.*'
+                 'users.create', 'admin/*', 'login', 'logout', 'register' , 'password/*' , 'admin'
             ],
 
             /*
@@ -225,6 +225,7 @@ return [
     'example_languages' => [
         'bash',
         'javascript',
+        'php'
     ],
 
     /*

@@ -15,7 +15,11 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-
+/**
+ * @group Auth
+ *
+ * APIs for
+ */
 class AuthController extends Controller
 {
     /**
@@ -29,8 +33,9 @@ class AuthController extends Controller
     }
 
     /**
-     * Get a JWT via given credentials.
+     * Login
      *
+     * @response 200
      * @param AuthRequest $request
      * @return JsonResponse
      */
@@ -40,6 +45,24 @@ class AuthController extends Controller
     }
 
     /**
+     * Register
+     *
+     * @bodyParam name string required Имя пользователя
+     * @bodyParam last_name string required Фамилия пользователя
+     * @bodyParam second_name string required Отчество
+     * @bodyParam phone string required Номер телефона Example: +74957556981
+     * @bodyParam role string required Роль Example: doctor or patient
+     * @bodyParam email string required Емейл
+     * @bodyParam region_id integer required Регион
+     * @bodyParam city_id integer required Город
+     * @bodyParam street string required Улица
+     * @bodyParam building string required Дом
+     * @bodyParam apartment string required Квартира
+     * @bodyParam password string required пароль
+     * @bodyParam password_confirmation string required повторите пароль
+     * @bodyParam lang_id integer required Язык
+     *
+     * @response 200
      * @param RegisterRequest $request
      * @return ResponseFactory|Application|Response
      */
@@ -63,8 +86,13 @@ class AuthController extends Controller
     }
 
     /**
+     * Verify
+     * @bodyParam code string required смс код
+     *
      * @param UserVerifyRequest $request
      * @return ResponseFactory|Application|Response
+     *
+     * @response 200
      */
     public function verify(UserVerifyRequest $request)
     {
@@ -80,6 +108,7 @@ class AuthController extends Controller
      * Get the authenticated User.
      *
      * @return JsonResponse
+     * @response 200
      */
     public function me()
     {
@@ -90,6 +119,7 @@ class AuthController extends Controller
      * Log the user out (Invalidate the token).
      *
      * @return JsonResponse
+     * @response 200
      */
     public function logout()
     {
@@ -102,6 +132,7 @@ class AuthController extends Controller
      * Refresh a token.
      *
      * @return JsonResponse
+     * @response 200
      */
     public function refresh()
     {
