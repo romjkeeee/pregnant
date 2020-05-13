@@ -12,6 +12,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+/**
+ * @group Patient belly
+ *
+ * APIs for
+ */
 class PatientBellyController extends Controller
 {
     /**

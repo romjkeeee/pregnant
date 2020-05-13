@@ -14,6 +14,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+/**
+ * @group Contraction
+ *
+ * APIs for
+ */
 class PatientContractionController extends Controller
 {
     /**

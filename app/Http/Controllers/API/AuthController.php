@@ -15,7 +15,11 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-
+/**
+ * @group Auth
+ *
+ * APIs for
+ */
 class AuthController extends Controller
 {
     /**
@@ -29,7 +33,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Get a JWT via given credentials.
+     * Login
      *
      * @param AuthRequest $request
      * @return JsonResponse
@@ -40,6 +44,8 @@ class AuthController extends Controller
     }
 
     /**
+     * Register
+     *
      * @param RegisterRequest $request
      * @return ResponseFactory|Application|Response
      */
@@ -63,6 +69,8 @@ class AuthController extends Controller
     }
 
     /**
+     * Verify
+     *
      * @param UserVerifyRequest $request
      * @return ResponseFactory|Application|Response
      */

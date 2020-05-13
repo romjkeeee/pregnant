@@ -9,6 +9,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+/**
+ * @group Specialization
+ *
+ * APIs for
+ */
 class SpecializationController extends Controller
 {
     /**

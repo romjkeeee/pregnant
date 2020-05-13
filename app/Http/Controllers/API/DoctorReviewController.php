@@ -10,6 +10,11 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+/**
+ * @group Doctor review
+ *
+ * APIs for
+ */
 class DoctorReviewController extends Controller
 {
     /**
