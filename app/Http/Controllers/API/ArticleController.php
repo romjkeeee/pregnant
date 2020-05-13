@@ -19,7 +19,7 @@ class ArticleController extends Controller
      * Список статей по категориям
      *
      * @authenticated required
-     * @response 200 {"data":[],"status": "success"}
+     * @response 200
      */
     public function index()
     {
@@ -35,7 +35,7 @@ class ArticleController extends Controller
      * Показать конкретную статью
      *
      * @authenticated required
-     * @response 200 {"data":{},"status":"success"}
+     * @response 200
      */
     public function show($id)
     {

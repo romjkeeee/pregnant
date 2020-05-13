@@ -28,8 +28,11 @@ class ClinicController extends Controller
 
 
     /**
-     * @param Request $request
-     * @return ResponseFactory|Application|Response
+     * List
+     * Список клиник
+     *
+     * @authenticated required
+     * @response 200
      */
     public function index(Request $request)
     {
@@ -37,8 +40,11 @@ class ClinicController extends Controller
     }
 
     /**
-     * @param $id
-     * @return ResponseFactory|Application|Response
+     * Show
+     * Показать клинику
+     *
+     * @authenticated required
+     * @response 200
      */
     public function show($id)
     {
