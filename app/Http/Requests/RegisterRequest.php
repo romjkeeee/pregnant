@@ -69,8 +69,8 @@ class RegisterRequest extends FormRequest
     private function __patient(): array
     {
         return [
-            'clinic_id'     => 'required|exists:clinics,id',
-            'doctor_id'     => 'required|exists:doctors,id',
+            'clinic_id'     => 'nullable|exists:clinics,id',
+            'doctor_id'     => 'nullable|exists:doctors,id',
             'date_of_birth' => 'required|date|before:now',
             'pregnant'      => 'required|in:0,1',
         ];
