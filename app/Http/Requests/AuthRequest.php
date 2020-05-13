@@ -25,7 +25,7 @@ class AuthRequest extends FormRequest
      */
     private function __user()
     {
-        return User::query()->where('email', $this->get('email'))->first();
+        return User::query()->where('phone', $this->get('phone'))->first();
     }
 
     /**
@@ -36,7 +36,7 @@ class AuthRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'    => ['required'],
+            'phone'    => ['required'],
             'password' => ['required', new AuthCheck($this->__user())]
         ];
     }

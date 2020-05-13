@@ -34,6 +34,12 @@ class User extends Authenticatable implements JWTSubject
         'last_name',
         'second_name',
         'phone',
+        'lang_id',
+        'region_id',
+        'city_id',
+        'street',
+        'building',
+        'apartment',
     ];
 
     /**
@@ -118,39 +124,6 @@ class User extends Authenticatable implements JWTSubject
         return $doc;
     }
 
-    public function isAdmin()
-    {
-        return $this->unique_id === str_repeat('0', config('limits.user_personal_code_length'));
-    }
-
-    public function has_right($right)
-    {
-
-        $role_id = (int)Auth()->user()->role_id;
-        if ($role_id == 0 or $role_id == null) {
-            return false;
-        }
-
-        if ($role_id > 0) {
-
-            $role = Role::find($role_id);
-            if (!$role) {
-                return false;
-            }
-
-            $rights = json_decode($role->rights, true);
-            if (in_array($right, $rights)) {
-                return true;
-            }
-
-            return false;
-
-        }
-
-        return false;
-
-    }
-
     /**
      * @return HasMany
      */
@@ -165,5 +138,21 @@ class User extends Authenticatable implements JWTSubject
     public function doctorReviews(): HasMany
     {
         return $this->hasMany(DoctorReview::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function region(): HasOne
+    {
+        return $this->hasOne(Region::class, 'id', 'region_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function city(): HasOne
+    {
+        return $this->hasOne(City::class, 'id', 'city_id');
     }
 }

@@ -2,11 +2,8 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Patient extends Authenticatable
@@ -15,12 +12,8 @@ class Patient extends Authenticatable
     protected $table = 'patients';
     protected $fillable = [
         'user_id',
-        'region_id',
-        'city_id',
-        'address',
         'clinic_id',
         'doctor_id',
-        'duration_id',
         'date_of_birth',
         'pregnant',
     ];
@@ -38,22 +31,6 @@ class Patient extends Authenticatable
     /**
      * @return HasOne
      */
-    public function region(): HasOne
-    {
-        return $this->hasOne(Region::class, 'id', 'region_id');
-    }
-
-    /**
-     * @return HasOne
-     */
-    public function city(): HasOne
-    {
-        return $this->hasOne(City::class, 'id', 'city_id');
-    }
-
-    /**
-     * @return HasOne
-     */
     public function clinic(): HasOne
     {
         return $this->hasOne(Clinic::class, 'id', 'clinic_id');
@@ -65,14 +42,6 @@ class Patient extends Authenticatable
     public function doctor(): HasOne
     {
         return $this->hasOne(Doctor::class, 'id', 'doctor_id');
-    }
-
-    /**
-     * @return HasOne
-     */
-    public function duration(): HasOne
-    {
-        return $this->hasOne(Duration::class, 'id', 'duration_id');
     }
 
     /**

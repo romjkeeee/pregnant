@@ -31,7 +31,7 @@ class PatientController extends Controller
      */
     public function index(Request $request)
     {
-        return \response(Patient::query()->with(['user', 'region', 'city', 'clinic', 'doctor', 'duration'])->paginate(20));
+        return \response(Patient::query()->with(['user.region', 'user.city', 'clinic', 'doctor'])->paginate(20));
     }
 
     /**
@@ -42,6 +42,6 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        return \response(Patient::query()->with(['user', 'region', 'city', 'clinic', 'doctor', 'duration'])->findOrFail($id));
+        return \response(Patient::query()->with(['user.region', 'user.city', 'clinic', 'doctor'])->findOrFail($id));
     }
 }

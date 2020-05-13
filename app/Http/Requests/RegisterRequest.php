@@ -32,15 +32,23 @@ class RegisterRequest extends FormRequest
     private function __user(): array
     {
         return [
-            'name'        => 'required|min:2|max:192',
-            'last_name'   => 'required|min:2|max:192',
-            'second_name' => 'required|min:2|max:192',
-            'phone'       => 'required|phone:RU|unique:users,phone',
-            'role'        => ['required', Rule::in($this->__roles())],
-            'email'       => 'required|email|max:192|unique:users,email',
-            'password'    => 'required|min:6|max:24',
+            'name'                  => 'required|min:2|max:192',
+            'last_name'             => 'required|min:2|max:192',
+            'second_name'           => 'required|min:2|max:192',
+            'phone'                 => 'required|phone:RU|unique:users,phone',
+            'role'                  => ['required', Rule::in($this->__roles())],
+            'email'                 => 'required|email|max:192|unique:users,email',
+            'region_id'             => 'required|exists:regions,id',
+            'city_id'               => 'required|exists:cities,id',
+            'street'                => 'required|min:2|max:128',
+            'building'              => 'required|min:1|max:32',
+            'apartment'             => 'nullable|min:1|max:32',
+            'password'              => 'required|min:6|max:24|confirmed',
+            'password_confirmation' => ['required'],
+            'lang_id'               => 'required|exists:langs,id'
         ];
     }
+
 
     /**
      * @return array|string[]
@@ -48,7 +56,6 @@ class RegisterRequest extends FormRequest
     private function __doctor(): array
     {
         return [
-            'specialization'    => 'required|min:2|max:192',
             'clinics'           => 'required|array',
             'clinics.*'         => 'required|exists:clinics,id',
             'specialisations'   => 'required|array',
@@ -62,12 +69,8 @@ class RegisterRequest extends FormRequest
     private function __patient(): array
     {
         return [
-            'region_id'     => 'required|exists:regions,id',
-            'city_id'       => 'required|exists:cities,id',
             'clinic_id'     => 'required|exists:clinics,id',
             'doctor_id'     => 'required|exists:doctors,id',
-            'duration_id'   => 'required|exists:durations,id',
-            'address'       => 'required|min:2|max:192',
             'date_of_birth' => 'required|date|before:now',
             'pregnant'      => 'required|in:0,1',
         ];
@@ -95,7 +98,7 @@ class RegisterRequest extends FormRequest
      */
     public function validatedUser(): array
     {
-        return $this->only(array_keys($this->__user()));
+        return collect($this->only(array_keys($this->__user())))->except(['password_confirmation'])->toArray();
     }
 
     /**
