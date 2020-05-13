@@ -36,7 +36,7 @@ class AuthRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone'    => ['required'],
+            'phone'    => ['required', 'exists:users,phone'],
             'password' => ['required', new AuthCheck($this->__user())]
         ];
     }
