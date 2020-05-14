@@ -119,7 +119,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(User::query()->with(['city', 'region', 'patient'])->find(auth()->id()));
     }
 
     /**

@@ -44,8 +44,6 @@ class PatientBellyController extends Controller
     }
 
     /**
-     * find Duration by id
-     *
      * @param $id
      * @return ResponseFactory|Application|Response
      */
@@ -54,6 +52,16 @@ class PatientBellyController extends Controller
         return \response(PatientBelly::query()->whereHas('patient', function (Builder $builder) {
             $builder->where('user_id', auth()->id());
         })->orderByDesc('date')->findOrFail($id));
+    }
+
+    /**
+     * @return ResponseFactory|Application|Response
+     */
+    public function last()
+    {
+        return \response(PatientBelly::query()->whereHas('patient', function (Builder $builder) {
+            $builder->where('user_id', auth()->id());
+        })->orderByDesc('date')->first());
     }
 
     /**
