@@ -14,23 +14,32 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+/** NEW ROUTES */
+
 Auth::routes();
+
+Route::get('admin', function () {
+    return redirect('admin.users.index');
+})->name('admin.home');
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Route::resource('users', 'UserController');
 });
 
 
+
+/** OLD ROUTES */
+
+
 Route::get('/', function () {
     return view('welcome');
 });
-
 
 /* Удаление записей */
 Route::get('/admin/delete_record/{table}/{id}', 'AdminController@delete')->name('admin_delete');
 
 /* Дашборд */
-Route::get('/admin', 'AdminController@dashboard')->name('admin_dashboard');
+//Route::get('/admin', 'AdminController@dashboard')->name('admin_dashboard');
 
 /* Врачи */
 Route::get('/admin/med', 'AdminMedController@index')->name('admin_med');
