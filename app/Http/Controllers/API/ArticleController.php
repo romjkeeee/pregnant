@@ -23,11 +23,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $data = ArticleCategory::with('articles')->paginate(15);
-        return response()->json([
-            'data' => $data,
-            'status' => 'success'
-        ], 200);
+        return response(ArticleCategory::with('articles')->paginate(15));
     }
 
     /**
@@ -39,10 +35,6 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        $data = Article::where('id','=',$id)->get();
-        return response()->json([
-            'data' => $data,
-            'status' => 'success'
-        ], 200);
+        return response(Article::where('id',$id)->get());
     }
 }
