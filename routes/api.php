@@ -27,6 +27,11 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::get('/{id}', 'ArticleController@show');
     });
 
+    Route::group(['prefix' => 'emergency_contacts'], function () {
+        Route::get('/', 'EmergencyContactController@index');
+        Route::post('/', 'EmergencyContactController@store');
+    });
+
     Route::group(['prefix' => 'location', 'as' => 'location.'], function () {
         Route::get('regions', 'LocationController@regions');
         Route::get('cities', 'LocationController@cities');
@@ -36,6 +41,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::apiResource('bellies', 'PatientBellyController');
     Route::apiResource('patients', 'PatientController');
     Route::apiResource('contractions', 'PatientContractionController');
+    Route::post('conception_date', 'PatientController@conceptionDate');
 
     /** doctor routes */
     Route::get('specializations/doctors', 'DoctorController@specialisationDoctors');

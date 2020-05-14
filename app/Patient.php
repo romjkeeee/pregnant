@@ -10,12 +10,8 @@ class Patient extends Authenticatable
 {
 
     protected $table = 'patients';
-    protected $fillable = [
-        'user_id',
-        'clinic_id',
-        'doctor_id',
-        'date_of_birth',
-        'pregnant',
+    protected $guarded = [
+        'id',
     ];
 
     protected $dates = ['date_of_birth'];
@@ -58,5 +54,14 @@ class Patient extends Authenticatable
     public function contractions(): HasMany
     {
         return $this->hasMany(PatientContraction::class, 'patient_id', 'id');
+    }
+
+    public function emergencyContacts()
+    {
+        return $this->hasMany(EmergencyContact::class, 'patient_id','id');
+    }
+    public function weight()
+    {
+        return $this->hasMany(PatientWeight::class, 'patient_id','id');
     }
 }

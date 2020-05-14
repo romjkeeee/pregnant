@@ -22,10 +22,6 @@ class ArticleCategoryController extends Controller
      */
     public function index()
     {
-        $data = ArticleCategory::all();
-        return response()->json([
-            'data' => $data,
-            'status' => 'success'
-        ], 200);
+        return response(ArticleCategory::all());
     }
 }

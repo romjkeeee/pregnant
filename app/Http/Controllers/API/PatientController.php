@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Doctor;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PatientConceptionRequest;
 use App\Patient;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Application;
@@ -48,5 +49,12 @@ class PatientController extends Controller
     public function show($id)
     {
         return \response(Patient::query()->with(['user.region', 'user.city', 'clinic', 'doctor'])->findOrFail($id));
+    }
+
+    public function conceptionDate(PatientConceptionRequest $request)
+    {
+        auth()->user()->patient()->update($request->validate());
+
+        return \response(['Сохранено']);
     }
 }
