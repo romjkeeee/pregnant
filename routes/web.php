@@ -11,11 +11,20 @@
 |
 */
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+Auth::routes();
+
+Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
+    Route::resource('users', 'UserController');
+});
+
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
 /* Удаление записей */
 Route::get('/admin/delete_record/{table}/{id}', 'AdminController@delete')->name('admin_delete');
@@ -142,6 +151,6 @@ Route::post('/admin/langs/edit/{id}', 'AdminLangController@edit')->name('admin_l
 //Route::get('/api/doctor/info', 'ApiController@doctor_info');
 //Route::get('/api/patient/info', 'ApiController@patient_info');
 //Route::post('/api/add_review', 'ApiController@add_review');
-//Route::post('/api/chat/start', 'ApiController@chat_start');
-//Route::post('/api/chat/send', 'ApiController@chat_send');
-//Route::get('/api/chat/updates', 'ApiController@chat_updates');
+Route::post('/api/chat/start', 'ApiController@chat_start');
+Route::post('/api/chat/send', 'ApiController@chat_send');
+Route::get('/api/chat/updates', 'ApiController@chat_updates');
