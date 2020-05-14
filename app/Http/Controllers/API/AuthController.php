@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
 use App\Http\Requests\RegisterRequest;
@@ -41,7 +42,13 @@ class AuthController extends Controller
      */
     public function login(AuthRequest $request)
     {
-        return $this->respondWithToken(auth()->attempt($request->validated()));
+        if (!$token = JWTAuth::attempt($request->only(['phone', 'password']))) {
+            return response()->json([
+                'error' => __('auth.unauthorized')
+            ], 401);
+        }
+
+        return $this->respondWithToken($token);
     }
 
     /**
@@ -136,7 +143,7 @@ class AuthController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(auth('api')->refresh());
     }
 
     /**
@@ -151,7 +158,7 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type'   => 'bearer',
-            'expires_in'   => auth()->factory()->getTTL() * 60
+            'expires_in'   => auth('api')->factory()->getTTL() * 60
         ]);
     }
 }

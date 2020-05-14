@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Hash;
 
 class LoginController extends Controller
 {
@@ -35,7 +34,8 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-		//var_dump(Hash::make('123456'));
         $this->middleware('guest')->except('logout');
     }
+
+
 }
