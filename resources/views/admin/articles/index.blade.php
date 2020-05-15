@@ -1,7 +1,7 @@
 @extends('layouts.admin.table')
-@section('breadcrumbs', Breadcrumbs::render('admin.article.index'))
+@section('breadcrumbs', Breadcrumbs::render('admin.articles.index'))
 @section('header-btn')
-    <a href="{{ route('admin.article.create') }}" class="btn btn-danger" style="margin-top: 30px;">Добавить</a>
+    <a href="{{ route('admin.articles.create') }}" class="btn btn-danger" style="margin-top: 30px;">Добавить</a>
 @endsection
 @section('table-header')
     <th data-toggle="true">#</th>
@@ -18,7 +18,7 @@
             <td class="footable-visible">{{ $item->title }}</td>
             <td class="footable-visible">{{ $item->preview }}</td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.article.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.articles.edit', $item->id)])
             </td>
         </tr>
     @endforeach
