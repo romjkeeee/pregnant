@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\ArticleCategory;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ArticleCategoryRequest;
 use App\Http\Requests\Admin\PatientRequest;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
@@ -45,7 +46,7 @@ class ArticleCategoryController extends Controller
      * @param PatientRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(ArticleCategoryRequest $request): RedirectResponse
     {
         ArticleCategory::query()->create($request->validated());
 
@@ -69,7 +70,7 @@ class ArticleCategoryController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(ArticleCategoryRequest $request, $id): RedirectResponse
     {
         ArticleCategory::query()->findOrFail($id)->update($request->validated());
 
