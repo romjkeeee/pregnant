@@ -1,8 +1,8 @@
 @extends('layouts.admin.store')
-@section('breadcrumbs', Breadcrumbs::render('admin.langs.edit', $instance->id))
-@section('form-action', route('admin.langs.update', $instance->id))
+@section('breadcrumbs', Breadcrumbs::render('admin.languages.edit', $instance->id))
+@section('form-action', route('admin.languages.update', $instance->id))
 @section('header-btn')
-    <a href="{{ route('admin.langs.index') }}" class="btn btn-danger" style="margin-top: 30px;">К списку языков</a>
+    <a href="{{ route('admin.languages.index') }}" class="btn btn-danger" style="margin-top: 30px;">К списку языков</a>
 @endsection
 @section('fields')
     @method('PUT')

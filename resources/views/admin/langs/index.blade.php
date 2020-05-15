@@ -1,8 +1,8 @@
 @extends('layouts.admin.table')
-@section('breadcrumbs', Breadcrumbs::render('admin.langs.index'))
-{{--@section('header-btn')--}}
-{{--    <a href="{{ route('admin_med_add') }}" class="btn btn-danger" style="margin-top: 30px;">Добавить</a>--}}
-{{--@endsection--}}
+@section('breadcrumbs', Breadcrumbs::render('admin.languages.index'))
+@section('header-btn')
+    <a href="{{ route('admin.languages.create') }}" class="btn btn-danger" style="margin-top: 30px;">Добавить</a>
+@endsection
 @section('table-header')
     <th data-toggle="true">#</th>
     <th data-toggle="true">Код</th>
@@ -18,7 +18,7 @@
             <td class="footable-visible">{{ $item->name }}</td>
             <td class="footable-visible">{{ $item->file }}</td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.langs.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.languages.edit', $item->id)])
             </td>
         </tr>
     @endforeach

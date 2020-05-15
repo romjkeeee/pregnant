@@ -2,18 +2,18 @@
 
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
-Breadcrumbs::for('admin.langs.index', function ($trail) {
+Breadcrumbs::for('admin.languages.index', function ($trail) {
     $trail->parent('admin.home');
-    $trail->push('Языки', route('admin.langs.index'));
+    $trail->push('Языки', route('admin.languages.index'));
 });
 
-Breadcrumbs::for('admin.langs.create', function ($trail) {
+Breadcrumbs::for('admin.languages.create', function ($trail) {
     $trail->parent('admin.home');
-    $trail->push('Добавление языка', route('admin.langs.create'));
+    $trail->push('Добавление языка', route('admin.languages.create'));
 });
 
-Breadcrumbs::for('admin.langs.edit', function ($trail, $id) {
+Breadcrumbs::for('admin.languages.edit', function ($trail, $id) {
     $trail->parent('admin.home');
-    $trail->push('Редактированние языка', route('admin.langs.edit', $id));
+    $trail->push('Редактированние языка', route('admin.languages.edit', $id));
 });
 

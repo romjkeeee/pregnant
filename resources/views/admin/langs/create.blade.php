@@ -1,8 +1,8 @@
 @extends('layouts.admin.store')
-@section('breadcrumbs', Breadcrumbs::render('admin.langs.create'))
-@section('form-action', route('admin.langs.store'))
+@section('breadcrumbs', Breadcrumbs::render('admin.languages.create'))
+@section('form-action', route('admin.languages.store'))
 @section('header-btn')
-    <a href="{{ route('admin.langs.index') }}" class="btn btn-danger" style="margin-top: 30px;">К списку языков</a>
+    <a href="{{ route('admin.languages.index') }}" class="btn btn-danger" style="margin-top: 30px;">К списку языков</a>
 @endsection
 @section('fields')
     @method('POST')
