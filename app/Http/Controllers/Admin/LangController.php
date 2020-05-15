@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ClinicRequest;
+use App\Http\Requests\LangAdminRequest;
 use App\Lang;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
@@ -45,10 +46,9 @@ class LangController extends Controller
      * @param ClinicRequest $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public function store(LangAdminRequest $request): RedirectResponse
     {
         Lang::query()->create($request->validated());
-
         return redirect()->route('admin.langs.index')->with('success', 'Язые успешно добавлен!');
     }
 
@@ -69,7 +69,7 @@ class LangController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(LangAdminRequest $request, $id): RedirectResponse
     {
         Lang::query()->findOrFail($id)->update($request->validated());
 

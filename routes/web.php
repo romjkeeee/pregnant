@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'],
         Route::post('regions', 'PreloadController@regions')->name('regions');
         Route::post('check-list', 'PreloadController@checkList')->name('check-list');
         Route::post('specializations', 'PreloadController@specializations')->name('specializations');
-        Route::post('langs', 'PreloadController@langs')->name('langs');
+        Route::post('languages', 'PreloadController@langs')->name('langs');
     });
 });
 
