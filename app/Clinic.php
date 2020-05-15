@@ -13,7 +13,7 @@ class Clinic extends BaseModel
     protected $table = 'clinics';
     public $timestamps = false;
 
-    protected $fillable = ['rate'];
+    protected $fillable = ['region_id', 'city_id', 'rate', 'type', 'phone', 'name', 'text', 'address', 'lng', 'lat'];
 
     /**
      * @return HasOne

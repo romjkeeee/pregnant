@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\CheckList;
+use App\City;
 use App\Clinic;
 use App\Doctor;
+use App\Region;
 use App\Specialization;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -91,4 +93,33 @@ class PreloadController extends Controller
         }));
     }
 
+    /**
+     * @param Request $request
+     * @return ResponseFactory|Application|Response
+     */
+    public function regions(Request $request)
+    {
+        return response(Region::query()->where(function (Builder $builder) use ($request) {
+            if ($request->get('search')) {
+                $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+            }
+        })->orderBy('id', 'desc')->get()->map(function (Region $item) {
+            return ['id' => $item->id, 'text' => $item->name];
+        }));
+    }
+
+    /**
+     * @param Request $request
+     * @return ResponseFactory|Application|Response
+     */
+    public function cities(Request $request)
+    {
+        return response(City::query()->where(function (Builder $builder) use ($request) {
+            if ($request->get('search')) {
+                $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+            }
+        })->orderBy('id', 'desc')->get()->map(function (City $item) {
+            return ['id' => $item->id, 'text' => $item->name];
+        }));
+    }
 }

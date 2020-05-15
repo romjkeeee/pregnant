@@ -26,12 +26,15 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'],
     Route::resource('users', 'UserController');
     Route::resource('doctors', 'DoctorController');
     Route::resource('patients', 'PatientController');
+    Route::resource('clinics', 'ClinicController');
     Route::resource('check-lists', 'CheckListController');
     Route::resource('check-list-tasks', 'CheckListTaskController');
     Route::group(['prefix' => 'preload', 'as' => 'preload.'], function () {
         Route::post('users', 'PreloadController@users')->name('users');
         Route::post('clinics', 'PreloadController@clinics')->name('clinics');
         Route::post('doctors', 'PreloadController@doctors')->name('doctors');
+        Route::post('cities', 'PreloadController@cities')->name('cities');
+        Route::post('regions', 'PreloadController@regions')->name('regions');
         Route::post('check-list', 'PreloadController@checkList')->name('check-list');
         Route::post('specializations', 'PreloadController@specializations')->name('specializations');
     });
