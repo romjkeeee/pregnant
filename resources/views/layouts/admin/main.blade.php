@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $page_title }}</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('/adm/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('/adm/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('/adm/css/plugins/summernote/summernote.css') }}" rel="stylesheet">
@@ -14,6 +15,14 @@
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('/css/jquery.tagsinput-revisited.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/adm/css/bootstrap-datetimepicker-build.css') }}">
+    <style>
+        .bg-image {
+            height: 100px;
+            width: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+    </style>
     @stack('styles')
 </head>
 
@@ -38,42 +47,8 @@
 <script src="{{ asset('/adm/js/jquery.maskedinput.js') }}"></script>
 <script src="{{ asset('/adm/js/moment.min.js') }}"></script>
 <script src="{{ asset('/adm/js/bootstrap-datetimepicker.min.js') }}"></script>
-
-<script>
-    $(document).ready(function () {
-        function init() {
-            if (!$('input[name=lng]').length) {
-                return false;
-            }
-            $('.map_container').show();
-            var lng = $('input[name=lng]').val();
-            lng = parseFloat(lng);
-            var lat = $('input[name=lat]').val();
-            lat = parseFloat(lat);
-            var myMap = new ymaps.Map("map", {
-                center: [lat, lng],
-                zoom: 17
-            });
-            var myPlacemark = new ymaps.Placemark([lat, lng], {}, {
-                preset: 'islands#redIcon'
-            });
-            myMap.geoObjects.add(myPlacemark);
-        }
-
-        $('input[name=date_of_birth]').mask('99.99.1999');
-        $('input[name=date]').mask('99.99.9999');
-        $('.time_mask').mask('99:99');
-        $('.rate_select a').click(function () {
-            var this_stars = $(this).data('stars');
-            this_stars = parseInt(this_stars);
-            $('.rate_select').find('a').find('i').removeClass('fa-star').addClass('fa-star-o');
-            for (var i = 0; i < this_stars; i++) {
-                $('.rate_select').find('a').eq(i).find('i').removeClass('fa-star-o').addClass('fa-star');
-            }
-            $('input[name=rating]').val(this_stars);
-        });
-    });
-</script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
 @stack('scripts')
 </body>

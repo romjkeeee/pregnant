@@ -26,15 +26,10 @@
             </div>
         </div>
         <div class="col-lg-12">
-            @if($errors->first())
-                <div class="alert alert-danger">{{ $errors->first() }}</div>
-            @endif
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
+            @include('layouts.admin.blocks.notification')
         </div>
         <div class="col-lg-12">
-            <form method="POST" action="@yield('form-action')">@csrf
+            <form method="POST" action="@yield('form-action')" enctype="multipart/form-data">@csrf
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Общая информация</h5>

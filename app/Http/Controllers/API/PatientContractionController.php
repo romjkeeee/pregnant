@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Duration;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\PatientBellyRequest;
 use App\Http\Requests\PatientContractionRequest;
-use App\PatientBelly;
 use App\PatientContraction;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -62,5 +59,17 @@ class PatientContractionController extends Controller
             ->contractions()->create($request->validated());
 
         return \response(['Сохранено']);
+    }
+
+    /**
+     * @param $id
+     * @return ResponseFactory|Application|Response
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        auth()->user()->patient()->firstOrFail()->contractions()->findOrFail($id)->delete();
+
+        return \response(['Удалено']);
     }
 }

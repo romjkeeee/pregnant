@@ -19,12 +19,6 @@
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-8">
                 <h2>{{ $page_title }}</h2>
-                @if (session('error'))
-                    <div class="alert alert-danger">{{ session('error') }}</div>
-                @endif
-                @if (session('success'))
-                    <div class="alert alert-danger">{{ session('success') }}</div>
-                @endif
                 @yield('breadcrumbs')
             </div>
             <div class="col-lg-4 text-right">
@@ -41,6 +35,9 @@
                         </div>
                     </form>
                     <br>
+                </div>
+                <div class="col-lg-12">
+                    @include('layouts.admin.blocks.notification')
                 </div>
                 <div class="col-lg-12">
                     <div class="ibox">
@@ -76,3 +73,4 @@
         @include('layouts.admin.blocks.footer')
     </div>
 @endsection
+

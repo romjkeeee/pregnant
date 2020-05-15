@@ -8,6 +8,8 @@ class PatientContraction extends BaseModel
 {
     protected $fillable = ['start', 'duration', 'interval'];
 
+    protected $dates = ['start'];
+
     /**
      * @return HasOne
      */

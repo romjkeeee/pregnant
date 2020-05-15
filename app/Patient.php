@@ -4,16 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Patient extends Authenticatable
+class Patient extends BaseModel
 {
-
-    protected $table = 'patients';
-    protected $guarded = [
-        'id',
-    ];
-
+    protected $fillable = ['user_id', 'clinic_id', 'doctor_id', 'date_of_birth', 'pregnant'];
     protected $dates = ['date_of_birth'];
 
     /**
@@ -56,12 +50,19 @@ class Patient extends Authenticatable
         return $this->hasMany(PatientContraction::class, 'patient_id', 'id');
     }
 
-    public function emergencyContacts()
+    /**
+     * @return HasMany
+     */
+    public function emergencyContacts(): HasMany
     {
-        return $this->hasMany(EmergencyContact::class, 'patient_id','id');
+        return $this->hasMany(EmergencyContact::class, 'patient_id', 'id');
     }
-    public function weight()
+
+    /**
+     * @return HasMany
+     */
+    public function weight(): HasMany
     {
-        return $this->hasMany(PatientWeight::class, 'patient_id','id');
+        return $this->hasMany(PatientWeight::class, 'patient_id', 'id');
     }
 }

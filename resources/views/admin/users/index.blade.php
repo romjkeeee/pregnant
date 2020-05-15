@@ -1,6 +1,8 @@
 @extends('layouts.admin.table')
 @section('breadcrumbs', Breadcrumbs::render('admin.users.index'))
-
+{{--@section('header-btn')--}}
+{{--    <a href="{{ route('admin_med_add') }}" class="btn btn-danger" style="margin-top: 30px;">Добавить</a>--}}
+{{--@endsection--}}
 @section('table-header')
     <th data-toggle="true">#</th>
     <th data-toggle="true">Подтвержден</th>

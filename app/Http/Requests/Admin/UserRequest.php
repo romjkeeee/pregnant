@@ -27,11 +27,9 @@ class UserRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
      * @return array
      */
-    public function rules()
+    private function __rules(): array
     {
         return [
             'name'      => 'required|min:2|max:64',
@@ -44,7 +42,39 @@ class UserRequest extends FormRequest
             'verified'  => 'required|in:0,1',
             'email'     => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user->id ?? null)],
             'phone'     => ['required', 'phone:RU', Rule::unique('users', 'phone')->ignore($this->user->id ?? null)],
-            'password'  => ['nullable', 'min:6', 'max:24']
         ];
+    }
+
+    /**
+     * @return array|\string[][]
+     */
+    private function __post(): array
+    {
+        return ['password' => ['required', 'min:6', 'max:24']];
+    }
+
+    /**
+     * @return array|\string[][]
+     */
+    private function __put(): array
+    {
+        return ['password' => ['nullable', 'min:6', 'max:24']];
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules(): array
+    {
+        switch ($this->method()) {
+            case 'POST':
+                return $this->__rules() + $this->__post();
+            case 'PUT':
+                return $this->__rules() + $this->__put();
+            default:
+                return [];
+        }
     }
 }

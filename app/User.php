@@ -6,10 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use App\Role;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -106,6 +104,14 @@ class User extends Authenticatable implements JWTSubject
         if ($password) {
             $this->attributes['password'] = bcrypt($password);
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullNameAttribute(): string
+    {
+        return "{$this->last_name} {$this->name} {$this->second_name}";
     }
 
     /**

@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class PatientContractionRequest extends FormRequest
+class CheckListTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +22,12 @@ class PatientContractionRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'start'    => 'required|date_format:Y-m-d H:i:s',
-            'duration' => 'required|date_format:H:i:s',
-            'interval' => 'required|date_format:H:i:s',
+            'list_id' => ['required', 'exists:check_lists,id'],
+            'name'    => ['required', Rule::unique('check_list_tasks', 'name')->ignore($this->route()->parameter('check_list_task'))],
         ];
     }
+
 }

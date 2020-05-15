@@ -43,4 +43,30 @@ class Doctor extends BaseModel
         return $this->hasMany(DoctorReview::class, 'doctor_id', 'id');
     }
 
+    /**
+     * @return array|null
+     */
+    public function getSelectedClinicsAttribute(): ?array
+    {
+        $clinics = [];
+        $this->clinics()->get()->each(function (Clinic $clinic) use (&$clinics) {
+            $clinics[$clinic->id] = $clinic->name;
+        })->toArray();
+
+        return $clinics;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getSelectedSpecialisationsAttribute(): ?array
+    {
+        $specialisations = [];
+        $this->specialisations()->get()->each(function (Specialization $specialization) use (&$specialisations) {
+            $specialisations[$specialization->id] = $specialization->name;
+        })->toArray();
+
+        return $specialisations;
+    }
+
 }
