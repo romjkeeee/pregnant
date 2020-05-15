@@ -16,11 +16,11 @@ class EmergencyContactController extends Controller
 {
     public function index()
     {
-        return \response(auth()->user()->patient()->emergencycontacts()->get());
+        return \response(auth()->user()->patient()->firstOrFail()->emergencycontacts()->get());
     }
 
     public function store(EmergencyContactsRequest $request)
     {
-        return response(auth()->user()->patient()->emergencycontacts()->create($request->validated()));
+        return response(auth()->user()->patient()->firstOrFail()->emergencycontacts()->create($request->validated()));
     }
 }
