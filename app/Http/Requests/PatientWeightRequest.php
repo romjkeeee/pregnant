@@ -14,7 +14,7 @@ class PatientWeightRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class PatientWeightRequest extends FormRequest
     public function rules()
     {
         return [
-            'weight'    => 'required|numeric|max:500',
+            'weights'    => 'required|numeric|max:500',
             'date'      => 'required|date|before:now',
         ];
     }

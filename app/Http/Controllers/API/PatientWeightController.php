@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PatientWeightRequest;
 use App\Patient;
 use App\PatientWeight;
 use Illuminate\Http\Request;
@@ -11,12 +12,12 @@ class PatientWeightController extends Controller
 {
     public function index()
     {
-        return \response(Patient::with('weight')->paginate(20));
+        return \response(auth()->user()->patient()->firstOrFail()->weight()->get());
     }
 
-    public function store(Request $request)
+    public function store(PatientWeightRequest $request)
     {
-        return response(auth()->user()->patient()->weight()->create($request->validated()));
+        return response(auth()->user()->patient()->firstOrFail()->weight()->create($request->validated()));
     }
 
     public function destroy(PatientWeight $patientWeight)
