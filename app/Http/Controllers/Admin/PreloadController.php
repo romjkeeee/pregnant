@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ArticleCategory;
 use App\CheckList;
 use App\City;
 use App\Clinic;
@@ -136,6 +137,21 @@ class PreloadController extends Controller
             }
         })->orderBy('id', 'desc')->get()->map(function (City $item) {
             return ['id' => $item->id, 'text' => $item->name];
+        }));
+    }
+
+    /**
+     * @param Request $request
+     * @return ResponseFactory|Application|Response
+     */
+    public function article_category(Request $request)
+    {
+        return response(ArticleCategory::query()->where(function (Builder $builder) use ($request) {
+            if ($request->get('search')) {
+                $builder->where('title', 'LIKE', "%{$request->get('search')}%");
+            }
+        })->orderBy('id', 'desc')->get()->map(function (ArticleCategory $item) {
+            return ['id' => $item->id, 'text' => $item->title];
         }));
     }
 }

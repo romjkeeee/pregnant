@@ -10,19 +10,19 @@
         <div class="col-lg-4">
             <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Код <span class="req">*</span></strong>
-                <input type="text" name="name" value="{{ old('code') }}" class="form-control">
+                <input type="text" name="code" value="{{ old('code') }}" class="form-control">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Наименование <span class="req">*</span></strong>
-                <input type="text" name="phone" value="{{ old('name') }}" class="form-control">
+                <input type="text" name="name" value="{{ old('name') }}" class="form-control">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Файл <span class="req">*</span></strong>
-                <input type="text" name="phone" value="{{ old('file') }}" class="form-control">
+                <input type="text" name="file" value="{{ old('file') }}" class="form-control">
             </div>
         </div>
     </div>
