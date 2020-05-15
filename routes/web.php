@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'],
     Route::resource('clinics', 'ClinicController');
     Route::resource('check-lists', 'CheckListController');
     Route::resource('check-list-tasks', 'CheckListTaskController');
+    Route::resource('langs', 'LangController');
     Route::group(['prefix' => 'preload', 'as' => 'preload.'], function () {
         Route::post('users', 'PreloadController@users')->name('users');
         Route::post('clinics', 'PreloadController@clinics')->name('clinics');
@@ -37,6 +38,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'],
         Route::post('regions', 'PreloadController@regions')->name('regions');
         Route::post('check-list', 'PreloadController@checkList')->name('check-list');
         Route::post('specializations', 'PreloadController@specializations')->name('specializations');
+        Route::post('langs', 'PreloadController@langs')->name('langs');
     });
 });
 

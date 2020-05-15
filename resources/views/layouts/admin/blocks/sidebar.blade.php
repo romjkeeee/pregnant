@@ -20,6 +20,7 @@
         @include('admin.patients.links')
         @include('admin.check-lists.links')
         @include('admin.clinics.links')
+        @include('admin.langs.links')
 
         {{--        <li @if (Route::current()->getName() == 'admin_med' or Route::current()->getName() == 'admin_med_add' or Route::current()->getName() == 'admin_med_edit' or Route::current()->getName() == 'admin_med_info') class="active" @endif>--}}
         {{--            <a href="{{ route('admin_med') }}"><i class="fa fa-user"></i> <span class="nav-label">Врачи</span> <span class="fa arrow"></span></a>--}}
