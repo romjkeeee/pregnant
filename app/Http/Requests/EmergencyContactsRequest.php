@@ -24,7 +24,6 @@ class EmergencyContactsRequest extends FormRequest
     public function rules()
     {
         return [
-            'patient_id'  => 'required|exists:patients,id',
             'name'        => 'required|string',
             'phone'       => 'required|phone:RU',
         ];

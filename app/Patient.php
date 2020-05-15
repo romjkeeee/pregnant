@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Patient extends BaseModel
 {
-    protected $fillable = ['user_id', 'clinic_id', 'doctor_id', 'date_of_birth', 'pregnant'];
+//    protected $fillable = ['user_id', 'clinic_id', 'doctor_id', 'date_of_birth', 'pregnant'];
     protected $dates = ['date_of_birth'];
-
+    protected $guarded = ['id'];
     /**
      * @return HasOne
      */
