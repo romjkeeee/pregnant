@@ -53,7 +53,8 @@ class PatientController extends Controller
 
     public function conceptionDate(PatientConceptionRequest $request)
     {
-        auth()->user()->patient()->update($request->validate());
+        $patient = auth()->user()->patient()->firstOrFail();
+        $patient->update($request->validated());
 
         return \response(['Сохранено']);
     }
