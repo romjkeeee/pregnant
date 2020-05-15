@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\ClinicDepartment;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\ClinicDepartmentsRequest;
 use App\Http\Requests\Admin\ClinicRequest;
-use App\Http\Requests\Admin\LangAdminRequest;
-use App\Lang;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
@@ -13,7 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class LangController extends Controller
+class ClinicDepartmentsController extends Controller
 {
     /**
      * @param Request $request
@@ -21,12 +21,12 @@ class LangController extends Controller
      */
     public function index(Request $request)
     {
-        return view('admin.langs.index', [
-            'page_title' => 'Языки',
+        return view('admin.clinics-departments.index', [
+            'page_title' => 'Департаменты',
             'search'     => $request->get('search'),
-            'items'      => Lang::query()->where(function (Builder $lang) use ($request) {
+            'items'      => ClinicDepartment::query()->where(function (Builder $clinicDepartments) use ($request) {
                     if ($request->get('search')) {
-                        $lang->where(function (Builder $builder) use ($request) {
+                        $clinicDepartments->where(function (Builder $builder) use ($request) {
                             $builder->orWhere('name', 'LIKE', "%{$request->get('search')}%");
                         });
                     }
@@ -39,17 +39,18 @@ class LangController extends Controller
      */
     public function create()
     {
-        return view('admin.langs.create', ['page_title' => 'Добавление языка']);
+        return view('admin.clinics-departments.create', ['page_title' => 'Добавление департамента']);
     }
 
     /**
      * @param ClinicRequest $request
      * @return RedirectResponse
      */
-    public function store(LangAdminRequest $request): RedirectResponse
+    public function store(ClinicDepartmentsRequest $request): RedirectResponse
     {
-        Lang::query()->create($request->validated());
-        return redirect()->route('admin.langs.index')->with('success', 'Язые успешно добавлен!');
+        ClinicDepartment::query()->create($request->validated());
+
+        return redirect()->route('admin.clinics-departments.index')->with('success', 'Депортамент успешно добавлен!');
     }
 
     /**
@@ -58,9 +59,9 @@ class LangController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.langs.edit', [
-            'page_title' => 'Редактирование языка',
-            'instance'   => Lang::query()->findOrFail($id),
+        return view('admin.clinics-departments.edit', [
+            'page_title' => 'Редактирование департмаента',
+            'instance'   => ClinicDepartment::query()->findOrFail($id),
         ]);
     }
 
@@ -69,10 +70,12 @@ class LangController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function update(LangAdminRequest $request, $id): RedirectResponse
+    public function update(ClinicDepartmentsRequest $request, $id): RedirectResponse
     {
-        Lang::query()->findOrFail($id)->update($request->validated());
+        ClinicDepartment::query()->findOrFail($id)->update($request->validated());
 
         return back()->with('success', 'Сохранено!');
     }
+
+
 }

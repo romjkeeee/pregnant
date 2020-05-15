@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'],
     Route::resource('check-lists', 'CheckListController');
     Route::resource('check-list-tasks', 'CheckListTaskController');
     Route::resource('languages', 'LangController');
+    Route::resource('clinic-departments', 'ClinicDepartmentsController');
     Route::group(['prefix' => 'preload', 'as' => 'preload.'], function () {
         Route::post('users', 'PreloadController@users')->name('users');
         Route::post('clinics', 'PreloadController@clinics')->name('clinics');

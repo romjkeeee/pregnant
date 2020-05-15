@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class LangAdminRequest extends FormRequest
+class ClinicDepartmentsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +25,10 @@ class LangAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required|string',
-            'name' => 'required|string',
+            'clinic_id' => ['required', 'exists:clinics,id'],
+            'name'    => ['required', 'string'],
+            'street'    => ['required', 'string'],
+            'building'    => ['required', 'string'],
         ];
     }
 }
