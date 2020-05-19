@@ -32,6 +32,7 @@ class RegisterRequest extends FormRequest
     private function __user(): array
     {
         return [
+            'image'                 => ['nullable', 'image', 'max:2048'],
             'name'                  => 'required|min:2|max:192',
             'last_name'             => 'required|min:2|max:192',
             'second_name'           => 'required|min:2|max:192',

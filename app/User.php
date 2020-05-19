@@ -5,9 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -38,6 +40,7 @@ class User extends Authenticatable implements JWTSubject
         'street',
         'building',
         'apartment',
+        'image'
     ];
 
     /**
@@ -160,5 +163,18 @@ class User extends Authenticatable implements JWTSubject
     public function city(): HasOne
     {
         return $this->hasOne(City::class, 'id', 'city_id');
+    }
+
+    /**
+     * @param UploadedFile|null $image
+     */
+    public function setImageAttribute(UploadedFile $image = null)
+    {
+        if ($image) {
+            if (isset($this->attributes['image']) && Storage::disk('publicUpload')->exists($this->attributes['image'])) {
+                Storage::disk('publicUpload')->delete($this->attributes['image']);
+            }
+            $this->attributes['image'] = Storage::disk('publicUpload')->put('images/check-lists', $image);
+        }
     }
 }
