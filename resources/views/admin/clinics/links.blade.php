@@ -1,6 +1,6 @@
 <li @if (request()->is('*clinics*') || request()->is('*clinic-departments*')) class="active" @endif>
     <a href="#">
-        <i class="fa fa-list"></i>
+        <i class="fa fa-building-o"></i>
         <span class="nav-label">Клиники</span>
         <span class="fa arrow"></span>
     </a>

@@ -1,6 +1,6 @@
 <li @if (request()->is('*articles*') || request()->is('*article-category*')) class="active" @endif>
     <a href="#">
-        <i class="fa fa-list"></i>
+        <i class="fa fa-newspaper-o"></i>
         <span class="nav-label">Статьи</span>
         <span class="fa arrow"></span>
     </a>

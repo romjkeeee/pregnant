@@ -17,3 +17,9 @@ Breadcrumbs::for('admin.patients.edit', function ($trail, $id) {
     $trail->push('Редактированние пациента', route('admin.patients.edit', $id));
 });
 
+Breadcrumbs::for('admin.check-list.index', function ($trail, $id) {
+    $trail->parent('admin.patients.index');
+    $trail->push("Чек лист пациента #{$id}", route('admin.check-list.index', $id));
+});
+
+

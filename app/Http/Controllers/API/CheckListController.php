@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\CheckList;
 use App\Http\Requests\SelectTaskRequest;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
@@ -28,7 +29,13 @@ class CheckListController extends Controller
      */
     public function index(): Response
     {
-        return response([CheckList::query()->with('tasks')->get()]);
+        return response([
+            CheckList::query()->with([
+                'tasks.patient' => function (BelongsToMany $many) {
+                    $many->where('patient_id', auth()->user()->patient->id ?? null);
+                }
+            ])->get()
+        ]);
     }
 
     /**

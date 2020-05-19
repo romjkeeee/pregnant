@@ -5,8 +5,8 @@
         <span class="fa arrow"></span>
     </a>
     <ul class="nav nav-second-level collapse">
-        <li @if (Route::current()->getName() == 'admin.check-lists.index') class="active" @endif><a href="{{ route('admin.check-lists.index') }}">Список групп</a></li>
-        <li @if (Route::current()->getName() == 'admin.check-lists.create') class="active" @endif><a href="{{ route('admin.check-lists.create') }}">Добавить группу</a></li>
+        <li @if (Route::current()->getName() == 'admin.check-lists.index') class="active" @endif><a href="{{ route('admin.check-lists.index') }}">Список</a></li>
+        <li @if (Route::current()->getName() == 'admin.check-lists.create') class="active" @endif><a href="{{ route('admin.check-lists.create') }}">Добавить</a></li>
         @include('admin.check-list-tasks.links')
     </ul>
 </li>

@@ -25,10 +25,13 @@ Route::get('admin', function () {
 Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Route::resource('users', 'UserController');
     Route::resource('doctors', 'DoctorController');
-    Route::resource('patients', 'PatientController');
     Route::resource('clinics', 'ClinicController');
+
+    Route::resource('patients', 'PatientController');
+    Route::resource('patient/{id}/check-list', 'PatientCheckListController');
     Route::resource('check-lists', 'CheckListController');
     Route::resource('check-list-tasks', 'CheckListTaskController');
+
     Route::resource('languages', 'LangController');
     Route::resource('clinic-departments', 'ClinicDepartmentsController');
     Route::resource('articles', 'ArticleController');
@@ -153,11 +156,11 @@ Route::get('/admin/msg/chat/{chat_id}', 'AdminMsgController@chat')->name('admin_
 Route::post('/admin/msg/chat/{chat_id}', 'AdminMsgController@add')->name('admin_msg_add');
 
 /* Языки */
-Route::get('/admin/langs', 'AdminLangController@index')->name('admin_langs');
-Route::get('/admin/langs/add', 'AdminLangController@add')->name('admin_langs_add');
-Route::post('/admin/langs/add', 'AdminLangController@add')->name('admin_langs_add');
-Route::get('/admin/langs/edit/{id}', 'AdminLangController@edit')->name('admin_langs_edit');
-Route::post('/admin/langs/edit/{id}', 'AdminLangController@edit')->name('admin_langs_edit');
+//Route::get('/admin/langs', 'AdminLangController@index')->name('admin_langs');
+//Route::get('/admin/langs/add', 'AdminLangController@add')->name('admin_langs_add');
+//Route::post('/admin/langs/add', 'AdminLangController@add')->name('admin_langs_add');
+//Route::get('/admin/langs/edit/{id}', 'AdminLangController@edit')->name('admin_langs_edit');
+//Route::post('/admin/langs/edit/{id}', 'AdminLangController@edit')->name('admin_langs_edit');
 
 /* API */
 //Route::any('/api/login/doctor', 'ApiController@login_doctor');
