@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Storage;
 class CheckList extends BaseModel
 {
     protected $fillable = ['name', 'image'];
+    protected $appends = ['image_path'];
+    /**
+     * @return string|null
+     */
+    public function getImagePathAttribute(): ?string
+    {
+        return $this->image ? asset($this->image) : null;
+    }
 
     /**
      * @param UploadedFile|null $image

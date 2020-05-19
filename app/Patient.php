@@ -2,12 +2,13 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Patient extends BaseModel
 {
-//    protected $fillable = ['user_id', 'clinic_id', 'doctor_id', 'date_of_birth', 'pregnant'];
+    protected $fillable = ['user_id', 'clinic_id', 'doctor_id', 'date_of_birth', 'pregnant'];
     protected $dates = ['date_of_birth'];
     protected $guarded = ['id'];
     /**
@@ -64,5 +65,13 @@ class Patient extends BaseModel
     public function weight(): HasMany
     {
         return $this->hasMany(PatientWeight::class, 'patient_id', 'id');
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function tasks(): BelongsToMany
+    {
+        return $this->belongsToMany(CheckListTask::class, 'patient_tasks', 'patient_id', 'task_id');
     }
 }

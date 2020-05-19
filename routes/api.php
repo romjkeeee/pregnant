@@ -43,12 +43,16 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     });
 
     /** patient routes */
+    Route::apiResource('check-lists', 'CheckListController');
+
     Route::get('bellies/last', 'PatientBellyController@last');
     Route::apiResource('bellies', 'PatientBellyController');
+
+    Route::apiResource('patient/weight', 'PatientWeightController');
     Route::apiResource('patients', 'PatientController');
+
+    Route::post('conception-date', 'PatientController@conceptionDate');
     Route::apiResource('contractions', 'PatientContractionController');
-    Route::post('conception_date', 'PatientController@conceptionDate');
-    Route::apiResource('/patient/weight', 'PatientWeightController');
 
     /** doctor routes */
     Route::get('specializations/doctors', 'DoctorController@specialisationDoctors');
