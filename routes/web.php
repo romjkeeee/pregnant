@@ -25,17 +25,23 @@ Route::get('admin', function () {
 Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Route::resource('users', 'UserController');
     Route::resource('doctors', 'DoctorController');
-    Route::resource('clinics', 'ClinicController');
 
     Route::resource('patients', 'PatientController');
     Route::resource('patient/{id}/check-list', 'PatientCheckListController');
     Route::resource('check-lists', 'CheckListController');
     Route::resource('check-list-tasks', 'CheckListTaskController');
 
-    Route::resource('languages', 'LangController');
+    Route::resource('clinics', 'ClinicController');
     Route::resource('clinic-departments', 'ClinicDepartmentsController');
+
     Route::resource('articles', 'ArticleController');
     Route::resource('article-category', 'ArticleCategoryController');
+
+    Route::resource('regions', 'RegionController');
+    Route::resource('cities', 'CityController');
+
+    Route::resource('languages', 'LangController');
+
     Route::group(['prefix' => 'preload', 'as' => 'preload.'], function () {
         Route::post('users', 'PreloadController@users')->name('users');
         Route::post('clinics', 'PreloadController@clinics')->name('clinics');

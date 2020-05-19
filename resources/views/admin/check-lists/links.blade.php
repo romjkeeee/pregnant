@@ -1,7 +1,7 @@
 <li @if (request()->is('*check-lists*') || request()->is('*check-list-tasks*')) class="active" @endif>
     <a href="#">
         <i class="fa fa-list"></i>
-        <span class="nav-label">Чек лист</span>
+        <span class="nav-label">Чек листы</span>
         <span class="fa arrow"></span>
     </a>
     <ul class="nav nav-second-level collapse">

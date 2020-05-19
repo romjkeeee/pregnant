@@ -21,9 +21,11 @@ class PatientCheckListController extends Controller
 
     public function __construct()
     {
-        $this->patient = Patient::query()
-            ->whereHas('user')->with('user')
-            ->findOrFail(\request()->route()->parameter('id'));
+        if (\request()->route()) {
+            $this->patient = Patient::query()
+                ->whereHas('user')->with('user')
+                ->findOrFail(request()->route()->parameter('id'));
+        }
     }
 
     /**
