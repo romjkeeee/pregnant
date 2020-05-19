@@ -21,9 +21,9 @@ class ArticleController extends Controller
      * @authenticated required
      * @response 200
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response(ArticleCategory::with('articles')->paginate(15));
+        return response(Article::with('article_category')->filter($request->only('region_id'))->paginate(15));
     }
 
     /**

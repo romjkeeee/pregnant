@@ -42,6 +42,11 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::get('cities', 'LocationController@cities');
     });
 
+    Route::group(['prefix' => 'duration-articles', 'as' => 'duration-articles.'], function () {
+        Route::get('/', 'DurationArticlesController@index');
+        Route::get('/{id}', 'DurationArticlesController@show');
+    });
+
     /** patient routes */
     Route::apiResource('check-lists', 'CheckListController');
 
@@ -53,6 +58,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
 
     Route::post('conception-date', 'PatientController@conceptionDate');
     Route::apiResource('contractions', 'PatientContractionController');
+    Route::get('my-duration', 'DurationController@get_duration');
 
     /** doctor routes */
     Route::get('specializations/doctors', 'DoctorController@specialisationDoctors');
