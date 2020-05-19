@@ -19,8 +19,13 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::post('register', 'AuthController@register');
     Route::post('verify', 'AuthController@verify');
     Route::post('refresh', 'AuthController@refresh');
-    Route::post('me', 'AuthController@me');
 
+    Route::group(['prefix' => 'me'], function () {
+        Route::post('/', 'AuthController@me');
+        Route::post('lang', 'AuthController@lang');
+        Route::post('phone', 'AuthController@phone');
+        Route::post('location', 'AuthController@location');
+    });
     Route::group(['prefix' => 'articles'], function () {
         Route::get('/category', 'ArticleCategoryController@index');
         Route::get('/', 'ArticleController@index');

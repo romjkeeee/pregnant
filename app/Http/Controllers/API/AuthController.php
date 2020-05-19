@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Requests\LocationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
@@ -109,6 +112,41 @@ class AuthController extends Controller
         $code->user->smsCodes()->delete();
 
         return \response(['Номер телефона подтвержден']);
+    }
+
+    /**
+     * @param Request $request
+     * @return ResponseFactory|Application|Response
+     */
+    public function lang(Request $request)
+    {
+        $request->validate(['lang_id' => ['required', 'exists:langs,id']]);
+        auth()->user()->update($request->only(['lang_id']));
+
+        return \response(['Язык изменен']);
+    }
+
+    /**
+     * @param Request $request
+     * @return ResponseFactory|Application|Response
+     */
+    public function phone(Request $request)
+    {
+        $request->validate(['phone' => ['required', 'phone:RU', Rule::unique('users', 'phone')->ignore(auth()->id())]]);
+        auth()->user()->update($request->only(['phone']));
+
+        return \response(['Телефон изменен']);
+    }
+
+    /**
+     * @param LocationRequest $request
+     * @return ResponseFactory|Application|Response
+     */
+    public function location(LocationRequest $request)
+    {
+        auth()->user()->update($request->validated());
+
+        return \response(['Сохранено']);
     }
 
     /**
