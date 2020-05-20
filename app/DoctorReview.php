@@ -14,6 +14,12 @@ class DoctorReview extends BaseModel
         static::created(function (self $review) {
             $review->doctor()->update(['rate' => self::query()->filter($review->only(['doctor_id']))->avg('rate')]);
         });
+        static::updated(function (self $review) {
+            $review->doctor()->update(['rate' => self::query()->filter($review->only(['doctor_id']))->avg('rate')]);
+        });
+        static::deleting(function (self $review) {
+            $review->doctor()->update(['rate' => self::query()->filter($review->only(['doctor_id']))->avg('rate')]);
+        });
     }
 
     /**

@@ -24,13 +24,19 @@ Route::get('admin', function () {
 
 Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     Route::resource('users', 'UserController');
-    Route::resource('doctors', 'DoctorController');
 
     Route::resource('patients', 'PatientController');
     Route::resource('patient/{id}/check-list', 'PatientCheckListController');
     Route::resource('check-lists', 'CheckListController');
     Route::resource('check-list-tasks', 'CheckListTaskController');
 
+    /** doctors routes */
+    Route::group(['prefix' => 'doctors', 'as' => 'doctors.'], function () {
+        Route::resource('reviews', 'DoctorReviewController');
+    });
+    Route::resource('doctors', 'DoctorController');
+
+    /** clinics routes */
     Route::group(['prefix' => 'clinics', 'as' => 'clinics.'], function () {
         Route::resource('prices', 'ClinicPriceController');
         Route::resource('reviews', 'ClinicReviewsController');

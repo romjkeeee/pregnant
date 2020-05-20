@@ -5,7 +5,12 @@
         <span class="fa arrow"></span>
     </a>
     <ul class="nav nav-second-level collapse">
-        <li @if (Route::current()->getName() == 'admin.doctors.index') class="active" @endif><a href="{{ route('admin.doctors.index') }}">Список</a></li>
-        <li @if (Route::current()->getName() == 'admin.doctors.create') class="active" @endif><a href="{{ route('admin.doctors.create') }}">Добавить</a></li>
+        <li @if (Route::current()->getName() == 'admin.doctors.index') class="active" @endif>
+            <a href="{{ route('admin.doctors.index') }}">Список</a>
+        </li>
+        <li @if (Route::current()->getName() == 'admin.doctors.create') class="active" @endif>
+            <a href="{{ route('admin.doctors.create') }}">Добавить</a>
+        </li>
+        @include('admin.doctors.reviews.links')
     </ul>
 </li>
