@@ -1,8 +1,8 @@
 @extends('layouts.admin.store')
-@section('breadcrumbs', Breadcrumbs::render('admin.prices.create'))
-@section('form-action', route('admin.prices.store'))
+@section('breadcrumbs', Breadcrumbs::render('admin.clinics.prices.create'))
+@section('form-action', route('admin.clinics.prices.store'))
 @section('header-btn')
-    <a href="{{ route('admin.prices.index') }}" class="btn btn-danger" style="margin-top: 30px;">К списку цен</a>
+    <a href="{{ route('admin.clinics.prices.index') }}" class="btn btn-danger" style="margin-top: 30px;">К списку цен</a>
 @endsection
 @section('fields')
     @method('POST')

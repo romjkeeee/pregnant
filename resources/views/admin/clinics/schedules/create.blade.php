@@ -1,8 +1,8 @@
 @extends('layouts.admin.store')
-@section('breadcrumbs', Breadcrumbs::render('admin.schedules.create'))
-@section('form-action', route('admin.schedules.store'))
+@section('breadcrumbs', Breadcrumbs::render('admin.clinics.schedules.create'))
+@section('form-action', route('admin.clinics.schedules.store'))
 @section('header-btn')
-    <a href="{{ route('admin.schedules.index') }}" class="btn btn-danger" style="margin-top: 30px;">К списку рассписаний</a>
+    <a href="{{ route('admin.clinics.schedules.index') }}" class="btn btn-danger" style="margin-top: 30px;">К списку рассписаний</a>
 @endsection
 @section('fields')
     @method('POST')

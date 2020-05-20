@@ -1,5 +1,5 @@
 @extends('layouts.admin.table')
-@section('breadcrumbs', Breadcrumbs::render('admin.schedules.index'))
+@section('breadcrumbs', Breadcrumbs::render('admin.clinics.schedules.index'))
 @section('header-btn')
     <div style="display: flex; justify-content: flex-end; align-items: center">
         <form id="list" style="margin-top: 30px">
@@ -12,7 +12,7 @@
                 <button type="submit" class="btn btn-warning" style="height: 34px"><i class="fa fa-close"></i></button>
             </form>
         @endif
-        <a href="{{ route('admin.schedules.create') }}" class="btn btn-danger" style="margin-top: 15px; margin-left: 10px;">Добавить</a>
+        <a href="{{ route('admin.clinics.schedules.create') }}" class="btn btn-danger" style="margin-top: 15px; margin-left: 10px;">Добавить</a>
     </div>
 @endsection
 @section('table-header')
@@ -38,7 +38,7 @@
 
             </td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.schedules.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.clinics.schedules.edit', $item->id)])
             </td>
         </tr>
     @endforeach

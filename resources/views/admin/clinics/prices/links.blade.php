@@ -4,7 +4,11 @@
         <span class="fa arrow"></span>
     </a>
     <ul class="nav nav-second-level collapse" style="margin-left: 15px">
-        <li @if (Route::current()->getName() == 'admin.prices.index') class="active" @endif><a href="{{ route('admin.prices.index') }}">Список</a></li>
-        <li @if (Route::current()->getName() == 'admin.prices.create') class="active" @endif><a href="{{ route('admin.prices.create') }}">Добавить</a></li>
+        <li @if (Route::current()->getName() == 'admin.clinics.prices.index') class="active" @endif>
+            <a href="{{ route('admin.clinics.prices.index') }}">Список</a>
+        </li>
+        <li @if (Route::current()->getName() == 'admin.clinics.prices.create') class="active" @endif>
+            <a href="{{ route('admin.clinics.prices.create') }}">Добавить</a>
+        </li>
     </ul>
 </li>

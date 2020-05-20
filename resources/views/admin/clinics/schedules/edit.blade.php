@@ -1,8 +1,8 @@
 @extends('layouts.admin.store')
-@section('breadcrumbs', Breadcrumbs::render('admin.schedules.edit', $instance->id))
-@section('form-action', route('admin.schedules.update', $instance->id))
+@section('breadcrumbs', Breadcrumbs::render('admin.clinics.schedules.edit', $instance->id))
+@section('form-action', route('admin.clinics.schedules.update', $instance->id))
 @section('header-btn')
-    <a href="{{ route('admin.schedules.index') }}" class="btn btn-danger" style="margin-top: 30px;">К списку графиков</a>
+    <a href="{{ route('admin.clinics.schedules.index') }}" class="btn btn-danger" style="margin-top: 30px;">К списку графиков</a>
 @endsection
 @section('fields')
     @method('PUT')

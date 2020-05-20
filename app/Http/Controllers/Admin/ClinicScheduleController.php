@@ -58,7 +58,7 @@ class ClinicScheduleController extends Controller
     {
         Clinic::query()->findOrFail($request->get('clinic_id'))->schedules()->createMany($request->validated());
 
-        return redirect()->route('admin.schedules.index')->with('success', 'График успешно добавлен!');
+        return redirect()->route('admin.clinics.schedules.index')->with('success', 'График успешно добавлен!');
     }
 
     /**

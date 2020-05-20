@@ -2,18 +2,18 @@
 
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
-Breadcrumbs::for('admin.clinic-departments.index', function ($trail) {
-    $trail->parent('admin.home');
-    $trail->push('Клиники', route('admin.clinic-departments.index'));
+Breadcrumbs::for('admin.clinics.departments.index', function ($trail) {
+    $trail->parent('admin.clinics.index');
+    $trail->push('Отделения', route('admin.clinics.departments.index'));
 });
 
-Breadcrumbs::for('admin.clinic-departments.create', function ($trail) {
-    $trail->parent('admin.clinic-departments.index');
-    $trail->push('Добавление клиники', route('admin.clinic-departments.create'));
+Breadcrumbs::for('admin.clinics.departments.create', function ($trail) {
+    $trail->parent('admin.clinics.departments.index');
+    $trail->push('Добавление отделения', route('admin.clinics.departments.create'));
 });
 
-Breadcrumbs::for('admin.clinic-departments.edit', function ($trail, $id) {
-    $trail->parent('admin.clinic-departments.index');
-    $trail->push('Редактированние клиники', route('admin.clinic-departments.edit', $id));
+Breadcrumbs::for('admin.clinics.departments.edit', function ($trail, $id) {
+    $trail->parent('admin.clinics.departments.index');
+    $trail->push('Редактированние отделения', route('admin.clinics.departments.edit', $id));
 });
 

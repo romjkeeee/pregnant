@@ -14,6 +14,12 @@ class ClinicReview extends BaseModel
         static::created(function (self $review) {
             $review->clinic()->update(['rate' => self::query()->filter($review->only(['clinic_id']))->avg('rate')]);
         });
+        static::updated(function (self $review) {
+            $review->clinic()->update(['rate' => self::query()->filter($review->only(['clinic_id']))->avg('rate')]);
+        });
+        static::deleting(function (self $review) {
+            $review->clinic()->update(['rate' => self::query()->filter($review->only(['clinic_id']))->avg('rate')]);
+        });
     }
 
     /**

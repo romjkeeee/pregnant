@@ -31,10 +31,14 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'],
     Route::resource('check-lists', 'CheckListController');
     Route::resource('check-list-tasks', 'CheckListTaskController');
 
-    Route::resource('clinics/prices', 'ClinicPriceController');
-    Route::resource('clinics/schedules', 'ClinicScheduleController');
+    Route::group(['prefix' => 'clinics', 'as' => 'clinics.'], function () {
+        Route::resource('prices', 'ClinicPriceController');
+        Route::resource('reviews', 'ClinicReviewsController');
+        Route::resource('schedules', 'ClinicScheduleController');
+        Route::resource('departments', 'ClinicDepartmentsController');
+    });
     Route::resource('clinics', 'ClinicController');
-    Route::resource('clinic-departments', 'ClinicDepartmentsController');
+
 
     Route::resource('articles', 'ArticleController');
     Route::resource('article-category', 'ArticleCategoryController');

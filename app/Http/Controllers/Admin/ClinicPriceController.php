@@ -51,7 +51,7 @@ class ClinicPriceController extends Controller
     {
         ClinicPrice::query()->create($request->validated());
 
-        return redirect()->route('admin.prices.index', ['clinic_id' => $request->get('clinic_id')])->with('success', 'Цена успешно добавлена!');
+        return redirect()->route('admin.clinics.prices.index', ['clinic_id' => $request->get('clinic_id')])->with('success', 'Цена успешно добавлена!');
     }
 
     /**

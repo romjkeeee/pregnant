@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Clinic;
 use App\ClinicDepartment;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\ClinicDepartmentsRequest;
-use App\Http\Requests\Admin\ClinicRequest;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
@@ -21,10 +21,14 @@ class ClinicDepartmentsController extends Controller
      */
     public function index(Request $request)
     {
-        return view('admin.clinics-departments.index', [
-            'page_title' => 'Департаменты',
+        $clinic = Clinic::query()->find($request->get('clinic_id'));
+
+        return view('admin.clinics.departments.index', [
+            'page_title' => 'Отделения',
+            'clinic'     => $clinic,
             'search'     => $request->get('search'),
-            'items'      => ClinicDepartment::query()->where(function (Builder $clinicDepartments) use ($request) {
+            'items'      => ClinicDepartment::query()->with(['clinic'])->filter($request->only('clinic_id'))
+                ->where(function (Builder $clinicDepartments) use ($request) {
                     if ($request->get('search')) {
                         $clinicDepartments->where(function (Builder $builder) use ($request) {
                             $builder->orWhere('name', 'LIKE', "%{$request->get('search')}%");
@@ -39,18 +43,18 @@ class ClinicDepartmentsController extends Controller
      */
     public function create()
     {
-        return view('admin.clinics-departments.create', ['page_title' => 'Добавление департамента']);
+        return view('admin.clinics.departments.create', ['page_title' => 'Добавление отделения']);
     }
 
     /**
-     * @param ClinicRequest $request
+     * @param ClinicDepartmentsRequest $request
      * @return RedirectResponse
      */
     public function store(ClinicDepartmentsRequest $request): RedirectResponse
     {
         ClinicDepartment::query()->create($request->validated());
 
-        return redirect()->route('admin.clinics-departments.index')->with('success', 'Депортамент успешно добавлен!');
+        return redirect()->route('admin.clinics.departments.index', $request->only(['clinic_id']))->with('success', 'Отделение успешно добавлен!');
     }
 
     /**
@@ -59,14 +63,14 @@ class ClinicDepartmentsController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.clinics-departments.edit', [
-            'page_title' => 'Редактирование департмаента',
+        return view('admin.clinics.departments.edit', [
+            'page_title' => 'Редактирование отделения',
             'instance'   => ClinicDepartment::query()->findOrFail($id),
         ]);
     }
 
     /**
-     * @param ClinicRequest $request
+     * @param ClinicDepartmentsRequest $request
      * @param $id
      * @return RedirectResponse
      */

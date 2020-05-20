@@ -26,9 +26,14 @@ class ClinicDepartmentsRequest extends FormRequest
     {
         return [
             'clinic_id' => ['required', 'exists:clinics,id'],
-            'name'    => ['required', 'string'],
             'street'    => ['required', 'string'],
-            'building'    => ['required', 'string'],
+            'building'  => ['required', 'string'],
+            'name'      => [
+                'required',
+                Rule::unique('clinic_departments', 'name')
+                    ->where('clinic_id', $this->get('clinic_id'))
+                    ->ignore($this->route()->parameter('department'))
+            ],
         ];
     }
 }
