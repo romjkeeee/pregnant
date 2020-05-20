@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Specialization extends BaseModel
 {
-
+    protected $fillable = ['name'];
     public $timestamps = false;
 
     /**

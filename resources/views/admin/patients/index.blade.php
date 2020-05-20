@@ -35,7 +35,7 @@
             <td class="footable-visible">@include('components.status', ['status' => $item->pregnant])</td>
             <td class="footable-visible">{{ $item->date_of_birth ? $item->date_of_birth->format('d.m.Y г.') : '~' }}</td>
             <td class="footable-visible">
-                <a href="{{ route('admin.check-list.index', ['id' => $item->id]) }}" class="btn btn-primary btn-sm">Перейти</a>
+                <a href="{{ route('admin.patients.check-list.index', ['id' => $item->id]) }}" class="btn btn-primary btn-sm">Перейти</a>
             </td>
             <td class="text-right footable-visible footable-last-column">
                 @include('components.action', ['edit' => route('admin.patients.edit', $item->id)])

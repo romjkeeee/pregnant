@@ -8,6 +8,7 @@ use App\City;
 use App\Clinic;
 use App\Doctor;
 use App\Lang;
+use App\Patient;
 use App\Region;
 use App\Specialization;
 use App\User;
@@ -61,6 +62,17 @@ class PreloadController extends Controller
     {
         return response(Doctor::query()->orderBy('id', 'desc')->get()->map(function (Doctor $doctor) {
             return ['id' => $doctor->id, 'text' => $doctor->user->fullName ?? "#{$doctor->id}"];
+        }));
+    }
+
+    /**
+     * @param Request $request
+     * @return ResponseFactory|Application|Response
+     */
+    public function patients(Request $request)
+    {
+        return response(Patient::query()->with(['user'])->orderBy('id', 'desc')->get()->map(function (Patient $patient) {
+            return ['id' => $patient->id, 'text' => $patient->user->fullName ?? "#{$patient->id}"];
         }));
     }
 

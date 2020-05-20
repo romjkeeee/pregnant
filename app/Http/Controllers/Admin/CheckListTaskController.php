@@ -21,7 +21,7 @@ class CheckListTaskController extends Controller
      */
     public function index(Request $request)
     {
-        return view('admin.check-list-tasks.index', [
+        return view('admin.check-lists.tasks.index', [
             'page_title' => 'Таски чек листов',
             'search'     => $request->get('search'),
             'list'       => CheckList::query()->find($request->get('list_id')),
@@ -39,7 +39,7 @@ class CheckListTaskController extends Controller
      */
     public function create()
     {
-        return view('admin.check-list-tasks.create', ['page_title' => 'Добавление таска чек листа']);
+        return view('admin.check-lists.tasks.create', ['page_title' => 'Добавление таска чек листа']);
     }
 
     /**
@@ -50,7 +50,7 @@ class CheckListTaskController extends Controller
     {
         CheckListTask::query()->create($request->validated());
 
-        return redirect()->route('admin.check-list-tasks.index')->with('success', 'Группа успешно добавлена!');
+        return redirect()->route('admin.check-lists.tasks.index', $request->only(['list_id']))->with('success', 'Таск успешно добавлен!');
     }
 
     /**
@@ -59,7 +59,7 @@ class CheckListTaskController extends Controller
      */
     public function edit($id)
     {
-        return view('admin.check-list-tasks.edit', [
+        return view('admin.check-lists.tasks.edit', [
             'page_title' => 'Редактирование таска чек листа',
             'instance'   => CheckListTask::query()->findOrFail($id),
         ]);

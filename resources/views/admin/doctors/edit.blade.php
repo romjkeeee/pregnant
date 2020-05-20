@@ -7,11 +7,11 @@
 @section('fields')
     @method('PUT')
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             @include('components.ajax-select', ['name' => 'user_id','title' => 'Пользователь<span class="req">*</span>',
                      'route' => 'admin.preload.users', 'default' => ['val' => $instance->user_id ?? null, 'text' => $instance->user->name ?? null]])
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             @include('components.ajax-select', ['name' => 'clinics[]','title' => 'Клиники<span class="req">*</span>',
                      'route' => 'admin.preload.clinics', 'multiple' => true, 'default' => ['val' => $instance->selectedClinics]])
         </div>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PatientContraction extends BaseModel
 {
-    protected $fillable = ['start', 'duration', 'interval'];
+    protected $fillable = ['start', 'duration', 'interval', 'patient_id'];
 
     protected $dates = ['start'];
 

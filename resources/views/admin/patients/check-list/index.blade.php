@@ -1,12 +1,12 @@
 @extends('layouts.admin.multi-table')
-@section('breadcrumbs', Breadcrumbs::render('admin.check-list.index', $patient->id))
+@section('breadcrumbs', Breadcrumbs::render('admin.patients.check-list.index', $patient->id))
 @section('header-btn')
     <a href="{{ route('admin.patients.index') }}" class="btn btn-danger" style="margin-top: 30px;">К списку пациентов</a>
 @endsection
 @section('tables')
     <div class="col-lg-12">
         @forelse($items as $list)
-            <form action="{{ route('admin.check-list.store', $patient->id) }}" method="post" class="ibox">@csrf
+            <form action="{{ route('admin.patients.check-list.store', $patient->id) }}" method="post" class="ibox">@csrf
                 <div class="ibox-title">
                     <h5>{{ $list->name }}</h5>
                 </div>

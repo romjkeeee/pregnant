@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class PatientBelly extends BaseModel
 {
-    protected $fillable = ['date', 'uterine_fundus_height', 'girth_abdomen'];
+    protected $fillable = ['patient_id', 'date', 'uterine_fundus_height', 'girth_abdomen'];
     protected $dates = ['date'];
 
     /**

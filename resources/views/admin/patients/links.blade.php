@@ -7,5 +7,9 @@
     <ul class="nav nav-second-level collapse">
         <li @if (Route::current()->getName() == 'admin.patients.index') class="active" @endif><a href="{{ route('admin.patients.index') }}">Список</a></li>
         <li @if (Route::current()->getName() == 'admin.patients.create') class="active" @endif><a href="{{ route('admin.patients.create') }}">Добавить</a></li>
+        @include('admin.patients.bellies.links')
+        @include('admin.patients.weights.links')
+        @include('admin.patients.contractions.links')
+        @include('admin.patients.emergency-contacts.links')
     </ul>
 </li>
