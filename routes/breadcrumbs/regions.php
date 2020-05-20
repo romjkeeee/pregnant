@@ -8,12 +8,12 @@ Breadcrumbs::for('admin.regions.index', function ($trail) {
 });
 
 Breadcrumbs::for('admin.regions.create', function ($trail) {
-    $trail->parent('admin.home');
+    $trail->parent('admin.regions.index');
     $trail->push('Добавление региона', route('admin.regions.create'));
 });
 
 Breadcrumbs::for('admin.regions.edit', function ($trail, $id) {
-    $trail->parent('admin.home');
+    $trail->parent('admin.regions.index');
     $trail->push('Редактированние региона', route('admin.regions.edit', $id));
 });
 

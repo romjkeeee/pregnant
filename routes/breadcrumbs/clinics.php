@@ -8,12 +8,12 @@ Breadcrumbs::for('admin.clinics.index', function ($trail) {
 });
 
 Breadcrumbs::for('admin.clinics.create', function ($trail) {
-    $trail->parent('admin.home');
+    $trail->parent('admin.clinics.index');
     $trail->push('Добавление клиники', route('admin.clinics.create'));
 });
 
 Breadcrumbs::for('admin.clinics.edit', function ($trail, $id) {
-    $trail->parent('admin.home');
+    $trail->parent('admin.clinics.index');
     $trail->push('Редактированние клиники', route('admin.clinics.edit', $id));
 });
 

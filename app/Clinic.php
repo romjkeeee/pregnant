@@ -62,4 +62,17 @@ class Clinic extends BaseModel
     {
         return $this->hasMany(ClinicReview::class, 'clinic_id', 'id');
     }
+
+    /**
+     * @return array
+     */
+    public function getFullSchedulesAttribute(): array
+    {
+        return collect(trans('date.days'))->map(function ($name, $day) {
+            return [
+                'day' => $name,
+                'period' => ($this->schedules->where('day', $day)->first()->start ?? '~').' - '.($this->schedules->where('day', $day)->first()->end ?? '~')
+            ];
+        })->toArray();
+    }
 }

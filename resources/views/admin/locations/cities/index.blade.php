@@ -8,7 +8,7 @@
         </form>
         @if($region)
             <form style="margin-top: 15px">
-                <input hidden name="list_id" value="">
+                <input hidden name="region_id" value="">
                 <button type="submit" class="btn btn-warning" style="height: 34px"><i class="fa fa-close"></i></button>
             </form>
         @endif

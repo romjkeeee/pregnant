@@ -8,12 +8,12 @@ Breadcrumbs::for('admin.cities.index', function ($trail) {
 });
 
 Breadcrumbs::for('admin.cities.create', function ($trail) {
-    $trail->parent('admin.home');
+    $trail->parent('admin.cities.index');
     $trail->push('Добавление города', route('admin.cities.create'));
 });
 
 Breadcrumbs::for('admin.cities.edit', function ($trail, $id) {
-    $trail->parent('admin.home');
+    $trail->parent('admin.cities.index');
     $trail->push('Редактированние города', route('admin.cities.edit', $id));
 });
 

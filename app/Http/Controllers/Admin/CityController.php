@@ -61,7 +61,7 @@ class CityController extends Controller
     public function edit($id)
     {
         return view('admin.locations.cities.edit', [
-            'page_title' => 'Города языка',
+            'page_title' => 'Редактирование города',
             'instance'   => City::query()->findOrFail($id),
         ]);
     }

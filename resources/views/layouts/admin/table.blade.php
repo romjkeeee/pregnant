@@ -50,7 +50,7 @@
                                 </thead>
                                 <tbody>
                                 @yield('table-body')
-                                @empty($items)
+                                @empty($items->items())
                                     <tr>
                                         <td colspan="5">Список пуст</td>
                                     </tr>

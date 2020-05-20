@@ -8,12 +8,12 @@ Breadcrumbs::for('admin.languages.index', function ($trail) {
 });
 
 Breadcrumbs::for('admin.languages.create', function ($trail) {
-    $trail->parent('admin.home');
+    $trail->parent('admin.languages.index');
     $trail->push('Добавление языка', route('admin.languages.create'));
 });
 
 Breadcrumbs::for('admin.languages.edit', function ($trail, $id) {
-    $trail->parent('admin.home');
+    $trail->parent('admin.languages.index');
     $trail->push('Редактированние языка', route('admin.languages.edit', $id));
 });
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\DurationArticles;
-use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
 
 class DurationArticlesController extends Controller
 {
@@ -17,8 +17,8 @@ class DurationArticlesController extends Controller
         return \response(DurationArticles::query()->paginate(20));
     }
 
-   public function show($id)
-   {
-       return \response(DurationArticles::query()->with(['duration'])->findOrFail($id));
-   }
+    public function show($id)
+    {
+        return \response(DurationArticles::query()->with(['duration'])->findOrFail($id));
+    }
 }

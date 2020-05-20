@@ -31,6 +31,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'],
     Route::resource('check-lists', 'CheckListController');
     Route::resource('check-list-tasks', 'CheckListTaskController');
 
+    Route::resource('clinics/prices', 'ClinicPriceController');
+    Route::resource('clinics/schedules', 'ClinicScheduleController');
     Route::resource('clinics', 'ClinicController');
     Route::resource('clinic-departments', 'ClinicDepartmentsController');
 
@@ -108,11 +110,11 @@ Route::get('/admin/reviews/edit/{id}', 'AdminReviewController@edit')->name('admi
 Route::post('/admin/reviews/edit/{id}', 'AdminReviewController@edit')->name('admin_reviews_edit');
 
 /* Недели */
-Route::get('/admin/duration', 'AdminDurationController@index')->name('admin_dur');
-Route::get('/admin/duration/add', 'AdminDurationController@add')->name('admin_dur_add');
-Route::post('/admin/duration/add', 'AdminDurationController@add')->name('admin_dur_add');
-Route::get('/admin/duration/edit/{id}', 'AdminDurationController@edit')->name('admin_dur_edit');
-Route::post('/admin/duration/edit/{id}', 'AdminDurationController@edit')->name('admin_dur_edit');
+//Route::get('/admin/duration', 'AdminDurationController@index')->name('admin_dur');
+//Route::get('/admin/duration/add', 'AdminDurationController@add')->name('admin_dur_add');
+//Route::post('/admin/duration/add', 'AdminDurationController@add')->name('admin_dur_add');
+//Route::get('/admin/duration/edit/{id}', 'AdminDurationController@edit')->name('admin_dur_edit');
+//Route::post('/admin/duration/edit/{id}', 'AdminDurationController@edit')->name('admin_dur_edit');
 
 /* Регионы */
 Route::get('/admin/regions', 'AdminRegionController@index')->name('admin_regions');
