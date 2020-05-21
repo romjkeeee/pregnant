@@ -23,7 +23,7 @@ Route::get('admin', function () {
     return redirect(\route('admin.users.index'));
 })->name('admin.home');
 
-Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin', 'as' => 'admin.'], function () {
     /** users routes */
     Route::resource('users', 'UserController');
     /** patients routes */
