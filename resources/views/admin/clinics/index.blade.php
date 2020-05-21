@@ -30,7 +30,7 @@
             <td class="footable-visible">{{ $item->prices->count() }}</td>
             <td class="footable-visible">@include('components.status', ['status' => !!$item->schedules->count()])</td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.clinics.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.clinics.edit', $item->id), 'delete' => $item->id])
             </td>
         </tr>
     @endforeach

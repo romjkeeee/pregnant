@@ -1,8 +1,8 @@
 @extends('layouts.admin.table')
 @section('breadcrumbs', Breadcrumbs::render('admin.users.index'))
-{{--@section('header-btn')--}}
-{{--    <a href="{{ route('admin_med_add') }}" class="btn btn-danger" style="margin-top: 30px;">Добавить</a>--}}
-{{--@endsection--}}
+@section('header-btn')
+    <a href="{{ route('admin.users.create') }}" class="btn btn-danger" style="margin-top: 30px;">Добавить</a>
+@endsection
 @section('table-header')
     <th data-toggle="true">#</th>
     <th data-toggle="true">Подтвержден</th>
@@ -22,7 +22,7 @@
             <td class="footable-visible">{{ $item->phone }}</td>
             <td class="footable-visible">{{ $item->email }}</td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.users.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.users.edit', $item->id), 'delete' => $item->id])
             </td>
         </tr>
     @endforeach

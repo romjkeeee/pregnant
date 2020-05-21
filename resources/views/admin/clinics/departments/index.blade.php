@@ -36,7 +36,7 @@
             <td class="footable-visible">{{ $item->street }}</td>
             <td class="footable-visible">{{ $item->building }}</td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.clinics.departments.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.clinics.departments.edit', $item->id), 'delete' => $item->id])
             </td>
         </tr>
     @endforeach

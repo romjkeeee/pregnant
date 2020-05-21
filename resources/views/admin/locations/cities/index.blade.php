@@ -32,7 +32,7 @@
                 @endif
             </td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.cities.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.cities.edit', $item->id), 'delete' => $item->id])
             </td>
         </tr>
     @endforeach

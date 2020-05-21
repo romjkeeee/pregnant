@@ -26,7 +26,7 @@
             <td class="footable-visible">{{ $item->specialisations->count() }}</td>
             <td class="footable-visible">{{ $item->reviews->count() }}</td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.doctors.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.doctors.edit', $item->id), 'delete' => $item->id])
             </td>
         </tr>
     @endforeach

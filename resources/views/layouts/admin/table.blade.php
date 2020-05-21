@@ -70,6 +70,7 @@
                 </div>
             </div>
         </div>
+        @include('components.destroy-modal')
         @include('layouts.admin.blocks.footer')
     </div>
 @endsection

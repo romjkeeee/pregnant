@@ -1,4 +1,4 @@
-<li @if (request()->is('*patients/bellies*')) class="active" @endif>
+<li @if (request()->is('*patients/emergency-contacts*')) class="active" @endif>
     <a href="#" style="margin-left: -2px">
         <span class="nav-label">Екстренные контакты</span>
         <span class="fa arrow"></span>

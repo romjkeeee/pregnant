@@ -63,6 +63,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Admin', 'as' => 'admin.'],
     /** articles routes */
     Route::resource('articles', 'ArticleController');
     Route::resource('article-category', 'ArticleCategoryController');
+    /** helper routes */
+    Route::post('destroy', 'AdminController@destroy')->name('destroy');
     /** ajax preload routes */
     Route::group(['prefix' => 'preload', 'as' => 'preload.'], function () {
         Route::post('users', 'PreloadController@users')->name('users');

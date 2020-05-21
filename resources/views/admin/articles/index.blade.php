@@ -18,7 +18,7 @@
             <td class="footable-visible">{{ $item->title }}</td>
             <td class="footable-visible">{{ $item->preview }}</td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.articles.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.articles.edit', $item->id), 'delete' => $item->id])
             </td>
         </tr>
     @endforeach

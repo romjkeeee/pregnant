@@ -38,7 +38,7 @@
             </td>
             <td class="footable-visible">{{ $item->rate }}</td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.clinics.reviews.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.clinics.reviews.edit', $item->id), 'delete' => $item->id])
             </td>
         </tr>
     @endforeach

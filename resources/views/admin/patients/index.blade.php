@@ -38,7 +38,7 @@
                 <a href="{{ route('admin.patients.check-list.index', ['id' => $item->id]) }}" class="btn btn-primary btn-sm">Перейти</a>
             </td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.patients.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.patients.edit', $item->id), 'delete' => $item->id])
             </td>
         </tr>
     @endforeach

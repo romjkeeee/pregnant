@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\EmergencyContact;
-use App\Http\Requests\Admin\PatientBellyRequest;
 use App\Http\Requests\Admin\PatientEmergencyContactRequest;
 use App\Patient;
-use App\PatientBelly;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasOne;
