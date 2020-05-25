@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\CheckList;
 use App\Http\Requests\SelectTaskRequest;
+use App\PatientTask;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Application;
@@ -59,7 +60,10 @@ class CheckListController extends Controller
      */
     public function destroy($id)
     {
-        auth()->user()->patient()->first()->tasks()->where('task_id', $id)->delete();
+        PatientTask::query()->where([
+            'patient_id' => auth()->user()->patient()->first()->id,
+            'task_id'    => $id,
+        ])->delete();
 
         return \response(['Сохранено.']);
     }
