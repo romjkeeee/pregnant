@@ -25,6 +25,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::post('lang', 'AuthController@lang');
         Route::post('phone', 'AuthController@phone');
         Route::post('location', 'AuthController@location');
+        Route::post('notification', 'AuthController@notification');
     });
     Route::group(['prefix' => 'articles'], function () {
         Route::get('/category', 'ArticleCategoryController@index');
@@ -46,6 +47,9 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::get('/', 'DurationArticlesController@index');
         Route::get('/{id}', 'DurationArticlesController@show');
     });
+
+    /** langs routes */
+    Route::get('langs', 'LangController');
 
     /** patient routes */
     Route::apiResource('check-lists', 'CheckListController');

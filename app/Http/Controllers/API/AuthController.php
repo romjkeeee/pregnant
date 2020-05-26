@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\LocationRequest;
+use App\Http\Requests\NotificationStateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -143,6 +144,17 @@ class AuthController extends Controller
      * @return ResponseFactory|Application|Response
      */
     public function location(LocationRequest $request)
+    {
+        auth()->user()->update($request->validated());
+
+        return \response(['Сохранено']);
+    }
+
+    /**
+     * @param NotificationStateRequest $request
+     * @return ResponseFactory|Application|Response
+     */
+    public function notification(NotificationStateRequest $request)
     {
         auth()->user()->update($request->validated());
 
