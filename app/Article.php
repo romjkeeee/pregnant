@@ -10,6 +10,6 @@ class Article extends BaseModel
 
     public function article_category()
     {
-        return $this->hasOne(ArticleCategory::class,'category_id','id');
+        return $this->hasOne(ArticleCategory::class,'id','category_id');
     }
 }
