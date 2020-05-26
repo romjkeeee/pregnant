@@ -23,7 +23,7 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
-        return response(Article::with('article_category')->filter($request->only('region_id'))->paginate(15));
+        return response(Article::with('article_category')->filter($request->only('category_id'))->paginate(15));
     }
 
     /**
