@@ -33,10 +33,12 @@ class ClinicController extends Controller
      *
      * @authenticated required
      * @response 200
+     * @param Request $request
+     * @return ResponseFactory|Application|Response
      */
     public function index(Request $request)
     {
-        return \response(Clinic::query()->with(['city', 'region', 'departments'])->filter($request->only(['type']))->paginate(20));
+        return \response(Clinic::query()->with(['city', 'region', 'departments'])->filter($request->only(['type']))->paginate($request->get('perPage') ?? 20));
     }
 
     /**
@@ -45,6 +47,8 @@ class ClinicController extends Controller
      *
      * @authenticated required
      * @response 200
+     * @param $id
+     * @return ResponseFactory|Application|Response
      */
     public function show($id)
     {

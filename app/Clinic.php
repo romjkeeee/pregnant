@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class Clinic extends BaseModel
 {
@@ -13,7 +15,7 @@ class Clinic extends BaseModel
     protected $table = 'clinics';
     public $timestamps = false;
 
-    protected $fillable = ['region_id', 'city_id', 'rate', 'type', 'phone', 'name', 'text', 'address', 'lng', 'lat'];
+    protected $fillable = ['region_id', 'city_id', 'rate', 'type', 'phone', 'name', 'text', 'address', 'lng', 'lat', 'image'];
 
     /**
      * @return HasOne
@@ -70,9 +72,22 @@ class Clinic extends BaseModel
     {
         return collect(trans('date.days'))->map(function ($name, $day) {
             return [
-                'day' => $name,
-                'period' => ($this->schedules->where('day', $day)->first()->start ?? '~').' - '.($this->schedules->where('day', $day)->first()->end ?? '~')
+                'day'    => $name,
+                'period' => ($this->schedules->where('day', $day)->first()->start ?? '~') . ' - ' . ($this->schedules->where('day', $day)->first()->end ?? '~')
             ];
         })->toArray();
+    }
+
+    /**
+     * @param UploadedFile|null $image
+     */
+    public function setImageAttribute(UploadedFile $image = null)
+    {
+        if ($image) {
+            if (isset($this->attributes['image']) && Storage::disk('publicUpload')->exists($this->attributes['image'])) {
+                Storage::disk('publicUpload')->delete($this->attributes['image']);
+            }
+            $this->attributes['image'] = Storage::disk('publicUpload')->put('images/clinics', $image);
+        }
     }
 }

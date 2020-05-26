@@ -40,7 +40,7 @@ class PatientBellyController extends Controller
     {
         return \response(PatientBelly::query()->whereHas('patient', function (Builder $builder) {
             $builder->where('user_id', auth()->id());
-        })->orderByDesc('date')->paginate(20));
+        })->orderByDesc('date')->paginate($request->get('perPage') ?? 20));
     }
 
     /**

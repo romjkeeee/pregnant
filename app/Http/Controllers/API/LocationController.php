@@ -30,11 +30,12 @@ class LocationController extends Controller
     /**
      * Get regions 50 per page
      *
+     * @param Request $request
      * @return ResponseFactory|Application|Response
      */
-    public function regions()
+    public function regions(Request $request)
     {
-        return \response(Region::query()->paginate(50));
+        return \response(Region::query()->paginate($request->get('perPage') ?? 50));
     }
 
     /**
@@ -45,6 +46,6 @@ class LocationController extends Controller
      */
     public function cities(Request $request)
     {
-        return \response(City::query()->filter($request->only('region_id'))->paginate(50));
+        return \response(City::query()->filter($request->only('region_id'))->paginate($request->get('perPage') ?? 50));
     }
 }

@@ -35,7 +35,7 @@ class PatientContractionController extends Controller
     {
         return \response(PatientContraction::query()->whereHas('patient', function (Builder $builder) {
             $builder->where('user_id', auth()->id());
-        })->orderByDesc('id')->paginate(20));
+        })->orderByDesc('id')->paginate($request->get('perPage') ?? 20));
     }
 
     /**
@@ -55,10 +55,10 @@ class PatientContractionController extends Controller
      */
     public function store(PatientContractionRequest $request)
     {
-        auth()->user()->patient()->firstOrFail()
-            ->contractions()->create($request->validated());
-
-        return \response(['Сохранено']);
+        return \response([
+            'message' => 'Сохранено',
+            'data'    => auth()->user()->patient()->firstOrFail()->contractions()->create($request->validated())
+        ]);
     }
 
     /**

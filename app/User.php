@@ -175,7 +175,7 @@ class User extends Authenticatable implements JWTSubject
             if (isset($this->attributes['image']) && Storage::disk('publicUpload')->exists($this->attributes['image'])) {
                 Storage::disk('publicUpload')->delete($this->attributes['image']);
             }
-            $this->attributes['image'] = Storage::disk('publicUpload')->put('images/check-lists', $image);
+            $this->attributes['image'] = Storage::disk('publicUpload')->put('images/users', $image);
         }
     }
 }

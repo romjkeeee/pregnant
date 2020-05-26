@@ -30,6 +30,7 @@ class ClinicRequest extends FormRequest
             'city_id'   => ['required', 'exists:cities,id'],
             'type'      => ['required', Rule::in(Clinic::PRIVATE, Clinic::STATE)],
             'phone'     => ['required', 'phone:RU'],
+            'image'     => ['nullable', 'image', 'max:2048'],
             'name'      => ['required', 'min:2', 'max:128'],
             'text'      => ['nullable', 'min:2', 'max:65000'],
             'address'   => ['required', 'min:2', 'max:192'],

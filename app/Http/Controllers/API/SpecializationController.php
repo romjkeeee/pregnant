@@ -35,7 +35,7 @@ class SpecializationController extends Controller
      */
     public function index(Request $request)
     {
-        return \response(Specialization::query()->paginate(20));
+        return \response(Specialization::query()->paginate($request->get('perPage') ?? 20));
     }
 
     /**

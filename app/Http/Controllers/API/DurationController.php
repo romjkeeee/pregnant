@@ -37,7 +37,7 @@ class DurationController extends Controller
      */
     public function index(Request $request)
     {
-        return \response(Duration::query()->filter($request->only('patient_id'))->paginate(20));
+        return \response(Duration::query()->filter($request->only('patient_id'))->paginate($request->get('perPage') ?? 20));
     }
 
     /**

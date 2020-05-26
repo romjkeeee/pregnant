@@ -37,7 +37,7 @@ class PatientController extends Controller
      */
     public function index(Request $request)
     {
-        return \response(Patient::query()->with(['user.region', 'user.city', 'clinic', 'doctor'])->paginate(20));
+        return \response(Patient::query()->with(['user.region', 'user.city', 'clinic', 'doctor'])->paginate($request->get('perPage') ?? 20));
     }
 
     /**

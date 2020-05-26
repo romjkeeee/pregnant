@@ -36,7 +36,7 @@ class DoctorController extends Controller
      */
     public function index(Request $request)
     {
-        return \response(Doctor::query()->with(['user', 'clinics', 'specialisations'])->paginate(20));
+        return \response(Doctor::query()->with(['user', 'clinics', 'specialisations'])->paginate($request->get('perPage') ?? 20));
     }
 
     /**

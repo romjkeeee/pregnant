@@ -55,6 +55,12 @@
         </div>
         <div class="col-lg-12">
             <div class="form-group" style="padding: 5px">
+                <strong style="margin-bottom: 10px!important;">Изображение <span class="req">*</span></strong>
+                <input type="file" name="image" class="form-control">
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Описание <span class="req">*</span></strong>
                 <textarea type="text" name="text" class="form-control">{{ old('text') }}</textarea>
             </div>
