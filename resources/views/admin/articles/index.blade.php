@@ -15,8 +15,12 @@
         <tr class="footable-odd">
             <td class="footable-visible">{{ $item->id }}</td>
             <td class="footable-visible">{{ $item->category_id }}</td>
-            <td class="footable-visible">{{ $item->title }}</td>
-            <td class="footable-visible">{{ $item->preview }}</td>
+            <td class="footable-visible">{{ $item->translate->title ?? null }}</td>
+            <td class="footable-visible">
+                @if($item->preview)
+                    <img src="{{ asset($item->preview) }}" height="100px">
+                @endif
+            </td>
             <td class="text-right footable-visible footable-last-column">
                 @include('components.action', ['edit' => route('admin.articles.edit', $item->id), 'delete' => $item->id])
             </td>

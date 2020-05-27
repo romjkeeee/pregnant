@@ -2,14 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\Lang;
 use Illuminate\Support\ServiceProvider;
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
-use View;
-use Auth;
 use App;
-use App\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,10 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-		//var_dump(User::find(15));
-		View::share('a', '123');
-		
+
     }
 
     /**

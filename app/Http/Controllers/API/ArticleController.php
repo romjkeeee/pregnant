@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\API;
 
 use App\Article;
-use App\ArticleCategory;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ArticleCollection;
 use Illuminate\Http\Request;
 
 /**
@@ -20,10 +20,14 @@ class ArticleController extends Controller
      *
      * @authenticated required
      * @response 200
+     * @param Request $request
+     * @return ArticleCollection
      */
     public function index(Request $request)
     {
-        return response(Article::with('article_category')->filter($request->only('category_id'))->paginate(15));
+        return ArticleCollection::make(Article::query()
+            ->filter($request->only('category_id'))
+            ->paginate($request->get('perPage') ?? 10));
     }
 
     /**
@@ -35,6 +39,6 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        return response(Article::where('id',$id)->get());
+        return response(Article::where('id', $id)->get());
     }
 }

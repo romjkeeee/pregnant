@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Article;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ArticleRequest;
-use App\Http\Requests\Admin\PatientRequest;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
@@ -24,12 +23,10 @@ class ArticleController extends Controller
         return view('admin.articles.index', [
             'page_title' => 'Статьи',
             'search'     => $request->get('search'),
-            'items'      => Article::query()->where(function (Builder $article) use ($request) {
-                if ($request->get('search')) {
-                    $article->where(function (Builder $builder) use ($request) {
-                        $builder->orWhere('name', 'LIKE', "%{$request->get('search')}%");
-                    });
-                }
+            'items'      => Article::query()->when($request->get('search'), function (Builder $article) use ($request) {
+                $article->where(function (Builder $builder) use ($request) {
+                    $builder->orWhere('name', 'LIKE', "%{$request->get('search')}%");
+                });
             })->orderBy('id', 'desc')->paginate(20)
         ]);
     }
@@ -43,12 +40,14 @@ class ArticleController extends Controller
     }
 
     /**
-     * @param PatientRequest $request
+     * @param ArticleRequest $request
      * @return RedirectResponse
      */
     public function store(ArticleRequest $request): RedirectResponse
     {
-        Article::query()->create($request->validated());
+        /** @var $article Article */
+        $article = Article::query()->create($request->validated());
+        $article->syncTranslates($request->get('translate'));
 
         return redirect()->route('admin.articles.index')->with('success', 'Статья успешно добавлена!');
     }
@@ -61,18 +60,21 @@ class ArticleController extends Controller
     {
         return view('admin.articles.edit', [
             'page_title' => 'Редактирование статьи',
-            'instance'   => Article::query()->findOrFail($id),
+            'instance'   => Article::query()->with(['translates', 'category'])->findOrFail($id),
         ]);
     }
 
     /**
-     * @param PatientRequest $request
+     * @param ArticleRequest $request
      * @param $id
      * @return RedirectResponse
      */
     public function update(ArticleRequest $request, $id): RedirectResponse
     {
-        Article::query()->findOrFail($id)->update($request->validated());
+        /** @var Article $article */
+        $article = Article::query()->findOrFail($id);
+        $article->update($request->validated());
+        $article->syncTranslates($request->get('translate'));
 
         return back()->with('success', 'Сохранено!');
     }

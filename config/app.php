@@ -2,6 +2,7 @@
 
 return [
 
+    'datetime_format' => 'd.m.Y H:i',
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -178,6 +179,7 @@ return [
 //        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 //        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        \App\Providers\LangServiceProvider::class,
     ],
 
     /*

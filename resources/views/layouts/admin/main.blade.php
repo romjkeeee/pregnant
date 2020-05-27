@@ -22,6 +22,14 @@
             background-size: contain;
             background-repeat: no-repeat;
         }
+
+        .tab-pane .form-group {
+            display: none !important;
+        }
+
+        .tab-pane.active .form-group {
+            display: block !important;
+        }
     </style>
     @stack('styles')
 </head>

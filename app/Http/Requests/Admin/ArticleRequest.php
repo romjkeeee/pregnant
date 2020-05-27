@@ -24,11 +24,21 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => ['required', 'exists:article_categories,id'],
-            'title'    => ['required', 'string'],
-            'text'    => ['required', 'string'],
-            'preview'    => ['image'],
-            'image'    => ['image'],
+            'category_id'         => ['required', 'exists:article_categories,id'],
+            'preview'             => ['image'],
+            'image'               => ['image'],
+            'translate'           => ['required', 'array'],
+            'translate.*.lang_id' => ['required', 'exists:langs,id'],
+            'translate.*.title'   => ['required', 'string'],
+            'translate.*.text'    => ['required', 'between:3,60000'],
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function validated(): array
+    {
+        return collect(parent::validated())->except(['translate'])->toArray();
     }
 }

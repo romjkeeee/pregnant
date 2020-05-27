@@ -166,6 +166,15 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(City::class, 'id', 'city_id');
     }
 
+
+    /**
+     * @return HasOne
+     */
+    public function lang(): HasOne
+    {
+        return $this->hasOne(Lang::class, 'id', 'lang_id');
+    }
+
     /**
      * @param UploadedFile|null $image
      */
@@ -177,5 +186,13 @@ class User extends Authenticatable implements JWTSubject
             }
             $this->attributes['image'] = Storage::disk('publicUpload')->put('images/users', $image);
         }
+    }
+
+    /**
+     * @return int|null
+     */
+    public function currentLang(): ?int
+    {
+        return $this->lang_id ?? Lang::query()->where('code', 'ru')->first()->id ?? null;
     }
 }

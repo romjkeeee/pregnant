@@ -12,18 +12,6 @@
         </div>
         <div class="col-lg-4">
             <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Название <span class="req">*</span></strong>
-                <input type="text" name="title" value="{{ old('title') }}" class="form-control">
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Наименование <span class="req">*</span></strong>
-                <input type="text" name="text" value="{{ old('text') }}" class="form-control">
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Предпоказ <span class="req">*</span></strong>
                 <input type="file" name="preview" value="{{ old('preview') }}" class="form-control">
             </div>
@@ -34,5 +22,13 @@
                 <input type="file" name="image" value="{{ old('image') }}" class="form-control">
             </div>
         </div>
+
+        @include('components.multi-lang', ['fields' => [
+                ['title' => 'Название <span class="req">*</span>', 'name' => 'title'],
+                ['title' => 'Описание <span class="req">*</span>', 'name' => 'text']
+        ]])
+
     </div>
 @endsection
+
+
