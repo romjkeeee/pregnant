@@ -32,8 +32,8 @@ class DoctorReviewController extends Controller
      */
     public function index(Request $request)
     {
-        return \response(DoctorReview::query()->with(['doctor'])
-            ->whereHas('doctor')
+        return \response(DoctorReview::query()->with(['user'])
+            ->whereHas('user')
             ->filter($request->only(['doctor_id']))
             ->paginate($request->get('perPage') ?? 10));
     }
@@ -44,7 +44,7 @@ class DoctorReviewController extends Controller
      */
     public function show($id)
     {
-        return \response(DoctorReview::query()->with(['doctor'])->whereHas('doctor')->findOrFail($id));
+        return \response(DoctorReview::query()->with(['user'])->whereHas('user')->findOrFail($id));
     }
 
     /**
