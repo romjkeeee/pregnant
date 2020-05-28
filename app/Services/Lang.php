@@ -22,5 +22,4 @@ class Lang implements LangInterface
     {
         return \App\Lang::all(['id', 'code', 'name']);
     }
-
 }

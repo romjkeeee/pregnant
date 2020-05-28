@@ -2,44 +2,18 @@
 
 namespace App;
 
-use App\Interfaces\ModelMultiLangInterface;
 use App\Traits\MultiLangTrait;
+use App\Traits\StoreImageTrait;
 use App\Translate\ArticleTranslate;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 
-class Article extends BaseModel implements ModelMultiLangInterface
+class Article extends BaseModel
 {
-    use MultiLangTrait;
+    use MultiLangTrait, StoreImageTrait;
 
-    protected $guarded = ['id'];
-
-    /**
-     * Article constructor.
-     * @param array $attributes
-     */
-    public function __construct(array $attributes = [])
-    {
-        $this->multiLangInit();
-        parent::__construct($attributes);
-    }
-
-    /**
-     * @return string
-     */
-    public function getTranslatedClass(): string
-    {
-        return ArticleTranslate::class;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTranslatedForeignKey(): string
-    {
-        return 'article_id';
-    }
+    protected $translatedClass = ArticleTranslate::class;
+    protected $translatedForeignKey = 'article_id';
+    protected $image = ['image', 'preview'];
 
     /**
      * @return HasOne
@@ -47,31 +21,5 @@ class Article extends BaseModel implements ModelMultiLangInterface
     public function category(): HasOne
     {
         return $this->hasOne(ArticleCategory::class, 'id', 'category_id');
-    }
-
-    /**
-     * @param UploadedFile|null $image
-     */
-    public function setImageAttribute(UploadedFile $image = null)
-    {
-        if ($image) {
-            if (isset($this->attributes['image']) && Storage::disk('publicUpload')->exists($this->attributes['image'])) {
-                Storage::disk('publicUpload')->delete($this->attributes['image']);
-            }
-            $this->attributes['image'] = Storage::disk('publicUpload')->put('images/articles/images', $image);
-        }
-    }
-
-    /**
-     * @param UploadedFile|null $image
-     */
-    public function setPreviewAttribute(UploadedFile $image = null)
-    {
-        if ($image) {
-            if (isset($this->attributes['preview']) && Storage::disk('publicUpload')->exists($this->attributes['preview'])) {
-                Storage::disk('publicUpload')->delete($this->attributes['preview']);
-            }
-            $this->attributes['preview'] = Storage::disk('publicUpload')->put('images/articles/previews', $image);
-        }
     }
 }

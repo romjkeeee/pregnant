@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\ArticleCategory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ArticleCategoryRequest;
-use App\Http\Requests\Admin\PatientRequest;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
@@ -24,7 +23,7 @@ class ArticleCategoryController extends Controller
         return view('admin.article-category.index', [
             'page_title' => 'Статьи',
             'search'     => $request->get('search'),
-            'items'      => ArticleCategory::query()->where(function (Builder $article) use ($request) {
+            'items'      => ArticleCategory::query()->with('translate')->where(function (Builder $article) use ($request) {
                 if ($request->get('search')) {
                     $article->where(function (Builder $builder) use ($request) {
                         $builder->orWhere('name', 'LIKE', "%{$request->get('search')}%");
@@ -43,12 +42,14 @@ class ArticleCategoryController extends Controller
     }
 
     /**
-     * @param PatientRequest $request
+     * @param ArticleCategoryRequest $request
      * @return RedirectResponse
      */
     public function store(ArticleCategoryRequest $request): RedirectResponse
     {
-        ArticleCategory::query()->create($request->validated());
+        /** @var $category ArticleCategory */
+        $category = ArticleCategory::query()->create($request->validated());
+        $category->syncTranslates($request->get('translate'));
 
         return redirect()->route('admin.article-category.index')->with('success', 'Категория успешно добавлена!');
     }
@@ -66,13 +67,16 @@ class ArticleCategoryController extends Controller
     }
 
     /**
-     * @param PatientRequest $request
+     * @param ArticleCategoryRequest $request
      * @param $id
      * @return RedirectResponse
      */
     public function update(ArticleCategoryRequest $request, $id): RedirectResponse
     {
-        ArticleCategory::query()->findOrFail($id)->update($request->validated());
+        /** @var $category ArticleCategory */
+        $category = ArticleCategory::query()->findOrFail($id);
+        $category->update($request->validated());
+        $category->syncTranslates($request->get('translate'));
 
         return back()->with('success', 'Сохранено!');
     }

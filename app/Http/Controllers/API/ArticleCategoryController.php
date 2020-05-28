@@ -4,24 +4,15 @@ namespace App\Http\Controllers\API;
 
 use App\ArticleCategory;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Resources\Collections\ArticleCategoryCollection;
 
-/**
- * @group Articles Category
- *
- * APIs for
- */
 class ArticleCategoryController extends Controller
 {
     /**
-     * List
-     * Список категорий
-     *
-     * @authenticated required
-     * @response 200 {"data":{},"status":"success"}
+     * @return ArticleCategoryCollection
      */
-    public function index()
+    public function index(): ArticleCategoryCollection
     {
-        return response(ArticleCategory::all());
+        return ArticleCategoryCollection::make(ArticleCategory::all());
     }
 }

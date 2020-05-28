@@ -3,30 +3,11 @@
 namespace App\Traits;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 trait MultiLangTrait
 {
-    /**
-     * @var $translatedClass Model
-     */
-    public $translatedClass;
-    /**
-     * @var $translatedForeignKey string
-     */
-    public $translatedForeignKey;
-
-    /**
-     * MultiLangTrait constructor.
-     */
-    public function multiLangInit()
-    {
-        $this->translatedClass = $this->getTranslatedClass();
-        $this->translatedForeignKey = $this->getTranslatedForeignKey();
-    }
-
     /**
      * @return HasOne
      */

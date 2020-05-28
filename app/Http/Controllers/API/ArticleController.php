@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Article;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ArticleCollection;
+
+use App\Http\Resources\Collections\ArticleCollection;
 use Illuminate\Http\Request;
 
 /**
@@ -39,6 +40,6 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        return response(Article::where('id', $id)->get());
+        return response(Article::query()->where('id', $id)->get());
     }
 }

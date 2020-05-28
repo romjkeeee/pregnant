@@ -2,14 +2,22 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Traits\MultiLangTrait;
+use App\Translate\ArticleCategoryTranslate;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ArticleCategory extends Model
+class ArticleCategory extends BaseModel
 {
-    protected $guarded = ['id'];
+    use MultiLangTrait;
 
-    public function articles()
+    protected $translatedClass = ArticleCategoryTranslate::class;
+    protected $translatedForeignKey = 'category_id';
+
+    /**
+     * @return HasMany
+     */
+    public function articles(): HasMany
     {
-        return $this->hasMany(Article::class,'category_id','id');
+        return $this->hasMany(Article::class, 'category_id', 'id');
     }
 }

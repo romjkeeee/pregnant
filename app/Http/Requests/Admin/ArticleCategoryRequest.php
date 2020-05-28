@@ -24,7 +24,17 @@ class ArticleCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string'],
+            'translate'           => ['required', 'array'],
+            'translate.*.lang_id' => ['required', 'exists:langs,id'],
+            'translate.*.title'   => ['required', 'string'],
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function validated(): array
+    {
+        return collect(parent::validated())->except(['translate'])->toArray();
     }
 }
