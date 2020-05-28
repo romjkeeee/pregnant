@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Doctor;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DoctorRecourse;
 use App\Specialization;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Builder;
@@ -57,10 +58,10 @@ class DoctorController extends Controller
      * find doctor by id
      *
      * @param $id
-     * @return ResponseFactory|Application|Response
+     * @return DoctorRecourse
      */
-    public function show($id)
+    public function show($id): DoctorRecourse
     {
-        return \response(Doctor::query()->with(['user', 'clinics', 'specialisations'])->findOrFail($id));
+        return DoctorRecourse::make(Doctor::query()->with(['user', 'clinics', 'specialisations'])->findOrFail($id));
     }
 }
