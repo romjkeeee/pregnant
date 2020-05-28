@@ -30,7 +30,7 @@ class DoctorReviewController extends Controller
             'items'      => DoctorReview::query()->with(['doctor', 'user'])->filter($request->only(['doctor_id']))
                 ->where(function (Builder $builder) use ($request) {
                     if ($request->get('search')) {
-                        $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                        $builder->where('text', 'LIKE', "%{$request->get('search')}%");
                     }
                 })->orderBy('id', 'desc')->paginate(20)
         ]);
@@ -52,7 +52,9 @@ class DoctorReviewController extends Controller
     {
         DoctorReview::query()->create($request->validated());
 
-        return redirect()->route('admin.doctors.reviews.index', ['doctor_id' => $request->get('clinic_id')])->with('success', 'Отзыв успешно добавлен!');
+        return redirect()->route('admin.doctors.reviews.index', [
+            'doctor_id' => $request->get('doctor_id')
+        ])->with('success', 'Отзыв успешно добавлен!');
     }
 
     /**

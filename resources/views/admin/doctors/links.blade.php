@@ -11,6 +11,7 @@
         <li @if (Route::current()->getName() == 'admin.doctors.create') class="active" @endif>
             <a href="{{ route('admin.doctors.create') }}">Добавить</a>
         </li>
+        @include('admin.doctors.educations.links')
         @include('admin.doctors.reviews.links')
     </ul>
 </li>

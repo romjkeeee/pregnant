@@ -13,7 +13,7 @@ Breadcrumbs::for('admin.doctors.reviews.create', function ($trail) {
 });
 
 Breadcrumbs::for('admin.doctors.reviews.edit', function ($trail, $id) {
-    $trail->parent('admin.clinics.prices.index');
+    $trail->parent('admin.doctors.reviews.index');
     $trail->push('Редактированние отзыва', route('admin.doctors.reviews.edit', $id));
 });
 

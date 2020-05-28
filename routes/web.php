@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
     Route::resource('check-lists', 'CheckListController');
     /** doctors routes */
     Route::group(['prefix' => 'doctors', 'as' => 'doctors.'], function () {
+        Route::resource('educations', 'DoctorEducationController');
         Route::resource('reviews', 'DoctorReviewController');
     });
     Route::resource('doctors', 'DoctorController');
