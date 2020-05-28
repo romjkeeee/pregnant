@@ -19,11 +19,11 @@ class ArticleResource extends JsonResource
             'id'         => $this->id,
             'title'      => $this->translate->title ?? null,
             'text'       => $this->translate->text ?? null,
-            'category'   => $this->category->title ?? null,
             'image'      => $this->image ? asset($this->image) : null,
             'preview'    => $this->preview ? asset($this->preview) : null,
             'created_at' => $this->created_at ? $this->created_at->format(config('app.datetime_format')) : null,
             'updated_at' => $this->updated_at ? $this->updated_at->format(config('app.datetime_format')) : null,
+            'category'   => ['id' => $this->category->id ?? null, 'title' => $this->category->title ?? null],
         ];
     }
 }
