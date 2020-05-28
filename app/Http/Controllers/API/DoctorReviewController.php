@@ -22,7 +22,7 @@ class DoctorReviewController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => []]);
+        $this->middleware('auth:api');
     }
 
 
@@ -32,8 +32,8 @@ class DoctorReviewController extends Controller
      */
     public function index(Request $request)
     {
-        return \response(DoctorReview::query()->with(['user.doctor'])
-            ->whereHas('user.doctor')
+        return \response(DoctorReview::query()->with(['doctor'])
+            ->whereHas('doctor')
             ->filter($request->only(['doctor_id']))
             ->paginate($request->get('perPage') ?? 10));
     }
@@ -44,7 +44,7 @@ class DoctorReviewController extends Controller
      */
     public function show($id)
     {
-        return \response(DoctorReview::query()->with(['user.doctor'])->whereHas('user.doctor')->findOrFail($id));
+        return \response(DoctorReview::query()->with(['doctor'])->whereHas('doctor')->findOrFail($id));
     }
 
     /**
