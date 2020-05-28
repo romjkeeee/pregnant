@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Clinic;
 use App\ClinicDepartment;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\admin\ClinicDepartmentsRequest;
+use App\Http\Requests\Admin\ClinicDepartmentsRequest;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
