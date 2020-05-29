@@ -25,10 +25,10 @@
     @foreach ($items as $item)
         <tr class="footable-odd">
             <td class="footable-visible">{{ $item->id }}</td>
-            <td class="footable-visible">{{ $item->name }}</td>
+            <td class="footable-visible">{{ $item->translate->name ?? null }}</td>
             <td class="footable-visible">
                 @if($item->region)
-                    <a href="{{ route('admin.regions.edit', $item->region_id) }}">{{ $item->region->name }}</a>
+                    <a href="{{ route('admin.regions.edit', $item->region_id) }}">{{ $item->region->translate->name ?? null }}</a>
                 @endif
             </td>
             <td class="text-right footable-visible footable-last-column">

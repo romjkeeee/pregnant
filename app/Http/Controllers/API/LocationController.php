@@ -4,11 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\City;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Collections\CityCollection;
+use App\Http\Resources\Collections\RegionCollection;
 use App\Region;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 /**
  * @group Location
@@ -31,21 +30,21 @@ class LocationController extends Controller
      * Get regions 50 per page
      *
      * @param Request $request
-     * @return ResponseFactory|Application|Response
+     * @return RegionCollection
      */
-    public function regions(Request $request)
+    public function regions(Request $request): RegionCollection
     {
-        return \response(Region::query()->paginate($request->get('perPage') ?? 50));
+        return RegionCollection::make(Region::query()->paginate($request->get('perPage') ?? 50));
     }
 
     /**
      * Get cities 50 per page
      *
      * @param Request $request
-     * @return ResponseFactory|Application|Response
+     * @return CityCollection
      */
-    public function cities(Request $request)
+    public function cities(Request $request): CityCollection
     {
-        return \response(City::query()->filter($request->only('region_id'))->paginate($request->get('perPage') ?? 50));
+        return CityCollection::make(City::query()->filter($request->only('region_id'))->paginate($request->get('perPage') ?? 50));
     }
 }

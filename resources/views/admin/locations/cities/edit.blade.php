@@ -12,11 +12,8 @@
             @include('components.ajax-select', ['name' => 'region_id', 'submit' => 'list', 'placeholder' => 'Выберите регион',
                      'route' => 'admin.preload.regions', 'default' => ['val' => $instance->region_id ?? null, 'text' => $instance->region->name ?? null]])
         </div>
-        <div class="col-lg-6">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Название <span class="req">*</span></strong>
-                <input type="text" name="name" value="{{ old('name', $instance->name) }}" class="form-control">
-            </div>
-        </div>
+        @include('components.multi-lang', ['fields' => [
+               ['title' => 'Название <span class="req">*</span>', 'name' => 'name'],
+        ]])
     </div>
 @endsection

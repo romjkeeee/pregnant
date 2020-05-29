@@ -2,11 +2,18 @@
 
 namespace App;
 
+use App\Traits\MultiLangTrait;
+use App\Translate\CityTranslate;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class City extends BaseModel
 {
-    protected $fillable = ['name', 'region_id'];
+    use MultiLangTrait;
+
+    protected $translatedClass = CityTranslate::class;
+    protected $translatedForeignKey = 'city_id';
+
+    protected $fillable = ['region_id'];
     public $timestamps = false;
 
     /**

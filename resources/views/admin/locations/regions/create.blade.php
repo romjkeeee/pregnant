@@ -7,11 +7,8 @@
 @section('fields')
     @method('POST')
     <div class="row">
-        <div class="col-lg-4">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Название <span class="req">*</span></strong>
-                <input type="text" name="name" value="{{ old('name') }}" class="form-control">
-            </div>
-        </div>
+        @include('components.multi-lang', ['fields' => [
+               ['title' => 'Название <span class="req">*</span>', 'name' => 'name'],
+        ]])
     </div>
 @endsection

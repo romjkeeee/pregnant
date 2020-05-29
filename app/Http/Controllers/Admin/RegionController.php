@@ -26,9 +26,11 @@ class RegionController extends Controller
             'search'     => $request->get('search'),
             'items'      => Region::query()->where(function (Builder $builder) use ($request) {
                 if ($request->get('search')) {
-                    $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                    $builder->whereHas('translates', function ($query) use ($request) {
+                        $query->where('name', 'LIKE', "%{$request->get('search')}%");
+                    });
                 }
-            })->orderBy('name')->paginate(20)
+            })->orderBy('id')->paginate(20)
         ]);
     }
 
@@ -46,7 +48,9 @@ class RegionController extends Controller
      */
     public function store(RegionRequest $request): RedirectResponse
     {
-        Region::query()->create($request->validated());
+        /** @var Region $region */
+        $region = Region::query()->create($request->validated());
+        $region->syncTranslates($request->get('translate'));
 
         return redirect()->route('admin.regions.index')->with('success', 'Регион успешно добавлен!');
     }
@@ -70,7 +74,10 @@ class RegionController extends Controller
      */
     public function update(RegionRequest $request, $id): RedirectResponse
     {
-        Region::query()->findOrFail($id)->update($request->validated());
+        /** @var Region $region */
+        $region = Region::query()->findOrFail($id);
+        $region->update($request->validated());
+        $region->syncTranslates($request->get('translate'));
 
         return back()->with('success', 'Сохранено!');
     }

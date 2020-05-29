@@ -29,9 +29,11 @@ class CityController extends Controller
             'search'     => $request->get('search'),
             'items'      => City::query()->with('region')->filter($request->only(['region_id']))->where(function (Builder $builder) use ($request) {
                 if ($request->get('search')) {
-                    $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                    $builder->whereHas('translates', function ($query) use ($request) {
+                        $query->where('name', 'LIKE', "%{$request->get('search')}%");
+                    });
                 }
-            })->orderBy('name')->paginate(20)
+            })->orderBy('id')->paginate(20)
         ]);
     }
 
@@ -49,7 +51,9 @@ class CityController extends Controller
      */
     public function store(CityRequest $request): RedirectResponse
     {
-        City::query()->create($request->validated());
+        /** @var City $city */
+        $city = City::query()->create($request->validated());
+        $city->syncTranslates($request->get('translate'));
 
         return redirect()->route('admin.cities.index', ['region_id' => $request->get('region_id')])->with('success', 'Город успешно добавлен!');
     }
@@ -73,7 +77,10 @@ class CityController extends Controller
      */
     public function update(CityRequest $request, $id): RedirectResponse
     {
-        City::query()->findOrFail($id)->update($request->validated());
+        /** @var City $city */
+        $city = City::query()->findOrFail($id);
+        $city->update($request->validated());
+        $city->syncTranslates($request->get('translate'));
 
         return back()->with('success', 'Сохранено!');
     }

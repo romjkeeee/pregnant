@@ -4,6 +4,8 @@ namespace App\Http\Controllers\API;
 
 use App\Clinic;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ClinicResource;
+use App\Http\Resources\Collections\ClinicCollection;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
@@ -34,11 +36,14 @@ class ClinicController extends Controller
      * @authenticated required
      * @response 200
      * @param Request $request
-     * @return ResponseFactory|Application|Response
+     * @return ClinicCollection
      */
     public function index(Request $request)
     {
-        return \response(Clinic::query()->with(['city', 'region', 'departments'])->filter($request->only(['type']))->paginate($request->get('perPage') ?? 20));
+        return ClinicCollection::make(Clinic::query()
+            ->with(['city', 'region', 'departments', 'schedules', 'prices'])
+            ->filter($request->only(['type']))
+            ->paginate($request->get('perPage') ?? 20));
     }
 
     /**
@@ -48,10 +53,12 @@ class ClinicController extends Controller
      * @authenticated required
      * @response 200
      * @param $id
-     * @return ResponseFactory|Application|Response
+     * @return ClinicResource
      */
     public function show($id)
     {
-        return \response(Clinic::query()->with(['city', 'region', 'departments', 'schedules', 'prices'])->findOrFail($id));
+        return ClinicResource::make(Clinic::query()
+            ->with(['city', 'region', 'departments', 'schedules', 'prices'])
+            ->findOrFail($id));
     }
 }

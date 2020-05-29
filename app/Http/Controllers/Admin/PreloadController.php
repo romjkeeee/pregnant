@@ -115,10 +115,12 @@ class PreloadController extends Controller
     {
         return response(Region::query()->where(function (Builder $builder) use ($request) {
             if ($request->get('search')) {
-                $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                $builder->whereHas('translates', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', "%{$request->get('search')}%");
+                });
             }
         })->orderBy('id', 'desc')->get()->map(function (Region $item) {
-            return ['id' => $item->id, 'text' => $item->name];
+            return ['id' => $item->id, 'text' => $item->translate->name ?? null];
         }));
     }
 
@@ -130,10 +132,12 @@ class PreloadController extends Controller
     {
         return response(City::query()->where(function (Builder $builder) use ($request) {
             if ($request->get('search')) {
-                $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                $builder->whereHas('translates', function ($query) use ($request) {
+                    $query->where('name', 'LIKE', "%{$request->get('search')}%");
+                });
             }
         })->orderBy('id', 'desc')->get()->map(function (City $item) {
-            return ['id' => $item->id, 'text' => $item->name];
+            return ['id' => $item->id, 'text' => $item->translate->name ?? null];
         }));
     }
 

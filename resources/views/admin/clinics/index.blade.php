@@ -22,8 +22,8 @@
             <td class="footable-visible">{{ $item->id }}</td>
             <td class="footable-visible">{{ $item->name }}</td>
             <td class="footable-visible">{{ $item->type }}</td>
-            <td class="footable-visible">{{ $item->region->name ?? null }}</td>
-            <td class="footable-visible">{{ $item->city->name ?? null }}</td>
+            <td class="footable-visible">{{ $item->region->translate->name ?? null }}</td>
+            <td class="footable-visible">{{ $item->city->translate->name ?? null }}</td>
             <td class="footable-visible">{{ $item->address }}</td>
             <td class="footable-visible">{{ $item->rate ?? 5 }}({{ $item->reviews->count() }})</td>
             <td class="footable-visible">{{ $item->departments->count() }}</td>

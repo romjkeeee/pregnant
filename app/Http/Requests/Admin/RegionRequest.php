@@ -25,7 +25,17 @@ class RegionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:2', 'max:128', Rule::unique('regions', 'name')->ignore($this->route()->parameter('region'))]
+            'translate'           => ['required', 'array'],
+            'translate.*.lang_id' => ['required', 'exists:langs,id'],
+            'translate.*.name'    => ['required', 'max:192'],
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function validated(): array
+    {
+        return collect(parent::validated())->except(['translate'])->toArray();
     }
 }

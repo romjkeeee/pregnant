@@ -25,15 +25,18 @@ class CityRequest extends FormRequest
     public function rules()
     {
         return [
-            'region_id' => ['required', 'exists:regions,id'],
-            'name'      => [
-                'required',
-                'min:2',
-                'max:128',
-                Rule::unique('cities', 'name')
-                    ->where('region_id', $this->get('region_id'))
-                    ->ignore($this->route()->parameter('city'))
-            ],
+            'region_id'           => ['required', 'exists:regions,id'],
+            'translate'           => ['required', 'array'],
+            'translate.*.lang_id' => ['required', 'exists:langs,id'],
+            'translate.*.name'    => ['required', 'max:192'],
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function validated(): array
+    {
+        return collect(parent::validated())->except(['translate'])->toArray();
     }
 }
