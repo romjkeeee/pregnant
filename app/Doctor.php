@@ -69,4 +69,12 @@ class Doctor extends BaseModel
         return $specialisations;
     }
 
+    /**
+     * @return HasMany
+     */
+    public function educations(): HasMany
+    {
+        return $this->hasMany(DoctorEducation::class, 'doctor_id', 'id');
+    }
+
 }
