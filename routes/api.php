@@ -48,6 +48,13 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::get('/{id}', 'DurationArticlesController@show');
     });
 
+    /** chat routes */
+    Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
+        Route::post('send', 'ChatController@send');
+        Route::post('start', 'ChatController@start');
+        Route::get('messages', 'ChatController@messages');
+    });
+
     /** langs routes */
     Route::get('langs', 'LangController');
 
@@ -77,9 +84,9 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::apiResource('specializations', 'SpecializationController');
     Route::apiResource('durations', 'DurationController');
 });
-Route::post('chat/start/{user_id}', 'ApiController@chat_start');
-Route::post('chat/send/{chat_id}', 'ApiController@chat_send');
-Route::get('chat/updates/{chat_id}', 'ApiController@chat_updates');
+//Route::post('chat/start/{user_id}', 'ApiController@chat_start');
+//Route::post('chat/send/{chat_id}', 'ApiController@chat_send');
+//Route::get('chat/updates/{chat_id}', 'ApiController@chat_updates');
 
 //
 //Route::get('user/getUserList', 'UserApiController@getUserList');

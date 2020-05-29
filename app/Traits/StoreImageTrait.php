@@ -27,7 +27,7 @@ trait StoreImageTrait
      */
     private function __folder(string $name): string
     {
-        return $this->storeFolder . '/' . strtolower(collect(explode('\\', get_class($this)))->last()) . '/' . $name;
+        return $this->storeFolder . '/' . collect(explode('\\', get_class($this)))->last() . '/' . $name;
     }
 
     /**

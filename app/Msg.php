@@ -2,12 +2,10 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+class Msg extends BaseModel
+{
 
-class Msg extends Authenticatable {
-	
-	protected $table = 'messages';
+    protected $table = 'messages';
 
+    protected $fillable = ['chat_id', 'sender_id', 'rec_id', 'text'];
 }

@@ -195,4 +195,20 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->lang_id ?? Lang::query()->where('code', 'ru')->first()->id ?? null;
     }
+
+    /**
+     * @return HasMany
+     */
+    public function senderChats(): HasMany
+    {
+        return $this->hasMany(Chat::class, 'sender_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function messages(): HasMany
+    {
+        return $this->hasMany(ChatMessage::class, 'sender_id', 'id');
+    }
 }
