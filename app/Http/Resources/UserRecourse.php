@@ -2,11 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\Collections\DoctorEducationCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DoctorRecourse extends JsonResource
+class UserRecourse extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,11 +16,9 @@ class DoctorRecourse extends JsonResource
     public function toArray($request)
     {
         return collect(parent::toArray($request))
-            ->except(['educations', 'clinics', 'user'])
+            ->except(['image'])
             ->merge([
-                'user'       => UserRecourse::make($this->user),
-                'clinic'     => $this->clinics->first(),
-                'educations' => DoctorEducationCollection::make($this->educations)
+                'image' => $this->image ? asset($this->image) : null
             ])->toArray();
     }
 }
