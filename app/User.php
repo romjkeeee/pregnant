@@ -2,19 +2,18 @@
 
 namespace App;
 
+use App\Traits\StoreImageTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Illuminate\Support\Facades\Storage;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable;
+    use Notifiable, StoreImageTrait;
 
     /** users role - doctor, patient */
     const DOCTOR = 'doctor';
@@ -53,6 +52,8 @@ class User extends Authenticatable implements JWTSubject
         'password',
         'remember_token',
     ];
+
+    protected $image = ['image'];
 
     // Rest omitted for brevity
 
@@ -173,19 +174,6 @@ class User extends Authenticatable implements JWTSubject
     public function lang(): HasOne
     {
         return $this->hasOne(Lang::class, 'id', 'lang_id');
-    }
-
-    /**
-     * @param UploadedFile|null $image
-     */
-    public function setImageAttribute(UploadedFile $image = null)
-    {
-        if ($image) {
-            if (isset($this->attributes['image']) && Storage::disk('publicUpload')->exists($this->attributes['image'])) {
-                Storage::disk('publicUpload')->delete($this->attributes['image']);
-            }
-            $this->attributes['image'] = Storage::disk('publicUpload')->put('images/users', $image);
-        }
     }
 
     /**

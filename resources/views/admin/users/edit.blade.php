@@ -27,26 +27,12 @@
         </div>
         <hr>
         <div class="col-lg-6">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Регион <span class="req">*</span></strong>
-                <select name="region_id" class="form-control">
-                    <option value="">Выберите регион</option>
-                    @foreach($regions as $region)
-                        <option value="{{ $region->id }}" @if(old('region_id', $instance->region_id) == $region->id) selected @endif>{{ $region->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+            @include('components.ajax-select', ['name' => 'region_id','title' => 'Регион<span class="req">*</span>',
+                     'route' => 'admin.preload.regions', 'default' => ['val' => $instance->region_id ?? null, 'text' => $instance->region->translate->name ?? null]])
         </div>
         <div class="col-lg-6">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Город <span class="req">*</span></strong>
-                <select name="city_id" class="form-control">
-                    <option value="">Выберите горд</option>
-                    @foreach($cities as $city)
-                        <option value="{{ $city->id }}" @if(old('city_id', $instance->city_id) == $city->id) selected @endif>{{ $city->name }}</option>
-                    @endforeach
-                </select>
-            </div>
+            @include('components.ajax-select', ['name' => 'city_id','title' => 'Город<span class="req">*</span>',
+                     'route' => 'admin.preload.cities', 'default' => ['val' => $instance->city_id ?? null, 'text' => $instance->city->translate->name ?? null]])
         </div>
         <div class="col-lg-6">
             <div class="form-group" style="padding: 5px">
@@ -82,6 +68,17 @@
                 <strong style="margin-bottom: 10px!important;">Новый пароль</strong>
                 <input type="password" name="password" class="form-control">
             </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group" style="padding: 5px">
+                <strong style="margin-bottom: 10px!important;">Изображение <span class="req">*</span></strong>
+                <input type="file" name="image" value="{{ old('image') }}" class="form-control">
+            </div>
+            @if($instance->image)
+                <a href="{{ asset($instance->image) }}" target="_blank">
+                    <img src="{{ asset($instance->image) }}" height="100px">
+                </a>
+            @endif
         </div>
         <div class="col-lg-3">
             <div class="form-check form-check-inline" style="margin-top: 30px; margin-left: 10px">
