@@ -9,17 +9,29 @@
     <div class="row">
         <div class="col-lg-4">
             <div class="form-group" style="padding: 5px">
+                <strong style="margin-bottom: 10px!important;">Фамилия <span class="req">*</span></strong>
+                <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Имя <span class="req">*</span></strong>
                 <input type="text" name="name" value="{{ old('name') }}" class="form-control">
             </div>
         </div>
         <div class="col-lg-4">
             <div class="form-group" style="padding: 5px">
+                <strong style="margin-bottom: 10px!important;">Отчество <span class="req">*</span></strong>
+                <input type="text" name="second_name" value="{{ old('second_name') }}" class="form-control">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Телефон <span class="req">*</span></strong>
                 <input type="text" name="phone" value="{{ old('phone') }}" class="form-control">
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Почта <span class="req">*</span></strong>
                 <input type="text" name="email" value="{{ old('email') }}" class="form-control">

@@ -32,17 +32,19 @@ class UserRequest extends FormRequest
     private function __rules(): array
     {
         return [
-            'name'      => 'required|min:2|max:64',
-            'city_id'   => 'required|exists:cities,id',
-            'region_id' => 'required|exists:regions,id',
-            'street'    => 'required|min:2|max:64',
-            'building'  => 'required|min:1|max:64',
-            'apartment' => 'nullable|min:1|max:64',
-            'role'      => ['required', Rule::in(User::DOCTOR, User::PATIENT)],
-            'verified'  => 'required|in:0,1',
-            'email'     => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user->id ?? null)],
-            'phone'     => ['required', 'phone:RU', Rule::unique('users', 'phone')->ignore($this->user->id ?? null)],
-            'image'     => ['nullable', 'image', 'max:2048']
+            'name'        => 'required|min:2|max:64',
+            'last_name'   => 'required|min:2|max:64',
+            'second_name' => 'required|min:2|max:64',
+            'city_id'     => 'required|exists:cities,id',
+            'region_id'   => 'required|exists:regions,id',
+            'street'      => 'required|min:2|max:64',
+            'building'    => 'required|min:1|max:64',
+            'apartment'   => 'nullable|min:1|max:64',
+            'role'        => ['required', Rule::in(User::DOCTOR, User::PATIENT)],
+            'verified'    => 'required|in:0,1',
+            'email'       => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user->id ?? null)],
+            'phone'       => ['required', 'phone:RU', Rule::unique('users', 'phone')->ignore($this->user->id ?? null)],
+            'image'       => ['nullable', 'image', 'max:2048']
         ];
     }
 
