@@ -16,7 +16,10 @@ class DoctorRecourse extends JsonResource
     public function toArray($request)
     {
         return collect(parent::toArray($request))
-            ->except('clinics')
-            ->merge(['clinic' => $this->clinics->first()])->toArray();
+            ->except(['educations', 'clinics'])
+            ->merge([
+                'clinic'     => $this->clinics->first(),
+                'educations' => DoctorEducationResource::make($this->educations)
+            ])->toArray();
     }
 }
