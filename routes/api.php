@@ -77,9 +77,10 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::apiResource('specializations', 'SpecializationController');
     Route::apiResource('durations', 'DurationController');
 });
-Route::post('chat/start', 'ApiController@chat_start');
-Route::post('chat/send', 'ApiController@chat_send');
-Route::get('chat/updates', 'ApiController@chat_updates');
+Route::post('chat/start/{user_id}', 'ApiController@chat_start');
+Route::post('chat/send/{chat_id}', 'ApiController@chat_send');
+Route::get('chat/updates/{chat_id}', 'ApiController@chat_updates');
+
 //
 //Route::get('user/getUserList', 'UserApiController@getUserList');
 //Route::get('user/userAdd', 'UserApiController@userAdd');
