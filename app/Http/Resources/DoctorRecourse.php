@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Collections\DoctorEducationCollection;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -19,7 +20,7 @@ class DoctorRecourse extends JsonResource
             ->except(['educations', 'clinics'])
             ->merge([
                 'clinic'     => $this->clinics->first(),
-                'educations' => DoctorEducationResource::make($this->educations)
+                'educations' => DoctorEducationCollection::make($this->educations)
             ])->toArray();
     }
 }
