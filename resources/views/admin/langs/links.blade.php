@@ -1,6 +1,6 @@
 <li @if (request()->is('*languages*')) class="active" @endif>
     <a href="#">
-        <i class="fa fa-language"></i>
+        <i class="fa fa-globe"></i>
         <span class="nav-label">Языки</span>
         <span class="fa arrow"></span>
     </a>

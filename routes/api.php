@@ -56,6 +56,8 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::get('messages', 'ChatController@messages');
     });
 
+    /** translates routes */
+    Route::apiResource('translates', 'TranslateController')->only(['index']);
     /** langs routes */
     Route::get('langs', 'LangController');
 

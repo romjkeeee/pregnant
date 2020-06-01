@@ -61,6 +61,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
     Route::resource('cities', 'CityController');
     /** lang routes */
     Route::resource('languages', 'LangController');
+    /** translate routes */
+    Route::resource('translates', 'TranslateController');
     /** articles routes */
     Route::resource('articles', 'ArticleController');
     Route::resource('article-category', 'ArticleCategoryController');

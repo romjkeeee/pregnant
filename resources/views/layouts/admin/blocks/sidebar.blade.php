@@ -20,6 +20,7 @@
         @include('admin.check-lists.links')
         @include('admin.specialisations.links')
         @include('admin.locations.links')
+        @include('admin.translates.links')
         @include('admin.langs.links')
     </ul>
 </div>

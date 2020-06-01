@@ -12,17 +12,30 @@
                 <input type="text" name="translate[][lang_id]" value="{{ $lang->id }}" hidden>
                 @php $index = $loop->index @endphp
                 @foreach($fields as $field)
-                    <div class="col-lg-6">
-                        <div class="form-group" style="padding: 5px">
-                            <strong style="margin-bottom: 10px!important;">{!! $field['title'] !!}</strong>
-                            @php $name = $field['name']; @endphp
-                            @php $value = old('translate')[$index][$name] ??
+                    @if(isset($field['tag']) && $field['tag'] == 'textarea')
+                        <div class="col-lg-12">
+                            <div class="form-group" style="padding: 5px">
+                                <strong style="margin-bottom: 10px!important;">{!! $field['title'] !!}</strong>
+                                @php $name = $field['name']; @endphp
+                                @php $value = old('translate')[$index][$name] ??
                             (isset($instance->translates) ? $instance->translates->where('lang_id', $lang->id)->first()->$name ?? null : null) @endphp
-                            <input type="text" name="translate[{{ $index }}][{{ $name }}]"
-                                   value="{{ old('translate')[$index][$name] ?? $value}}"
-                                   class="form-control">
+                                <textarea rows="5" type="text" name="translate[{{ $index }}][{{ $name }}]"
+                                          class="form-control">{{ old('translate')[$index][$name] ?? $value}}</textarea>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="col-lg-6">
+                            <div class="form-group" style="padding: 5px">
+                                <strong style="margin-bottom: 10px!important;">{!! $field['title'] !!}</strong>
+                                @php $name = $field['name']; @endphp
+                                @php $value = old('translate')[$index][$name] ??
+                            (isset($instance->translates) ? $instance->translates->where('lang_id', $lang->id)->first()->$name ?? null : null) @endphp
+                                <input type="text" name="translate[{{ $index }}][{{ $name }}]"
+                                       value="{{ old('translate')[$index][$name] ?? $value}}"
+                                       class="form-control">
+                            </div>
+                        </div>
+                    @endif
                 @endforeach
             </div>
         @endforeach
