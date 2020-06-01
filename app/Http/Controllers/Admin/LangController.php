@@ -49,7 +49,7 @@ class LangController extends Controller
     public function store(LangAdminRequest $request): RedirectResponse
     {
         Lang::query()->create($request->validated());
-        return redirect()->route('admin.langs.index')->with('success', 'Язые успешно добавлен!');
+        return redirect()->route('admin.languages.index')->with('success', 'Язые успешно добавлен!');
     }
 
     /**

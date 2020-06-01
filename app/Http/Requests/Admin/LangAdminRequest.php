@@ -24,7 +24,7 @@ class LangAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => 'required|string',
+            'code' => 'required|size:2',
             'name' => 'required|string',
         ];
     }
