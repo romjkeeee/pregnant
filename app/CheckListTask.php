@@ -2,12 +2,19 @@
 
 namespace App;
 
+use App\Traits\MultiLangTrait;
+use App\Translate\CheckListTaskTranslate;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CheckListTask extends BaseModel
 {
-    protected $fillable = ['list_id', 'name'];
+    use MultiLangTrait;
+
+    protected $translatedClass = CheckListTaskTranslate::class;
+    protected $translatedForeignKey = 'task_id';
+
+    protected $fillable = ['list_id'];
 
     protected $appends = ['selected'];
 

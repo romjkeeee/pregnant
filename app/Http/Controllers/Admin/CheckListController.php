@@ -23,10 +23,10 @@ class CheckListController extends Controller
         return view('admin.check-lists.index', [
             'page_title' => 'Чек листы',
             'search'     => $request->get('search'),
-            'items'      => CheckList::query()->with(['tasks'])->where(function (Builder $builder) use ($request) {
-                if ($request->get('search')) {
+            'items'      => CheckList::query()->with(['tasks'])->when($request->get('search'), function (Builder $query) use ($request) {
+                $query->whereHas('translates', function (Builder $builder) use ($request) {
                     $builder->where('name', 'LIKE', "%{$request->get('search')}%");
-                }
+                });
             })->orderBy('id', 'desc')->paginate(20)
         ]);
     }
@@ -45,7 +45,9 @@ class CheckListController extends Controller
      */
     public function store(CheckListRequest $request): RedirectResponse
     {
-        CheckList::query()->create($request->validated());
+        /** @var CheckList $list */
+        $list = CheckList::query()->create($request->validated());
+        $list->syncTranslates($request->get('translate'));
 
         return redirect()->route('admin.check-lists.index')->with('success', 'Группа успешно добавлена!');
     }
@@ -69,7 +71,10 @@ class CheckListController extends Controller
      */
     public function update(CheckListRequest $request, $id): RedirectResponse
     {
-        CheckList::query()->findOrFail($id)->update($request->validated());
+        /** @var CheckList $list */
+        $list = CheckList::query()->findOrFail($id);
+        $list->update($request->validated());
+        $list->syncTranslates($request->get('translate'));
 
         return back()->with('success', 'Сохранено!');
     }

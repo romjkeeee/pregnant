@@ -4,7 +4,7 @@
     <div style="display: flex; justify-content: flex-end; align-items: center">
         <form id="list">
             @include('components.ajax-select', ['name' => 'list_id', 'submit' => 'list', 'placeholder' => 'Выберите группу',
-             'route' => 'admin.preload.check-list', 'default' => ['val' => $list->id ?? null, 'text' => $list->name ?? null]])
+             'route' => 'admin.preload.check-list', 'default' => ['val' => $list->id ?? null, 'text' => $list->translate->name ?? null]])
         </form>
         @if($list)
             <form style="margin-top: 30px">
@@ -25,8 +25,8 @@
     @foreach ($items as $item)
         <tr class="footable-odd">
             <td class="footable-visible">{{ $item->id }}</td>
-            <td class="footable-visible">{{ $item->name }}</td>
-            <td class="footable-visible">{{ $item->list->name ?? null }}</td>
+            <td class="footable-visible">{{ $item->translate->name ?? null }}</td>
+            <td class="footable-visible">{{ $item->list->translate->name ?? null }}</td>
             <td class="text-right footable-visible footable-last-column">
                 @include('components.action', ['edit' => route('admin.check-lists.tasks.edit', $item->id)])
             </td>

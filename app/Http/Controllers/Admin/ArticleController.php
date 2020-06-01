@@ -24,8 +24,8 @@ class ArticleController extends Controller
             'page_title' => 'Статьи',
             'search'     => $request->get('search'),
             'items'      => Article::query()->when($request->get('search'), function (Builder $article) use ($request) {
-                $article->where(function (Builder $builder) use ($request) {
-                    $builder->orWhere('name', 'LIKE', "%{$request->get('search')}%");
+                $article->whereHas('translates', function (Builder $builder) use ($request) {
+                    $builder->where('name', 'LIKE', "%{$request->get('search')}%");
                 });
             })->orderBy('id', 'desc')->paginate(20)
         ]);

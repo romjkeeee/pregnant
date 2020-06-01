@@ -4,11 +4,13 @@ namespace App\Http\Controllers\API;
 
 use App\CheckList;
 use App\Http\Requests\SelectTaskRequest;
+use App\Http\Resources\CheckListResource;
 use App\PatientTask;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class CheckListController extends Controller
@@ -26,17 +28,15 @@ class CheckListController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return AnonymousResourceCollection
      */
-    public function index(): Response
+    public function index(): AnonymousResourceCollection
     {
-        return response([
-            CheckList::query()->with([
-                'tasks.patient' => function (BelongsToMany $many) {
-                    $many->where('patient_id', auth()->user()->patient->id ?? null);
-                }
-            ])->get()
-        ]);
+        return CheckListResource::collection(CheckList::query()->with([
+            'tasks.patient' => function (BelongsToMany $many) {
+                $many->where('patient_id', auth()->user()->patient->id ?? null);
+            }
+        ])->get());
     }
 
     /**

@@ -25,9 +25,18 @@ class CheckListTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'list_id' => ['required', 'exists:check_lists,id'],
-            'name'    => ['required', Rule::unique('check_list_tasks', 'name')->ignore($this->route()->parameter('check_list_task'))],
+            'list_id'             => ['required', 'exists:check_lists,id'],
+            'translate'           => ['required', 'array'],
+            'translate.*.lang_id' => ['required', 'exists:langs,id'],
+            'translate.*.name'    => ['required', 'max:192'],
         ];
     }
 
+    /**
+     * @return array
+     */
+    public function validated(): array
+    {
+        return collect(parent::validated())->except(['translate'])->toArray();
+    }
 }

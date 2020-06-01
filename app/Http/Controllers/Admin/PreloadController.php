@@ -98,12 +98,12 @@ class PreloadController extends Controller
      */
     public function checkList(Request $request)
     {
-        return response(CheckList::query()->where(function (Builder $builder) use ($request) {
-            if ($request->get('search')) {
+        return response(CheckList::query()->when($request->get('search'), function (Builder $query) use ($request) {
+            $query->whereHas('translates', function (Builder $builder) use ($request) {
                 $builder->where('name', 'LIKE', "%{$request->get('search')}%");
-            }
+            });
         })->orderBy('id', 'desc')->get()->map(function (CheckList $list) {
-            return ['id' => $list->id, 'text' => $list->name];
+            return ['id' => $list->id, 'text' => $list->translate->name ?? null];
         }));
     }
 
@@ -113,12 +113,10 @@ class PreloadController extends Controller
      */
     public function regions(Request $request)
     {
-        return response(Region::query()->where(function (Builder $builder) use ($request) {
-            if ($request->get('search')) {
-                $builder->whereHas('translates', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', "%{$request->get('search')}%");
-                });
-            }
+        return response(Region::query()->when($request->get('search'), function (Builder $query) use ($request) {
+            $query->whereHas('translates', function (Builder $builder) use ($request) {
+                $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+            });
         })->orderBy('id', 'desc')->get()->map(function (Region $item) {
             return ['id' => $item->id, 'text' => $item->translate->name ?? null];
         }));
@@ -130,12 +128,10 @@ class PreloadController extends Controller
      */
     public function cities(Request $request)
     {
-        return response(City::query()->where(function (Builder $builder) use ($request) {
-            if ($request->get('search')) {
-                $builder->whereHas('translates', function ($query) use ($request) {
-                    $query->where('name', 'LIKE', "%{$request->get('search')}%");
-                });
-            }
+        return response(City::query()->when($request->get('search'), function (Builder $query) use ($request) {
+            $query->whereHas('translates', function (Builder $builder) use ($request) {
+                $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+            });
         })->orderBy('id', 'desc')->get()->map(function (City $item) {
             return ['id' => $item->id, 'text' => $item->translate->name ?? null];
         }));
@@ -162,10 +158,10 @@ class PreloadController extends Controller
      */
     public function article_category(Request $request)
     {
-        return response(ArticleCategory::query()->where(function (Builder $builder) use ($request) {
-            if ($request->get('search')) {
+        return response(ArticleCategory::query()->when($request->get('search'), function (Builder $query) use ($request) {
+            $query->whereHas('translates', function (Builder $builder) use ($request) {
                 $builder->where('title', 'LIKE', "%{$request->get('search')}%");
-            }
+            });
         })->orderBy('id', 'desc')->get()->map(function (ArticleCategory $item) {
             return ['id' => $item->id, 'text' => $item->title];
         }));

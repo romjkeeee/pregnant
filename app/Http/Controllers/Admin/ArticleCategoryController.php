@@ -23,12 +23,10 @@ class ArticleCategoryController extends Controller
         return view('admin.article-category.index', [
             'page_title' => 'Статьи',
             'search'     => $request->get('search'),
-            'items'      => ArticleCategory::query()->with('translate')->where(function (Builder $article) use ($request) {
-                if ($request->get('search')) {
-                    $article->where(function (Builder $builder) use ($request) {
-                        $builder->orWhere('name', 'LIKE', "%{$request->get('search')}%");
-                    });
-                }
+            'items'      => ArticleCategory::query()->with('translate')->when($request->get('search'), function (Builder $query) use ($request) {
+                $query->whereHas('translates', function (Builder $builder) use ($request) {
+                    $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                });
             })->orderBy('id', 'desc')->paginate(20)
         ]);
     }

@@ -2,14 +2,22 @@
 
 namespace App;
 
+use App\Traits\MultiLangTrait;
+use App\Translate\CheckListTranslate;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class CheckList extends BaseModel
 {
-    protected $fillable = ['name', 'image'];
+    use MultiLangTrait;
+
+    protected $translatedClass = CheckListTranslate::class;
+    protected $translatedForeignKey = 'list_id';
+
+    protected $fillable = ['image'];
     protected $appends = ['image_path'];
+
     /**
      * @return string|null
      */

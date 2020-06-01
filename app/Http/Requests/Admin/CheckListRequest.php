@@ -25,16 +25,24 @@ class CheckListRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'  => ['required', Rule::unique('check_lists', 'name')->ignore($this->route()->parameter('check_list'))],
-            'image' => [
+            'image'               => [
                 Rule::requiredIf(function () {
                     return $this->isMethod('post');
                 }),
                 'nullable',
                 'image',
                 'max:2048'
-            ]
+            ],
+            'translate'           => ['required', 'array'],
+            'translate.*.lang_id' => ['required', 'exists:langs,id'],
+            'translate.*.name'    => ['required', 'max:192'],
         ];
     }
-
+    /**
+     * @return array
+     */
+    public function validated(): array
+    {
+        return collect(parent::validated())->except(['translate'])->toArray();
+    }
 }
