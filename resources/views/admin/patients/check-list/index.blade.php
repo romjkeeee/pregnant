@@ -6,9 +6,9 @@
 @section('tables')
     <div class="col-lg-12">
         @forelse($items as $list)
-            <form action="{{ route('admin.patients.check-list.store', $patient->id) }}" method="post" class="ibox">@csrf
+            <form action="{{ route('admin.patients.check-list.store', ['id' => $patient->id ?? null]) }}" method="post" class="ibox">@csrf
                 <div class="ibox-title">
-                    <h5>{{ $list->name }}</h5>
+                    <h5>{{ $list->translate->name ?? 'Не указано' }}</h5>
                 </div>
                 <div class="ibox-content">
                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
@@ -21,7 +21,7 @@
                         <tbody>
                         @forelse($list->tasks as $task)
                             <tr class="footable-odd">
-                                <td class="footable-visible">{{ $task->name }}</td>
+                                <td class="footable-visible">{{ $task->translate->name ?? null }}</td>
                                 <td class="footable-visible">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="checkbox" id="check-{{ $task->id }}" @if($task->selected) checked @endif value="{{ $task->id }}" name="task_id[]">

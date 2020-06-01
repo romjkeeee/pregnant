@@ -16,8 +16,11 @@ class ClinicResource extends JsonResource
     public function toArray($request)
     {
         return array_merge(parent::toArray($request), [
-            'city'   => CityResource::make($this->city),
-            'region' => RegionResource::make($this->region)
+            'name'    => $this->translate->name ?? null,
+            'text'    => $this->translate->text ?? null,
+            'address' => $this->translate->address ?? null,
+            'city'    => CityResource::make($this->city),
+            'region'  => RegionResource::make($this->region)
         ]);
     }
 }

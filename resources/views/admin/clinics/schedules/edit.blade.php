@@ -7,12 +7,6 @@
 @section('fields')
     @method('PUT')
     <div class="row">
-        <div class="col-lg-1">
-            <strong style="margin-bottom: 10px!important;margin-left: 10px">Клиника <span class="req">*</span></strong>
-        </div>
-        <div class="col-lg-12">
-            <div class="hr-line-dashed"></div>
-        </div>
         @foreach(trans('date.days') as $key => $day)
             <div class="col-lg-1">
                 {{ $day }}

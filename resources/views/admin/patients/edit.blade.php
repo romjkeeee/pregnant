@@ -13,7 +13,7 @@
         </div>
         <div class="col-lg-4">
             @include('components.ajax-select', ['name' => 'clinic_id','title' => 'Клиника<span class="req">*</span>',
-                     'route' => 'admin.preload.clinics', 'default' => ['val' => $instance->clinic_id, 'text' => $instance->clinic->name ?? "#{$instance->clinic_id}"]])
+                     'route' => 'admin.preload.clinics', 'default' => ['val' => $instance->clinic_id, 'text' => $instance->clinic->translate->name ?? "#{$instance->clinic_id}"]])
         </div>
         <div class="col-lg-4">
             @include('components.ajax-select', ['name' => 'doctor_id','title' => 'Доктор<span class="req">*</span>',

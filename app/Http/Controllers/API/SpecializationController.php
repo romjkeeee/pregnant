@@ -3,17 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Collections\SpecializationCollection;
+use App\Http\Resources\SpecializationResource;
 use App\Specialization;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
-/**
- * @group Specialization
- *
- * APIs for
- */
 class SpecializationController extends Controller
 {
     /**
@@ -31,21 +25,21 @@ class SpecializationController extends Controller
      * get specializations paginate list 20 per page
      *
      * @param Request $request
-     * @return ResponseFactory|Application|Response
+     * @return SpecializationCollection
      */
-    public function index(Request $request)
+    public function index(Request $request): SpecializationCollection
     {
-        return \response(Specialization::query()->paginate($request->get('perPage') ?? 20));
+        return SpecializationCollection::make(Specialization::query()->paginate($request->get('perPage') ?? 20));
     }
 
     /**
      * find specialization by id
      *
      * @param $id
-     * @return ResponseFactory|Application|Response
+     * @return SpecializationResource
      */
-    public function show($id)
+    public function show($id): SpecializationResource
     {
-        return \response(Specialization::query()->findOrFail($id));
+        return SpecializationResource::make(Specialization::query()->findOrFail($id));
     }
 }

@@ -2,12 +2,17 @@
 
 namespace App;
 
-
+use App\Traits\MultiLangTrait;
+use App\Translate\SpecializationTranslate;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Specialization extends BaseModel
 {
-    protected $fillable = ['name'];
+    use MultiLangTrait;
+
+    protected $translatedClass = SpecializationTranslate::class;
+    protected $translatedForeignKey = 'specialization_id';
+
     public $timestamps = false;
 
     /**

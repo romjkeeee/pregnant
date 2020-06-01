@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Traits\MultiLangTrait;
+use App\Translate\ClinicTranslate;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Http\UploadedFile;
@@ -9,13 +11,15 @@ use Illuminate\Support\Facades\Storage;
 
 class Clinic extends BaseModel
 {
+    use MultiLangTrait;
+
     const STATE = 'state';
     const PRIVATE = 'private';
 
-    protected $table = 'clinics';
-    public $timestamps = false;
+    protected $translatedClass = ClinicTranslate::class;
+    protected $translatedForeignKey = 'clinic_id';
 
-    protected $fillable = ['region_id', 'city_id', 'rate', 'type', 'phone', 'name', 'text', 'address', 'lng', 'lat', 'image'];
+    protected $fillable = ['region_id', 'city_id', 'rate', 'type', 'phone', 'lng', 'lat', 'image'];
 
     /**
      * @return HasOne

@@ -31,12 +31,22 @@ class ClinicRequest extends FormRequest
             'type'      => ['required', Rule::in(Clinic::PRIVATE, Clinic::STATE)],
             'phone'     => ['required', 'phone:RU'],
             'image'     => ['nullable', 'image', 'max:2048'],
-            'name'      => ['required', 'min:2', 'max:128'],
-            'text'      => ['nullable', 'min:2', 'max:65000'],
-            'address'   => ['required', 'min:2', 'max:192'],
             'lng'       => ['required', 'min:3', 'max:32'],
             'lat'       => ['required', 'min:3', 'max:32'],
+
+            'translate'           => ['required', 'array'],
+            'translate.*.lang_id' => ['required', 'exists:langs,id'],
+            'translate.*.name'    => ['required', 'max:192'],
+            'translate.*.address' => ['required', 'max:192'],
+            'translate.*.text'    => ['required', 'between:3,60000'],
         ];
     }
 
+    /**
+     * @return array
+     */
+    public function validated(): array
+    {
+        return collect(parent::validated())->except(['translate'])->toArray();
+    }
 }

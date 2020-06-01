@@ -50,7 +50,7 @@ class Doctor extends BaseModel
     {
         $clinics = [];
         $this->clinics()->get()->each(function (Clinic $clinic) use (&$clinics) {
-            $clinics[$clinic->id] = $clinic->name;
+            $clinics[$clinic->id] = $clinic->translate->name;
         })->toArray();
 
         return $clinics;
@@ -63,7 +63,7 @@ class Doctor extends BaseModel
     {
         $specialisations = [];
         $this->specialisations()->get()->each(function (Specialization $specialization) use (&$specialisations) {
-            $specialisations[$specialization->id] = $specialization->name;
+            $specialisations[$specialization->id] = $specialization->translate->name;
         })->toArray();
 
         return $specialisations;

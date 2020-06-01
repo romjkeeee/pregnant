@@ -27,15 +27,17 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <div class="row">
-                <div class="col-lg-6">
-                    <form class="form form-inline">
-                        <div class="form-group">
-                            <input type="text" name="search" value="{{ $search }}" class="form-control">
-                            <button type="submit" class="btn btn-default">Поиск</button>
-                        </div>
-                    </form>
-                    <br>
-                </div>
+                @if(!isset($dontSearch))
+                    <div class="col-lg-6">
+                        <form class="form form-inline">
+                            <div class="form-group">
+                                <input type="text" name="search" value="{{ $search }}" class="form-control">
+                                <button type="submit" class="btn btn-default">Поиск</button>
+                            </div>
+                        </form>
+                        <br>
+                    </div>
+                @endif
                 <div class="col-lg-12">
                     @include('layouts.admin.blocks.notification')
                 </div>

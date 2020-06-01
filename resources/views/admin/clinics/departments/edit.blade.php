@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-lg-6">
             @include('components.ajax-select', ['name' => 'clinic_id','title' => 'Клиника<span class="req">*</span>',
-                     'route' => 'admin.preload.clinics', 'default' => ['val' => $instance->clinic_id, 'text' => $instance->clinic->name ?? null]])
+                     'route' => 'admin.preload.clinics', 'default' => ['val' => $instance->clinic_id, 'text' => $instance->clinic->translate->name ?? null]])
         </div>
         <div class="col-lg-6">
             <div class="form-group" style="padding: 5px">

@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Clinic;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ClinicRequest;
-use App\Http\Requests\Admin\PatientRequest;
-use App\Patient;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
@@ -26,13 +24,10 @@ class ClinicController extends Controller
             'page_title' => 'Клиники',
             'search'     => $request->get('search'),
             'items'      => Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices'])
-                ->where(function (Builder $clinic) use ($request) {
-                    if ($request->get('search')) {
-                        $clinic->where(function (Builder $builder) use ($request) {
-                            $builder->orWhere('name', 'LIKE', "%{$request->get('search')}%")
-                                ->orWhere('phone', 'LIKE', "%{$request->get('search')}%");
-                        });
-                    }
+                ->when($request->get('search'), function (Builder $query) use ($request) {
+                    $query->whereHas('translates', function (Builder $builder) use ($request) {
+                        $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                    });
                 })->orderBy('id', 'desc')->paginate(20)
         ]);
     }
@@ -51,7 +46,9 @@ class ClinicController extends Controller
      */
     public function store(ClinicRequest $request): RedirectResponse
     {
-        Clinic::query()->create($request->validated());
+        /** @var Clinic $clinic */
+        $clinic = Clinic::query()->create($request->validated());
+        $clinic->syncTranslates($request->get('translate'));
 
         return redirect()->route('admin.clinics.index')->with('success', 'Клиника успешно добавлена!');
     }
@@ -75,7 +72,10 @@ class ClinicController extends Controller
      */
     public function update(ClinicRequest $request, $id): RedirectResponse
     {
-        Clinic::query()->findOrFail($id)->update($request->validated());
+        /** @var Clinic $clinic */
+        $clinic = Clinic::query()->findOrFail($id);
+        $clinic->update($request->validated());
+        $clinic->syncTranslates($request->get('translate'));
 
         return back()->with('success', 'Сохранено!');
     }

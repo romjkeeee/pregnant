@@ -7,19 +7,13 @@
 @section('fields')
     @method('POST')
     <div class="row">
-        <div class="col-lg-4">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Название <span class="req">*</span></strong>
-                <input type="text" name="name" value="{{ old('name') }}" class="form-control">
-            </div>
-        </div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Телефон <span class="req">*</span></strong>
                 <input type="text" name="phone" value="{{ old('phone') }}" class="form-control">
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Тип <span class="req">*</span></strong>
                 <select name="type" class="form-control">
@@ -35,19 +29,13 @@
         <div class="col-lg-6">
             @include('components.ajax-select', ['name' => 'city_id','title' => 'Город<span class="req">*</span>', 'route' => 'admin.preload.cities'])
         </div>
-        <div class="col-lg-4">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Адрес <span class="req">*</span></strong>
-                <input type="text" name="address" value="{{ old('address') }}" class="form-control">
-            </div>
-        </div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Долгота <span class="req">*</span></strong>
                 <input type="text" name="lng" value="{{ old('lng') }}" class="form-control">
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Широта <span class="req">*</span></strong>
                 <input type="text" name="lat" value="{{ old('lat') }}" class="form-control">
@@ -59,11 +47,10 @@
                 <input type="file" name="image" class="form-control">
             </div>
         </div>
-        <div class="col-lg-12">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Описание <span class="req">*</span></strong>
-                <textarea type="text" name="text" class="form-control">{{ old('text') }}</textarea>
-            </div>
-        </div>
+        @include('components.multi-lang', ['fields' => [
+                ['title' => 'Название <span class="req">*</span>', 'name' => 'name'],
+                ['title' => 'Адрес <span class="req">*</span>', 'name' => 'address'],
+                ['title' => 'Описание <span class="req">*</span>', 'name' => 'text', 'tag' => 'textarea']
+        ]])
     </div>
 @endsection

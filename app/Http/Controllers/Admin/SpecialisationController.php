@@ -24,12 +24,11 @@ class SpecialisationController extends Controller
         return view('admin.specialisations.index', [
             'page_title' => 'Специализация',
             'search'     => $request->get('search'),
-            'items'      => Specialization::query()
-                ->where(function (Builder $builder) use ($request) {
-                    if ($request->get('search')) {
-                        $builder->where('name', 'LIKE', "%{$request->get('search')}%");
-                    }
-                })->orderBy('id', 'desc')->paginate(20)
+            'items'      => Specialization::query()->when($request->get('search'), function (Builder $query) use ($request) {
+                $query->whereHas('translates', function (Builder $builder) use ($request) {
+                    $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                });
+            })->orderBy('id', 'desc')->paginate(20)
         ]);
     }
 
@@ -47,7 +46,9 @@ class SpecialisationController extends Controller
      */
     public function store(SpecialisationRequest $request): RedirectResponse
     {
-        Specialization::query()->create($request->validated());
+        /** @var Specialization $specialization */
+        $specialization = Specialization::query()->create();
+        $specialization->syncTranslates($request->get('translate'));
 
         return redirect()->route('admin.specialisations.index')->with('success', 'Специализация успешно добавлена!');
     }
@@ -71,7 +72,9 @@ class SpecialisationController extends Controller
      */
     public function update(SpecialisationRequest $request, $id): RedirectResponse
     {
-        Specialization::query()->findOrFail($id)->update($request->validated());
+        /** @var Specialization $specialization */
+        $specialization = Specialization::query()->findOrFail($id);
+        $specialization->syncTranslates($request->get('translate'));
 
         return back()->with('success', 'Сохранено!');
     }

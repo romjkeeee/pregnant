@@ -4,7 +4,7 @@
     <div style="display: flex; justify-content: flex-end; align-items: center">
         <form id="list" style="margin-top: 30px">
             @include('components.ajax-select', ['name' => 'clinic_id', 'submit' => 'list', 'placeholder' => 'Выберите клинику',
-             'route' => 'admin.preload.clinics', 'default' => ['val' => $clinic->id ?? null, 'text' => $clinic->name ?? null]])
+             'route' => 'admin.preload.clinics', 'default' => ['val' => $clinic->id ?? null, 'text' => $clinic->translate->name ?? null]])
         </form>
         @if($clinic)
             <form style="margin-top: 15px">
@@ -25,7 +25,9 @@
     @foreach ($items as $item)
         <tr class="footable-odd">
             <td class="footable-visible">{{ $item->id }}</td>
-            <td class="footable-visible"><a href="{{ route('admin.clinics.edit', $item->id) }}">{{ $item->name }}</a></td>
+            <td class="footable-visible">
+                <a href="{{ route('admin.clinics.edit', $item->id) }}">{{ $item->translate->name ?? 'Не указано' }}</a>
+            </td>
             <td class="footable-visible">
                 <table>
                     @foreach($item->fullSchedules as $schedule)

@@ -4,7 +4,7 @@
     <div style="display: flex; justify-content: flex-end; align-items: center">
         <form id="list" style="margin-top: 30px">
             @include('components.ajax-select', ['name' => 'clinic_id', 'submit' => 'list', 'placeholder' => 'Выберите клинику',
-             'route' => 'admin.preload.clinics', 'default' => ['val' => $clinic->id ?? null, 'text' => $clinic->name ?? null]])
+             'route' => 'admin.preload.clinics', 'default' => ['val' => $clinic->id ?? null, 'text' => $clinic->translate->name ?? null]])
         </form>
         @if($clinic)
             <form style="margin-top: 15px">
@@ -26,7 +26,7 @@
         <tr class="footable-odd">
             <td class="footable-visible">
                 @if($item->clinic)
-                    <a href="{{ route('admin.clinics.edit', $item->clinic_id) }}">{{ $item->clinic->name }}</a>
+                    <a href="{{ route('admin.clinics.edit', $item->clinic_id) }}">{{ $item->clinic->translate->name ?? 'Не указано' }}</a>
                 @endif
             </td>
             <td class="footable-visible">{{ $item->name }}</td>

@@ -45,12 +45,12 @@ class PreloadController extends Controller
      */
     public function clinics(Request $request)
     {
-        return response(Clinic::query()->where(function (Builder $builder) use ($request) {
-            if ($request->get('search')) {
+        return response(Clinic::query()->when($request->get('search'), function (Builder $query) use ($request) {
+            $query->whereHas('translates', function (Builder $builder) use ($request) {
                 $builder->where('name', 'LIKE', "%{$request->get('search')}%");
-            }
+            });
         })->orderBy('id', 'desc')->get()->map(function (Clinic $clinic) {
-            return ['id' => $clinic->id, 'text' => $clinic->name];
+            return ['id' => $clinic->id, 'text' => $clinic->translate->name];
         }));
     }
 
@@ -82,12 +82,12 @@ class PreloadController extends Controller
      */
     public function specializations(Request $request)
     {
-        return response(Specialization::query()->where(function (Builder $builder) use ($request) {
-            if ($request->get('search')) {
+        return response(Specialization::query()->when($request->get('search'), function (Builder $query) use ($request) {
+            $query->whereHas('translates', function (Builder $builder) use ($request) {
                 $builder->where('name', 'LIKE', "%{$request->get('search')}%");
-            }
+            });
         })->orderBy('id', 'desc')->get()->map(function (Specialization $specialization) {
-            return ['id' => $specialization->id, 'text' => $specialization->name];
+            return ['id' => $specialization->id, 'text' => $specialization->translate->name ?? null];
         }));
     }
 

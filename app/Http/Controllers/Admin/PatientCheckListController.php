@@ -24,7 +24,7 @@ class PatientCheckListController extends Controller
         if (\request()->route()) {
             $this->patient = Patient::query()
                 ->whereHas('user')->with('user')
-                ->findOrFail(request()->route()->parameter('id'));
+                ->findOrFail(request()->get('id'));
         }
     }
 
@@ -32,17 +32,17 @@ class PatientCheckListController extends Controller
      * @param Request $request
      * @return array|Factory|Application|View|mixed
      */
-    public function index(Request $request, $id)
+    public function index(Request $request)
     {
         return view('admin.patients.check-list.index', [
             'page_title' => "Чек лист пациента {$this->patient->user->fullName}",
-            'search'     => $request->get('search'),
+            'dontSearch' => false,
             'patient'    => $this->patient,
             'items'      => CheckList::query()->with([
-                'tasks.patient' => function (BelongsToMany $many) use ($id) {
-                    $many->where('patient_id', $id);
+                'tasks.patient' => function (BelongsToMany $many) use ($request) {
+                    $many->where('patient_id', $request->get('id'));
                 }
-            ])->orderBy('name')->get(),
+            ])->orderBy('id')->get(),
         ]);
     }
 

@@ -24,7 +24,7 @@
             </td>
             <td class="footable-visible">
                 @if($item->clinic)
-                    <a href="{{ route('admin.users.edit', $item->clinic->id) }}">{{ $item->clinic->name }}</a>
+                    <a href="{{ route('admin.users.edit', $item->clinic->id) }}">{{ $item->clinic->translate->name ?? 'Не указано' }}</a>
                 @endif
             </td>
             <td class="footable-visible">

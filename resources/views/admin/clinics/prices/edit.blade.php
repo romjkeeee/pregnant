@@ -10,7 +10,7 @@
         <div class="col-lg-4">
             <strong style="margin-bottom: 10px!important;">Клиника <span class="req">*</span></strong>
             @include('components.ajax-select', ['name' => 'clinic_id', 'submit' => 'list', 'placeholder' => 'Выберите клинику',
-            'route' => 'admin.preload.clinics', 'default' => ['val' => $instance->clinic->id ?? null, 'text' => $instance->clinic->name ?? null]])
+            'route' => 'admin.preload.clinics', 'default' => ['val' => $instance->clinic->id ?? null, 'text' => $instance->clinic->translate->name ?? null]])
         </div>
         <div class="col-lg-4">
             <div class="form-group" style="padding: 5px">

@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class SpecialisationRequest extends FormRequest
 {
@@ -25,13 +24,9 @@ class SpecialisationRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'required',
-                'min:2',
-                'max:128',
-                Rule::unique('specializations', 'name')
-                    ->ignore($this->route()->parameter('specialisation'))
-            ],
+            'translate'           => ['required', 'array'],
+            'translate.*.lang_id' => ['required', 'exists:langs,id'],
+            'translate.*.name'    => ['required', 'max:192'],
         ];
     }
 }
