@@ -18,7 +18,7 @@ class MessageResource extends JsonResource
         return [
             'id'       => $this->id,
             'text'     => $this->text,
-            'send_at'  => $this->send_at ? $this->send_at->format(config('app.datetime_format')) : null,
+            'send_at'  => $this->send_at ? $this->send_at->format('Y-m-d H:i:s') : null,
             'sender'   => $this->sender,
             'attaches' => AttachResource::collection($this->attaches)
         ];
