@@ -59,7 +59,9 @@ class ChatController extends Controller
     {
         return MessageCollection::make(ChatMessage::query()
             ->where($request->validated())
-            ->orderByDesc('send_at')
+            ->when($request->get('search'), function (Builder $builder) use ($request) {
+                $builder->where('text', 'LIKE', "%{$request->get('search')}%");
+            })->orderByDesc('send_at')
             ->paginate($request->get('perPage') ?? 20));
     }
 
@@ -73,7 +75,23 @@ class ChatController extends Controller
             ->where(function (Builder $builder) {
                 $builder->orWhere('sender_id', auth()->id())
                     ->orWhere('recipient_id', auth()->id());
-            })->orderByDesc('id')
-            ->paginate($request->get('perPage') ?? 20));
+            })->when($request->get('search'), function (Builder $builder) use ($request) {
+                $builder->where(function (Builder $query) use ($request) {
+                    $query->orWhereHas('sender', function (Builder $user) use ($request) {
+                        $user->where(function (Builder $name) use ($request) {
+                            $name->orWhere('name', 'LIKE', "%{$request->get('search')}%")
+                                ->orWhere('last_name', 'LIKE', "%{$request->get('search')}%")
+                                ->orWhere('second_name', 'LIKE', "%{$request->get('search')}%");
+                        });
+                    });
+                    $query->orWhereHas('recipient', function (Builder $user) use ($request) {
+                        $user->where(function (Builder $name) use ($request) {
+                            $name->orWhere('name', 'LIKE', "%{$request->get('search')}%")
+                                ->orWhere('last_name', 'LIKE', "%{$request->get('search')}%")
+                                ->orWhere('second_name', 'LIKE', "%{$request->get('search')}%");
+                        });
+                    });
+                });
+            })->orderByDesc('id')->paginate($request->get('perPage') ?? 20));
     }
 }
