@@ -10,23 +10,10 @@
         <div class="col-lg-6">
             @include('components.ajax-select', ['name' => 'clinic_id','title' => 'Клиника<span class="req">*</span>', 'route' => 'admin.preload.clinics'])
         </div>
-        <div class="col-lg-6">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Название <span class="req">*</span></strong>
-                <input type="text" name="name" value="{{ old('name') }}" class="form-control">
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Улица <span class="req">*</span></strong>
-                <input type="text" name="street" value="{{ old('street') }}" class="form-control">
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Дом <span class="req">*</span></strong>
-                <input type="text" name="building" value="{{ old('building') }}" class="form-control">
-            </div>
-        </div>
+        @include('components.multi-lang', ['fields' => [
+               ['title' => 'Название <span class="req">*</span>', 'name' => 'name'],
+               ['title' => 'Улица <span class="req">*</span>', 'name' => 'street'],
+               ['title' => 'Дом <span class="req">*</span>', 'name' => 'building']
+       ]])
     </div>
 @endsection

@@ -26,14 +26,12 @@ class ClinicDepartmentsRequest extends FormRequest
     {
         return [
             'clinic_id' => ['required', 'exists:clinics,id'],
-            'street'    => ['required', 'string'],
-            'building'  => ['required', 'string'],
-            'name'      => [
-                'required',
-                Rule::unique('clinic_departments', 'name')
-                    ->where('clinic_id', $this->get('clinic_id'))
-                    ->ignore($this->route()->parameter('department'))
-            ],
+
+            'translate'            => ['required', 'array'],
+            'translate.*.lang_id'  => ['required', 'exists:langs,id'],
+            'translate.*.name'     => ['required', 'max:192'],
+            'translate.*.street'   => ['required', 'max:192'],
+            'translate.*.building' => ['required', 'max:192'],
         ];
     }
 }

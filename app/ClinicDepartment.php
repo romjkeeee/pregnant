@@ -2,11 +2,18 @@
 
 namespace App;
 
+use App\Traits\MultiLangTrait;
+use App\Translate\ClinicDepartmentTranslate;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ClinicDepartment extends BaseModel
 {
-    protected $fillable = ['clinic_id', 'name', 'street', 'building'];
+    use MultiLangTrait;
+
+    protected $translatedClass = ClinicDepartmentTranslate::class;
+    protected $translatedForeignKey = 'department_id';
+
+    protected $fillable = ['clinic_id'];
 
     /**
      * @return HasOne

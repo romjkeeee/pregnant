@@ -28,12 +28,10 @@ class ClinicDepartmentsController extends Controller
             'clinic'     => $clinic,
             'search'     => $request->get('search'),
             'items'      => ClinicDepartment::query()->with(['clinic'])->filter($request->only('clinic_id'))
-                ->where(function (Builder $clinicDepartments) use ($request) {
-                    if ($request->get('search')) {
-                        $clinicDepartments->where(function (Builder $builder) use ($request) {
-                            $builder->orWhere('name', 'LIKE', "%{$request->get('search')}%");
-                        });
-                    }
+                ->when($request->get('search'), function (Builder $query) use ($request) {
+                    $query->whereHas('translates', function (Builder $builder) use ($request) {
+                        $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                    });
                 })->orderBy('id', 'desc')->paginate(20)
         ]);
     }
@@ -52,7 +50,9 @@ class ClinicDepartmentsController extends Controller
      */
     public function store(ClinicDepartmentsRequest $request): RedirectResponse
     {
-        ClinicDepartment::query()->create($request->validated());
+        /** @var Clinic $clinic */
+        $clinic = ClinicDepartment::query()->create($request->validated());
+        $clinic->syncTranslates($request->get('translate'));
 
         return redirect()->route('admin.clinics.departments.index', $request->only(['clinic_id']))->with('success', 'Отделение успешно добавлен!');
     }
@@ -76,7 +76,10 @@ class ClinicDepartmentsController extends Controller
      */
     public function update(ClinicDepartmentsRequest $request, $id): RedirectResponse
     {
-        ClinicDepartment::query()->findOrFail($id)->update($request->validated());
+        /** @var ClinicDepartment $clinic */
+        $clinic = ClinicDepartment::query()->findOrFail($id);
+        $clinic->update($request->validated());
+        $clinic->syncTranslates($request->get('translate'));
 
         return back()->with('success', 'Сохранено!');
     }

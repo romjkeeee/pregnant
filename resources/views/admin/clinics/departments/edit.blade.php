@@ -11,25 +11,10 @@
             @include('components.ajax-select', ['name' => 'clinic_id','title' => 'Клиника<span class="req">*</span>',
                      'route' => 'admin.preload.clinics', 'default' => ['val' => $instance->clinic_id, 'text' => $instance->clinic->translate->name ?? null]])
         </div>
-        <div class="col-lg-6">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Название <span class="req">*</span></strong>
-                <input type="text" name="name" value="{{ old('name', $instance->name) }}" class="form-control">
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Улица <span class="req">*</span></strong>
-                <input type="text" name="street" value="{{ old('street', $instance->street) }}" class="form-control">
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Дом <span class="req">*</span></strong>
-                <input type="text" name="building" value="{{ old('building', $instance->building) }}" class="form-control">
-            </div>
-        </div>
-
-
+        @include('components.multi-lang', ['fields' => [
+                ['title' => 'Название <span class="req">*</span>', 'name' => 'name'],
+                ['title' => 'Улица <span class="req">*</span>', 'name' => 'street'],
+                ['title' => 'Дом <span class="req">*</span>', 'name' => 'building']
+        ]])
     </div>
 @endsection
