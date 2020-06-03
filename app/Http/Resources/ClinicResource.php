@@ -21,6 +21,7 @@ class ClinicResource extends JsonResource
             'address'     => $this->translate->address ?? null,
             'city'        => CityResource::make($this->city),
             'region'      => RegionResource::make($this->region),
+            'prices'      => ClinicPriceResource::collection($this->prices),
             'departments' => ClinicDepartmentResource::collection($this->departments)
         ]);
     }

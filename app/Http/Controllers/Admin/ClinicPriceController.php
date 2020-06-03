@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Clinic;
+use App\ClinicDepartment;
 use App\ClinicPrice;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ClinicPriceRequest;
@@ -27,11 +28,12 @@ class ClinicPriceController extends Controller
             'page_title' => 'Цены ' . ($clinic ? "клиники {$clinic->name}" : null),
             'clinic'     => $clinic,
             'search'     => $request->get('search'),
-            'items'      => ClinicPrice::query()->with('clinic')->filter($request->only(['clinic_id']))->where(function (Builder $builder) use ($request) {
-                if ($request->get('search')) {
-                    $builder->where('name', 'LIKE', "%{$request->get('search')}%");
-                }
-            })->orderBy('id', 'desc')->paginate(20)
+            'items'      => ClinicPrice::query()->with('clinic')->filter($request->only(['clinic_id']))
+                ->when($request->get('search'), function (Builder $query) use ($request) {
+                    $query->whereHas('translates', function (Builder $builder) use ($request) {
+                        $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                    });
+                })->orderBy('id', 'desc')->paginate(20)
         ]);
     }
 
@@ -49,9 +51,13 @@ class ClinicPriceController extends Controller
      */
     public function store(ClinicPriceRequest $request): RedirectResponse
     {
-        ClinicPrice::query()->create($request->validated());
+        /** @var ClinicPrice $clinic */
+        $clinic = ClinicPrice::query()->create($request->validated());
+        $clinic->syncTranslates($request->get('translate'));
 
-        return redirect()->route('admin.clinics.prices.index', ['clinic_id' => $request->get('clinic_id')])->with('success', 'Цена успешно добавлена!');
+        return redirect()->route('admin.clinics.prices.index', [
+            'clinic_id' => $request->get('clinic_id')
+        ])->with('success', 'Цена успешно добавлена!');
     }
 
     /**
@@ -73,7 +79,10 @@ class ClinicPriceController extends Controller
      */
     public function update(ClinicPriceRequest $request, $id): RedirectResponse
     {
-        ClinicPrice::query()->findOrFail($id)->update($request->validated());
+        /** @var ClinicPrice $clinic */
+        $clinic = ClinicPrice::query()->findOrFail($id);
+        $clinic->update($request->validated());
+        $clinic->syncTranslates($request->get('translate'));
 
         return back()->with('success', 'Сохранено!');
     }

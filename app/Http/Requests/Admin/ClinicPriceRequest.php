@@ -27,14 +27,10 @@ class ClinicPriceRequest extends FormRequest
         return [
             'clinic_id' => ['required', 'exists:clinics,id'],
             'price'     => ['required', 'integer'],
-            'name'      => [
-                'required',
-                'min:2',
-                'max:128',
-                Rule::unique('clinic_prices', 'name')
-                    ->where('clinic_id', $this->get('clinic_id'))
-                    ->ignore($this->route()->parameter('price'))
-            ]
+
+            'translate'           => ['required', 'array'],
+            'translate.*.lang_id' => ['required', 'exists:langs,id'],
+            'translate.*.name'    => ['required', 'max:192'],
         ];
     }
 }
