@@ -8,6 +8,11 @@ use App\Http\Resources\SpecializationResource;
 use App\Specialization;
 use Illuminate\Http\Request;
 
+/**
+ * @group Specialization
+ *
+ * APIs for
+ */
 class SpecializationController extends Controller
 {
     /**

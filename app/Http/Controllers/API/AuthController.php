@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Requests\LocationRequest;
+use App\Http\Requests\NameUpdateRequest;
 use App\Http\Requests\NotificationStateRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
@@ -116,8 +118,10 @@ class AuthController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return ResponseFactory|Application|Response
+     * Set lang
+     *
+     * @bodyparam lang_id string required
+     * @response 200
      */
     public function lang(Request $request)
     {
@@ -128,8 +132,10 @@ class AuthController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return ResponseFactory|Application|Response
+     * Update phone
+     *
+     * @bodyParam phone string required
+     *
      */
     public function phone(Request $request)
     {
@@ -140,8 +146,14 @@ class AuthController extends Controller
     }
 
     /**
-     * @param LocationRequest $request
-     * @return ResponseFactory|Application|Response
+     * Update location
+     *
+     * @bodyParam region_id string required
+     * @bodyParam city_id string required
+     * @bodyParam street string required
+     * @bodyParam building string required
+     * @bodyParam apartment string
+     *
      */
     public function location(LocationRequest $request)
     {
@@ -151,8 +163,23 @@ class AuthController extends Controller
     }
 
     /**
-     * @param NotificationStateRequest $request
-     * @return ResponseFactory|Application|Response
+     * Update name
+     *
+     * @bodyParam name string
+     * @bodyParam last_name string
+     * @bodyParam second_name string required
+     *
+     */
+    public function name(NameUpdateRequest $request)
+    {
+        auth()->user()->update($request->validated());
+        return \response(['Сохранено']);
+    }
+
+    /**
+     * Set notification
+     *
+     * @bodyparam notification bool required
      */
     public function notification(NotificationStateRequest $request)
     {
@@ -170,6 +197,24 @@ class AuthController extends Controller
     public function me()
     {
         return response()->json(User::query()->with(['city', 'region', 'patient'])->find(auth()->id()));
+    }
+
+    /**
+     * Update photo
+     *
+     * @bodyParam image base64
+     *
+     */
+    public function update_photo(Request $request)
+    {
+        $image = $request->image;  // your base64 encoded
+        $image = str_replace('base64', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = rand(0, 10000) . '.jpeg';
+        Storage::disk('public')->put($imageName, base64_decode($image));
+
+        $data = 'http://offer.org.ru/storage/' . $imageName;
+        return \response(auth()->user()->update(['image' => $data]));
     }
 
     /**

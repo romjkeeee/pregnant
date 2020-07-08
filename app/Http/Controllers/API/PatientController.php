@@ -51,6 +51,13 @@ class PatientController extends Controller
         return \response(Patient::query()->with(['user.region', 'user.city', 'clinic', 'doctor'])->findOrFail($id));
     }
 
+    /**
+     * Add conception date
+     *
+     * @bodyParam conception_type string required menstruation or screening
+     * @bodyParam conception_date string required date of last menstruatiion or screenenig
+     *
+     */
     public function conceptionDate(PatientConceptionRequest $request)
     {
         $patient = auth()->user()->patient()->firstOrFail();

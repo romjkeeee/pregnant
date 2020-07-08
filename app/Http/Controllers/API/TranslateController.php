@@ -7,6 +7,11 @@ use App\Http\Resources\Collections\TranslateCollection;
 use App\Translate;
 use Illuminate\Http\Request;
 
+/**
+ * @group Translate
+ *
+ * APIs for
+ */
 class TranslateController extends Controller
 {
     /**
@@ -21,8 +26,10 @@ class TranslateController extends Controller
 
 
     /**
-     * @param Request $request
-     * @return TranslateCollection
+     * List translate
+     * Список переводов
+     *
+     * @response 200
      */
     public function index(Request $request)
     {

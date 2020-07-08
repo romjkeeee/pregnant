@@ -7,6 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Collections\DoctorEducationCollection;
 use Illuminate\Http\Request;
 
+/**
+ * @group Doctor
+ *
+ * APIs for
+ */
 class DoctorEducationController extends Controller
 {
     /**

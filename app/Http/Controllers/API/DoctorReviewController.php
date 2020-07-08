@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 /**
- * @group Doctor review
+ * @group Doctor
  *
  * APIs for
  */

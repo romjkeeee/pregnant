@@ -15,6 +15,11 @@ use App\Http\Resources\Chat\ChatResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
+/**
+ * @group Chat
+ *
+ * APIs for
+ */
 class ChatController extends Controller
 {
     /**

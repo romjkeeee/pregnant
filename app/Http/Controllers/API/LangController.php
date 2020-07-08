@@ -8,10 +8,17 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Response;
 
+/**
+ * @group Lang
+ *
+ * APIs for
+ */
 class LangController extends Controller
 {
     /**
-     * @return ResponseFactory|Application|Response
+     * List lang
+     * Список языков
+     *
      */
     public function __invoke()
     {

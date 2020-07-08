@@ -51,14 +51,21 @@ class DurationController extends Controller
         return \response(Duration::query()->findOrFail($id));
     }
 
+    /**
+     * Get duration
+     * Получения недели беременности с статьей для нее
+     *
+     * @bodyParam phone string required
+     *
+     */
     public function get_duration()
     {
-        $patient = auth()->user()->patient()->firstOrFail();;
+        $patient = auth()->user()->patient()->firstOrFail();
         if ($patient)
         {
             if ($patient->pregnant == 1)
             {
-                if ($patient->conception_type === 'menstruation')
+                if ($patient->conception_type == 'menstruation')
                 {
                     $day_menstruation = date($patient->conception_date);
                     $timestamp_menstruation = date_timestamp_get(date_create($day_menstruation));
@@ -78,7 +85,12 @@ class DurationController extends Controller
                 } elseif ($patient->conception_type === 'screening') {
                     return \response('Еще учусь как правильно высчитать');
                 }
+            }else{
+                return \response('пациент не беременный');
+
             }
+        }else{
+            return \response('пациент не найден');
         }
     }
 }

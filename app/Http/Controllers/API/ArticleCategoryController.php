@@ -6,10 +6,18 @@ use App\ArticleCategory;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Collections\ArticleCategoryCollection;
 
+/**
+ * @group Articles
+ *
+ * APIs for
+ */
 class ArticleCategoryController extends Controller
 {
     /**
-     * @return ArticleCategoryCollection
+     * List category
+     * Список категорий статей
+     *
+     * @response 200
      */
     public function index(): ArticleCategoryCollection
     {

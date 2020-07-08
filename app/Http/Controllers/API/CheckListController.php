@@ -13,6 +13,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
+/**
+ * @group Check List
+ *
+ * APIs for
+ */
 class CheckListController extends Controller
 {
     /**

@@ -26,6 +26,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::post('phone', 'AuthController@phone');
         Route::post('location', 'AuthController@location');
         Route::post('notification', 'AuthController@notification');
+        Route::post('name', 'AuthController@name');
     });
     Route::group(['prefix' => 'articles'], function () {
         Route::get('/category', 'ArticleCategoryController@index');
