@@ -92,7 +92,7 @@ class AuthController extends Controller
                 $user->smsCodes()->create(['code' => Str::random(10)]);
             });
 
-            return response(['Успешная регистрация']);
+            return response(['message' => 'Успешная регистрация']);
         } catch (\Exception $exception) {
             return response(['error' => $exception->getMessage()], 422);
         }
@@ -114,7 +114,7 @@ class AuthController extends Controller
         $code->user()->update(['verified' => true]);
         $code->user->smsCodes()->delete();
 
-        return \response(['Номер телефона подтвержден']);
+        return \response(['message' => 'Номер телефона подтвержден']);
     }
 
     /**
@@ -128,7 +128,7 @@ class AuthController extends Controller
         $request->validate(['lang_id' => ['required', 'exists:langs,id']]);
         auth()->user()->update($request->only(['lang_id']));
 
-        return \response(['Язык изменен']);
+        return \response(['message'=>'Язык изменен']);
     }
 
     /**
@@ -142,7 +142,7 @@ class AuthController extends Controller
         $request->validate(['phone' => ['required', 'phone:RU', Rule::unique('users', 'phone')->ignore(auth()->id())]]);
         auth()->user()->update($request->only(['phone']));
 
-        return \response(['Телефон изменен']);
+        return \response(['message'=>'Телефон изменен']);
     }
 
     /**
@@ -159,7 +159,7 @@ class AuthController extends Controller
     {
         auth()->user()->update($request->validated());
 
-        return \response(['Сохранено']);
+        return \response(['message'=>'Сохранено']);
     }
 
     /**
@@ -173,7 +173,7 @@ class AuthController extends Controller
     public function name(NameUpdateRequest $request)
     {
         auth()->user()->update($request->validated());
-        return \response(['Сохранено']);
+        return \response(['message'=>'Сохранено']);
     }
 
     /**
@@ -185,7 +185,7 @@ class AuthController extends Controller
     {
         auth()->user()->update($request->validated());
 
-        return \response(['Сохранено']);
+        return \response(['message'=>'Сохранено']);
     }
 
     /**
