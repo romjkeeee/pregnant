@@ -41,6 +41,8 @@ class AuthController extends Controller
 
     /**
      * Login
+     * @bodyParam phone string required
+     * @bodyParam password string required
      *
      * @response 200
      * @param AuthRequest $request
@@ -92,9 +94,9 @@ class AuthController extends Controller
                 $user->smsCodes()->create(['code' => Str::random(10)]);
             });
 
-            return response(['message' => 'Успешная регистрация']);
+            return response(['status'=>'success','message' => 'Успешная регистрация']);
         } catch (\Exception $exception) {
-            return response(['error' => $exception->getMessage()], 422);
+            return response(['status'=>'error', 'message' => $exception->getMessage()], 422);
         }
     }
 
@@ -114,7 +116,7 @@ class AuthController extends Controller
         $code->user()->update(['verified' => true]);
         $code->user->smsCodes()->delete();
 
-        return \response(['message' => 'Номер телефона подтвержден']);
+        return \response(['status'=>'success','message' => 'Номер телефона подтвержден']);
     }
 
     /**
@@ -128,7 +130,7 @@ class AuthController extends Controller
         $request->validate(['lang_id' => ['required', 'exists:langs,id']]);
         auth()->user()->update($request->only(['lang_id']));
 
-        return \response(['message'=>'Язык изменен']);
+        return \response(['status'=>'success','message'=>'Язык изменен']);
     }
 
     /**
@@ -142,7 +144,7 @@ class AuthController extends Controller
         $request->validate(['phone' => ['required', 'phone:RU', Rule::unique('users', 'phone')->ignore(auth()->id())]]);
         auth()->user()->update($request->only(['phone']));
 
-        return \response(['message'=>'Телефон изменен']);
+        return \response(['status'=>'success','message'=>'Телефон изменен']);
     }
 
     /**
@@ -159,7 +161,7 @@ class AuthController extends Controller
     {
         auth()->user()->update($request->validated());
 
-        return \response(['message'=>'Сохранено']);
+        return \response(['status'=>'success','message'=>'Сохранено']);
     }
 
     /**
@@ -173,7 +175,7 @@ class AuthController extends Controller
     public function name(NameUpdateRequest $request)
     {
         auth()->user()->update($request->validated());
-        return \response(['message'=>'Сохранено']);
+        return \response(['status'=>'success','message'=>'Сохранено']);
     }
 
     /**
@@ -185,7 +187,7 @@ class AuthController extends Controller
     {
         auth()->user()->update($request->validated());
 
-        return \response(['message'=>'Сохранено']);
+        return \response(['status'=>'success','message'=>'Сохранено']);
     }
 
     /**
@@ -227,7 +229,7 @@ class AuthController extends Controller
     {
         auth()->logout();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['status'=>'success','message' => 'Successfully logged out']);
     }
 
     /**
