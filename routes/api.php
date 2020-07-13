@@ -27,6 +27,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::post('location', 'AuthController@location');
         Route::post('notification', 'AuthController@notification');
         Route::post('name', 'AuthController@name');
+        Route::post('update_photo', 'AuthController@update_photo');
     });
     Route::group(['prefix' => 'articles'], function () {
         Route::get('/category', 'ArticleCategoryController@index');
