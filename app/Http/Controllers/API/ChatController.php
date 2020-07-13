@@ -33,8 +33,10 @@ class ChatController extends Controller
     }
 
     /**
-     * @param StartRequest $request
-     * @return ChatResource
+     * Start chat
+     *
+     * @bodyParam recipient_id integer
+     *
      */
     public function start(StartRequest $request): ChatResource
     {
@@ -44,8 +46,11 @@ class ChatController extends Controller
     }
 
     /**
-     * @param SendRequest $request
-     * @return MessageResource
+     * Send message
+     *
+     * @bodyParam text text Укажите либо текст либо изображение
+     * @bodyParam attaches text Укажите либо текст либо изображение
+     *
      */
     public function send(SendRequest $request): MessageResource
     {
@@ -57,8 +62,10 @@ class ChatController extends Controller
     }
 
     /**
-     * @param ListRequest $request
-     * @return MessageCollection
+     * Send message
+     *
+     * @bodyParam chat_id integer
+     *
      */
     public function messages(ListRequest $request): MessageCollection
     {
@@ -71,8 +78,10 @@ class ChatController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return ChatCollection
+     * List message
+     *
+     * @response 200
+     *
      */
     public function list(Request $request): ChatCollection
     {

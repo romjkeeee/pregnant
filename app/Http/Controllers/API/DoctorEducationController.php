@@ -23,8 +23,10 @@ class DoctorEducationController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return DoctorEducationCollection
+     * List
+     * Doctor education
+     * @bodyParam doctor_id integer
+     *
      */
     public function index(Request $request): DoctorEducationCollection
     {

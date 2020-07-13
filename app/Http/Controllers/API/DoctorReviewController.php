@@ -27,8 +27,8 @@ class DoctorReviewController extends Controller
 
 
     /**
-     * @param Request $request
-     * @return ResponseFactory|Application|Response
+     * List doctor
+     * @bodyParam doctor_id integer
      */
     public function index(Request $request)
     {
@@ -39,8 +39,8 @@ class DoctorReviewController extends Controller
     }
 
     /**
-     * @param $id
-     * @return ResponseFactory|Application|Response
+     * Show doctor
+     *
      */
     public function show($id)
     {
@@ -48,8 +48,10 @@ class DoctorReviewController extends Controller
     }
 
     /**
-     * @param DoctorReviewRequest $request
-     * @return ResponseFactory|Application|Response
+     * Create review
+     * @bodyParam doctor_id integer
+     * @bodyParam rate integer 1-5
+     * @bodyParam text text 1-5
      */
     public function store(DoctorReviewRequest $request)
     {

@@ -14,11 +14,22 @@ use Illuminate\Http\Request;
  */
 class EmergencyContactController extends Controller
 {
+    /**
+     * List emergency contacts
+     *
+     */
     public function index()
     {
         return \response(auth()->user()->patient()->firstOrFail()->emergencycontacts()->get());
     }
 
+    /**
+     * Create emergency contact
+     *
+     * @bodyParam name string
+     * @bodyParam phone string
+     *
+     */
     public function store(EmergencyContactsRequest $request)
     {
         return response(auth()->user()->patient()->firstOrFail()->emergencycontacts()->create($request->validated()));

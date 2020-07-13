@@ -31,9 +31,10 @@ class CheckListController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * List checklist
      *
-     * @return AnonymousResourceCollection
+     * @bodyParam chat_id integer
+     *
      */
     public function index(): AnonymousResourceCollection
     {
@@ -45,10 +46,10 @@ class CheckListController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store checklist
      *
-     * @param SelectTaskRequest $request
-     * @return ResponseFactory|Application|Response
+     * @bodyParam task_id integer
+     *
      */
     public function store(SelectTaskRequest $request)
     {
@@ -58,10 +59,9 @@ class CheckListController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Destroy checklist
      *
-     * @param int $id
-     * @return Response
+     *
      */
     public function destroy($id)
     {

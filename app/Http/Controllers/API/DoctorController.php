@@ -41,6 +41,8 @@ class DoctorController extends Controller
     }
 
     /**
+     * Doctor by clinik
+     * @bodyParam clinic_id integer
      * @param Request $request
      * @return ResponseFactory|Application|Response
      */

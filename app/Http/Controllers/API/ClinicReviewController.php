@@ -27,8 +27,12 @@ class ClinicReviewController extends Controller
 
 
     /**
-     * @param Request $request
-     * @return ResponseFactory|Application|Response
+     * List
+     * Список отзывов клиник
+     *
+     * @bodyParam clinic_id integer
+     * @authenticated required
+     * @response 200
      */
     public function index(Request $request)
     {
@@ -39,8 +43,11 @@ class ClinicReviewController extends Controller
     }
 
     /**
-     * @param $id
-     * @return ResponseFactory|Application|Response
+     * Show
+     * Показать отзыв отзывов клиник
+     *
+     * @authenticated required
+     * @response 200
      */
     public function show($id)
     {
@@ -48,8 +55,14 @@ class ClinicReviewController extends Controller
     }
 
     /**
-     * @param ClinicReviewRequest $request
-     * @return ResponseFactory|Application|Response
+     * Create
+     * Создать отзыв клиники
+     * @bodyParam clinic_id integer
+     * @bodyParam rate integer 1-5
+     * @bodyParam text integer 1-5
+     *
+     * @authenticated required
+     * @response 200
      */
     public function store(ClinicReviewRequest $request)
     {

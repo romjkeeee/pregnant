@@ -252,23 +252,39 @@ print_r(json_decode((string) $body));</code></pre>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/login" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/login" \
+    -H "Content-Type: application/json" \
+    -d '{"phone":"soluta","password":"aut"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/login");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "phone": "soluta",
+    "password": "aut"
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post("http://localhost/api/login", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "phone" =&gt; "soluta",
+            "password" =&gt; "aut",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
@@ -278,6 +294,29 @@ print_r(json_decode((string) $body));</code></pre>
 <pre><code class="language-json">{}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/login</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td>required</td>
+</tr>
+<tr>
+<td>password</td>
+<td>string</td>
+<td>required</td>
+</tr>
+</tbody>
+</table>
 <!-- END_c3fa189a6c95ca36ad6ac4791a873d23 -->
 <!-- START_61739f3220a224b34228600649230ad1 -->
 <h2>Log the user out (Invalidate the token).</h2>
@@ -318,7 +357,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/register" \
     -H "Content-Type: application/json" \
-    -d '{"name":"qui","last_name":"magni","second_name":"est","phone":"+74957556981","role":"doctor or patient","email":"ratione","region_id":20,"city_id":14,"street":"quam","building":"ipsum","apartment":"est","password":"deleniti","password_confirmation":"nihil","lang_id":5}'
+    -d '{"name":"architecto","last_name":"natus","second_name":"nisi","phone":"+74957556981","role":"doctor or patient","email":"necessitatibus","region_id":17,"city_id":15,"street":"enim","building":"asperiores","apartment":"cupiditate","password":"eos","password_confirmation":"neque","lang_id":16}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/register");
 
@@ -328,20 +367,20 @@ let headers = {
 }
 
 let body = {
-    "name": "qui",
-    "last_name": "magni",
-    "second_name": "est",
+    "name": "architecto",
+    "last_name": "natus",
+    "second_name": "nisi",
     "phone": "+74957556981",
     "role": "doctor or patient",
-    "email": "ratione",
-    "region_id": 20,
-    "city_id": 14,
-    "street": "quam",
-    "building": "ipsum",
-    "apartment": "est",
-    "password": "deleniti",
-    "password_confirmation": "nihil",
-    "lang_id": 5
+    "email": "necessitatibus",
+    "region_id": 17,
+    "city_id": 15,
+    "street": "enim",
+    "building": "asperiores",
+    "apartment": "cupiditate",
+    "password": "eos",
+    "password_confirmation": "neque",
+    "lang_id": 16
 }
 
 fetch(url, {
@@ -358,20 +397,20 @@ $response = $client-&gt;post("http://localhost/api/register", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "name" =&gt; "qui",
-            "last_name" =&gt; "magni",
-            "second_name" =&gt; "est",
+            "name" =&gt; "architecto",
+            "last_name" =&gt; "natus",
+            "second_name" =&gt; "nisi",
             "phone" =&gt; "+74957556981",
             "role" =&gt; "doctor or patient",
-            "email" =&gt; "ratione",
-            "region_id" =&gt; "20",
-            "city_id" =&gt; "14",
-            "street" =&gt; "quam",
-            "building" =&gt; "ipsum",
-            "apartment" =&gt; "est",
-            "password" =&gt; "deleniti",
-            "password_confirmation" =&gt; "nihil",
-            "lang_id" =&gt; "5",
+            "email" =&gt; "necessitatibus",
+            "region_id" =&gt; "17",
+            "city_id" =&gt; "15",
+            "street" =&gt; "enim",
+            "building" =&gt; "asperiores",
+            "apartment" =&gt; "cupiditate",
+            "password" =&gt; "eos",
+            "password_confirmation" =&gt; "neque",
+            "lang_id" =&gt; "16",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -487,7 +526,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/verify" \
     -H "Content-Type: application/json" \
-    -d '{"code":"nam"}'
+    -d '{"code":"atque"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/verify");
 
@@ -497,7 +536,7 @@ let headers = {
 }
 
 let body = {
-    "code": "nam"
+    "code": "atque"
 }
 
 fetch(url, {
@@ -514,7 +553,7 @@ $response = $client-&gt;post("http://localhost/api/verify", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "code" =&gt; "nam",
+            "code" =&gt; "atque",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -648,7 +687,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/me/phone" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"explicabo"}'
+    -d '{"phone":"enim"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/me/phone");
 
@@ -658,7 +697,7 @@ let headers = {
 }
 
 let body = {
-    "phone": "explicabo"
+    "phone": "enim"
 }
 
 fetch(url, {
@@ -675,7 +714,7 @@ $response = $client-&gt;post("http://localhost/api/me/phone", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "phone" =&gt; "explicabo",
+            "phone" =&gt; "enim",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -708,7 +747,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/me/location" \
     -H "Content-Type: application/json" \
-    -d '{"region_id":"deleniti","city_id":"quaerat","street":"quas","building":"aut","apartment":"mollitia"}'
+    -d '{"region_id":"dolorum","city_id":"ut","street":"nihil","building":"consectetur","apartment":"sunt"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/me/location");
 
@@ -718,11 +757,11 @@ let headers = {
 }
 
 let body = {
-    "region_id": "deleniti",
-    "city_id": "quaerat",
-    "street": "quas",
-    "building": "aut",
-    "apartment": "mollitia"
+    "region_id": "dolorum",
+    "city_id": "ut",
+    "street": "nihil",
+    "building": "consectetur",
+    "apartment": "sunt"
 }
 
 fetch(url, {
@@ -739,11 +778,11 @@ $response = $client-&gt;post("http://localhost/api/me/location", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "region_id" =&gt; "deleniti",
-            "city_id" =&gt; "quaerat",
-            "street" =&gt; "quas",
-            "building" =&gt; "aut",
-            "apartment" =&gt; "mollitia",
+            "region_id" =&gt; "dolorum",
+            "city_id" =&gt; "ut",
+            "street" =&gt; "nihil",
+            "building" =&gt; "consectetur",
+            "apartment" =&gt; "sunt",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -824,7 +863,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/me/name" \
     -H "Content-Type: application/json" \
-    -d '{"name":"harum","last_name":"autem","second_name":"dolorum"}'
+    -d '{"name":"numquam","last_name":"deserunt","second_name":"mollitia"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/me/name");
 
@@ -834,9 +873,9 @@ let headers = {
 }
 
 let body = {
-    "name": "harum",
-    "last_name": "autem",
-    "second_name": "dolorum"
+    "name": "numquam",
+    "last_name": "deserunt",
+    "second_name": "mollitia"
 }
 
 fetch(url, {
@@ -853,9 +892,9 @@ $response = $client-&gt;post("http://localhost/api/me/name", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "name" =&gt; "harum",
-            "last_name" =&gt; "autem",
-            "second_name" =&gt; "dolorum",
+            "name" =&gt; "numquam",
+            "last_name" =&gt; "deserunt",
+            "second_name" =&gt; "mollitia",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -894,63 +933,136 @@ print_r(json_decode((string) $body));</code></pre>
 <h1>Chat</h1>
 <p>APIs for</p>
 <!-- START_d9a7f14ac04a2a4180db2014d1b1eea7 -->
-<h2>api/chat/send</h2>
+<h2>Send message</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/chat/send" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/chat/send" \
+    -H "Content-Type: application/json" \
+    -d '{"text":"qui","attaches":"ipsam"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/chat/send");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "text": "qui",
+    "attaches": "ipsam"
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post("http://localhost/api/chat/send", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "text" =&gt; "qui",
+            "attaches" =&gt; "ipsam",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/chat/send</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>text</td>
+<td>text</td>
+<td>optional</td>
+<td>Укажите либо текст либо изображение</td>
+</tr>
+<tr>
+<td>attaches</td>
+<td>text</td>
+<td>optional</td>
+<td>Укажите либо текст либо изображение</td>
+</tr>
+</tbody>
+</table>
 <!-- END_d9a7f14ac04a2a4180db2014d1b1eea7 -->
 <!-- START_e68fb882eee1a84b388c1b17671cb0b5 -->
-<h2>api/chat/start</h2>
+<h2>Start chat</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/chat/start" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/chat/start" \
+    -H "Content-Type: application/json" \
+    -d '{"recipient_id":16}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/chat/start");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "recipient_id": 16
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post("http://localhost/api/chat/start", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "recipient_id" =&gt; "16",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/chat/start</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>recipient_id</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_e68fb882eee1a84b388c1b17671cb0b5 -->
 <!-- START_6d342bbf7c4103bec385380a092a5ce6 -->
-<h2>api/chat/list</h2>
+<h2>List message</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -975,6 +1087,10 @@ $response = $client-&gt;get("http://localhost/api/chat/list", [
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{}</code></pre>
+<blockquote>
 <p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
@@ -984,27 +1100,41 @@ print_r(json_decode((string) $body));</code></pre>
 <p><code>GET api/chat/list</code></p>
 <!-- END_6d342bbf7c4103bec385380a092a5ce6 -->
 <!-- START_ac265984ad6c19fa50938064c2fd1f40 -->
-<h2>api/chat/messages</h2>
+<h2>Send message</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/chat/messages" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/chat/messages" \
+    -H "Content-Type: application/json" \
+    -d '{"chat_id":2}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/chat/messages");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "chat_id": 2
 }
 
 fetch(url, {
     method: "GET",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get("http://localhost/api/chat/messages", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "chat_id" =&gt; "2",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
@@ -1016,31 +1146,63 @@ print_r(json_decode((string) $body));</code></pre>
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/chat/messages</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chat_id</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_ac265984ad6c19fa50938064c2fd1f40 -->
 <h1>Check List</h1>
 <p>APIs for</p>
 <!-- START_8f80620b1b19c9d55405a474b5694c0d -->
-<h2>Display a listing of the resource.</h2>
+<h2>List checklist</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/check-lists" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/check-lists" \
+    -H "Content-Type: application/json" \
+    -d '{"chat_id":3}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/check-lists");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "chat_id": 3
 }
 
 fetch(url, {
     method: "GET",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get("http://localhost/api/check-lists", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "chat_id" =&gt; "3",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
@@ -1052,37 +1214,87 @@ print_r(json_decode((string) $body));</code></pre>
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/check-lists</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>chat_id</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_8f80620b1b19c9d55405a474b5694c0d -->
 <!-- START_a17bcf05d81ee6a923f2ec67bb6597a6 -->
-<h2>Store a newly created resource in storage.</h2>
+<h2>Store checklist</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/check-lists" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/check-lists" \
+    -H "Content-Type: application/json" \
+    -d '{"task_id":5}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/check-lists");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "task_id": 5
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post("http://localhost/api/check-lists", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "task_id" =&gt; "5",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/check-lists</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>task_id</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_a17bcf05d81ee6a923f2ec67bb6597a6 -->
 <!-- START_fea21f34c8bff578d65a59d05bd1d484 -->
-<h2>Remove the specified resource from storage.</h2>
+<h2>Destroy checklist</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -1141,12 +1353,253 @@ print_r(json_decode((string) $body));</code></pre>
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">{}</code></pre>
-<blockquote>
-<p>Example response (429):</p>
-</blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "data": [
+        {
+            "id": 1,
+            "region_id": 1,
+            "city_id": 1,
+            "rate": 3.75,
+            "type": "state",
+            "phone": "+74957556981",
+            "lng": "1111",
+            "lat": "2222",
+            "image": null,
+            "paid": 0,
+            "created_at": null,
+            "updated_at": null,
+            "city": {
+                "id": 1,
+                "name": "Москва",
+                "region": {
+                    "id": 1,
+                    "name": "Московский 1"
+                }
+            },
+            "region": {
+                "id": 1,
+                "name": "Московский 1"
+            },
+            "departments": [
+                {
+                    "id": 2,
+                    "clinic_id": 1,
+                    "created_at": "2020-05-28 14:28:50",
+                    "updated_at": "2020-05-28 14:28:50",
+                    "name": null,
+                    "street": null,
+                    "building": null
+                },
+                {
+                    "id": 3,
+                    "clinic_id": 1,
+                    "created_at": "2020-05-28 14:44:46",
+                    "updated_at": "2020-05-28 14:44:46",
+                    "name": null,
+                    "street": null,
+                    "building": null
+                }
+            ],
+            "schedules": [
+                {
+                    "clinic_id": 1,
+                    "day": 0,
+                    "start": "09:00",
+                    "end": "18:00",
+                    "dayName": "Понедельник"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 1,
+                    "start": "08:00",
+                    "end": "14:13",
+                    "dayName": "Вторник"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 2,
+                    "start": "17:19",
+                    "end": "19:21",
+                    "dayName": "Среда"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 3,
+                    "start": "18:20",
+                    "end": "23:20",
+                    "dayName": "Четвер"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 4,
+                    "start": "17:16",
+                    "end": "20:19",
+                    "dayName": "Пятница"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 5,
+                    "start": "07:27",
+                    "end": "16:26",
+                    "dayName": "Суббота"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 6,
+                    "start": "14:21",
+                    "end": "20:26",
+                    "dayName": "Воскресенье"
+                }
+            ],
+            "prices": [],
+            "name": null,
+            "text": null,
+            "address": null
+        },
+        {
+            "id": 2,
+            "region_id": 1,
+            "city_id": 1,
+            "rate": 0,
+            "type": "state",
+            "phone": null,
+            "lng": null,
+            "lat": null,
+            "image": null,
+            "paid": 0,
+            "created_at": null,
+            "updated_at": null,
+            "city": {
+                "id": 1,
+                "name": "Москва",
+                "region": {
+                    "id": 1,
+                    "name": "Московский 1"
+                }
+            },
+            "region": {
+                "id": 1,
+                "name": "Московский 1"
+            },
+            "departments": [
+                {
+                    "id": 1,
+                    "clinic_id": 2,
+                    "created_at": null,
+                    "updated_at": null,
+                    "name": null,
+                    "street": null,
+                    "building": null
+                }
+            ],
+            "schedules": [
+                {
+                    "clinic_id": 2,
+                    "day": 1,
+                    "start": "08:31",
+                    "end": "18:31",
+                    "dayName": "Вторник"
+                },
+                {
+                    "clinic_id": 2,
+                    "day": 2,
+                    "start": "08:31",
+                    "end": "18:31",
+                    "dayName": "Среда"
+                },
+                {
+                    "clinic_id": 2,
+                    "day": 3,
+                    "start": "08:31",
+                    "end": "18:31",
+                    "dayName": "Четвер"
+                },
+                {
+                    "clinic_id": 2,
+                    "day": 4,
+                    "start": "08:31",
+                    "end": "18:31",
+                    "dayName": "Пятница"
+                },
+                {
+                    "clinic_id": 2,
+                    "day": 5,
+                    "start": "08:31",
+                    "end": "18:31",
+                    "dayName": "Суббота"
+                }
+            ],
+            "prices": [
+                {
+                    "id": 1,
+                    "clinic_id": 2,
+                    "price": 100000,
+                    "created_at": null,
+                    "updated_at": null,
+                    "name": null
+                },
+                {
+                    "id": 2,
+                    "clinic_id": 2,
+                    "price": 50000,
+                    "created_at": null,
+                    "updated_at": null,
+                    "name": null
+                }
+            ],
+            "name": null,
+            "text": null,
+            "address": null
+        },
+        {
+            "id": 3,
+            "region_id": 1,
+            "city_id": 1,
+            "rate": 0,
+            "type": "private",
+            "phone": null,
+            "lng": null,
+            "lat": null,
+            "image": null,
+            "paid": 0,
+            "created_at": null,
+            "updated_at": null,
+            "city": {
+                "id": 1,
+                "name": "Москва",
+                "region": {
+                    "id": 1,
+                    "name": "Московский 1"
+                }
+            },
+            "region": {
+                "id": 1,
+                "name": "Московский 1"
+            },
+            "departments": [],
+            "schedules": [],
+            "prices": [],
+            "name": null,
+            "text": null,
+            "address": null
+        }
+    ],
+    "links": {
+        "self": "link-value",
+        "first": "http:\/\/localhost\/api\/clinics?page=1",
+        "last": "http:\/\/localhost\/api\/clinics?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/clinics",
+        "per_page": 20,
+        "to": 3,
+        "total": 3
+    }
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/clinics</code></p>
@@ -1181,12 +1634,108 @@ print_r(json_decode((string) $body));</code></pre>
 <blockquote>
 <p>Example response (200):</p>
 </blockquote>
-<pre><code class="language-json">{}</code></pre>
-<blockquote>
-<p>Example response (429):</p>
-</blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "data": {
+        "id": 1,
+        "region_id": 1,
+        "city_id": 1,
+        "rate": 3.75,
+        "type": "state",
+        "phone": "+74957556981",
+        "lng": "1111",
+        "lat": "2222",
+        "image": null,
+        "paid": 0,
+        "created_at": null,
+        "updated_at": null,
+        "city": {
+            "id": 1,
+            "name": "Москва",
+            "region": {
+                "id": 1,
+                "name": "Московский 1"
+            }
+        },
+        "region": {
+            "id": 1,
+            "name": "Московский 1"
+        },
+        "departments": [
+            {
+                "id": 2,
+                "clinic_id": 1,
+                "created_at": "2020-05-28 14:28:50",
+                "updated_at": "2020-05-28 14:28:50",
+                "name": null,
+                "street": null,
+                "building": null
+            },
+            {
+                "id": 3,
+                "clinic_id": 1,
+                "created_at": "2020-05-28 14:44:46",
+                "updated_at": "2020-05-28 14:44:46",
+                "name": null,
+                "street": null,
+                "building": null
+            }
+        ],
+        "schedules": [
+            {
+                "clinic_id": 1,
+                "day": 0,
+                "start": "09:00",
+                "end": "18:00",
+                "dayName": "Понедельник"
+            },
+            {
+                "clinic_id": 1,
+                "day": 1,
+                "start": "08:00",
+                "end": "14:13",
+                "dayName": "Вторник"
+            },
+            {
+                "clinic_id": 1,
+                "day": 2,
+                "start": "17:19",
+                "end": "19:21",
+                "dayName": "Среда"
+            },
+            {
+                "clinic_id": 1,
+                "day": 3,
+                "start": "18:20",
+                "end": "23:20",
+                "dayName": "Четвер"
+            },
+            {
+                "clinic_id": 1,
+                "day": 4,
+                "start": "17:16",
+                "end": "20:19",
+                "dayName": "Пятница"
+            },
+            {
+                "clinic_id": 1,
+                "day": 5,
+                "start": "07:27",
+                "end": "16:26",
+                "dayName": "Суббота"
+            },
+            {
+                "clinic_id": 1,
+                "day": 6,
+                "start": "14:21",
+                "end": "20:26",
+                "dayName": "Воскресенье"
+            }
+        ],
+        "prices": [],
+        "name": null,
+        "text": null,
+        "address": null
+    }
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/clinics/{clinic}</code></p>
@@ -1194,69 +1743,163 @@ print_r(json_decode((string) $body));</code></pre>
 <h1>Clinic review</h1>
 <p>APIs for</p>
 <!-- START_1abd9daec7dc72e8dfa2b8dddcc96c1a -->
-<h2>api/clinics/reviews</h2>
+<h2>List</h2>
+<p>Список отзывов клиник</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/clinics/reviews" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/clinics/reviews" \
+    -H "Content-Type: application/json" \
+    -d '{"clinic_id":19}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/clinics/reviews");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "clinic_id": 19
 }
 
 fetch(url, {
     method: "GET",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get("http://localhost/api/clinics/reviews", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "clinic_id" =&gt; "19",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (429):</p>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{}</code></pre>
+<blockquote>
+<p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "message": "Unauthenticated."
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/clinics/reviews</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clinic_id</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_1abd9daec7dc72e8dfa2b8dddcc96c1a -->
 <!-- START_6acc9bfda8e1dad237eee8852d08ba1b -->
-<h2>api/clinics/reviews</h2>
+<h2>Create</h2>
+<p>Создать отзыв клиники</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/clinics/reviews" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/clinics/reviews" \
+    -H "Content-Type: application/json" \
+    -d '{"clinic_id":19,"rate":12,"text":12}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/clinics/reviews");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "clinic_id": 19,
+    "rate": 12,
+    "text": 12
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post("http://localhost/api/clinics/reviews", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "clinic_id" =&gt; "19",
+            "rate" =&gt; "12",
+            "text" =&gt; "12",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{}</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/clinics/reviews</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clinic_id</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>integer</td>
+<td>optional</td>
+<td>1-5</td>
+</tr>
+<tr>
+<td>text</td>
+<td>integer</td>
+<td>optional</td>
+<td>1-5</td>
+</tr>
+</tbody>
+</table>
 <!-- END_6acc9bfda8e1dad237eee8852d08ba1b -->
 <!-- START_aebb1e8390e705fd8920115e6c210b47 -->
-<h2>api/clinics/reviews/{review}</h2>
+<h2>Show</h2>
+<p>Показать отзыв отзывов клиник</p>
+<p><br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small></p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -1281,10 +1924,14 @@ $response = $client-&gt;get("http://localhost/api/clinics/reviews/1", [
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (429):</p>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{}</code></pre>
+<blockquote>
+<p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "message": "Unauthenticated."
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/clinics/reviews/{review}</code></p>
@@ -1292,7 +1939,7 @@ print_r(json_decode((string) $body));</code></pre>
 <h1>Contraction</h1>
 <p>APIs for</p>
 <!-- START_3f5fb4637d0ff3fe2a234f6bac0fca98 -->
-<h2>api/contractions</h2>
+<h2>List cotraction for user</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -1326,35 +1973,82 @@ print_r(json_decode((string) $body));</code></pre>
 <p><code>GET api/contractions</code></p>
 <!-- END_3f5fb4637d0ff3fe2a234f6bac0fca98 -->
 <!-- START_88f5999187fa6c3806be929b8342bfb8 -->
-<h2>api/contractions</h2>
+<h2>Create cantraction</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/contractions" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/contractions" \
+    -H "Content-Type: application/json" \
+    -d '{"start":"sint","duration":"tempora","interval":"nesciunt"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/contractions");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "start": "sint",
+    "duration": "tempora",
+    "interval": "nesciunt"
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post("http://localhost/api/contractions", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "start" =&gt; "sint",
+            "duration" =&gt; "tempora",
+            "interval" =&gt; "nesciunt",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/contractions</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>start</td>
+<td>date_format:Y-m-d</td>
+<td>optional</td>
+<td>H:i:s</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>date_format:H:i:s</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>interval</td>
+<td>date_format:H:i:s</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_88f5999187fa6c3806be929b8342bfb8 -->
 <!-- START_2ffa12a490e136c29b139610598ca4fc -->
-<h2>api/contractions/{contraction}</h2>
+<h2>SHow by id</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -1388,7 +2082,7 @@ print_r(json_decode((string) $body));</code></pre>
 <p><code>GET api/contractions/{contraction}</code></p>
 <!-- END_2ffa12a490e136c29b139610598ca4fc -->
 <!-- START_70c77c79ab8da8f8284ca7a0f7bd5acf -->
-<h2>api/contractions/{contraction}</h2>
+<h2>Destroy by id</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -1418,27 +2112,41 @@ print_r(json_decode((string) $body));</code></pre>
 <h1>Doctor</h1>
 <p>APIs for</p>
 <!-- START_0d837076a1183451b8487d4b381d7c25 -->
-<h2>api/specializations/doctors</h2>
+<h2>Doctor by clinik</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/specializations/doctors" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/specializations/doctors" \
+    -H "Content-Type: application/json" \
+    -d '{"clinic_id":16}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/specializations/doctors");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "clinic_id": 16
 }
 
 fetch(url, {
     method: "GET",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get("http://localhost/api/specializations/doctors", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "clinic_id" =&gt; "16",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
@@ -1450,29 +2158,61 @@ print_r(json_decode((string) $body));</code></pre>
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/specializations/doctors</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clinic_id</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_0d837076a1183451b8487d4b381d7c25 -->
 <!-- START_3996aae3ed91064d2f80d0c8b5e81c73 -->
-<h2>api/doctors/reviews</h2>
+<h2>List doctor</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/doctors/reviews" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/doctors/reviews" \
+    -H "Content-Type: application/json" \
+    -d '{"doctor_id":4}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/doctors/reviews");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "doctor_id": 4
 }
 
 fetch(url, {
     method: "GET",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get("http://localhost/api/doctors/reviews", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "doctor_id" =&gt; "4",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
@@ -1484,37 +2224,103 @@ print_r(json_decode((string) $body));</code></pre>
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/doctors/reviews</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>doctor_id</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_3996aae3ed91064d2f80d0c8b5e81c73 -->
 <!-- START_70ad9ef21cd58690d1b277bc0ccac5e9 -->
-<h2>api/doctors/reviews</h2>
+<h2>Create review</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/doctors/reviews" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/doctors/reviews" \
+    -H "Content-Type: application/json" \
+    -d '{"doctor_id":20,"rate":12,"text":"animi"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/doctors/reviews");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "doctor_id": 20,
+    "rate": 12,
+    "text": "animi"
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post("http://localhost/api/doctors/reviews", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "doctor_id" =&gt; "20",
+            "rate" =&gt; "12",
+            "text" =&gt; "animi",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/doctors/reviews</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>doctor_id</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>rate</td>
+<td>integer</td>
+<td>optional</td>
+<td>1-5</td>
+</tr>
+<tr>
+<td>text</td>
+<td>text</td>
+<td>optional</td>
+<td>1-5</td>
+</tr>
+</tbody>
+</table>
 <!-- END_70ad9ef21cd58690d1b277bc0ccac5e9 -->
 <!-- START_6256d08430acf84bdbd90f3485b42814 -->
-<h2>api/doctors/reviews/{review}</h2>
+<h2>Show doctor</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -1539,47 +2345,80 @@ $response = $client-&gt;get("http://localhost/api/doctors/reviews/1", [
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (429):</p>
+<p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "message": "Unauthenticated."
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/doctors/reviews/{review}</code></p>
 <!-- END_6256d08430acf84bdbd90f3485b42814 -->
 <!-- START_286d9ac41ec7b34302d6608bb26afa29 -->
-<h2>api/doctors/educations</h2>
+<h2>List</h2>
+<p>Doctor education</p>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X GET -G "http://localhost/api/doctors/educations" </code></pre>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/doctors/educations" \
+    -H "Content-Type: application/json" \
+    -d '{"doctor_id":15}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/doctors/educations");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "doctor_id": 15
 }
 
 fetch(url, {
     method: "GET",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;get("http://localhost/api/doctors/educations", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "doctor_id" =&gt; "15",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (429):</p>
+<p>Example response (401):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "message": "Unauthenticated."
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/doctors/educations</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>doctor_id</td>
+<td>integer</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_286d9ac41ec7b34302d6608bb26afa29 -->
 <!-- START_774744abc65e28e4368f69ef4798a8f7 -->
 <h2>get doctor paginate list 20 per page</h2>
@@ -1607,10 +2446,706 @@ $response = $client-&gt;get("http://localhost/api/doctors", [
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (429):</p>
+<p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "current_page": 1,
+    "data": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "rate": 4,
+            "created_at": "2020-05-13 11:43:10",
+            "updated_at": "2020-05-28 14:10:22",
+            "user": {
+                "id": 1,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 3,
+                "street": "33",
+                "building": "44",
+                "apartment": "5578",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "email@email.com",
+                "name": "Аннар",
+                "last_name": "Болатбаева",
+                "second_name": "Сергеевна",
+                "phone": "+74957556981",
+                "image": "images\/User\/image\/EOsBWWQttqNHW0bnSXa4MyZh1DZE5sMo2667g5Lc.png",
+                "created_at": "2020-05-13 11:43:10",
+                "updated_at": "2020-05-29 17:00:40"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 1,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 1,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "user_id": 4,
+            "rate": null,
+            "created_at": "2020-05-14 17:13:28",
+            "updated_at": "2020-05-14 17:13:28",
+            "user": {
+                "id": 4,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "street",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "test@email.com",
+                "name": "name",
+                "last_name": "last_name",
+                "second_name": "second_name",
+                "phone": "+74957556900",
+                "image": null,
+                "created_at": "2020-05-14 17:13:28",
+                "updated_at": "2020-05-14 17:13:28"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 2,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 2,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "user_id": 5,
+            "rate": null,
+            "created_at": "2020-05-14 17:13:34",
+            "updated_at": "2020-05-14 17:13:34",
+            "user": {
+                "id": 5,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "street",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "test1@email.com",
+                "name": "name",
+                "last_name": "last_name",
+                "second_name": "second_name",
+                "phone": "+74957556901",
+                "image": null,
+                "created_at": "2020-05-14 17:13:34",
+                "updated_at": "2020-05-14 17:13:34"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 3,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 3,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "user_id": 6,
+            "rate": null,
+            "created_at": "2020-05-14 17:13:38",
+            "updated_at": "2020-05-14 17:13:38",
+            "user": {
+                "id": 6,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "street",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "test2@email.com",
+                "name": "name",
+                "last_name": "last_name",
+                "second_name": "second_name",
+                "phone": "+74957556902",
+                "image": null,
+                "created_at": "2020-05-14 17:13:38",
+                "updated_at": "2020-05-14 17:13:38"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 4,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 4,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "user_id": 7,
+            "rate": null,
+            "created_at": "2020-05-14 17:13:42",
+            "updated_at": "2020-05-14 17:13:42",
+            "user": {
+                "id": 7,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "street",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "test3@email.com",
+                "name": "name",
+                "last_name": "last_name",
+                "second_name": "second_name",
+                "phone": "+74957556903",
+                "image": null,
+                "created_at": "2020-05-14 17:13:42",
+                "updated_at": "2020-05-14 17:13:42"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 5,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 5,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "user_id": 8,
+            "rate": null,
+            "created_at": "2020-05-14 17:13:47",
+            "updated_at": "2020-05-14 17:13:47",
+            "user": {
+                "id": 8,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "street",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "test4@email.com",
+                "name": "name",
+                "last_name": "last_name",
+                "second_name": "second_name",
+                "phone": "+74957556904",
+                "image": null,
+                "created_at": "2020-05-14 17:13:47",
+                "updated_at": "2020-05-14 17:13:47"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 6,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 6,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "user_id": 9,
+            "rate": null,
+            "created_at": "2020-05-14 17:13:53",
+            "updated_at": "2020-05-14 17:13:53",
+            "user": {
+                "id": 9,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "street",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "test5@email.com",
+                "name": "name",
+                "last_name": "last_name",
+                "second_name": "second_name",
+                "phone": "+74957556905",
+                "image": null,
+                "created_at": "2020-05-14 17:13:53",
+                "updated_at": "2020-05-14 17:13:53"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 7,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 7,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "user_id": 10,
+            "rate": null,
+            "created_at": "2020-05-14 17:13:59",
+            "updated_at": "2020-05-14 17:13:59",
+            "user": {
+                "id": 10,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "street",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "test6@email.com",
+                "name": "name",
+                "last_name": "last_name",
+                "second_name": "second_name",
+                "phone": "+74957556906",
+                "image": null,
+                "created_at": "2020-05-14 17:13:59",
+                "updated_at": "2020-05-14 17:13:59"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 8,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 8,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "user_id": 11,
+            "rate": null,
+            "created_at": "2020-05-14 17:14:04",
+            "updated_at": "2020-05-14 17:14:04",
+            "user": {
+                "id": 11,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "street",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "test7@email.com",
+                "name": "name",
+                "last_name": "last_name",
+                "second_name": "second_name",
+                "phone": "+74957556907",
+                "image": null,
+                "created_at": "2020-05-14 17:14:04",
+                "updated_at": "2020-05-14 17:14:04"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 9,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 9,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "user_id": 12,
+            "rate": null,
+            "created_at": "2020-05-14 17:14:09",
+            "updated_at": "2020-05-14 17:14:09",
+            "user": {
+                "id": 12,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "street",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "test8@email.com",
+                "name": "name",
+                "last_name": "last_name",
+                "second_name": "second_name",
+                "phone": "+74957556908",
+                "image": null,
+                "created_at": "2020-05-14 17:14:09",
+                "updated_at": "2020-05-14 17:14:09"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 10,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 10,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "user_id": 22,
+            "rate": null,
+            "created_at": "2020-06-22 18:30:24",
+            "updated_at": "2020-06-22 18:30:24",
+            "user": {
+                "id": 22,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "street",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "test9@email.com",
+                "name": "name",
+                "last_name": "last_name",
+                "second_name": "second_name",
+                "phone": "+74957556910",
+                "image": null,
+                "created_at": "2020-06-22 18:30:24",
+                "updated_at": "2020-06-22 18:30:24"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 11,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 11,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "user_id": 23,
+            "rate": null,
+            "created_at": "2020-06-25 12:12:03",
+            "updated_at": "2020-06-25 12:12:03",
+            "user": {
+                "id": 23,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "Main",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "doctor1@users.com",
+                "name": "Нина",
+                "last_name": "Иванова",
+                "second_name": "Амировна",
+                "phone": "+79998012661",
+                "image": null,
+                "created_at": "2020-06-25 12:12:03",
+                "updated_at": "2020-06-25 12:12:03"
+            },
+            "clinics": [
+                {
+                    "id": 1,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
+                    "pivot": {
+                        "doctor_id": 12,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 1,
+                    "photo": null,
+                    "pivot": {
+                        "doctor_id": 12,
+                        "specialization_id": 1
+                    }
+                }
+            ]
+        }
+    ],
+    "first_page_url": "http:\/\/localhost\/api\/doctors?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http:\/\/localhost\/api\/doctors?page=1",
+    "next_page_url": null,
+    "path": "http:\/\/localhost\/api\/doctors",
+    "per_page": 20,
+    "prev_page_url": null,
+    "to": 12,
+    "total": 12
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/doctors</code></p>
@@ -1641,10 +3176,138 @@ $response = $client-&gt;get("http://localhost/api/doctors/1", [
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (429):</p>
+<p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "data": {
+        "id": 1,
+        "user_id": 1,
+        "rate": 4,
+        "created_at": "2020-05-13 11:43:10",
+        "updated_at": "2020-05-28 14:10:22",
+        "specialisations": [
+            {
+                "id": 1,
+                "photo": null,
+                "pivot": {
+                    "doctor_id": 1,
+                    "specialization_id": 1
+                }
+            }
+        ],
+        "user": {
+            "id": 1,
+            "lang_id": 1,
+            "region_id": 1,
+            "city_id": 3,
+            "street": "33",
+            "building": "44",
+            "apartment": "5578",
+            "role": "doctor",
+            "verified": 0,
+            "notification": 1,
+            "email": "email@email.com",
+            "name": "Аннар",
+            "last_name": "Болатбаева",
+            "second_name": "Сергеевна",
+            "phone": "+74957556981",
+            "created_at": "2020-05-13 11:43:10",
+            "updated_at": "2020-05-29 17:00:40",
+            "image": "http:\/\/localhost\/images\/User\/image\/EOsBWWQttqNHW0bnSXa4MyZh1DZE5sMo2667g5Lc.png"
+        },
+        "clinic": {
+            "id": 1,
+            "region_id": 1,
+            "city_id": 1,
+            "rate": 3.75,
+            "type": "state",
+            "phone": "+74957556981",
+            "lng": "1111",
+            "lat": "2222",
+            "image": null,
+            "paid": 0,
+            "created_at": null,
+            "updated_at": null,
+            "pivot": {
+                "doctor_id": 1,
+                "clinic_id": 1
+            },
+            "schedules": [
+                {
+                    "clinic_id": 1,
+                    "day": 0,
+                    "start": "09:00",
+                    "end": "18:00",
+                    "dayName": "Понедельник"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 1,
+                    "start": "08:00",
+                    "end": "14:13",
+                    "dayName": "Вторник"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 2,
+                    "start": "17:19",
+                    "end": "19:21",
+                    "dayName": "Среда"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 3,
+                    "start": "18:20",
+                    "end": "23:20",
+                    "dayName": "Четвер"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 4,
+                    "start": "17:16",
+                    "end": "20:19",
+                    "dayName": "Пятница"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 5,
+                    "start": "07:27",
+                    "end": "16:26",
+                    "dayName": "Суббота"
+                },
+                {
+                    "clinic_id": 1,
+                    "day": 6,
+                    "start": "14:21",
+                    "end": "20:26",
+                    "dayName": "Воскресенье"
+                }
+            ]
+        },
+        "educations": {
+            "data": [
+                {
+                    "id": 2,
+                    "doctor_id": 1,
+                    "title": "Одинатура",
+                    "description": "Кафедра акушерства и гинекологии организована в 1995 году в составе заведующего кафедрой В.И. Радько и кандидата медицинских наук Темуряна М.К., ассистентов Ширгалиевой Е.С., Калдыбековой Н.И. В связи с увелечением штатов, кафедра с годами пополнялась новыми работниками: кандидатом медицинских наук Данияровой А.Ж, ассистентами Исмаиловой У.И., Нартаевой М.М., Абдукасымовой Э.А., Тажибаевой М.С., Мамырбековой С.У., Джунусовой Р.К.",
+                    "created_at": "29.05.2020 12:42",
+                    "updated_at": "29.05.2020 12:42"
+                },
+                {
+                    "id": 3,
+                    "doctor_id": 1,
+                    "title": "Повышение квалификации",
+                    "description": "Под руководством к.м.н. Тлеужан Р.Т. в 2013г. успешно защищены магистрские диссертации магистрантов: Байжуматовой Б. на тему «Особенности ведения родов у многорожавших женщин по ЮКО», Ермановой А на тему«Медико-социальные аспекты материнской смертности в г.Шымкент», Саркуловой И. на тему «Оценка исходов при наружном профилактическом повороте плода», в 2015г. защищены диссертации магистрантов: Болатбаевой А.С.",
+                    "created_at": "29.05.2020 12:43",
+                    "updated_at": "29.05.2020 12:43"
+                }
+            ],
+            "links": {
+                "self": "link-value"
+            }
+        }
+    }
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/doctors/{doctor}</code></p>
@@ -1729,7 +3392,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/my-duration" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"ea"}'
+    -d '{"phone":"ut"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/my-duration");
 
@@ -1739,7 +3402,7 @@ let headers = {
 }
 
 let body = {
-    "phone": "ea"
+    "phone": "ut"
 }
 
 fetch(url, {
@@ -1756,7 +3419,7 @@ $response = $client-&gt;get("http://localhost/api/my-duration", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "phone" =&gt; "ea",
+            "phone" =&gt; "ut",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -1814,10 +3477,113 @@ $response = $client-&gt;get("http://localhost/api/durations", [
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (429):</p>
+<p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "current_page": 1,
+    "data": [
+        {
+            "id": 1,
+            "pos": 1,
+            "name": "первая",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 2,
+            "pos": 2,
+            "name": "вторвая",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 3,
+            "pos": 3,
+            "name": "третья",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 4,
+            "pos": 4,
+            "name": "4",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 5,
+            "pos": 5,
+            "name": "5",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 6,
+            "pos": 6,
+            "name": "6",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 7,
+            "pos": 7,
+            "name": "7",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 8,
+            "pos": 8,
+            "name": "8",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 9,
+            "pos": 9,
+            "name": "9",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 10,
+            "pos": 10,
+            "name": "10",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 11,
+            "pos": 11,
+            "name": "11",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 12,
+            "pos": 12,
+            "name": "12",
+            "text": null,
+            "photo": null
+        },
+        {
+            "id": 13,
+            "pos": 13,
+            "name": "13",
+            "text": "",
+            "photo": null
+        }
+    ],
+    "first_page_url": "http:\/\/localhost\/api\/durations?page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http:\/\/localhost\/api\/durations?page=1",
+    "next_page_url": null,
+    "path": "http:\/\/localhost\/api\/durations",
+    "per_page": 20,
+    "prev_page_url": null,
+    "to": 13,
+    "total": 13
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/durations</code></p>
@@ -1848,10 +3614,14 @@ $response = $client-&gt;get("http://localhost/api/durations/1", [
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (429):</p>
+<p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "id": 1,
+    "pos": 1,
+    "name": "первая",
+    "text": null,
+    "photo": null
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/durations/{duration}</code></p>
@@ -1859,7 +3629,7 @@ print_r(json_decode((string) $body));</code></pre>
 <h1>Emergency Contacts</h1>
 <p>APIs for</p>
 <!-- START_a5ca6ccf2ba7bf3a34749a84bfe5869a -->
-<h2>api/emergency_contacts</h2>
+<h2>List emergency contacts</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -1893,32 +3663,71 @@ print_r(json_decode((string) $body));</code></pre>
 <p><code>GET api/emergency_contacts</code></p>
 <!-- END_a5ca6ccf2ba7bf3a34749a84bfe5869a -->
 <!-- START_962df80d0dc2785598301976b39182f6 -->
-<h2>api/emergency_contacts</h2>
+<h2>Create emergency contact</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/emergency_contacts" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/emergency_contacts" \
+    -H "Content-Type: application/json" \
+    -d '{"name":"quas","phone":"quia"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/emergency_contacts");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "name": "quas",
+    "phone": "quia"
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post("http://localhost/api/emergency_contacts", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "name" =&gt; "quas",
+            "phone" =&gt; "quia",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/emergency_contacts</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>string</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_962df80d0dc2785598301976b39182f6 -->
 <h1>Lang</h1>
 <p>APIs for</p>
@@ -2187,7 +3996,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/patient/weight" \
     -H "Content-Type: application/json" \
-    -d '{"weights":"eligendi","date":"et"}'
+    -d '{"weights":"culpa","date":"sed"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/patient/weight");
 
@@ -2197,8 +4006,8 @@ let headers = {
 }
 
 let body = {
-    "weights": "eligendi",
-    "date": "et"
+    "weights": "culpa",
+    "date": "sed"
 }
 
 fetch(url, {
@@ -2215,8 +4024,8 @@ $response = $client-&gt;post("http://localhost/api/patient/weight", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "weights" =&gt; "eligendi",
-            "date" =&gt; "et",
+            "weights" =&gt; "culpa",
+            "date" =&gt; "sed",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -3085,18 +4894,305 @@ print_r(json_decode((string) $body));</code></pre>
                 "created_at": "2020-05-14 17:13:28",
                 "updated_at": "2020-05-14 17:13:28"
             }
+        },
+        {
+            "id": 14,
+            "user_id": 28,
+            "clinic_id": null,
+            "doctor_id": null,
+            "date_of_birth": "2020-01-11 00:00:00",
+            "conception_date": null,
+            "conception_type": null,
+            "pregnant": 1,
+            "created_at": "2020-07-08 22:23:30",
+            "updated_at": "2020-07-08 22:23:30",
+            "user": {
+                "id": 28,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "iusto",
+                "building": "quae",
+                "apartment": "incidunt",
+                "role": "patient",
+                "verified": 0,
+                "notification": 1,
+                "email": "roma@roma.net",
+                "name": "eum",
+                "last_name": "esse",
+                "second_name": "nemo",
+                "phone": "+380938554715",
+                "image": null,
+                "created_at": "2020-07-08 22:23:30",
+                "updated_at": "2020-07-08 22:23:30",
+                "region": {
+                    "id": 1
+                },
+                "city": {
+                    "id": 1,
+                    "region_id": 1
+                }
+            },
+            "clinic": null,
+            "doctor": null
+        },
+        {
+            "id": 15,
+            "user_id": 29,
+            "clinic_id": null,
+            "doctor_id": null,
+            "date_of_birth": "2020-01-11 00:00:00",
+            "conception_date": null,
+            "conception_type": null,
+            "pregnant": 1,
+            "created_at": "2020-07-08 22:24:26",
+            "updated_at": "2020-07-08 22:24:26",
+            "user": {
+                "id": 29,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "iusto",
+                "building": "quae",
+                "apartment": "incidunt",
+                "role": "patient",
+                "verified": 0,
+                "notification": 1,
+                "email": "roma@roma1.net",
+                "name": "eum",
+                "last_name": "esse",
+                "second_name": "nemo",
+                "phone": "+380938554716",
+                "image": null,
+                "created_at": "2020-07-08 22:24:26",
+                "updated_at": "2020-07-08 22:24:26",
+                "region": {
+                    "id": 1
+                },
+                "city": {
+                    "id": 1,
+                    "region_id": 1
+                }
+            },
+            "clinic": null,
+            "doctor": null
+        },
+        {
+            "id": 16,
+            "user_id": 30,
+            "clinic_id": null,
+            "doctor_id": null,
+            "date_of_birth": "2020-01-11 00:00:00",
+            "conception_date": null,
+            "conception_type": null,
+            "pregnant": 1,
+            "created_at": "2020-07-08 22:25:28",
+            "updated_at": "2020-07-08 22:25:28",
+            "user": {
+                "id": 30,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "iusto",
+                "building": "quae",
+                "apartment": "incidunt",
+                "role": "patient",
+                "verified": 0,
+                "notification": 1,
+                "email": "roma@roma12.net",
+                "name": "eum",
+                "last_name": "esse",
+                "second_name": "nemo",
+                "phone": "+380938554717",
+                "image": null,
+                "created_at": "2020-07-08 22:25:28",
+                "updated_at": "2020-07-08 22:25:28",
+                "region": {
+                    "id": 1
+                },
+                "city": {
+                    "id": 1,
+                    "region_id": 1
+                }
+            },
+            "clinic": null,
+            "doctor": null
+        },
+        {
+            "id": 17,
+            "user_id": 31,
+            "clinic_id": null,
+            "doctor_id": null,
+            "date_of_birth": "2020-01-11 00:00:00",
+            "conception_date": null,
+            "conception_type": null,
+            "pregnant": 1,
+            "created_at": "2020-07-08 22:27:59",
+            "updated_at": "2020-07-08 22:27:59",
+            "user": {
+                "id": 31,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "iusto",
+                "building": "quae",
+                "apartment": "incidunt",
+                "role": "patient",
+                "verified": 0,
+                "notification": 1,
+                "email": "roma@roma122.net",
+                "name": "eum",
+                "last_name": "esse",
+                "second_name": "nemo",
+                "phone": "+380938554718",
+                "image": null,
+                "created_at": "2020-07-08 22:27:59",
+                "updated_at": "2020-07-08 22:27:59",
+                "region": {
+                    "id": 1
+                },
+                "city": {
+                    "id": 1,
+                    "region_id": 1
+                }
+            },
+            "clinic": null,
+            "doctor": null
+        },
+        {
+            "id": 19,
+            "user_id": 33,
+            "clinic_id": null,
+            "doctor_id": null,
+            "date_of_birth": "2020-01-11 00:00:00",
+            "conception_date": null,
+            "conception_type": null,
+            "pregnant": 1,
+            "created_at": "2020-07-08 22:30:51",
+            "updated_at": "2020-07-08 22:30:51",
+            "user": {
+                "id": 33,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "iusto",
+                "building": "quae",
+                "apartment": "incidunt",
+                "role": "patient",
+                "verified": 0,
+                "notification": 1,
+                "email": "roma1@roma1222.net",
+                "name": "eum",
+                "last_name": "esse",
+                "second_name": "nemo",
+                "phone": "+380938554720",
+                "image": null,
+                "created_at": "2020-07-08 22:30:51",
+                "updated_at": "2020-07-08 22:30:51",
+                "region": {
+                    "id": 1
+                },
+                "city": {
+                    "id": 1,
+                    "region_id": 1
+                }
+            },
+            "clinic": null,
+            "doctor": null
+        },
+        {
+            "id": 20,
+            "user_id": 34,
+            "clinic_id": null,
+            "doctor_id": null,
+            "date_of_birth": "2020-01-11 00:00:00",
+            "conception_date": null,
+            "conception_type": null,
+            "pregnant": 1,
+            "created_at": "2020-07-08 22:39:04",
+            "updated_at": "2020-07-08 22:39:04",
+            "user": {
+                "id": 34,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "iusto",
+                "building": "quae",
+                "apartment": "incidunt",
+                "role": "patient",
+                "verified": 0,
+                "notification": 1,
+                "email": "roma1@roma12222.net",
+                "name": "eum",
+                "last_name": "esse",
+                "second_name": "nemo",
+                "phone": "+380938554721",
+                "image": null,
+                "created_at": "2020-07-08 22:39:04",
+                "updated_at": "2020-07-08 22:39:04",
+                "region": {
+                    "id": 1
+                },
+                "city": {
+                    "id": 1,
+                    "region_id": 1
+                }
+            },
+            "clinic": null,
+            "doctor": null
+        },
+        {
+            "id": 21,
+            "user_id": 35,
+            "clinic_id": null,
+            "doctor_id": null,
+            "date_of_birth": "2020-01-11 00:00:00",
+            "conception_date": null,
+            "conception_type": null,
+            "pregnant": 1,
+            "created_at": "2020-07-08 23:01:08",
+            "updated_at": "2020-07-08 23:01:08",
+            "user": {
+                "id": 35,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "iusto",
+                "building": "quae",
+                "apartment": "incidunt",
+                "role": "patient",
+                "verified": 0,
+                "notification": 1,
+                "email": "roma1@rom1a12222.net",
+                "name": "eum",
+                "last_name": "esse",
+                "second_name": "nemo",
+                "phone": "+380938554722",
+                "image": null,
+                "created_at": "2020-07-08 23:01:08",
+                "updated_at": "2020-07-08 23:01:08",
+                "region": {
+                    "id": 1
+                },
+                "city": {
+                    "id": 1,
+                    "region_id": 1
+                }
+            },
+            "clinic": null,
+            "doctor": null
         }
     ],
     "first_page_url": "http:\/\/localhost\/api\/patients?page=1",
     "from": 1,
-    "last_page": 1,
-    "last_page_url": "http:\/\/localhost\/api\/patients?page=1",
-    "next_page_url": null,
+    "last_page": 2,
+    "last_page_url": "http:\/\/localhost\/api\/patients?page=2",
+    "next_page_url": "http:\/\/localhost\/api\/patients?page=2",
     "path": "http:\/\/localhost\/api\/patients",
     "per_page": 20,
     "prev_page_url": null,
-    "to": 13,
-    "total": 13
+    "to": 20,
+    "total": 32
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/patients</code></p>
@@ -3199,7 +5295,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/conception-date" \
     -H "Content-Type: application/json" \
-    -d '{"conception_type":"eligendi","conception_date":"doloremque"}'
+    -d '{"conception_type":"autem","conception_date":"assumenda"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/conception-date");
 
@@ -3209,8 +5305,8 @@ let headers = {
 }
 
 let body = {
-    "conception_type": "eligendi",
-    "conception_date": "doloremque"
+    "conception_type": "autem",
+    "conception_date": "assumenda"
 }
 
 fetch(url, {
@@ -3227,8 +5323,8 @@ $response = $client-&gt;post("http://localhost/api/conception-date", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "conception_type" =&gt; "eligendi",
-            "conception_date" =&gt; "doloremque",
+            "conception_type" =&gt; "autem",
+            "conception_date" =&gt; "assumenda",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -3264,7 +5360,7 @@ print_r(json_decode((string) $body));</code></pre>
 <h1>Patient belly</h1>
 <p>APIs for</p>
 <!-- START_75638e9a29ec7d0d150ea20b0b2c07c2 -->
-<h2>api/bellies/last</h2>
+<h2>Last</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -3332,35 +5428,81 @@ print_r(json_decode((string) $body));</code></pre>
 <p><code>GET api/bellies</code></p>
 <!-- END_596474d9d4775c55875992e4392b94a7 -->
 <!-- START_10d7fe99da6529ea61db5250f8cc9b26 -->
-<h2>api/bellies</h2>
+<h2>Create belly</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
-<pre><code class="language-bash">curl -X POST "http://localhost/api/bellies" </code></pre>
+<pre><code class="language-bash">curl -X POST "http://localhost/api/bellies" \
+    -H "Content-Type: application/json" \
+    -d '{"uterine_fundus_height":"unde","girth_abdomen":"molestias","date":"voluptatem"}'
+</code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/bellies");
 
 let headers = {
-    "Accept": "application/json",
     "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "uterine_fundus_height": "unde",
+    "girth_abdomen": "molestias",
+    "date": "voluptatem"
 }
 
 fetch(url, {
     method: "POST",
     headers: headers,
+    body: body
 })
     .then(response =&gt; response.json())
     .then(json =&gt; console.log(json));</code></pre>
 <pre><code class="language-php">
 $client = new \GuzzleHttp\Client();
 $response = $client-&gt;post("http://localhost/api/bellies", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "uterine_fundus_height" =&gt; "unde",
+            "girth_abdomen" =&gt; "molestias",
+            "date" =&gt; "voluptatem",
+        ],
 ]);
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/bellies</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uterine_fundus_height</td>
+<td>numeric</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>girth_abdomen</td>
+<td>numeric</td>
+<td>optional</td>
+</tr>
+<tr>
+<td>date</td>
+<td>date</td>
+<td>optional</td>
+</tr>
+</tbody>
+</table>
 <!-- END_10d7fe99da6529ea61db5250f8cc9b26 -->
 <!-- START_46199db951bfe10deee82f6f6bdd40e8 -->
-<h2>api/bellies/{belly}</h2>
+<h2>Show by id</h2>
 <blockquote>
 <p>Example request:</p>
 </blockquote>
@@ -3421,10 +5563,32 @@ $response = $client-&gt;get("http://localhost/api/specializations", [
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (429):</p>
+<p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "data": [
+        {
+            "id": 1,
+            "name": null,
+            "photo": null
+        }
+    ],
+    "links": {
+        "self": "link-value",
+        "first": "http:\/\/localhost\/api\/specializations?page=1",
+        "last": "http:\/\/localhost\/api\/specializations?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "path": "http:\/\/localhost\/api\/specializations",
+        "per_page": 20,
+        "to": 1,
+        "total": 1
+    }
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/specializations</code></p>
@@ -3455,10 +5619,14 @@ $response = $client-&gt;get("http://localhost/api/specializations/1", [
 $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 <blockquote>
-<p>Example response (429):</p>
+<p>Example response (200):</p>
 </blockquote>
 <pre><code class="language-json">{
-    "message": "Too Many Attempts."
+    "data": {
+        "id": 1,
+        "name": null,
+        "photo": null
+    }
 }</code></pre>
 <h3>HTTP Request</h3>
 <p><code>GET api/specializations/{specialization}</code></p>

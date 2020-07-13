@@ -33,8 +33,6 @@ class PatientBellyController extends Controller
     /**
      * get PatientBelly paginate list 20 per page
      *
-     * @param Request $request
-     * @return ResponseFactory|Application|Response
      */
     public function index(Request $request)
     {
@@ -44,8 +42,8 @@ class PatientBellyController extends Controller
     }
 
     /**
-     * @param $id
-     * @return ResponseFactory|Application|Response
+     * Show by id
+     *
      */
     public function show($id)
     {
@@ -55,7 +53,7 @@ class PatientBellyController extends Controller
     }
 
     /**
-     * @return ResponseFactory|Application|Response
+     * Last
      */
     public function last()
     {
@@ -65,8 +63,10 @@ class PatientBellyController extends Controller
     }
 
     /**
-     * @param PatientBellyRequest $request
-     * @return ResponseFactory|Application|Response
+     * Create belly
+     * @bodyParam uterine_fundus_height numeric
+     * @bodyParam girth_abdomen numeric
+     * @bodyParam date date
      */
     public function store(PatientBellyRequest $request)
     {

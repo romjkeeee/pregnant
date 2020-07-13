@@ -28,8 +28,7 @@ class PatientContractionController extends Controller
 
 
     /**
-     * @param Request $request
-     * @return ResponseFactory|Application|Response
+     * List cotraction for user
      */
     public function index(Request $request)
     {
@@ -39,8 +38,7 @@ class PatientContractionController extends Controller
     }
 
     /**
-     * @param $id
-     * @return ResponseFactory|Application|Response
+     * SHow by id
      */
     public function show($id)
     {
@@ -50,8 +48,11 @@ class PatientContractionController extends Controller
     }
 
     /**
-     * @param PatientContractionRequest $request
-     * @return ResponseFactory|Application|Response
+     * Create cantraction
+     *
+     * @bodyParam start date_format:Y-m-d H:i:s
+     * @bodyParam duration date_format:H:i:s
+     * @bodyParam interval date_format:H:i:s
      */
     public function store(PatientContractionRequest $request)
     {
@@ -62,9 +63,7 @@ class PatientContractionController extends Controller
     }
 
     /**
-     * @param $id
-     * @return ResponseFactory|Application|Response
-     * @throws \Exception
+     * Destroy by id
      */
     public function destroy($id)
     {
