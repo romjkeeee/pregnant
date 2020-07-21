@@ -98,6 +98,13 @@ class AuthController extends Controller
             });
             $token = JWTAuth::attempt($request->only(['phone', 'password']));
 
+            if ($request->file('image')) {
+                $user = User::query()->where('id',auth()->user()->id)->first();
+                $user->image =  'https://med.weedoo.ru/storage/app/'.$request->file('image')
+                        ->store('avatar/'.$user->id);
+                $user->update();
+            }
+
             return response(['status'=>'success','message' => 'Register success', 'token' => $this->respondWithToken($token)->original]);
         } catch (\Exception $exception) {
             return response(['status'=>'error', 'message' => $exception->getMessage()], 422);
@@ -232,7 +239,7 @@ class AuthController extends Controller
     {
         if ($request->file('image')) {
             $user = User::query()->where('id',auth()->user()->id)->first();
-            $user->image =  'http://med.weedoo.ru/storage/app/'.$request->file('image')
+            $user->image =  'https://med.weedoo.ru/storage/app/'.$request->file('image')
                     ->store('avatar/'.$user->id);
             $user->update();
         }
