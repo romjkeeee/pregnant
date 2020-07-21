@@ -19,6 +19,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::post('register', 'AuthController@register');
     Route::post('verify', 'AuthController@verify');
     Route::post('refresh', 'AuthController@refresh');
+    Route::get('send_sms', 'AuthController@send_sms');
 
     Route::group(['prefix' => 'me'], function () {
         Route::post('/', 'AuthController@me');

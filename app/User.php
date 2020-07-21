@@ -13,7 +13,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    use Notifiable, StoreImageTrait;
+    use Notifiable;
 
     /** users role - doctor, patient */
     const DOCTOR = 'doctor';
@@ -53,7 +53,6 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
-    protected $image = ['image'];
 
     // Rest omitted for brevity
 

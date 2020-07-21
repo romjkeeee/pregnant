@@ -254,7 +254,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/login" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"dolorum","password":"voluptates"}'
+    -d '{"phone":"cum","password":"dolorum"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/login");
 
@@ -264,8 +264,8 @@ let headers = {
 }
 
 let body = {
-    "phone": "dolorum",
-    "password": "voluptates"
+    "phone": "cum",
+    "password": "dolorum"
 }
 
 fetch(url, {
@@ -282,8 +282,8 @@ $response = $client-&gt;post("http://localhost/api/login", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "phone" =&gt; "dolorum",
-            "password" =&gt; "voluptates",
+            "phone" =&gt; "cum",
+            "password" =&gt; "dolorum",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -357,7 +357,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/register" \
     -H "Content-Type: application/json" \
-    -d '{"name":"odio","last_name":"nesciunt","second_name":"sint","phone":"+74957556981","role":"doctor or patient","email":"magni","region_id":3,"city_id":16,"street":"neque","building":"amet","apartment":"enim","password":"voluptatem","password_confirmation":"aut","lang_id":3}'
+    -d '{"name":"maxime","last_name":"non","second_name":"necessitatibus","phone":"+74957556981","role":"doctor or patient","email":"nostrum","region_id":18,"city_id":9,"street":"inventore","building":"suscipit","apartment":"debitis","password":"magni","password_confirmation":"quas","lang_id":6}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/register");
 
@@ -367,20 +367,20 @@ let headers = {
 }
 
 let body = {
-    "name": "odio",
-    "last_name": "nesciunt",
-    "second_name": "sint",
+    "name": "maxime",
+    "last_name": "non",
+    "second_name": "necessitatibus",
     "phone": "+74957556981",
     "role": "doctor or patient",
-    "email": "magni",
-    "region_id": 3,
-    "city_id": 16,
-    "street": "neque",
-    "building": "amet",
-    "apartment": "enim",
-    "password": "voluptatem",
-    "password_confirmation": "aut",
-    "lang_id": 3
+    "email": "nostrum",
+    "region_id": 18,
+    "city_id": 9,
+    "street": "inventore",
+    "building": "suscipit",
+    "apartment": "debitis",
+    "password": "magni",
+    "password_confirmation": "quas",
+    "lang_id": 6
 }
 
 fetch(url, {
@@ -397,20 +397,20 @@ $response = $client-&gt;post("http://localhost/api/register", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "name" =&gt; "odio",
-            "last_name" =&gt; "nesciunt",
-            "second_name" =&gt; "sint",
+            "name" =&gt; "maxime",
+            "last_name" =&gt; "non",
+            "second_name" =&gt; "necessitatibus",
             "phone" =&gt; "+74957556981",
             "role" =&gt; "doctor or patient",
-            "email" =&gt; "magni",
-            "region_id" =&gt; "3",
-            "city_id" =&gt; "16",
-            "street" =&gt; "neque",
-            "building" =&gt; "amet",
-            "apartment" =&gt; "enim",
-            "password" =&gt; "voluptatem",
-            "password_confirmation" =&gt; "aut",
-            "lang_id" =&gt; "3",
+            "email" =&gt; "nostrum",
+            "region_id" =&gt; "18",
+            "city_id" =&gt; "9",
+            "street" =&gt; "inventore",
+            "building" =&gt; "suscipit",
+            "apartment" =&gt; "debitis",
+            "password" =&gt; "magni",
+            "password_confirmation" =&gt; "quas",
+            "lang_id" =&gt; "6",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -526,7 +526,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/verify" \
     -H "Content-Type: application/json" \
-    -d '{"code":"doloribus"}'
+    -d '{"code":"similique"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/verify");
 
@@ -536,7 +536,7 @@ let headers = {
 }
 
 let body = {
-    "code": "doloribus"
+    "code": "similique"
 }
 
 fetch(url, {
@@ -553,7 +553,7 @@ $response = $client-&gt;post("http://localhost/api/verify", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "code" =&gt; "doloribus",
+            "code" =&gt; "similique",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -616,6 +616,77 @@ print_r(json_decode((string) $body));</code></pre>
 <h3>HTTP Request</h3>
 <p><code>POST api/refresh</code></p>
 <!-- END_3fba263a38f92fde0e4e12f76067a611 -->
+<!-- START_a3b5fa7b79d359f56ac9da5a3ec851a1 -->
+<h2>Re send sms</h2>
+<blockquote>
+<p>Example request:</p>
+</blockquote>
+<pre><code class="language-bash">curl -X GET -G "http://localhost/api/send_sms" \
+    -H "Content-Type: application/json" \
+    -d '{"phone":"minus"}'
+</code></pre>
+<pre><code class="language-javascript">const url = new URL("http://localhost/api/send_sms");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "phone": "minus"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response =&gt; response.json())
+    .then(json =&gt; console.log(json));</code></pre>
+<pre><code class="language-php">
+$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get("http://localhost/api/send_sms", [
+    'headers' =&gt; [
+            "Content-Type" =&gt; "application/json",
+        ],
+    'json' =&gt; [
+            "phone" =&gt; "minus",
+        ],
+]);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+<blockquote>
+<p>Example response (200):</p>
+</blockquote>
+<pre><code class="language-json">{}</code></pre>
+<blockquote>
+<p>Example response (401):</p>
+</blockquote>
+<pre><code class="language-json">{
+    "message": "Unauthenticated."
+}</code></pre>
+<h3>HTTP Request</h3>
+<p><code>GET api/send_sms</code></p>
+<h4>Body Parameters</h4>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>phone</td>
+<td>required</td>
+<td>optional</td>
+<td>string</td>
+</tr>
+</tbody>
+</table>
+<!-- END_a3b5fa7b79d359f56ac9da5a3ec851a1 -->
 <!-- START_d131f717df7db546af1657d1e7ce10f6 -->
 <h2>Get the authenticated User.</h2>
 <blockquote>
@@ -687,7 +758,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/me/phone" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"odio"}'
+    -d '{"phone":"et"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/me/phone");
 
@@ -697,7 +768,7 @@ let headers = {
 }
 
 let body = {
-    "phone": "odio"
+    "phone": "et"
 }
 
 fetch(url, {
@@ -714,7 +785,7 @@ $response = $client-&gt;post("http://localhost/api/me/phone", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "phone" =&gt; "odio",
+            "phone" =&gt; "et",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -747,7 +818,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/me/location" \
     -H "Content-Type: application/json" \
-    -d '{"region_id":"veritatis","city_id":"maiores","street":"iure","building":"dolorem","apartment":"consequatur"}'
+    -d '{"region_id":"eos","city_id":"adipisci","street":"culpa","building":"omnis","apartment":"quis"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/me/location");
 
@@ -757,11 +828,11 @@ let headers = {
 }
 
 let body = {
-    "region_id": "veritatis",
-    "city_id": "maiores",
-    "street": "iure",
-    "building": "dolorem",
-    "apartment": "consequatur"
+    "region_id": "eos",
+    "city_id": "adipisci",
+    "street": "culpa",
+    "building": "omnis",
+    "apartment": "quis"
 }
 
 fetch(url, {
@@ -778,11 +849,11 @@ $response = $client-&gt;post("http://localhost/api/me/location", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "region_id" =&gt; "veritatis",
-            "city_id" =&gt; "maiores",
-            "street" =&gt; "iure",
-            "building" =&gt; "dolorem",
-            "apartment" =&gt; "consequatur",
+            "region_id" =&gt; "eos",
+            "city_id" =&gt; "adipisci",
+            "street" =&gt; "culpa",
+            "building" =&gt; "omnis",
+            "apartment" =&gt; "quis",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -863,7 +934,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/me/name" \
     -H "Content-Type: application/json" \
-    -d '{"name":"et","last_name":"sed","second_name":"impedit"}'
+    -d '{"name":"quo","last_name":"repellendus","second_name":"inventore"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/me/name");
 
@@ -873,9 +944,9 @@ let headers = {
 }
 
 let body = {
-    "name": "et",
-    "last_name": "sed",
-    "second_name": "impedit"
+    "name": "quo",
+    "last_name": "repellendus",
+    "second_name": "inventore"
 }
 
 fetch(url, {
@@ -892,9 +963,9 @@ $response = $client-&gt;post("http://localhost/api/me/name", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "name" =&gt; "et",
-            "last_name" =&gt; "sed",
-            "second_name" =&gt; "impedit",
+            "name" =&gt; "quo",
+            "last_name" =&gt; "repellendus",
+            "second_name" =&gt; "inventore",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -937,7 +1008,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/me/update_photo" \
     -H "Content-Type: application/json" \
-    -d '{"image":"at"}'
+    -d '{"image":"ipsum"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/me/update_photo");
 
@@ -947,7 +1018,7 @@ let headers = {
 }
 
 let body = {
-    "image": "at"
+    "image": "ipsum"
 }
 
 fetch(url, {
@@ -964,7 +1035,7 @@ $response = $client-&gt;post("http://localhost/api/me/update_photo", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "image" =&gt; "at",
+            "image" =&gt; "ipsum",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -984,7 +1055,7 @@ print_r(json_decode((string) $body));</code></pre>
 <tbody>
 <tr>
 <td>image</td>
-<td>base64</td>
+<td>image</td>
 <td>optional</td>
 </tr>
 </tbody>
@@ -999,7 +1070,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/chat/send" \
     -H "Content-Type: application/json" \
-    -d '{"text":"aut","attaches":"incidunt"}'
+    -d '{"text":"corporis","attaches":"excepturi"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/chat/send");
 
@@ -1009,8 +1080,8 @@ let headers = {
 }
 
 let body = {
-    "text": "aut",
-    "attaches": "incidunt"
+    "text": "corporis",
+    "attaches": "excepturi"
 }
 
 fetch(url, {
@@ -1027,8 +1098,8 @@ $response = $client-&gt;post("http://localhost/api/chat/send", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "text" =&gt; "aut",
-            "attaches" =&gt; "incidunt",
+            "text" =&gt; "corporis",
+            "attaches" =&gt; "excepturi",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -1068,7 +1139,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/chat/start" \
     -H "Content-Type: application/json" \
-    -d '{"recipient_id":18}'
+    -d '{"recipient_id":16}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/chat/start");
 
@@ -1078,7 +1149,7 @@ let headers = {
 }
 
 let body = {
-    "recipient_id": 18
+    "recipient_id": 16
 }
 
 fetch(url, {
@@ -1095,7 +1166,7 @@ $response = $client-&gt;post("http://localhost/api/chat/start", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "recipient_id" =&gt; "18",
+            "recipient_id" =&gt; "16",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -1166,7 +1237,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/chat/messages" \
     -H "Content-Type: application/json" \
-    -d '{"chat_id":11}'
+    -d '{"chat_id":14}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/chat/messages");
 
@@ -1176,7 +1247,7 @@ let headers = {
 }
 
 let body = {
-    "chat_id": 11
+    "chat_id": 14
 }
 
 fetch(url, {
@@ -1193,7 +1264,7 @@ $response = $client-&gt;get("http://localhost/api/chat/messages", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "chat_id" =&gt; "11",
+            "chat_id" =&gt; "14",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -1234,7 +1305,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/check-lists" \
     -H "Content-Type: application/json" \
-    -d '{"chat_id":5}'
+    -d '{"chat_id":20}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/check-lists");
 
@@ -1244,7 +1315,7 @@ let headers = {
 }
 
 let body = {
-    "chat_id": 5
+    "chat_id": 20
 }
 
 fetch(url, {
@@ -1261,7 +1332,7 @@ $response = $client-&gt;get("http://localhost/api/check-lists", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "chat_id" =&gt; "5",
+            "chat_id" =&gt; "20",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -1300,7 +1371,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/check-lists" \
     -H "Content-Type: application/json" \
-    -d '{"task_id":4}'
+    -d '{"task_id":15}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/check-lists");
 
@@ -1310,7 +1381,7 @@ let headers = {
 }
 
 let body = {
-    "task_id": 4
+    "task_id": 15
 }
 
 fetch(url, {
@@ -1327,7 +1398,7 @@ $response = $client-&gt;post("http://localhost/api/check-lists", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "task_id" =&gt; "4",
+            "task_id" =&gt; "15",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -1811,7 +1882,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/clinics/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"clinic_id":1}'
+    -d '{"clinic_id":14}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/clinics/reviews");
 
@@ -1821,7 +1892,7 @@ let headers = {
 }
 
 let body = {
-    "clinic_id": 1
+    "clinic_id": 14
 }
 
 fetch(url, {
@@ -1838,7 +1909,7 @@ $response = $client-&gt;get("http://localhost/api/clinics/reviews", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "clinic_id" =&gt; "1",
+            "clinic_id" =&gt; "14",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -1883,7 +1954,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/clinics/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"clinic_id":2,"rate":2,"text":12}'
+    -d '{"clinic_id":18,"rate":19,"text":20}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/clinics/reviews");
 
@@ -1893,9 +1964,9 @@ let headers = {
 }
 
 let body = {
-    "clinic_id": 2,
-    "rate": 2,
-    "text": 12
+    "clinic_id": 18,
+    "rate": 19,
+    "text": 20
 }
 
 fetch(url, {
@@ -1912,9 +1983,9 @@ $response = $client-&gt;post("http://localhost/api/clinics/reviews", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "clinic_id" =&gt; "2",
-            "rate" =&gt; "2",
-            "text" =&gt; "12",
+            "clinic_id" =&gt; "18",
+            "rate" =&gt; "19",
+            "text" =&gt; "20",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -2039,7 +2110,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/contractions" \
     -H "Content-Type: application/json" \
-    -d '{"start":"fuga","duration":"doloremque","interval":"enim"}'
+    -d '{"start":"vel","duration":"velit","interval":"et"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/contractions");
 
@@ -2049,9 +2120,9 @@ let headers = {
 }
 
 let body = {
-    "start": "fuga",
-    "duration": "doloremque",
-    "interval": "enim"
+    "start": "vel",
+    "duration": "velit",
+    "interval": "et"
 }
 
 fetch(url, {
@@ -2068,9 +2139,9 @@ $response = $client-&gt;post("http://localhost/api/contractions", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "start" =&gt; "fuga",
-            "duration" =&gt; "doloremque",
-            "interval" =&gt; "enim",
+            "start" =&gt; "vel",
+            "duration" =&gt; "velit",
+            "interval" =&gt; "et",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -2178,7 +2249,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/specializations/doctors" \
     -H "Content-Type: application/json" \
-    -d '{"clinic_id":3}'
+    -d '{"clinic_id":14}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/specializations/doctors");
 
@@ -2188,7 +2259,7 @@ let headers = {
 }
 
 let body = {
-    "clinic_id": 3
+    "clinic_id": 14
 }
 
 fetch(url, {
@@ -2205,7 +2276,7 @@ $response = $client-&gt;get("http://localhost/api/specializations/doctors", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "clinic_id" =&gt; "3",
+            "clinic_id" =&gt; "14",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -2244,7 +2315,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/doctors/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"doctor_id":1}'
+    -d '{"doctor_id":9}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/doctors/reviews");
 
@@ -2254,7 +2325,7 @@ let headers = {
 }
 
 let body = {
-    "doctor_id": 1
+    "doctor_id": 9
 }
 
 fetch(url, {
@@ -2271,7 +2342,7 @@ $response = $client-&gt;get("http://localhost/api/doctors/reviews", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "doctor_id" =&gt; "1",
+            "doctor_id" =&gt; "9",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -2310,7 +2381,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/doctors/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"doctor_id":2,"rate":17,"text":"enim"}'
+    -d '{"doctor_id":14,"rate":13,"text":"doloribus"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/doctors/reviews");
 
@@ -2320,9 +2391,9 @@ let headers = {
 }
 
 let body = {
-    "doctor_id": 2,
-    "rate": 17,
-    "text": "enim"
+    "doctor_id": 14,
+    "rate": 13,
+    "text": "doloribus"
 }
 
 fetch(url, {
@@ -2339,9 +2410,9 @@ $response = $client-&gt;post("http://localhost/api/doctors/reviews", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "doctor_id" =&gt; "2",
-            "rate" =&gt; "17",
-            "text" =&gt; "enim",
+            "doctor_id" =&gt; "14",
+            "rate" =&gt; "13",
+            "text" =&gt; "doloribus",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -2421,7 +2492,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/doctors/educations" \
     -H "Content-Type: application/json" \
-    -d '{"doctor_id":20}'
+    -d '{"doctor_id":19}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/doctors/educations");
 
@@ -2431,7 +2502,7 @@ let headers = {
 }
 
 let body = {
-    "doctor_id": 20
+    "doctor_id": 19
 }
 
 fetch(url, {
@@ -2448,7 +2519,7 @@ $response = $client-&gt;get("http://localhost/api/doctors/educations", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "doctor_id" =&gt; "20",
+            "doctor_id" =&gt; "19",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -3452,7 +3523,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X GET -G "http://localhost/api/my-duration" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"dolores"}'
+    -d '{"phone":"est"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/my-duration");
 
@@ -3462,7 +3533,7 @@ let headers = {
 }
 
 let body = {
-    "phone": "dolores"
+    "phone": "est"
 }
 
 fetch(url, {
@@ -3479,7 +3550,7 @@ $response = $client-&gt;get("http://localhost/api/my-duration", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "phone" =&gt; "dolores",
+            "phone" =&gt; "est",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -3729,7 +3800,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/emergency_contacts" \
     -H "Content-Type: application/json" \
-    -d '{"name":"aut","phone":"omnis"}'
+    -d '{"name":"asperiores","phone":"voluptatem"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/emergency_contacts");
 
@@ -3739,8 +3810,8 @@ let headers = {
 }
 
 let body = {
-    "name": "aut",
-    "phone": "omnis"
+    "name": "asperiores",
+    "phone": "voluptatem"
 }
 
 fetch(url, {
@@ -3757,8 +3828,8 @@ $response = $client-&gt;post("http://localhost/api/emergency_contacts", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "name" =&gt; "aut",
-            "phone" =&gt; "omnis",
+            "name" =&gt; "asperiores",
+            "phone" =&gt; "voluptatem",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -4056,7 +4127,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/patient/weight" \
     -H "Content-Type: application/json" \
-    -d '{"weights":"delectus","date":"provident"}'
+    -d '{"weights":"quisquam","date":"totam"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/patient/weight");
 
@@ -4066,8 +4137,8 @@ let headers = {
 }
 
 let body = {
-    "weights": "delectus",
-    "date": "provident"
+    "weights": "quisquam",
+    "date": "totam"
 }
 
 fetch(url, {
@@ -4084,8 +4155,8 @@ $response = $client-&gt;post("http://localhost/api/patient/weight", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "weights" =&gt; "delectus",
-            "date" =&gt; "provident",
+            "weights" =&gt; "quisquam",
+            "date" =&gt; "totam",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -4742,9 +4813,9 @@ print_r(json_decode((string) $body));</code></pre>
                 "last_name": "last_name",
                 "second_name": "second_name",
                 "phone": "+74957556986",
-                "image": null,
+                "image": "http:\/\/med.weedoo.ru\/storage\/app\/avatar\/24\/aMF9BDzIdFxSqixvvTWTCigkimutClRXo1P6rXPl.jpeg",
                 "created_at": "2020-07-02 19:05:20",
-                "updated_at": "2020-07-02 19:05:20",
+                "updated_at": "2020-07-21 11:21:01",
                 "region": {
                     "id": 1
                 },
@@ -5355,7 +5426,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/conception-date" \
     -H "Content-Type: application/json" \
-    -d '{"conception_type":"laboriosam","conception_date":"molestias"}'
+    -d '{"conception_type":"omnis","conception_date":"facere"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/conception-date");
 
@@ -5365,8 +5436,8 @@ let headers = {
 }
 
 let body = {
-    "conception_type": "laboriosam",
-    "conception_date": "molestias"
+    "conception_type": "omnis",
+    "conception_date": "facere"
 }
 
 fetch(url, {
@@ -5383,8 +5454,8 @@ $response = $client-&gt;post("http://localhost/api/conception-date", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "conception_type" =&gt; "laboriosam",
-            "conception_date" =&gt; "molestias",
+            "conception_type" =&gt; "omnis",
+            "conception_date" =&gt; "facere",
         ],
 ]);
 $body = $response-&gt;getBody();
@@ -5494,7 +5565,7 @@ print_r(json_decode((string) $body));</code></pre>
 </blockquote>
 <pre><code class="language-bash">curl -X POST "http://localhost/api/bellies" \
     -H "Content-Type: application/json" \
-    -d '{"uterine_fundus_height":"officia","girth_abdomen":"omnis","date":"animi"}'
+    -d '{"uterine_fundus_height":"ratione","girth_abdomen":"non","date":"voluptatum"}'
 </code></pre>
 <pre><code class="language-javascript">const url = new URL("http://localhost/api/bellies");
 
@@ -5504,9 +5575,9 @@ let headers = {
 }
 
 let body = {
-    "uterine_fundus_height": "officia",
-    "girth_abdomen": "omnis",
-    "date": "animi"
+    "uterine_fundus_height": "ratione",
+    "girth_abdomen": "non",
+    "date": "voluptatum"
 }
 
 fetch(url, {
@@ -5523,9 +5594,9 @@ $response = $client-&gt;post("http://localhost/api/bellies", [
             "Content-Type" =&gt; "application/json",
         ],
     'json' =&gt; [
-            "uterine_fundus_height" =&gt; "officia",
-            "girth_abdomen" =&gt; "omnis",
-            "date" =&gt; "animi",
+            "uterine_fundus_height" =&gt; "ratione",
+            "girth_abdomen" =&gt; "non",
+            "date" =&gt; "voluptatum",
         ],
 ]);
 $body = $response-&gt;getBody();

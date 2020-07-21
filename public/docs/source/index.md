@@ -276,7 +276,7 @@ APIs for
 ```bash
 curl -X POST "http://localhost/api/login" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"dolorum","password":"voluptates"}'
+    -d '{"phone":"cum","password":"dolorum"}'
 
 ```
 
@@ -289,8 +289,8 @@ let headers = {
 }
 
 let body = {
-    "phone": "dolorum",
-    "password": "voluptates"
+    "phone": "cum",
+    "password": "dolorum"
 }
 
 fetch(url, {
@@ -310,8 +310,8 @@ $response = $client->post("http://localhost/api/login", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "phone" => "dolorum",
-            "password" => "voluptates",
+            "phone" => "cum",
+            "password" => "dolorum",
         ],
 ]);
 $body = $response->getBody();
@@ -392,7 +392,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/register" \
     -H "Content-Type: application/json" \
-    -d '{"name":"odio","last_name":"nesciunt","second_name":"sint","phone":"+74957556981","role":"doctor or patient","email":"magni","region_id":3,"city_id":16,"street":"neque","building":"amet","apartment":"enim","password":"voluptatem","password_confirmation":"aut","lang_id":3}'
+    -d '{"name":"maxime","last_name":"non","second_name":"necessitatibus","phone":"+74957556981","role":"doctor or patient","email":"nostrum","region_id":18,"city_id":9,"street":"inventore","building":"suscipit","apartment":"debitis","password":"magni","password_confirmation":"quas","lang_id":6}'
 
 ```
 
@@ -405,20 +405,20 @@ let headers = {
 }
 
 let body = {
-    "name": "odio",
-    "last_name": "nesciunt",
-    "second_name": "sint",
+    "name": "maxime",
+    "last_name": "non",
+    "second_name": "necessitatibus",
     "phone": "+74957556981",
     "role": "doctor or patient",
-    "email": "magni",
-    "region_id": 3,
-    "city_id": 16,
-    "street": "neque",
-    "building": "amet",
-    "apartment": "enim",
-    "password": "voluptatem",
-    "password_confirmation": "aut",
-    "lang_id": 3
+    "email": "nostrum",
+    "region_id": 18,
+    "city_id": 9,
+    "street": "inventore",
+    "building": "suscipit",
+    "apartment": "debitis",
+    "password": "magni",
+    "password_confirmation": "quas",
+    "lang_id": 6
 }
 
 fetch(url, {
@@ -438,20 +438,20 @@ $response = $client->post("http://localhost/api/register", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "name" => "odio",
-            "last_name" => "nesciunt",
-            "second_name" => "sint",
+            "name" => "maxime",
+            "last_name" => "non",
+            "second_name" => "necessitatibus",
             "phone" => "+74957556981",
             "role" => "doctor or patient",
-            "email" => "magni",
-            "region_id" => "3",
-            "city_id" => "16",
-            "street" => "neque",
-            "building" => "amet",
-            "apartment" => "enim",
-            "password" => "voluptatem",
-            "password_confirmation" => "aut",
-            "lang_id" => "3",
+            "email" => "nostrum",
+            "region_id" => "18",
+            "city_id" => "9",
+            "street" => "inventore",
+            "building" => "suscipit",
+            "apartment" => "debitis",
+            "password" => "magni",
+            "password_confirmation" => "quas",
+            "lang_id" => "6",
         ],
 ]);
 $body = $response->getBody();
@@ -497,7 +497,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/verify" \
     -H "Content-Type: application/json" \
-    -d '{"code":"doloribus"}'
+    -d '{"code":"similique"}'
 
 ```
 
@@ -510,7 +510,7 @@ let headers = {
 }
 
 let body = {
-    "code": "doloribus"
+    "code": "similique"
 }
 
 fetch(url, {
@@ -530,7 +530,7 @@ $response = $client->post("http://localhost/api/verify", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "code" => "doloribus",
+            "code" => "similique",
         ],
 ]);
 $body = $response->getBody();
@@ -601,6 +601,79 @@ print_r(json_decode((string) $body));
 
 
 <!-- END_3fba263a38f92fde0e4e12f76067a611 -->
+
+<!-- START_a3b5fa7b79d359f56ac9da5a3ec851a1 -->
+## Re send sms
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/send_sms" \
+    -H "Content-Type: application/json" \
+    -d '{"phone":"minus"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/send_sms");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "phone": "minus"
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get("http://localhost/api/send_sms", [
+    'headers' => [
+            "Content-Type" => "application/json",
+        ],
+    'json' => [
+            "phone" => "minus",
+        ],
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+> Example response (200):
+
+```json
+{}
+```
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/send_sms`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    phone | required |  optional  | string
+
+<!-- END_a3b5fa7b79d359f56ac9da5a3ec851a1 -->
 
 <!-- START_d131f717df7db546af1657d1e7ce10f6 -->
 ## Get the authenticated User.
@@ -704,7 +777,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/me/phone" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"odio"}'
+    -d '{"phone":"et"}'
 
 ```
 
@@ -717,7 +790,7 @@ let headers = {
 }
 
 let body = {
-    "phone": "odio"
+    "phone": "et"
 }
 
 fetch(url, {
@@ -737,7 +810,7 @@ $response = $client->post("http://localhost/api/me/phone", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "phone" => "odio",
+            "phone" => "et",
         ],
 ]);
 $body = $response->getBody();
@@ -765,7 +838,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/me/location" \
     -H "Content-Type: application/json" \
-    -d '{"region_id":"veritatis","city_id":"maiores","street":"iure","building":"dolorem","apartment":"consequatur"}'
+    -d '{"region_id":"eos","city_id":"adipisci","street":"culpa","building":"omnis","apartment":"quis"}'
 
 ```
 
@@ -778,11 +851,11 @@ let headers = {
 }
 
 let body = {
-    "region_id": "veritatis",
-    "city_id": "maiores",
-    "street": "iure",
-    "building": "dolorem",
-    "apartment": "consequatur"
+    "region_id": "eos",
+    "city_id": "adipisci",
+    "street": "culpa",
+    "building": "omnis",
+    "apartment": "quis"
 }
 
 fetch(url, {
@@ -802,11 +875,11 @@ $response = $client->post("http://localhost/api/me/location", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "region_id" => "veritatis",
-            "city_id" => "maiores",
-            "street" => "iure",
-            "building" => "dolorem",
-            "apartment" => "consequatur",
+            "region_id" => "eos",
+            "city_id" => "adipisci",
+            "street" => "culpa",
+            "building" => "omnis",
+            "apartment" => "quis",
         ],
 ]);
 $body = $response->getBody();
@@ -880,7 +953,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/me/name" \
     -H "Content-Type: application/json" \
-    -d '{"name":"et","last_name":"sed","second_name":"impedit"}'
+    -d '{"name":"quo","last_name":"repellendus","second_name":"inventore"}'
 
 ```
 
@@ -893,9 +966,9 @@ let headers = {
 }
 
 let body = {
-    "name": "et",
-    "last_name": "sed",
-    "second_name": "impedit"
+    "name": "quo",
+    "last_name": "repellendus",
+    "second_name": "inventore"
 }
 
 fetch(url, {
@@ -915,9 +988,9 @@ $response = $client->post("http://localhost/api/me/name", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "name" => "et",
-            "last_name" => "sed",
-            "second_name" => "impedit",
+            "name" => "quo",
+            "last_name" => "repellendus",
+            "second_name" => "inventore",
         ],
 ]);
 $body = $response->getBody();
@@ -947,7 +1020,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/me/update_photo" \
     -H "Content-Type: application/json" \
-    -d '{"image":"at"}'
+    -d '{"image":"ipsum"}'
 
 ```
 
@@ -960,7 +1033,7 @@ let headers = {
 }
 
 let body = {
-    "image": "at"
+    "image": "ipsum"
 }
 
 fetch(url, {
@@ -980,7 +1053,7 @@ $response = $client->post("http://localhost/api/me/update_photo", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "image" => "at",
+            "image" => "ipsum",
         ],
 ]);
 $body = $response->getBody();
@@ -996,7 +1069,7 @@ print_r(json_decode((string) $body));
 
 Parameter | Type | Status | Description
 --------- | ------- | ------- | ------- | -----------
-    image | base64 |  optional  | 
+    image | image |  optional  | 
 
 <!-- END_b05833c7a4a5a2028d1b3794e0fa7f32 -->
 
@@ -1012,7 +1085,7 @@ APIs for
 ```bash
 curl -X POST "http://localhost/api/chat/send" \
     -H "Content-Type: application/json" \
-    -d '{"text":"aut","attaches":"incidunt"}'
+    -d '{"text":"corporis","attaches":"excepturi"}'
 
 ```
 
@@ -1025,8 +1098,8 @@ let headers = {
 }
 
 let body = {
-    "text": "aut",
-    "attaches": "incidunt"
+    "text": "corporis",
+    "attaches": "excepturi"
 }
 
 fetch(url, {
@@ -1046,8 +1119,8 @@ $response = $client->post("http://localhost/api/chat/send", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "text" => "aut",
-            "attaches" => "incidunt",
+            "text" => "corporis",
+            "attaches" => "excepturi",
         ],
 ]);
 $body = $response->getBody();
@@ -1076,7 +1149,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/chat/start" \
     -H "Content-Type: application/json" \
-    -d '{"recipient_id":18}'
+    -d '{"recipient_id":16}'
 
 ```
 
@@ -1089,7 +1162,7 @@ let headers = {
 }
 
 let body = {
-    "recipient_id": 18
+    "recipient_id": 16
 }
 
 fetch(url, {
@@ -1109,7 +1182,7 @@ $response = $client->post("http://localhost/api/chat/start", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "recipient_id" => "18",
+            "recipient_id" => "16",
         ],
 ]);
 $body = $response->getBody();
@@ -1191,7 +1264,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X GET -G "http://localhost/api/chat/messages" \
     -H "Content-Type: application/json" \
-    -d '{"chat_id":11}'
+    -d '{"chat_id":14}'
 
 ```
 
@@ -1204,7 +1277,7 @@ let headers = {
 }
 
 let body = {
-    "chat_id": 11
+    "chat_id": 14
 }
 
 fetch(url, {
@@ -1224,7 +1297,7 @@ $response = $client->get("http://localhost/api/chat/messages", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "chat_id" => "11",
+            "chat_id" => "14",
         ],
 ]);
 $body = $response->getBody();
@@ -1263,7 +1336,7 @@ APIs for
 ```bash
 curl -X GET -G "http://localhost/api/check-lists" \
     -H "Content-Type: application/json" \
-    -d '{"chat_id":5}'
+    -d '{"chat_id":20}'
 
 ```
 
@@ -1276,7 +1349,7 @@ let headers = {
 }
 
 let body = {
-    "chat_id": 5
+    "chat_id": 20
 }
 
 fetch(url, {
@@ -1296,7 +1369,7 @@ $response = $client->get("http://localhost/api/check-lists", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "chat_id" => "5",
+            "chat_id" => "20",
         ],
 ]);
 $body = $response->getBody();
@@ -1331,7 +1404,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/check-lists" \
     -H "Content-Type: application/json" \
-    -d '{"task_id":4}'
+    -d '{"task_id":15}'
 
 ```
 
@@ -1344,7 +1417,7 @@ let headers = {
 }
 
 let body = {
-    "task_id": 4
+    "task_id": 15
 }
 
 fetch(url, {
@@ -1364,7 +1437,7 @@ $response = $client->post("http://localhost/api/check-lists", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "task_id" => "4",
+            "task_id" => "15",
         ],
 ]);
 $body = $response->getBody();
@@ -1891,7 +1964,7 @@ APIs for
 ```bash
 curl -X GET -G "http://localhost/api/clinics/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"clinic_id":1}'
+    -d '{"clinic_id":14}'
 
 ```
 
@@ -1904,7 +1977,7 @@ let headers = {
 }
 
 let body = {
-    "clinic_id": 1
+    "clinic_id": 14
 }
 
 fetch(url, {
@@ -1924,7 +1997,7 @@ $response = $client->get("http://localhost/api/clinics/reviews", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "clinic_id" => "1",
+            "clinic_id" => "14",
         ],
 ]);
 $body = $response->getBody();
@@ -1966,7 +2039,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/clinics/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"clinic_id":2,"rate":2,"text":12}'
+    -d '{"clinic_id":18,"rate":19,"text":20}'
 
 ```
 
@@ -1979,9 +2052,9 @@ let headers = {
 }
 
 let body = {
-    "clinic_id": 2,
-    "rate": 2,
-    "text": 12
+    "clinic_id": 18,
+    "rate": 19,
+    "text": 20
 }
 
 fetch(url, {
@@ -2001,9 +2074,9 @@ $response = $client->post("http://localhost/api/clinics/reviews", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "clinic_id" => "2",
-            "rate" => "2",
-            "text" => "12",
+            "clinic_id" => "18",
+            "rate" => "19",
+            "text" => "20",
         ],
 ]);
 $body = $response->getBody();
@@ -2147,7 +2220,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/contractions" \
     -H "Content-Type: application/json" \
-    -d '{"start":"fuga","duration":"doloremque","interval":"enim"}'
+    -d '{"start":"vel","duration":"velit","interval":"et"}'
 
 ```
 
@@ -2160,9 +2233,9 @@ let headers = {
 }
 
 let body = {
-    "start": "fuga",
-    "duration": "doloremque",
-    "interval": "enim"
+    "start": "vel",
+    "duration": "velit",
+    "interval": "et"
 }
 
 fetch(url, {
@@ -2182,9 +2255,9 @@ $response = $client->post("http://localhost/api/contractions", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "start" => "fuga",
-            "duration" => "doloremque",
-            "interval" => "enim",
+            "start" => "vel",
+            "duration" => "velit",
+            "interval" => "et",
         ],
 ]);
 $body = $response->getBody();
@@ -2309,7 +2382,7 @@ APIs for
 ```bash
 curl -X GET -G "http://localhost/api/specializations/doctors" \
     -H "Content-Type: application/json" \
-    -d '{"clinic_id":3}'
+    -d '{"clinic_id":14}'
 
 ```
 
@@ -2322,7 +2395,7 @@ let headers = {
 }
 
 let body = {
-    "clinic_id": 3
+    "clinic_id": 14
 }
 
 fetch(url, {
@@ -2342,7 +2415,7 @@ $response = $client->get("http://localhost/api/specializations/doctors", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "clinic_id" => "3",
+            "clinic_id" => "14",
         ],
 ]);
 $body = $response->getBody();
@@ -2377,7 +2450,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/doctors/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"doctor_id":1}'
+    -d '{"doctor_id":9}'
 
 ```
 
@@ -2390,7 +2463,7 @@ let headers = {
 }
 
 let body = {
-    "doctor_id": 1
+    "doctor_id": 9
 }
 
 fetch(url, {
@@ -2410,7 +2483,7 @@ $response = $client->get("http://localhost/api/doctors/reviews", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "doctor_id" => "1",
+            "doctor_id" => "9",
         ],
 ]);
 $body = $response->getBody();
@@ -2445,7 +2518,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/doctors/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"doctor_id":2,"rate":17,"text":"enim"}'
+    -d '{"doctor_id":14,"rate":13,"text":"doloribus"}'
 
 ```
 
@@ -2458,9 +2531,9 @@ let headers = {
 }
 
 let body = {
-    "doctor_id": 2,
-    "rate": 17,
-    "text": "enim"
+    "doctor_id": 14,
+    "rate": 13,
+    "text": "doloribus"
 }
 
 fetch(url, {
@@ -2480,9 +2553,9 @@ $response = $client->post("http://localhost/api/doctors/reviews", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "doctor_id" => "2",
-            "rate" => "17",
-            "text" => "enim",
+            "doctor_id" => "14",
+            "rate" => "13",
+            "text" => "doloribus",
         ],
 ]);
 $body = $response->getBody();
@@ -2562,7 +2635,7 @@ Doctor education
 ```bash
 curl -X GET -G "http://localhost/api/doctors/educations" \
     -H "Content-Type: application/json" \
-    -d '{"doctor_id":20}'
+    -d '{"doctor_id":19}'
 
 ```
 
@@ -2575,7 +2648,7 @@ let headers = {
 }
 
 let body = {
-    "doctor_id": 20
+    "doctor_id": 19
 }
 
 fetch(url, {
@@ -2595,7 +2668,7 @@ $response = $client->get("http://localhost/api/doctors/educations", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "doctor_id" => "20",
+            "doctor_id" => "19",
         ],
 ]);
 $body = $response->getBody();
@@ -3657,7 +3730,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X GET -G "http://localhost/api/my-duration" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"dolores"}'
+    -d '{"phone":"est"}'
 
 ```
 
@@ -3670,7 +3743,7 @@ let headers = {
 }
 
 let body = {
-    "phone": "dolores"
+    "phone": "est"
 }
 
 fetch(url, {
@@ -3690,7 +3763,7 @@ $response = $client->get("http://localhost/api/my-duration", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "phone" => "dolores",
+            "phone" => "est",
         ],
 ]);
 $body = $response->getBody();
@@ -3983,7 +4056,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/emergency_contacts" \
     -H "Content-Type: application/json" \
-    -d '{"name":"aut","phone":"omnis"}'
+    -d '{"name":"asperiores","phone":"voluptatem"}'
 
 ```
 
@@ -3996,8 +4069,8 @@ let headers = {
 }
 
 let body = {
-    "name": "aut",
-    "phone": "omnis"
+    "name": "asperiores",
+    "phone": "voluptatem"
 }
 
 fetch(url, {
@@ -4017,8 +4090,8 @@ $response = $client->post("http://localhost/api/emergency_contacts", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "name" => "aut",
-            "phone" => "omnis",
+            "name" => "asperiores",
+            "phone" => "voluptatem",
         ],
 ]);
 $body = $response->getBody();
@@ -4373,7 +4446,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/patient/weight" \
     -H "Content-Type: application/json" \
-    -d '{"weights":"delectus","date":"provident"}'
+    -d '{"weights":"quisquam","date":"totam"}'
 
 ```
 
@@ -4386,8 +4459,8 @@ let headers = {
 }
 
 let body = {
-    "weights": "delectus",
-    "date": "provident"
+    "weights": "quisquam",
+    "date": "totam"
 }
 
 fetch(url, {
@@ -4407,8 +4480,8 @@ $response = $client->post("http://localhost/api/patient/weight", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "weights" => "delectus",
-            "date" => "provident",
+            "weights" => "quisquam",
+            "date" => "totam",
         ],
 ]);
 $body = $response->getBody();
@@ -5079,9 +5152,9 @@ print_r(json_decode((string) $body));
                 "last_name": "last_name",
                 "second_name": "second_name",
                 "phone": "+74957556986",
-                "image": null,
+                "image": "http:\/\/med.weedoo.ru\/storage\/app\/avatar\/24\/aMF9BDzIdFxSqixvvTWTCigkimutClRXo1P6rXPl.jpeg",
                 "created_at": "2020-07-02 19:05:20",
-                "updated_at": "2020-07-02 19:05:20",
+                "updated_at": "2020-07-21 11:21:01",
                 "region": {
                     "id": 1
                 },
@@ -5713,7 +5786,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/conception-date" \
     -H "Content-Type: application/json" \
-    -d '{"conception_type":"laboriosam","conception_date":"molestias"}'
+    -d '{"conception_type":"omnis","conception_date":"facere"}'
 
 ```
 
@@ -5726,8 +5799,8 @@ let headers = {
 }
 
 let body = {
-    "conception_type": "laboriosam",
-    "conception_date": "molestias"
+    "conception_type": "omnis",
+    "conception_date": "facere"
 }
 
 fetch(url, {
@@ -5747,8 +5820,8 @@ $response = $client->post("http://localhost/api/conception-date", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "conception_type" => "laboriosam",
-            "conception_date" => "molestias",
+            "conception_type" => "omnis",
+            "conception_date" => "facere",
         ],
 ]);
 $body = $response->getBody();
@@ -5879,7 +5952,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/bellies" \
     -H "Content-Type: application/json" \
-    -d '{"uterine_fundus_height":"officia","girth_abdomen":"omnis","date":"animi"}'
+    -d '{"uterine_fundus_height":"ratione","girth_abdomen":"non","date":"voluptatum"}'
 
 ```
 
@@ -5892,9 +5965,9 @@ let headers = {
 }
 
 let body = {
-    "uterine_fundus_height": "officia",
-    "girth_abdomen": "omnis",
-    "date": "animi"
+    "uterine_fundus_height": "ratione",
+    "girth_abdomen": "non",
+    "date": "voluptatum"
 }
 
 fetch(url, {
@@ -5914,9 +5987,9 @@ $response = $client->post("http://localhost/api/bellies", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "uterine_fundus_height" => "officia",
-            "girth_abdomen" => "omnis",
-            "date" => "animi",
+            "uterine_fundus_height" => "ratione",
+            "girth_abdomen" => "non",
+            "date" => "voluptatum",
         ],
 ]);
 $body = $response->getBody();

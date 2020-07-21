@@ -21,6 +21,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Traits\StoreImageTrait;
 
 /**
  * @group Auth
@@ -29,6 +30,8 @@ use Illuminate\Support\Str;
  */
 class AuthController extends Controller
 {
+    use StoreImageTrait;
+
     /**
      * Create a new AuthController instance.
      *
@@ -99,6 +102,23 @@ class AuthController extends Controller
         } catch (\Exception $exception) {
             return response(['status'=>'error', 'message' => $exception->getMessage()], 422);
         }
+    }
+
+    /**
+     * Re send sms
+     * @bodyParam phone required string
+     *
+     * @response 200
+     */
+    public function send_sms(Request $request)
+    {
+        $user = User::query()->where('phone',$request->phone)->first();
+        if ($user) {
+            if ($user->smsCodes()->create(['code' => Str::random(10)])) {
+                return response(['status' => 'success', 'message' => 'Смс успешно отправлена']);
+            }
+        }
+        return response(['status' => 'error', 'message' => 'Пользователь не найден']);
     }
 
     /**
@@ -205,19 +225,18 @@ class AuthController extends Controller
     /**
      * Update photo
      *
-     * @bodyParam image base64
+     * @bodyParam image image
      *
      */
     public function update_photo(Request $request)
     {
-        $image = $request->image;  // your base64 encoded
-        $image = str_replace('base64', '', $image);
-        $image = str_replace(' ', '+', $image);
-        $imageName = rand(0, 10000) . '.jpeg';
-        Storage::disk('public')->put($imageName, base64_decode($image));
-
-        $data = 'http://offer.org.ru/storage/' . $imageName;
-        return \response(auth()->user()->update(['image' => $data]));
+        if ($request->file('image')) {
+            $user = User::query()->where('id',auth()->user()->id)->first();
+            $user->image =  'http://med.weedoo.ru/'.$request->file('image')
+                    ->store('avatar/'.$user->id);
+            $user->update();
+        }
+        return response()->json(['status' => 'success' , 'data' => $user]);
     }
 
     /**
