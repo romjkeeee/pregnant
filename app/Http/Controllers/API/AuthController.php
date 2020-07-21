@@ -232,7 +232,7 @@ class AuthController extends Controller
     {
         if ($request->file('image')) {
             $user = User::query()->where('id',auth()->user()->id)->first();
-            $user->image =  'http://med.weedoo.ru/'.$request->file('image')
+            $user->image =  'http://med.weedoo.ru/storage/app/'.$request->file('image')
                     ->store('avatar/'.$user->id);
             $user->update();
         }
