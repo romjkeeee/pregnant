@@ -10,6 +10,7 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Carbon\Carbon;
 
 /**
  * @group Duration
@@ -84,10 +85,18 @@ class DurationController extends Controller
 
                 } elseif ($patient->conception_type === 'screening') {
                     return \response('Еще учусь как правильно высчитать');
+                } elseif ($patient->conception_type === 'pregnanc') {
+                    $date_pregnanc = new Carbon($patient->conception_date);
+                    $date_now = Carbon::now();
+                    $date = $date_now->diff($date_pregnanc);
+
+                    return [
+                        'month' => $date->format('%m'),
+                        'day' => $date->format('%d')
+                    ] ?? false;
                 }
             }else{
                 return \response('пациент не беременный');
-
             }
         }else{
             return \response('пациент не найден');
