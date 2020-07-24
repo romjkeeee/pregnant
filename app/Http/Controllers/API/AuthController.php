@@ -22,6 +22,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Traits\StoreImageTrait;
+use Carbon\Carbon;
+use App\Http\Controllers\API\DurationController;
 
 /**
  * @group Auth
@@ -226,7 +228,12 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return response()->json(User::query()->with(['city', 'region', 'patient'])->find(auth()->id()));
+        $user = User::query()->with(['city', 'region', 'patient'])->find(auth()->id());
+
+        $duration = new DurationController();
+        $user->pregnanc = $duration->get_duration();
+
+        return response()->json($user);
     }
 
     /**

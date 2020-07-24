@@ -43,7 +43,7 @@ class UserRequest extends FormRequest
             'role'        => ['required', Rule::in(User::DOCTOR, User::PATIENT)],
             'verified'    => 'required|in:0,1',
             'email'       => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user->id ?? null)],
-            'phone'       => ['required', 'phone:RU', Rule::unique('users', 'phone')->ignore($this->user->id ?? null)],
+            'phone'       => ['required', 'phone_num', Rule::unique('users', 'phone')->ignore($this->user->id ?? null)],
             'image'       => ['nullable', 'image', 'max:2048']
         ];
     }
