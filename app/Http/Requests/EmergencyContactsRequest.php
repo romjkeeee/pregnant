@@ -25,7 +25,7 @@ class EmergencyContactsRequest extends FormRequest
     {
         return [
             'name'        => 'required|string',
-            'phone'       => 'required|phone:AUTO,RU,UA,KZ',
+            'phone'       => 'required|phone_num',
         ];
     }
 }
