@@ -36,7 +36,7 @@ class RegisterRequest extends FormRequest
             'name'                  => 'required|min:2|max:192',
             'last_name'             => 'required|min:2|max:192',
             'second_name'           => 'required|min:2|max:192',
-            'phone'                 => 'required|phone:AUTO,RU,UA|unique:users,phone',
+            'phone'                 => 'required|phone:AUTO,RU,UA,KZ|unique:users,phone',
             'role'                  => ['required', Rule::in($this->__roles())],
             'email'                 => 'required|email|max:192|unique:users,email',
             'region_id'             => 'required|exists:regions,id',
