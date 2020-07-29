@@ -16,6 +16,7 @@ class TranslateCollection extends ResourceCollection
      */
     public function toArray($request)
     {
+        /*return json_encode($this->collection);*/
         return [
             'data'  => TranslateResource::collection($this->collection),
         ];

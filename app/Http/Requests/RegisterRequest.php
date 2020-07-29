@@ -36,7 +36,7 @@ class RegisterRequest extends FormRequest
             'name'                  => 'required|min:2|max:192',
             'last_name'             => 'required|min:2|max:192',
             'second_name'           => 'required|min:2|max:192',
-            'phone'                 => 'required|phone:RU,UA|unique:users,phone',
+            'phone'                 => 'required|phone_num|unique:users,phone',
             'role'                  => ['required', Rule::in($this->__roles())],
             'email'                 => 'required|email|max:192|unique:users,email',
             'region_id'             => 'required|exists:regions,id',
@@ -45,7 +45,6 @@ class RegisterRequest extends FormRequest
             'building'              => 'required|min:1|max:32',
             'apartment'             => 'nullable|min:1|max:32',
             'password'              => 'required|min:6|max:24|confirmed',
-            'password_confirmation' => ['required'],
             'lang_id'               => 'required|exists:langs,id'
         ];
     }

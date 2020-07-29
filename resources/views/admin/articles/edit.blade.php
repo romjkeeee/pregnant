@@ -13,7 +13,7 @@
         </div>
         @include('components.multi-lang', ['fields' => [
              ['title' => 'Название <span class="req">*</span>', 'name' => 'title'],
-             ['title' => 'Описание <span class="req">*</span>', 'name' => 'text']
+             ['title' => 'Текст статьи <span class="req">*</span>', 'name' => 'text', 'tag' => 'textarea']
         ]])
     </div>
 @endsection

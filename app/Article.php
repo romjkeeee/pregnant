@@ -15,6 +15,8 @@ class Article extends BaseModel
     protected $translatedForeignKey = 'article_id';
     protected $image = ['image', 'preview'];
 
+    protected $guarded = [];
+
     /**
      * @return HasOne
      */
