@@ -45,7 +45,6 @@ class RegisterRequest extends FormRequest
             'building'              => 'required|min:1|max:32',
             'apartment'             => 'nullable|min:1|max:32',
             'password'              => 'required|min:6|max:24|confirmed',
-            'password_confirmation' => ['required'],
             'lang_id'               => 'required|exists:langs,id'
         ];
     }
