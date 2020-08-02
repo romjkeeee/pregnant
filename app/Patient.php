@@ -51,6 +51,14 @@ class Patient extends BaseModel
     }
 
     /**
+     * @return HasOne
+     */
+    public function menstruation(): HasOne
+    {
+        return $this->hasOne(PatientMenstruation::class, 'patient_id', 'id');
+    }
+
+    /**
      * @return HasMany
      */
     public function emergencyContacts(): HasMany

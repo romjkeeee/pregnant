@@ -76,6 +76,8 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::post('conception-date', 'PatientController@conceptionDate');
     Route::apiResource('contractions', 'PatientContractionController');
     Route::get('my-duration', 'DurationController@get_duration');
+    Route::get('my-menstruation', 'PatientMenstruationController@index');
+    Route::get('add-menstruation', 'PatientMenstruationController@info');
 
     /** doctor routes */
     Route::get('specializations/doctors', 'DoctorController@specialisationDoctors');
