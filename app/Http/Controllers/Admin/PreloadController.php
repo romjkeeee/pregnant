@@ -163,7 +163,7 @@ class PreloadController extends Controller
                 $builder->where('title', 'LIKE', "%{$request->get('search')}%");
             });
         })->orderBy('id', 'desc')->get()->map(function (ArticleCategory $item) {
-            return ['id' => $item->id, 'text' => $item->title];
+            return ['id' => $item->id, 'text' => $item->articles[0]->title];
         }));
     }
 }

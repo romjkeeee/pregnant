@@ -81,4 +81,6 @@ class Patient extends BaseModel
     {
         return $this->belongsToMany(CheckListTask::class, 'patient_tasks', 'patient_id', 'task_id');
     }
+
+
 }

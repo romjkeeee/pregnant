@@ -29,6 +29,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::post('notification', 'AuthController@notification');
         Route::post('name', 'AuthController@name');
         Route::post('update_photo', 'AuthController@update_photo');
+        Route::post('set_doctor', 'AuthController@setDoctor');
     });
     Route::group(['prefix' => 'articles'], function () {
         Route::get('/category', 'ArticleCategoryController@index');
@@ -84,6 +85,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::apiResource('doctors/reviews', 'DoctorReviewController');
     Route::apiResource('doctors/educations', 'DoctorEducationController');
     Route::apiResource('doctors', 'DoctorController');
+    Route::post('doctors/patiens', 'PatientController@getPatiens');
 
     /** clinics routes */
     Route::apiResource('clinics/reviews', 'ClinicReviewController');

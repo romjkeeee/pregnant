@@ -4,7 +4,9 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\LocationRequest;
 use App\Http\Requests\NameUpdateRequest;
+use App\Http\Requests\AddDoctorRequest;
 use App\Http\Requests\NotificationStateRequest;
+use App\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -192,6 +194,19 @@ class AuthController extends Controller
         auth()->user()->update($request->validated());
 
         return \response(['status'=>'success','message'=>'Saved']);
+    }
+
+    /**
+     * @param AddDoctorRequest $request
+     * @return ResponseFactory|Application|Response
+     */
+
+    public function setDoctor(AddDoctorRequest $request)
+    {
+        Patient::query()->update($request->validated());
+        return \response([
+            'status' => 'success',
+            'message'=>'Saved']);
     }
 
     /**
