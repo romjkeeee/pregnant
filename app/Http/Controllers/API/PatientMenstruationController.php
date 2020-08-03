@@ -35,17 +35,17 @@ class PatientMenstruationController extends Controller
         $menstruation = PatientMenstruation::query()->where('patient_id', $patient->id)->orderBy('created_at', 'desc')->first();
         $last_menstruation = strtotime($menstruation->start_last_menstruation);
 
-        $next_menstruation_start = strtotime('+'.$menstruation->duration_menstruation.' days', $last_menstruation);
-        $next_menstruation_finish = strtotime('+'.$menstruation->duration_cycle.' days', $next_menstruation_start);
+        $next_menstruation_start = strtotime('+'.$menstruation->duration_cycle.' days', $last_menstruation);
+        $next_menstruation_finish = strtotime('+'.$menstruation->duration_menstruation.' days', $next_menstruation_start);
 
-        $ovulation_data = $menstruation->duration_menstruation / 2 + 1;
+        $ovulation_data = $menstruation->duration_cycle / 2 + 1;
 
         $ovulation_middle = strtotime('+'.$ovulation_data.' days', $last_menstruation);
         $start_ovulation = strtotime('-1 days', $ovulation_middle);
         $finis_ovulation = strtotime('+1 days', $ovulation_middle);
 
-        $next_menstruation_start_second = strtotime('+'.$menstruation->duration_menstruation.' days', $next_menstruation_start);
-        $next_menstruation_finish_second = strtotime('+'.$menstruation->duration_cycle.' days', $next_menstruation_start_second);
+        $next_menstruation_start_second = strtotime('+'.$menstruation->duration_cycle.' days', $next_menstruation_start);
+        $next_menstruation_finish_second = strtotime('+'.$menstruation->duration_menstruation.' days', $next_menstruation_start_second);
         $ovulation_middle_second = strtotime('+'.$ovulation_data.' days', $next_menstruation_start_second);
         $start_ovulation_second = strtotime('-1 days', $ovulation_middle_second);
         $finis_ovulation_second = strtotime('+1 days', $ovulation_middle_second);
