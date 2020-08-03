@@ -14,6 +14,7 @@ use App\Http\Resources\Chat\MessageResource;
 use App\Http\Resources\Chat\ChatResource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @group Chat
@@ -38,11 +39,18 @@ class ChatController extends Controller
      * @bodyParam recipient_id integer
      *
      */
-    public function start(StartRequest $request): ChatResource
+    public function start(StartRequest $request)
     {
-        $chat = auth()->user()->senderChats()->create($request->validated());
-
-        return ChatResource::make($chat);
+        $chat_id = DB::table('chats')->where([
+                'sender_id' => auth()->id(),
+                'recipient_id' => $request->recipient_id
+            ])->first() ?? false;
+        if ($chat_id) {
+            return json_encode($chat_id);
+        } else {
+            $chat = auth()->user()->senderChats()->create($request->validated());
+            return ChatResource::make($chat);
+        }
     }
 
     /**
@@ -107,5 +115,12 @@ class ChatController extends Controller
                     });
                 });
             })->orderByDesc('id')->paginate($request->get('perPage') ?? 20));
+    }
+
+    public function visible(Request $request) {
+        ChatMessage::find($request->id)->update([
+            'visible' => 1
+        ]);
+        return \response(['Ok']);
     }
 }

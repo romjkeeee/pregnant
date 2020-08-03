@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateUsersColumn extends Migration
+class AddOrders extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,13 @@ class UpdateUsersColumn extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('orders', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('title');
+            $table->text('text');
+            $table->date('date');
+            $table->timestamps();
+        });
     }
 
     /**

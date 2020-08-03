@@ -17,9 +17,7 @@ class TranslateResource extends JsonResource
     {
         return [
             $this->lang_id->code ?? null => [
-                'id'    => $this->id,
-                'key'   => $this->key,
-                'text' => $this->translate->text ?? null,
+                $this->key => $this->translate->text ?? null,
             ]
         ];
     }

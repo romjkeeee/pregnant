@@ -81,5 +81,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
         Route::post('languages', 'PreloadController@langs')->name('langs');
         Route::post('article-category', 'PreloadController@article_category')->name('article-category');
     });
+
+    /** Orders */
+    Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
+        Route::get('/', 'OrderController@index')->name('index');
+        Route::post('clinics', 'PreloadController@clinics')->name('clinics');
+
+    });
 });
 
