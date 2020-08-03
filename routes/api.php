@@ -56,8 +56,14 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
         Route::post('send', 'ChatController@send');
         Route::post('start', 'ChatController@start');
+        Route::post('visible', 'ChatController@visible');
         Route::get('list', 'ChatController@list');
         Route::get('messages', 'ChatController@messages');
+    });
+
+    Route::group(['prefix' => 'orders', 'as' => 'order.'], function () {
+        Route::get('list', 'OrderController@list');
+        Route::get('get', 'OrderController@get');
     });
 
     /** translates routes */

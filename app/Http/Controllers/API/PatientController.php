@@ -118,10 +118,18 @@ class PatientController extends Controller
                 'doctor_id' => $user->doctor->id,
                 ['created_at', '>=', $request->from],
                 ['created_at', '<=', $request->to],
-            ])->get();
-
+            ])
+            ->get();
+            $string = explode(' ', $request->search);
             foreach ($data as $item) {
-                $patients[] = User::query()->with(['patient'])->find($item->user_id) ?? false;
+                $user = User::query()->with(['patient'])->find($item->user_id) ?? false;
+                for($i = 0; $i < count($string); $i++) {
+                    if (strripos($user->name, $string[$i]) !== false) {
+                        $patients[] = $user;
+                    } elseif (strripos($user->last_name, $string[$i]) !== false) {
+                        $patients[] = $user;
+                    }
+                }
             }
         }
 

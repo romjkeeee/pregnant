@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateUsersColumn extends Migration
+class AddColumnChatMessages extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,9 @@ class UpdateUsersColumn extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('chat_messages', function (Blueprint $table) {
+            $table->integer('visible')->default(0);
+        });
     }
 
     /**

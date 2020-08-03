@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class PatientBellyRequest extends FormRequest
+class OrderGetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +24,7 @@ class PatientBellyRequest extends FormRequest
     public function rules()
     {
         return [
-            'uterine_fundus_height' => 'required|numeric|max:500',
-            'girth_abdomen'         => 'required|numeric|max:500',
-            'date'                  => [
-                'required',
-                'date',
-                'before:now'
-            ]
+            'id' => 'required|exists:orders,id'
         ];
     }
 }
