@@ -18,10 +18,26 @@ class OrderController extends Controller
 
     public function list(OrderListRequest $request)
     {
-        return Order::where([
-            ['date', '>=', $request->from],
-            ['date', '<=', $request->to],
-        ])->get();
+        if ($request->search_id) {
+            $data = Order::where([
+                ['date', '>=', $request->from],
+                ['date', '<=', $request->to],
+                'id_order' => $request->search_id
+            ])->get();
+        } elseif ($request->search) {
+            $data = Order::where([
+                ['date', '>=', $request->from],
+                ['date', '<=', $request->to],
+                ['title', 'LIKE', "%{$request->get('search')}%"]
+            ])->get();
+        } else {
+            $data = Order::where([
+                ['date', '>=', $request->from],
+                ['date', '<=', $request->to],
+            ])->get();
+        }
+
+        return $data;
     }
 
     /**
