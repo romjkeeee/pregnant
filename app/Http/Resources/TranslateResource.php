@@ -16,7 +16,7 @@ class TranslateResource extends JsonResource
     public function toArray($request)
     {
         return [
-            $this->lang_id->code ?? null => [
+            $this->lang_id->code ?? 'ru' => [
                 $this->key => $this->translate->text ?? null,
             ]
         ];
