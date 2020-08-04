@@ -17,8 +17,14 @@ class ChatResource extends JsonResource
     {
         return [
             'id'          => $this->id,
-            'sender'      => $this->sender,
-            'recipient'   => $this->recipient,
+            'sender'      => [
+                'data' => $this->sender,
+                'user' => $this->info_sender
+            ],
+            'recipient'   => [
+                'data' => $this->recipient,
+                'user' => $this->info_recipient
+            ],
             'lastMessage' => MessageResource::make($this->lastMessage)
         ];
     }

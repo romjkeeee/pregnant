@@ -118,9 +118,11 @@ class ChatController extends Controller
     }
 
     public function visible(Request $request) {
-        ChatMessage::find($request->id)->update([
-            'visible' => 1
-        ]);
+        foreach ($request->data as $data) {
+            ChatMessage::find($data)->update([
+                'visible' => 1
+            ]);
+        }
         return \response(['Ok']);
     }
 }
