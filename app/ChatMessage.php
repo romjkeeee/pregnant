@@ -10,7 +10,7 @@ class ChatMessage extends Model
 {
     public $timestamps = false;
     public $dates = ['send_at'];
-    protected $fillable = ['sender_id', 'text', 'chat_id'];
+    protected $fillable = ['sender_id', 'text', 'chat_id', 'visible'];
 
     /**
      * @return HasOne
