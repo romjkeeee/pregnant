@@ -24,7 +24,7 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            /*'category_id'         => ['required', 'exists:article_categories,id'],*/
+            'category_id'         => ['required', 'exists:article_categories,id'],
             'preview'             => ['image'],
             'image'               => ['image'],
             'translate'           => ['required', 'array'],

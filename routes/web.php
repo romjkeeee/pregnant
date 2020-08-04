@@ -14,6 +14,13 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+/**
+ * Напутствие следующему.
+ * Статьи Мой малыш сделаны на основе статей.
+ * Чтобы они работали нужно добавить категорию Мой малыш и указть id этой категории в файлах.
+ * Здесь уже ничего не поможет, поэтому пускай оно просто работает...
+ */
+
 Auth::routes();
 
 Route::get('/', function () {
@@ -84,11 +91,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
 
     /** Orders */
     Route::resource('orders', 'OrderController');
-    /*Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
-        Route::get('/', 'OrderController@index')->name('index');
-        Route::get('create', 'OrderController@create')->name('create');
-        Route::post('store', 'OrderController@store')->name('store');
-
-    });*/
+    /** my baby routes */
+    Route::resource('mybaby', 'MyBabyController');
 });
 
