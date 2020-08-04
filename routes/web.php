@@ -83,10 +83,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
     });
 
     /** Orders */
-    Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
+    Route::resource('orders', 'OrderController');
+    /*Route::group(['prefix' => 'orders', 'as' => 'orders.'], function () {
         Route::get('/', 'OrderController@index')->name('index');
-        Route::post('clinics', 'PreloadController@clinics')->name('clinics');
+        Route::get('create', 'OrderController@create')->name('create');
+        Route::post('store', 'OrderController@store')->name('store');
 
-    });
+    });*/
 });
 
