@@ -6,6 +6,7 @@ use App\Http\Requests\LocationRequest;
 use App\Http\Requests\NameUpdateRequest;
 use App\Http\Requests\AddDoctorRequest;
 use App\Http\Requests\NotificationStateRequest;
+use App\Http\Requests\UpdateEmail;
 use App\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -270,6 +271,23 @@ class AuthController extends Controller
             $user->update();
         }
         return response()->json(['status' => 'success' , 'data' => $user]);
+    }
+
+    /**
+     * @param UpdateEmail $request
+     * @return JsonResponse
+     */
+
+    public function updateEmail(UpdateEmail $request)
+    {
+        $user = User::find(auth()->user()->id);
+        $user->email = $request->email;
+        $user->update();
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $request->email
+        ]);
     }
 
     /**

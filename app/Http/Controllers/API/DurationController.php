@@ -84,13 +84,20 @@ class DurationController extends Controller
                         ->where('pos', $weeks)->first());
 
                 } elseif ($patient->conception_type === 'screening') {
+                    $now = time();
+                    $your_date = strtotime($patient->conception_date);
+                    $datediff = $now - $your_date;
+
+                    $week = $datediff / (60 * 60 * 24);
+
                     $date_pregnanc = new Carbon($patient->conception_date);
                     $date_now = Carbon::now();
                     $date = $date_now->diff($date_pregnanc);
 
                     return [
                             'month' => $date->format('%m'),
-                            'day' => $date->format('%d')
+                            'week' => floor($week / 7),
+                            'day' => floor($week),
                         ] ?? false;
                 }
             }else{
