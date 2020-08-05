@@ -165,6 +165,9 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(City::class, 'id', 'city_id');
     }
 
+    /**
+     * @return HasMany
+     */
 
     public function city_translate(): hasMany
     {
@@ -201,5 +204,23 @@ class User extends Authenticatable implements JWTSubject
     public function messages(): HasMany
     {
         return $this->hasMany(ChatMessage::class, 'sender_id', 'id');
+    }
+
+    /**
+     * @return HasOne
+     */
+
+    public function bellie() : HasOne
+    {
+        return $this->hasOne(PatientBelly::class, 'id', 'patient_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+
+    public function weight() : HasOne
+    {
+        return $this->hasOne(PatientWeight::class, 'id', 'patient_id');
     }
 }
