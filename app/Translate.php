@@ -14,8 +14,8 @@ class Translate extends BaseModel
 
     protected $fillable = ['key'];
 
-    public function lang_id()
+    public function lang_code()
     {
-        return $this->hasOne('App\Lang', 'id');
+        return $this->hasOne($this->translatedClass, 'translate_id', 'id');
     }
 }

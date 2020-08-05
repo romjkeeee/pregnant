@@ -171,7 +171,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function city_translate(): hasMany
     {
-        return $this->hasMany(CityTranslate::class, 'city_id', 'city_id');
+        return $this->hasMany(Translate\CityTranslate::class, 'city_id', 'city_id');
     }
 
     /**
