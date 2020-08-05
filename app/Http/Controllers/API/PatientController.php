@@ -85,7 +85,7 @@ class PatientController extends Controller
             ])->get();
 
             foreach ($data as $item) {
-                $patients[] = User::query()->with(['patient'])->find($item->user_id) ?? false;
+                $patients[] = User::query()->with(['patient', 'city_translate'])->find($item->user_id) ?? false;
             }
         } else {
             $patients = [];
@@ -94,7 +94,7 @@ class PatientController extends Controller
             ])->get();
 
             foreach ($data as $item) {
-                $patients[] = User::query()->with(['patient'])->find($item->user_id) ?? false;
+                $patients[] = User::query()->with(['patient', 'city_translate'])->find($item->user_id) ?? false;
             }
         }
 
@@ -108,7 +108,7 @@ class PatientController extends Controller
             ->get();
             $string = explode(' ', $request->search);
             foreach ($data as $item) {
-                $user = User::query()->with(['patient'])->find($item->user_id) ?? false;
+                $user = User::query()->with(['patient', 'city_translate'])->find($item->user_id) ?? false;
                 for($i = 0; $i < count($string); $i++) {
                     if (strripos($user->name, $string[$i]) !== false) {
                         $patients[] = $user;

@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Traits\StoreImageTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -166,6 +165,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(City::class, 'id', 'city_id');
     }
 
+
+    public function city_translate(): hasMany
+    {
+        return $this->hasMany(CityTranslate::class, 'city_id', 'city_id');
+    }
 
     /**
      * @return HasOne
