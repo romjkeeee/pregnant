@@ -99,7 +99,7 @@ class AuthController extends Controller
                     ? $user->createDoctor($request->validatedDoctor(), $request->validatedClinics(), $request->validatedSpecialisations())
                     : $user->patient()->create($request->validatedPatient());
 
-                $user->smsCodes()->create(['code' => Str::random(10)]);
+                $user->smsCodes()->create(['code' => mt_rand(1000, 9999)]);
             });
             $token = JWTAuth::attempt($request->only(['phone', 'password']));
 
