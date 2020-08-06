@@ -30,6 +30,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::post('name', 'AuthController@name');
         Route::post('update_photo', 'AuthController@update_photo');
         Route::post('set_doctor', 'AuthController@setDoctor');
+        Route::post('update_email', 'AuthController@updateEmail');
     });
     Route::group(['prefix' => 'articles'], function () {
         Route::get('/category', 'ArticleCategoryController@index');

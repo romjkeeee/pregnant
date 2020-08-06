@@ -21,14 +21,24 @@ class Chat extends BaseModel
      * @return HasOne
      */
 
-    public function info_sender(): HasOne
+    public function info_sender_patient(): HasOne
     {
-        return $this->hasOne(Patient::class, 'user_id', 'sender_id') ?? $this->hasOne(Doctor::class, 'user_id', 'sender_id');
+        return $this->hasOne(Patient::class, 'user_id', 'sender_id');
     }
 
-    public function info_recipient(): HasOne
+    public function info_sender_doctor(): HasOne
     {
-        return $this->hasOne(Patient::class, 'user_id', 'recipient_id') ?? $this->hasOne(Doctor::class, 'user_id', 'recipient_id');
+        return $this->hasOne(Doctor::class, 'user_id', 'sender_id');
+    }
+
+    public function info_recipient_patient(): HasOne
+    {
+        return $this->hasOne(Patient::class, 'user_id', 'recipient_id');
+    }
+
+    public function info_recipient_doctor(): HasOne
+    {
+        return $this->hasOne(Doctor::class, 'user_id', 'recipient_id');
     }
 
     /**

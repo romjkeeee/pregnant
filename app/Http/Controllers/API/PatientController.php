@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PatientConceptionRequest;
 use App\Patient;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
@@ -99,7 +100,9 @@ class PatientController extends Controller
             ])->get();
 
             foreach ($data as $item) {
-                $patients[] = User::query()->with(['patient'])->find($item->user_id) ?? false;
+                $patient = User::query()->with(['patient', 'city_translate', 'bellie', 'weight'])->find($item->user_id);
+                $patient->duration = $this->duration($patient->id);
+                $patients[] = $patient ?? false;
             }
         } else {
             $patients = [];
@@ -108,7 +111,9 @@ class PatientController extends Controller
             ])->get();
 
             foreach ($data as $item) {
-                $patients[] = User::query()->with(['patient'])->find($item->user_id) ?? false;
+                $patient = User::query()->with(['patient', 'city_translate', 'bellie', 'weight'])->find($item->user_id);
+                $patient->duration = $this->duration($patient->id);
+                $patients[] = $patient ?? false;
             }
         }
 
@@ -122,17 +127,40 @@ class PatientController extends Controller
             ->get();
             $string = explode(' ', $request->search);
             foreach ($data as $item) {
-                $user = User::query()->with(['patient'])->find($item->user_id) ?? false;
+                $patient = User::query()->with(['patient', 'city_translate', 'bellie', 'weight'])->find($item->user_id) ?? false;
                 for($i = 0; $i < count($string); $i++) {
-                    if (strripos($user->name, $string[$i]) !== false) {
-                        $patients[] = $user;
-                    } elseif (strripos($user->last_name, $string[$i]) !== false) {
-                        $patients[] = $user;
+                    if (strripos($patient->name, $string[$i]) !== false) {
+                        $patient->duration = $this->duration($patient->id);
+                        $patients[] = $patient;
+                    } elseif (strripos($patient->last_name, $string[$i]) !== false) {
+                        $patient->duration = $this->duration($patient->id);
+                        $patients[] = $patient;
                     }
                 }
             }
         }
 
         return $patients;
+    }
+
+    public function duration(int $id)
+    {
+        $user = Patient::where('user_id', $id)->first();
+
+        $now = time();
+        $your_date = strtotime($user->conception_date);
+        $datediff = $now - $your_date;
+
+        $week = $datediff / (60 * 60 * 24);
+
+        $date_pregnanc = new Carbon($user->conception_date);
+        $date_now = Carbon::now();
+        $date = $date_now->diff($date_pregnanc);
+
+        return [
+                'month' => $date->format('%m'),
+                'week' => floor($week / 7),
+                'day' => floor($week),
+            ] ?? false;
     }
 }

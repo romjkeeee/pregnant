@@ -19,11 +19,11 @@ class ChatResource extends JsonResource
             'id'          => $this->id,
             'sender'      => [
                 'data' => $this->sender,
-                'user' => $this->info_sender
+                'user' => $this->info_sender_patient ?? $this->info_sender_doctor
             ],
             'recipient'   => [
                 'data' => $this->recipient,
-                'user' => $this->info_recipient
+                'user' => $this->info_recipient_patient ?? $this->info_recipient_doctor
             ],
             'lastMessage' => MessageResource::make($this->lastMessage)
         ];

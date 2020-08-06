@@ -11,6 +11,12 @@
             @include('components.ajax-select', ['name' => 'category_id','title' => 'Категории<span class="req">*</span>',
                      'route' => 'admin.preload.article-category', 'default' => ['val' => 5, 'text' => 'Мой ребенок']])
         </div>
+        <div class="col-lg-4">
+            <div class="form-group" style="padding: 5px">
+                <strong style="margin-bottom: 10px!important;">Неделя <span class="req">*</span></strong>
+                <input type="number" name="week" value="{{ old('week', $instance->week ?? '') }}" class="form-control">
+            </div>
+        </div>
         @include('components.multi-lang', ['fields' => [
              ['title' => 'Название <span class="req">*</span>', 'name' => 'title'],
              ['title' => 'Текст статьи <span class="req">*</span>', 'name' => 'text', 'tag' => 'textarea']

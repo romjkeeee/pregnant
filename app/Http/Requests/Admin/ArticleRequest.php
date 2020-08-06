@@ -31,6 +31,7 @@ class ArticleRequest extends FormRequest
             'translate.*.lang_id' => ['required', 'exists:langs,id'],
             'translate.*.title'   => ['required', 'string'],
             'translate.*.text'    => ['required', 'between:3,60000'],
+            'week' => 'nullable|min:1'
         ];
     }
 

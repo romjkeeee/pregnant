@@ -7,6 +7,7 @@
     <th data-toggle="true">#</th>
     <th data-toggle="true">Название</th>
     <th data-toggle="true">Предпоказ</th>
+    <th data-toggle="true">Неделя</th>
     <th class="text-right" data-sort-ignore="true">Действия</th>
 @endsection
 @section('table-body')
@@ -19,6 +20,7 @@
                     <img src="{{ asset($item->preview) }}" height="100px">
                 @endif
             </td>
+            <td class="footable-visible">{{ $item->week ?? null }}</td>
             <td class="text-right footable-visible footable-last-column">
                 @include('components.action', ['edit' => route('admin.mybaby.edit', $item->id), 'delete' => $item->id])
             </td>
