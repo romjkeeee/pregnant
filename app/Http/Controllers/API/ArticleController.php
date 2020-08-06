@@ -28,6 +28,7 @@ class ArticleController extends Controller
     {
         return ArticleCollection::make(Article::query()
             ->filter($request->only('category_id'))
+            ->filter($request->only('week'))
             ->paginate($request->get('perPage') ?? 10));
     }
 

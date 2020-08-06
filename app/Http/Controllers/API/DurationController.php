@@ -80,8 +80,7 @@ class DurationController extends Controller
                     $wy = $tm_yday / 7;
                     $wyp = $yday / 7;
                     $weeks = round($wy - $wyp);
-                    return \response(Duration::with('duration_articles')
-                        ->where('pos', $weeks)->first());
+                    return $weeks;
 
                 } elseif ($patient->conception_type === 'screening') {
                     $now = time();
