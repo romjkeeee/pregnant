@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ClinicResource;
 use App\Http\Resources\Collections\ClinicCollection;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -50,15 +51,33 @@ class ClinicController extends Controller
      * Show
      * Показать клинику
      *
-     * @authenticated required
-     * @response 200
      * @param $id
-     * @return ClinicResource
+     * @param Request $request
+     * @return ClinicResource|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function show($id)
+    public function show($id, Request $request)
     {
-        return ClinicResource::make(Clinic::query()
-            ->with(['city', 'region', 'departments', 'schedules', 'prices'])
-            ->findOrFail($id));
+        if($request->search) {
+            if ($request->type) {
+                return Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices'])
+                    ->where('type', $request->type)
+                    ->when($request->get('search'), function (Builder $query) use ($request) {
+                        $query->whereHas('translates', function (Builder $builder) use ($request) {
+                            $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                        });
+                    })->orderBy('id', 'desc')->paginate(20);
+            } else {
+                return Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices'])
+                    ->when($request->get('search'), function (Builder $query) use ($request) {
+                        $query->whereHas('translates', function (Builder $builder) use ($request) {
+                            $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                        });
+                    })->orderBy('id', 'desc')->paginate(20);
+            }
+        } else {
+            return ClinicResource::make(Clinic::query()
+                ->with(['city', 'region', 'departments', 'schedules', 'prices'])
+                ->findOrFail($id));
+        }
     }
 }

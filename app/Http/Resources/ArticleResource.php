@@ -21,6 +21,7 @@ class ArticleResource extends JsonResource
             'text'       => $this->translate->text ?? null,
             'image'      => $this->image ? asset($this->image) : null,
             'preview'    => $this->preview ? asset($this->preview) : null,
+            'week'    => $this->week ? asset($this->week) : null,
             'created_at' => $this->created_at ? $this->created_at->format(config('app.datetime_format')) : null,
             'updated_at' => $this->updated_at ? $this->updated_at->format(config('app.datetime_format')) : null,
             'category'   => ArticleCategoryResource::make($this->category),

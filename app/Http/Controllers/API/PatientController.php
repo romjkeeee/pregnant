@@ -96,7 +96,7 @@ class PatientController extends Controller
             $data = Patient::where([
                 'doctor_id' => $user->doctor->id,
                 ['created_at', '>=', $request->from],
-                ['created_at', '<=', $request->to ],
+                ['created_at', '<=', $request->to],
             ])->get();
 
             foreach ($data as $item) {
