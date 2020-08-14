@@ -53,7 +53,9 @@ class DoctorController extends Controller
                 $doctors->whereHas('clinics', function (Builder $clinic) use ($request) {
                     $clinic->where('id', $request->get('clinic_id'));
                 });
-            })->get());
+            })
+            ->where('id',$request->get('specialisation'))
+            ->get());
     }
 
     /**
