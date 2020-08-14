@@ -12,6 +12,7 @@ class Specialization extends BaseModel
 
     protected $translatedClass = SpecializationTranslate::class;
     protected $translatedForeignKey = 'specialization_id';
+    protected $guarded = [];
 
     public $timestamps = false;
 

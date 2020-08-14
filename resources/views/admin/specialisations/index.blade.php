@@ -6,6 +6,7 @@
 @section('table-header')
     <th data-toggle="true">#</th>
     <th data-toggle="true">Название</th>
+    <th data-toggle="true">Картинка</th>
     <th class="text-right" data-sort-ignore="true">Действия</th>
 @endsection
 @section('table-body')
@@ -13,6 +14,11 @@
         <tr class="footable-odd">
             <td class="footable-visible">{{ $item->id }}</td>
             <td class="footable-visible">{{ $item->translate->name ?? null }}</td>
+            <td class="footable-visible">
+                @if($item->photo)
+                    <img src="{{ asset($item->photo) }}" height="100px">
+                @endif
+            </td>
             <td class="text-right footable-visible footable-last-column">
                 @include('components.action', ['edit' => route('admin.specialisations.edit', $item->id), 'delete' => $item->id])
             </td>

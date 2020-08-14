@@ -49,7 +49,10 @@ class SpecialisationController extends Controller
         /** @var Specialization $specialization */
         $specialization = Specialization::query()->create();
         $specialization->syncTranslates($request->get('translate'));
-
+        if ($request->file('photo')) {
+            $specialization->photo = $request->file('photo')->store('spec');
+            $specialization->update();
+        }
         return redirect()->route('admin.specialisations.index')->with('success', 'Специализация успешно добавлена!');
     }
 
@@ -75,7 +78,10 @@ class SpecialisationController extends Controller
         /** @var Specialization $specialization */
         $specialization = Specialization::query()->findOrFail($id);
         $specialization->syncTranslates($request->get('translate'));
-
+        if ($request->file('photo')) {
+            $specialization->photo = 'storage/'.$request->file('photo')->store('spec');
+            $specialization->update();
+        }
         return back()->with('success', 'Сохранено!');
     }
 }
