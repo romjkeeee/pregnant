@@ -50,7 +50,7 @@ class SpecialisationController extends Controller
         $specialization = Specialization::query()->create();
         $specialization->syncTranslates($request->get('translate'));
         if ($request->file('photo')) {
-            $specialization->photo = $request->file('photo')->store('spec');
+            $specialization->photo = 'storage/'.$request->file('photo')->store('spec');
             $specialization->update();
         }
         return redirect()->route('admin.specialisations.index')->with('success', 'Специализация успешно добавлена!');
