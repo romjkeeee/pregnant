@@ -54,7 +54,9 @@ class DoctorController extends Controller
                     $clinic->where('id', $request->get('clinic_id'));
                 });
             })
-            ->where('id',$request->get('specialisation'))
+            ->when($request->specialisation, function ($query) use ($request) {
+                return $query->where('id',$request->get('specialisation'));
+            })
             ->get());
     }
 
