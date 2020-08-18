@@ -29,7 +29,7 @@ class Clinic extends BaseModel
         return $this->hasOne(Region::class, 'id', 'region_id');
     }
 
-    public function translate(): HasMany
+    public function translates(): HasMany
     {
         return $this->hasMany(ClinicTranslate::class, 'clinic_id', 'id');
     }
