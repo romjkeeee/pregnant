@@ -57,8 +57,8 @@ class ClinicController extends Controller
      */
     public function show($id, Request $request)
     {
-        if($request->search) {
-            if ($request->type) {
+        if($request->get('search')) {
+            if ($request->get('type')) {
                 dd($request->type);
                 return Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices'])
                     ->where('type', $request->type)
