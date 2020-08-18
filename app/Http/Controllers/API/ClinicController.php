@@ -83,35 +83,19 @@ class ClinicController extends Controller
 
     public function search(Request $request)
     {
-        if($request->search) {
-            if ($request->type) {
-                return Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices', 'translates'])
-                    ->where('type', $request->type)
-                    ->when($request->get('search'), function (Builder $query) use ($request) {
-                        $query->whereHas('translates', function (Builder $builder) use ($request) {
-                            $builder->where('name', 'LIKE', "%{$request->get('search')}%");
-                        });
-                    })->when($request->get('city_id'), function (Builder $query) use ($request) {
-                        $query->whereHas('city', function (Builder $builder) use ($request) {
-                            $builder->where('id', $request->get('city_id'));
-                        });
-                    })->orderBy('id', 'desc')->paginate(20);
-            } else {
-                return Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices', 'translates'])
-                    ->when($request->get('search'), function (Builder $query) use ($request) {
-                        $query->whereHas('translates', function (Builder $builder) use ($request) {
-                            $builder->where('name', 'LIKE', "%{$request->get('search')}%");
-                        });
-                    })->when($request->get('city_id'), function (Builder $query) use ($request) {
-                        $query->whereHas('city', function (Builder $builder) use ($request) {
-                            $builder->where('id', $request->get('city_id'));
-                        });
-                    })->orderBy('id', 'desc')->paginate(20);
-            }
-        }else{
-            return Clinic::query()
-                ->with(['city', 'region', 'departments', 'schedules', 'prices', 'translates'])
-                ->paginate(20);
-        }
+            return Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices', 'translates'])
+                ->when($request->get('type'), function (Builder $query) use ($request) {
+                    $query->where('type', $request->get('type'));
+                })
+                ->when($request->get('search'), function (Builder $query) use ($request) {
+                    $query->whereHas('translates', function (Builder $builder) use ($request) {
+                        $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                    });
+                })->when($request->get('city_id'), function (Builder $query) use ($request) {
+                    $query->whereHas('city', function (Builder $builder) use ($request) {
+                        $builder->where('id', $request->get('city_id'));
+                    });
+                })->orderBy('id', 'desc')->paginate(20);
+
     }
 }
