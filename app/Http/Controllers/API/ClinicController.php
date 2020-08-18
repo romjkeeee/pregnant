@@ -109,9 +109,9 @@ class ClinicController extends Controller
                     })->orderBy('id', 'desc')->paginate(20);
             }
         }else{
-            return ClinicResource::make(Clinic::query()
-                ->with(['city', 'region', 'departments', 'schedules', 'prices'])
-                ->get());
+            return Clinic::query()
+                ->with(['city', 'region', 'departments', 'schedules', 'prices', 'translates'])
+                ->get();
         }
     }
 }
