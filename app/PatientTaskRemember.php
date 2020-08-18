@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class PatientTaskRemember extends Model
 {
-    //
+    protected $guarded = ['id'];
+
 }
