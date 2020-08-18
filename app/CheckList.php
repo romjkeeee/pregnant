@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\MultiLangTrait;
 use App\Translate\CheckListTranslate;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -45,5 +46,10 @@ class CheckList extends BaseModel
     public function tasks(): HasMany
     {
         return $this->hasMany(CheckListTask::class, 'list_id', 'id');
+    }
+
+    public function remember(): BelongsToMany
+    {
+        return $this->belongsToMany(CheckListTask::class, 'patient_task_remembers', 'task_id', 'id');
     }
 }
