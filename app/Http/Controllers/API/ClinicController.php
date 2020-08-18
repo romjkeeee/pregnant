@@ -63,14 +63,14 @@ class ClinicController extends Controller
                     ->where('type', $request->type)
                     ->when($request->get('search'), function (Builder $query) use ($request) {
                         $query->whereHas('translates', function (Builder $builder) use ($request) {
-                            $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                            $builder->where('name', 'LIKE', '%'.$request->get('search').'%');
                         });
                     })->orderBy('id', 'desc')->paginate(20);
             } else {
                 return Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices'])
                     ->when($request->get('search'), function (Builder $query) use ($request) {
                         $query->whereHas('translates', function (Builder $builder) use ($request) {
-                            $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                            $builder->where('name', 'LIKE', '%'.$request->get('search').'%');
                         });
                     })->orderBy('id', 'desc')->paginate(20);
             }
