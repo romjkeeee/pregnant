@@ -44,7 +44,7 @@ class CheckListTask extends BaseModel
 
     public function remember(): BelongsToMany
     {
-        return $this->belongsToMany(CheckListTask::class, 'patient_task_remembers', 'task_id', 'patient_id');
+        return $this->belongsToMany(Patient::class, 'patient_task_remembers', 'task_id', 'patient_id')->select('remember','date');
     }
 
 }
