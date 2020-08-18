@@ -111,7 +111,7 @@ class ClinicController extends Controller
         }else{
             return Clinic::query()
                 ->with(['city', 'region', 'departments', 'schedules', 'prices', 'translates'])
-                ->get();
+                ->paginate(20);
         }
     }
 }
