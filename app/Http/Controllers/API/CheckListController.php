@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\CheckList;
+use App\Http\Requests\RememberTaskRequest;
 use App\Http\Requests\SelectTaskRequest;
 use App\Http\Resources\CheckListResource;
 use App\PatientTask;
+use App\PatientTaskRemember;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Application;
@@ -54,6 +56,36 @@ class CheckListController extends Controller
     public function store(SelectTaskRequest $request)
     {
         auth()->user()->patient()->first()->tasks()->attach($request->validated());
+
+        return \response(['Сохранено.']);
+    }
+
+    /**
+     * Store remember
+     *
+     * @bodyParam task_id integer
+     * @bodyParam remember boolean
+     * @bodyParam date date example: 2020-08-18
+     *
+     */
+    public function remember(RememberTaskRequest $request)
+    {
+        auth()->user()->patient()->first()->remember()->attach($request->validated());
+
+        return \response(['Сохранено.']);
+    }
+
+    /**
+     * Destroy remember
+     *
+     *
+     */
+    public function destroy_remember($id)
+    {
+        PatientTaskRemember::query()->where([
+            'patient_id' => auth()->user()->patient()->first()->id,
+            'task_id'    => $id,
+        ])->delete();
 
         return \response(['Сохранено.']);
     }
