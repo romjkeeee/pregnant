@@ -65,7 +65,7 @@ class PatientController extends Controller
         $patient = auth()->user()->patient()->firstOrFail();
         $patient->update($request->validated());
 
-        return \response(['Сохранено']);
+        return $this->duration($patient->id);
     }
 
     /**

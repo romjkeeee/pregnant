@@ -251,6 +251,8 @@ class AuthController extends Controller
             $user->pregnanc = $duration->get_duration();
         } else {
             $user = User::query()->with(['city', 'region', 'doctor'])->find(auth()->id());
+            $user->specialisation = $user->doctor->specialisations;
+            $user->clinic = $user->doctor->clinics;
         }
 
         return response()->json($user);
