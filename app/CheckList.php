@@ -50,6 +50,6 @@ class CheckList extends BaseModel
 
     public function remember(): BelongsToMany
     {
-        return $this->belongsToMany(CheckListTask::class, 'patient_task_remembers', 'task_id', 'list_id');
+        return $this->belongsToMany(CheckListTask::class, 'patient_task_remembers', 'list_id', 'task_id');
     }
 }
