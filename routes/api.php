@@ -100,6 +100,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     /** clinics routes */
     Route::apiResource('clinics/reviews', 'ClinicReviewController');
     Route::apiResource('clinics', 'ClinicController');
+    Route::post('clinics-search', 'ClinicController@search');
 
     Route::apiResource('specializations', 'SpecializationController');
     Route::apiResource('durations', 'DurationController');
