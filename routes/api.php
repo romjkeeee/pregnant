@@ -75,7 +75,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     /** patient routes */
     Route::apiResource('check-lists', 'CheckListController');
     Route::post('remember-task', 'CheckListController@remember');
-    Route::delete('remember-task', 'CheckListController@destroy_remember');
+    Route::delete('remember-task/{id}', 'CheckListController@destroy_remember');
 
     Route::get('bellies/last', 'PatientBellyController@last');
     Route::apiResource('bellies', 'PatientBellyController');
