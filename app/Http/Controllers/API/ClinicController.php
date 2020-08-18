@@ -68,11 +68,9 @@ class ClinicController extends Controller
                     })->orderBy('id', 'desc')->paginate(20);
             } else {
                 return Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices'])
-                    ->when($request->get('search'), function (Builder $query) use ($request) {
-                        $query->whereHas('translates', function (Builder $builder) use ($request) {
+                        ->whereHas('translates', function (Builder $builder) use ($request) {
                             return $builder->where('name', 'LIKE', '%'.$request->get('search').'%');
-                        });
-                    })->orderBy('id', 'desc')->paginate(20);
+                        })->orderBy('id', 'desc')->paginate(20);
             }
         } else {
             return ClinicResource::make(Clinic::query()
