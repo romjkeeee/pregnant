@@ -32,6 +32,14 @@ class Clinic extends BaseModel
     /**
      * @return HasOne
      */
+    public function translate(): HasOne
+    {
+        return $this->hasOne(ClinicTranslate::class, 'clinic_id', 'id');
+    }
+
+    /**
+     * @return HasOne
+     */
     public function city(): HasOne
     {
         return $this->hasOne(City::class, 'id', 'city_id');
