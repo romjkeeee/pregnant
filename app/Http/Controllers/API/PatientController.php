@@ -65,7 +65,7 @@ class PatientController extends Controller
         $patient = auth()->user()->patient()->firstOrFail();
         $patient->update($request->validated());
 
-        return \response(['Сохранено']);
+        return $this->duration($patient->id);
     }
 
     /**
@@ -101,8 +101,10 @@ class PatientController extends Controller
 
             foreach ($data as $item) {
                 $patient = User::query()->with(['patient', 'city_translate', 'bellie', 'weight'])->find($item->user_id);
-                $patient->duration = $this->duration($patient->id);
-                $patients[] = $patient ?? false;
+                if ($patient->role !== 'doctor') {
+                    $patient->duration = $this->duration($patient->id);
+                    $patients[] = $patient ?? false;
+                }
             }
         } else {
             $patients = [];
@@ -112,8 +114,10 @@ class PatientController extends Controller
 
             foreach ($data as $item) {
                 $patient = User::query()->with(['patient', 'city_translate', 'bellie', 'weight'])->find($item->user_id);
-                $patient->duration = $this->duration($patient->id);
-                $patients[] = $patient ?? false;
+                if ($patient->role !== 'doctor') {
+                    $patient->duration = $this->duration($patient->id);
+                    $patients[] = $patient ?? false;
+                }
             }
         }
 
@@ -128,13 +132,15 @@ class PatientController extends Controller
             $string = explode(' ', $request->search);
             foreach ($data as $item) {
                 $patient = User::query()->with(['patient', 'city_translate', 'bellie', 'weight'])->find($item->user_id) ?? false;
-                for($i = 0; $i < count($string); $i++) {
-                    if (strripos($patient->name, $string[$i]) !== false) {
-                        $patient->duration = $this->duration($patient->id);
-                        $patients[] = $patient;
-                    } elseif (strripos($patient->last_name, $string[$i]) !== false) {
-                        $patient->duration = $this->duration($patient->id);
-                        $patients[] = $patient;
+                if ($patient->role !== 'doctor') {
+                    for ($i = 0; $i < count($string); $i++) {
+                        if (strripos($patient->name, $string[$i]) !== false) {
+                            $patient->duration = $this->duration($patient->id);
+                            $patients[] = $patient;
+                        } elseif (strripos($patient->last_name, $string[$i]) !== false) {
+                            $patient->duration = $this->duration($patient->id);
+                            $patients[] = $patient;
+                        }
                     }
                 }
             }
