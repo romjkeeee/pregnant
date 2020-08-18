@@ -91,14 +91,14 @@ class ClinicController extends Controller
                         $query->whereHas('translates', function (Builder $builder) use ($request) {
                             $builder->where('name', 'LIKE', "%{$request->get('search')}%");
                         });
-                    })->orderBy('id', 'desc')->paginate(20));
+                    })->orderBy('id', 'desc'));
             } else {
                 return ClinicResource::make(Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices'])
                     ->when($request->get('search'), function (Builder $query) use ($request) {
                         $query->whereHas('translates', function (Builder $builder) use ($request) {
                             $builder->where('name', 'LIKE', "%{$request->get('search')}%");
                         });
-                    })->orderBy('id', 'desc')->paginate(20));
+                    })->orderBy('id', 'desc'));
             }
         }
     }
