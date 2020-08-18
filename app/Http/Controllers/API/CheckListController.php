@@ -42,7 +42,7 @@ class CheckListController extends Controller
             'tasks.patient' => function (BelongsToMany $many) {
                 $many->where('patient_id', auth()->user()->patient->id ?? null);
             }
-        ])->with(['remember' => function (BelongsToMany $many) {
+        ])->with(['tasks.remember' => function (BelongsToMany $many) {
                 $many->where('patient_id', auth()->user()->patient->id ?? null);
             }
         ])->get());
