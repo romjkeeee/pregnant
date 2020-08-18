@@ -59,6 +59,7 @@ class ClinicController extends Controller
     {
         if($request->search) {
             if ($request->type) {
+                dd($request->type);
                 return Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices'])
                     ->where('type', $request->type)
                     ->whereHas('translate', function (Builder $builder) use ($request) {
