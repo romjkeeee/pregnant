@@ -70,7 +70,14 @@ class CheckListController extends Controller
      */
     public function remember(RememberTaskRequest $request)
     {
-        auth()->user()->patient()->first()->remember()->attach($request->validated());
+        $patient = auth()->user()->patient()->first();
+
+        $remember =  new PatientTaskRemember();
+        $remember->task_id = $request->task_id;
+        $remember->patient_id = $patient->id;
+        $remember->remember = $request->remember;
+        $remember->date = $request->date;
+        $remember->save();
 
         return \response(['Сохранено.']);
     }
