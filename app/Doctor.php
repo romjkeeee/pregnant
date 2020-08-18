@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Translate\ClinicTranslate;
+use App\Translate\SpecializationTranslate;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -33,6 +35,16 @@ class Doctor extends BaseModel
     public function specialisations(): BelongsToMany
     {
         return $this->belongsToMany(Specialization::class, 'doctor_specializations', 'doctor_id', 'specialization_id');
+    }
+
+    public function specialisationsTranslate()
+    {
+        return $this->hasMany(SpecializationTranslate::class, 'specialization_id');
+    }
+
+    public function translates(): hasMany
+    {
+        return $this->hasMany(ClinicTranslate::class, 'clinic_id');
     }
 
     /**

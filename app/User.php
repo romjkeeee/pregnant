@@ -223,9 +223,4 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(PatientWeight::class, 'id', 'patient_id');
     }
-
-    public function specialisations() : HasOne
-    {
-
-    }
 }

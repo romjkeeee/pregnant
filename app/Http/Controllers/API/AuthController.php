@@ -253,6 +253,9 @@ class AuthController extends Controller
             $user = User::query()->with(['city', 'region', 'doctor'])->find(auth()->id());
             $user->specialisation = $user->doctor->specialisations;
             $user->clinic = $user->doctor->clinics;
+            $user->clinic_translate = $user->doctor->translates;
+            $user->specialisations = $user->doctor->specialisations;
+            $user->specialisations_translate = $user->doctor->specialisationsTranslate;
         }
 
         return response()->json($user);
