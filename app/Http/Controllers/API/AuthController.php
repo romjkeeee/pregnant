@@ -249,6 +249,7 @@ class AuthController extends Controller
             $user = User::query()->with(['city', 'region', 'patient'])->find(auth()->id());
             $duration = new DurationController();
             $user->pregnanc = $duration->get_duration();
+            $user->weight = $user->patient->weight;
         } else {
             $user = User::query()->with(['city', 'region', 'doctor'])->find(auth()->id());
             $user->specialisation = $user->doctor->specialisations;
