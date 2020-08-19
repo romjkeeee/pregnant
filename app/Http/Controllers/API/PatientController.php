@@ -167,6 +167,6 @@ class PatientController extends Controller
                 'month' => $date->format('%m'),
                 'week' => floor($week / 7),
                 'day' => floor($week),
-            ] ?? false;
+        ] ?? false;
     }
 }

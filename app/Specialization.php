@@ -26,8 +26,8 @@ class Specialization extends BaseModel
         return $this->belongsToMany(Doctor::class, 'doctor_specializations', 'specialization_id', 'doctor_id');
     }
 
-    public function translate(): HasMany
+    public function translates(): HasMany
     {
-        return $this->hasMany(self::$translatedClass, self::$translatedForeignKey);
+        return $this->hasMany($this->translatedClass, $this->translatedForeignKey);
     }
 }

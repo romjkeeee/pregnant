@@ -80,7 +80,14 @@ class DurationController extends Controller
                     $wy = $tm_yday / 7;
                     $wyp = $yday / 7;
                     $weeks = round($wy - $wyp);
-                    return $weeks;
+                    $date_pregnanc = new Carbon($day_menstruation);
+                    $date_now = Carbon::now();
+                    $date = $date_now->diff($date_pregnanc);
+                    return [
+                            'month' => $date->format('%m'),
+                            'week' => floor($weeks / 7),
+                            'day' => floor($weeks)
+                        ] ?? false;
 
                 } elseif ($patient->conception_type === 'screening') {
                     $now = time();
@@ -96,7 +103,7 @@ class DurationController extends Controller
                     return [
                             'month' => $date->format('%m'),
                             'week' => floor($week / 7),
-                            'day' => floor($week),
+                            'day' => floor($week)
                         ] ?? false;
                 }
             }else{
