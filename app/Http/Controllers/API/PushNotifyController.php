@@ -15,7 +15,7 @@ class PushNotifyController extends Controller
 {
     public function sendPush(Request $request)
     {
-        $user = User::find($request->id);
+        $user = User::query()->where('id',$request->id)->first();
         $data = [
             "to" => $user->push_key,
             "notification" =>
@@ -40,8 +40,8 @@ class PushNotifyController extends Controller
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
 
-        curl_exec($ch);
+        $data = curl_exec($ch);
 
-        return response('message', 'Notification sent!');
+        return response(['message'=> 'Notification sent!', 'data' => $data]);
     }
 }
