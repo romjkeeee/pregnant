@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
  */
 class PushNotifyController extends Controller
 {
-    public function sendPush($body = null, $id = null)
+    public function sendPush($body, $id)
     {
         $user = User::query()->where('id',$id)->first();
         $data = [
