@@ -13,16 +13,16 @@ use Illuminate\Http\Request;
  */
 class PushNotifyController extends Controller
 {
-    public function sendPush(Request $request)
+    public function sendPush($body = null, $id = null)
     {
-        $user = User::query()->where('id',$request->id)->first();
+        $user = User::query()->where('id',$id)->first();
         $data = [
             "to" => $user->push_key,
             "notification" =>
                 [
-                    "title" => 'Web Push',
-                    "body" => "Sample Notification",
-                    "icon" => url('/logo.png')
+                    "title" => 'Pregnancy',
+                    "body" => $body ?? 'New notification',
+//                    "icon" => url('/logo.png')
                 ],
         ];
         $dataString = json_encode($data);

@@ -31,6 +31,7 @@ class ChatController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+
     }
 
     /**
@@ -45,6 +46,8 @@ class ChatController extends Controller
                 'sender_id' => auth()->id(),
                 'recipient_id' => $request->recipient_id
             ])->first() ?? false;
+        $sendPush = new PushNotifyController();
+        $sendPush->sendPush('You have new chat',$request->recipient_id);
         if ($chat_id) {
             return json_encode($chat_id);
         } else {
@@ -65,7 +68,9 @@ class ChatController extends Controller
         /** @var ChatMessage $message */
         $message = auth()->user()->messages()->create($request->validated());
         $message->attaches()->createMany($request->all()['attaches'] ?? []);
-
+        $sendPush = new PushNotifyController();
+        $chat = Chat::query()->where('id', $request->chat_id)->first();
+        $sendPush->sendPush(ChatMessage::query()->where('id',$message->id)->first('text'),$chat->recipient_id);
         return MessageResource::make(ChatMessage::query()->findOrFail($message->id));
     }
 
