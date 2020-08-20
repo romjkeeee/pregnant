@@ -104,6 +104,8 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
 
     Route::apiResource('specializations', 'SpecializationController');
     Route::apiResource('durations', 'DurationController');
+
+    Route::get('send_push', 'PushNotifyController@sendPush');
 });
 
 
