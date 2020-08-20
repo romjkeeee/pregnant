@@ -13,13 +13,6 @@ use Illuminate\Http\Request;
  */
 class PushNotifyController extends Controller
 {
-    protected $serverKey;
-
-    public function __construct()
-    {
-        $this->serverKey = env('FIREBASE_SERVER_KEY');
-    }
-
     public function sendPush(Request $request)
     {
         $user = User::find($request->id);
@@ -35,7 +28,7 @@ class PushNotifyController extends Controller
         $dataString = json_encode($data);
 
         $headers = [
-            'Authorization: key=' . $this->serverKey,
+            'Authorization: key=' . env('FIREBASE_SERVER_KEY'),
             'Content-Type: application/json',
         ];
 
