@@ -63,6 +63,12 @@ class AuthController extends Controller
                 'error' => __('auth.unauthorized')
             ], 401);
         }
+        if ($request->push_key)
+        {
+            $user = User::query()->where('phone',$request->phone)->first();
+            $user->push_key = $request->push_key;
+            $user->update();
+        }
 
         return $this->respondWithToken($token);
     }

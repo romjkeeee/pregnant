@@ -39,7 +39,8 @@ class User extends Authenticatable implements JWTSubject
         'building',
         'apartment',
         'image',
-        'notification'
+        'notification',
+        'push_key'
     ];
 
     /**
