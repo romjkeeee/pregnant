@@ -17,7 +17,7 @@ class PushNotifyController extends Controller
 
     public function __construct()
     {
-        $this->serverKey = config('app.firebase_server_key');
+        $this->serverKey = env('FIREBASE_SERVER_KEY');
     }
 
     public function sendPush(Request $request)
