@@ -26,7 +26,7 @@ class TranslateController extends Controller
             'items'      => Translate::query()->with(['translate'])->where(function (Builder $builder) use ($request) {
                 if ($request->get('search')) {
                     $builder->whereHas('translates', function ($query) use ($request) {
-                        $query->where('text', 'LIKE', "%{$request->get('search')}%");
+                        $query->where('key', 'LIKE', "%{$request->get('search')}%");
                     });
                 }
             })->orderBy('id')->paginate(20)

@@ -30,9 +30,7 @@ class PatientBellyRequest extends FormRequest
             'date'                  => [
                 'required',
                 'date',
-                'before:now',
-                Rule::unique('patient_bellies', 'date')
-                    ->where('patient_id', auth()->user()->patient->id)
+                'before:now'
             ]
         ];
     }

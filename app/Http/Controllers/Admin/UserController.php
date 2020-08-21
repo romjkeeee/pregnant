@@ -52,8 +52,11 @@ class UserController extends Controller
      */
     public function store(UserRequest $request): RedirectResponse
     {
-        User::query()->create($request->validated());
-
+        $user = User::query()->create($request->validated());
+        if ($request->file('image')) {
+            $user->image = 'storage/'.$request->file('image')->store('user');
+            $user->update();
+        }
         return redirect()->route('admin.users.index')->with('success', 'Пользователь создан!');
     }
 
@@ -79,9 +82,12 @@ class UserController extends Controller
     public function update(UserRequest $request, $id): RedirectResponse
     {
         User::query()->findOrFail($id)->update($request->validated());
-
+        if ($request->file('image')) {
+            $user = User::query()->where('id',$id)->first();
+            $user->image = 'storage/'.$request->file('image')->store('user');
+            $user->update();
+        }
         return back()->with('success', 'Сохранено!');
     }
-
 
 }

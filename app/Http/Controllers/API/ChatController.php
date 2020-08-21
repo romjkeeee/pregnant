@@ -12,8 +12,10 @@ use App\Http\Resources\Chat\ChatCollection;
 use App\Http\Resources\Chat\MessageCollection;
 use App\Http\Resources\Chat\MessageResource;
 use App\Http\Resources\Chat\ChatResource;
+use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @group Chat
@@ -30,6 +32,7 @@ class ChatController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+
     }
 
     /**
@@ -38,11 +41,20 @@ class ChatController extends Controller
      * @bodyParam recipient_id integer
      *
      */
-    public function start(StartRequest $request): ChatResource
+    public function start(StartRequest $request)
     {
-        $chat = auth()->user()->senderChats()->create($request->validated());
-
-        return ChatResource::make($chat);
+        $chat_id = DB::table('chats')->where([
+                'sender_id' => auth()->id(),
+                'recipient_id' => $request->recipient_id
+            ])->first() ?? false;
+        $sendPush = new PushNotifyController();
+        $sendPush->sendPush('You have new chat',$request->recipient_id);
+        if ($chat_id) {
+            return json_encode($chat_id);
+        } else {
+            $chat = auth()->user()->senderChats()->create($request->validated());
+            return ChatResource::make($chat);
+        }
     }
 
     /**
@@ -57,7 +69,10 @@ class ChatController extends Controller
         /** @var ChatMessage $message */
         $message = auth()->user()->messages()->create($request->validated());
         $message->attaches()->createMany($request->all()['attaches'] ?? []);
-
+        $sendPush = new PushNotifyController();
+        $chat = Chat::query()->where('id', $request->chat_id)->first();
+        $body = User::query()->where('id',$message->sender_id)->first();
+        $sendPush->sendPush($message->text,$chat->recipient_id, $body->name .' '. $body->second_name);
         return MessageResource::make(ChatMessage::query()->findOrFail($message->id));
     }
 
@@ -107,5 +122,14 @@ class ChatController extends Controller
                     });
                 });
             })->orderByDesc('id')->paginate($request->get('perPage') ?? 20));
+    }
+
+    public function visible(Request $request) {
+        foreach ($request->data as $data) {
+            ChatMessage::find($data)->update([
+                'visible' => 1
+            ]);
+        }
+        return \response(['Ok']);
     }
 }

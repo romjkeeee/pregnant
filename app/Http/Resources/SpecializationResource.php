@@ -18,6 +18,7 @@ class SpecializationResource extends JsonResource
         return [
             'id'    => $this->id,
             'name'  => $this->translate->name ?? null,
+            'description'  => $this->translate->description ?? null,
             'photo' => $this->photo ? asset($this->photo) : null,
         ];
     }

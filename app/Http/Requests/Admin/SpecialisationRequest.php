@@ -27,6 +27,8 @@ class SpecialisationRequest extends FormRequest
             'translate'           => ['required', 'array'],
             'translate.*.lang_id' => ['required', 'exists:langs,id'],
             'translate.*.name'    => ['required', 'max:192'],
+            'translate.*.description'    => ['required', 'max:192'],
+            'photo'               => ['image'],
         ];
     }
 }

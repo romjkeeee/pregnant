@@ -4,7 +4,10 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\LocationRequest;
 use App\Http\Requests\NameUpdateRequest;
+use App\Http\Requests\AddDoctorRequest;
 use App\Http\Requests\NotificationStateRequest;
+use App\Http\Requests\UpdateEmail;
+use App\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -60,6 +63,12 @@ class AuthController extends Controller
                 'error' => __('auth.unauthorized')
             ], 401);
         }
+        if ($request->push_key)
+        {
+            $user = User::query()->where('phone',$request->phone)->first();
+            $user->push_key = $request->push_key;
+            $user->update();
+        }
 
         return $this->respondWithToken($token);
     }
@@ -96,7 +105,7 @@ class AuthController extends Controller
                     ? $user->createDoctor($request->validatedDoctor(), $request->validatedClinics(), $request->validatedSpecialisations())
                     : $user->patient()->create($request->validatedPatient());
 
-                $user->smsCodes()->create(['code' => Str::random(10)]);
+//                $user->smsCodes()->create(['code' => mt_rand(1000, 9999)]);
             });
             $token = JWTAuth::attempt($request->only(['phone', 'password']));
 
@@ -195,6 +204,19 @@ class AuthController extends Controller
     }
 
     /**
+     * @param AddDoctorRequest $request
+     * @return ResponseFactory|Application|Response
+     */
+
+    public function setDoctor(AddDoctorRequest $request)
+    {
+        Patient::query()->update($request->validated());
+        return \response([
+            'status' => 'success',
+            'message'=>'Saved']);
+    }
+
+    /**
      * Update name
      *
      * @bodyParam name string
@@ -228,10 +250,27 @@ class AuthController extends Controller
      */
     public function me()
     {
+<<<<<<< HEAD
         $user = User::query()->with(['city', 'region', 'patient'])->find(auth()->id());
 
         $duration = new DurationController();
         $user->pregnanc = $duration->get_duration();
+=======
+        $auth = User::find(auth()->id());
+        if ($auth->role == 'patient') {
+            $user = User::query()->with(['city', 'region', 'patient'])->find(auth()->id());
+            $duration = new DurationController();
+            $user->pregnanc = $duration->get_duration();
+            $user->weight = $user->patient->weight;
+        } else {
+            $user = User::query()->with(['city', 'region', 'doctor'])->find(auth()->id());
+            $user->specialisation = $user->doctor->specialisations;
+            $user->clinic = $user->doctor->clinics;
+            $user->clinic_translate = $user->doctor->translates;
+            $user->specialisations = $user->doctor->specialisations;
+            $user->specialisations_translate = $user->doctor->specialisationsTranslate;
+        }
+>>>>>>> 93c6244dcde707656a762e4398f8a854566cdaa3
 
         return response()->json($user);
     }
@@ -251,6 +290,23 @@ class AuthController extends Controller
             $user->update();
         }
         return response()->json(['status' => 'success' , 'data' => $user]);
+    }
+
+    /**
+     * @param UpdateEmail $request
+     * @return JsonResponse
+     */
+
+    public function updateEmail(UpdateEmail $request)
+    {
+        $user = User::find(auth()->user()->id);
+        $user->email = $request->email;
+        $user->update();
+
+        return \response()->json([
+            'status' => 'success',
+            'data' => $request->email
+        ]);
     }
 
     /**

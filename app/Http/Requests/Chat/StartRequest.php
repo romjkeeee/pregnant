@@ -27,9 +27,7 @@ class StartRequest extends FormRequest
         return [
             'recipient_id' => [
                 'required',
-                'exists:users,id',
-                Rule::notIn([auth()->id()]),
-                Rule::unique('chats', 'recipient_id')->where('sender_id', auth()->id())
+                'exists:users,id'
             ]
         ];
     }

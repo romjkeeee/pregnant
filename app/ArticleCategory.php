@@ -16,8 +16,8 @@ class ArticleCategory extends BaseModel
     /**
      * @return HasMany
      */
-    public function articles(): HasMany
+    public function articles()
     {
-        return $this->hasMany(Article::class, 'category_id', 'id');
+        return $this->hasOne('App\Translate\ArticleCategoryTranslate', 'category_id');
     }
 }

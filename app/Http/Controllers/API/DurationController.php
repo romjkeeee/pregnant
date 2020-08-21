@@ -80,20 +80,42 @@ class DurationController extends Controller
                     $wy = $tm_yday / 7;
                     $wyp = $yday / 7;
                     $weeks = round($wy - $wyp);
-                    return \response(Duration::with('duration_articles')
-                        ->where('pos', $weeks)->first());
+                    $date_pregnanc = new Carbon($day_menstruation);
+                    $date_now = Carbon::now();
+                    $date = $date_now->diff($date_pregnanc);
+                    return [
+                            'month' => $date->format('%m'),
+                            'week' => floor($weeks / 7),
+                            'day' => floor($weeks)
+                        ] ?? false;
 
                 } elseif ($patient->conception_type === 'screening') {
+<<<<<<< HEAD
                     return \response('Еще учусь как правильно высчитать');
                 } elseif ($patient->conception_type === 'pregnanc') {
+=======
+                    $now = time();
+                    $your_date = strtotime($patient->conception_date);
+                    $datediff = $now - $your_date;
+
+                    $week = $datediff / (60 * 60 * 24);
+
+>>>>>>> 93c6244dcde707656a762e4398f8a854566cdaa3
                     $date_pregnanc = new Carbon($patient->conception_date);
                     $date_now = Carbon::now();
                     $date = $date_now->diff($date_pregnanc);
 
                     return [
+<<<<<<< HEAD
                         'month' => $date->format('%m'),
                         'day' => $date->format('%d')
                     ] ?? false;
+=======
+                            'month' => $date->format('%m'),
+                            'week' => floor($week / 7),
+                            'day' => floor($week)
+                        ] ?? false;
+>>>>>>> 93c6244dcde707656a762e4398f8a854566cdaa3
                 }
             }else{
                 return \response('пациент не беременный');

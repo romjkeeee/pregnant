@@ -2,7 +2,6 @@
 
 namespace App;
 
-use App\Traits\StoreImageTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -40,7 +39,8 @@ class User extends Authenticatable implements JWTSubject
         'building',
         'apartment',
         'image',
-        'notification'
+        'notification',
+        'push_key'
     ];
 
     /**
@@ -166,6 +166,14 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(City::class, 'id', 'city_id');
     }
 
+    /**
+     * @return HasMany
+     */
+
+    public function city_translate(): hasMany
+    {
+        return $this->hasMany(Translate\CityTranslate::class, 'city_id', 'city_id');
+    }
 
     /**
      * @return HasOne
@@ -197,5 +205,23 @@ class User extends Authenticatable implements JWTSubject
     public function messages(): HasMany
     {
         return $this->hasMany(ChatMessage::class, 'sender_id', 'id');
+    }
+
+    /**
+     * @return HasOne
+     */
+
+    public function bellie() : HasOne
+    {
+        return $this->hasOne(PatientBelly::class, 'id', 'patient_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+
+    public function weight() : HasOne
+    {
+        return $this->hasOne(PatientWeight::class, 'id', 'patient_id');
     }
 }

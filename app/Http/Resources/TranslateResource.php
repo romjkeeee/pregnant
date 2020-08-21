@@ -2,8 +2,11 @@
 
 namespace App\Http\Resources;
 
+use App\Translate;
+use App\Translate\TranslateText;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Lang;
 
 class TranslateResource extends JsonResource
 {
@@ -15,10 +18,16 @@ class TranslateResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'id'    => $this->id,
-            'key'   => $this->key,
-            'text' => $this->translate->text ?? null,
-        ];
+        $data = [];
+
+        $items = TranslateText::where('translate_id', $this->translate->translate_id)->get();
+
+        foreach ($items as $item) {
+            $data[Lang::find($item->lang_id)->code] = [
+                $this->key.'_' => $item->text
+            ];
+        }
+
+        return $data;
     }
 }

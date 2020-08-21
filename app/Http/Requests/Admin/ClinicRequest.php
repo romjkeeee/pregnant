@@ -29,7 +29,7 @@ class ClinicRequest extends FormRequest
             'region_id' => ['required', 'exists:regions,id'],
             'city_id'   => ['required', 'exists:cities,id'],
             'type'      => ['required', Rule::in(Clinic::PRIVATE, Clinic::STATE)],
-            'phone'     => ['required', 'phone:RU'],
+            'phone'     => ['required', /*'phone:RU'*/],
             'image'     => ['nullable', 'image', 'max:2048'],
             'lng'       => ['required', 'min:3', 'max:32'],
             'lat'       => ['required', 'min:3', 'max:32'],
