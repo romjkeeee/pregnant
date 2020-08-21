@@ -264,6 +264,7 @@ class AuthController extends Controller
             $user->specialisations = $user->doctor->specialisations;
             $user->specialisations_translate = $user->doctor->specialisationsTranslate;
         }
+        /**/
         return response()->json($user);
     }
 
