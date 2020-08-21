@@ -260,9 +260,21 @@ class AuthController extends Controller
             $user = User::query()->with(['city', 'region', 'doctor'])->find(auth()->id());
             $user->specialisation = $user->doctor->specialisations;
             $user->clinic = $user->doctor->clinics;
-            $user->clinic_translate = $user->doctor->translates;
             $user->specialisations = $user->doctor->specialisations;
-            $user->specialisations_translate = $user->doctor->specialisationsTranslate;
+
+            /* Нет времени разбиратся, потом переделать и убрать этот костыль */
+            $specialisations_translate = [];
+            foreach ($user->specialisations as $item) {
+                $specialisations_translate[] = SpecializationTranslate::where('specialization_id', $item->id)->get();
+            }
+            $user->specialisations_translate = $specialisations_translate;
+            /* Нет времени разбиратся, потом переделать и убрать этот костыль */
+            $clinic_translate = [];
+            foreach ($user->clinic as $item) {
+                $clinic_translate[] = ClinicTranslate::where('clinic_id', $item->id)->get();
+            }
+            $user->clinic_translate = $clinic_translate;
+
         }
         /**/
         return response()->json($user);
