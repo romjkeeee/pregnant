@@ -71,7 +71,7 @@ class ChatController extends Controller
         $sendPush = new PushNotifyController();
         $chat = Chat::query()->where('id', $request->chat_id)->first();
         $body = ChatMessage::query()->where('id',$chat->id)->first();
-        $sendPush->sendPush($body->text,$chat->recipient_id);
+        $sendPush->sendPush($body['text'],$chat->recipient_id);
         return MessageResource::make(ChatMessage::query()->findOrFail($message->id));
     }
 
