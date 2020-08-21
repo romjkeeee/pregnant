@@ -42,7 +42,7 @@ class ClinicController extends Controller
     public function index(Request $request)
     {
         return ClinicCollection::make(Clinic::query()
-            ->with(['city', 'region', 'departments', 'schedules', 'prices'])
+            ->with(['city', 'region', 'departments', 'schedules', 'prices', 'translates'])
             ->filter($request->only('city_id'))
             ->filter($request->only(['type']))
             ->paginate($request->get('perPage') ?? 20));
@@ -58,7 +58,6 @@ class ClinicController extends Controller
      */
     public function show($id, Request $request)
     {
-        
         if($request->search) {
             if ($request->type) {
                 return Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices'])

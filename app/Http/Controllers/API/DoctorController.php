@@ -68,6 +68,6 @@ class DoctorController extends Controller
      */
     public function show($id): DoctorRecourse
     {
-        return DoctorRecourse::make(Doctor::query()->with(['user', 'clinics.schedules', 'specialisations', 'educations'])->findOrFail($id));
+        return DoctorRecourse::make(Doctor::query()->with(['user', 'clinics.schedules', 'specialisations', 'educations', 'translates', 'specialisationsTranslate'])->findOrFail($id));
     }
 }
