@@ -27,8 +27,6 @@ use Illuminate\Support\Str;
 use App\Traits\StoreImageTrait;
 use Carbon\Carbon;
 use App\Http\Controllers\API\DurationController;
-use App\Translate\ClinicTranslate;
-use App\Translate\SpecializationTranslate;
 
 /**
  * @group Auth
