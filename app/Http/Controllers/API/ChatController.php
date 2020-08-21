@@ -68,11 +68,10 @@ class ChatController extends Controller
         /** @var ChatMessage $message */
         $message = auth()->user()->messages()->create($request->validated());
         $message->attaches()->createMany($request->all()['attaches'] ?? []);
-        dd($message);
         $sendPush = new PushNotifyController();
         $chat = Chat::query()->where('id', $request->chat_id)->first();
-        $body = ChatMessage::query()->where('id',$chat->id)->first();
-        $sendPush->sendPush($body['text'],$chat->recipient_id);
+//        $body = ChatMessage::query()->where('id',$chat->id)->first();
+        $sendPush->sendPush($message->text,$chat->recipient_id);
         return MessageResource::make(ChatMessage::query()->findOrFail($message->id));
     }
 
