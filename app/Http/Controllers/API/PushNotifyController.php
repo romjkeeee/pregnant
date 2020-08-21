@@ -16,7 +16,6 @@ class PushNotifyController extends Controller
     public function sendPush($body, $id)
     {
         $user = User::query()->where('id',$id)->first();
-        dd($user->push_key, $body);
         $data = [
             "to" => $user->push_key,
             "notification" =>
