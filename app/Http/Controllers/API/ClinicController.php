@@ -41,19 +41,11 @@ class ClinicController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->city_id) {
-            $data = ClinicCollection::make(Clinic::query()
-                ->with(['city', 'region', 'departments', 'schedules', 'prices'])
-                ->where('city_id', $request->city_id)
-                ->filter($request->only(['type']))
-                ->paginate($request->get('perPage') ?? 20));
-        } else {
-            $data = ClinicCollection::make(Clinic::query()
-                ->with(['city', 'region', 'departments', 'schedules', 'prices'])
-                ->filter($request->only(['type']))
-                ->paginate($request->get('perPage') ?? 20));
-        }
-        return $data;
+        return ClinicCollection::make(Clinic::query()
+            ->with(['city', 'region', 'departments', 'schedules', 'prices'])
+            ->filter($request->only('city_id'))
+            ->filter($request->only(['type']))
+            ->paginate($request->get('perPage') ?? 20));
     }
 
     /**
