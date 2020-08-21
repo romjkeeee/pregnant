@@ -42,6 +42,7 @@ class PushNotifyController extends Controller
 
         $data = curl_exec($ch);
 
+        dd($data);
         return response($data);
     }
 }
