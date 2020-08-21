@@ -63,6 +63,12 @@ class AuthController extends Controller
                 'error' => __('auth.unauthorized')
             ], 401);
         }
+        if ($request->push_key)
+        {
+            $user = User::query()->where('phone',$request->phone)->first();
+            $user->push_key = $request->push_key;
+            $user->update();
+        }
 
         return $this->respondWithToken($token);
     }
@@ -99,7 +105,7 @@ class AuthController extends Controller
                     ? $user->createDoctor($request->validatedDoctor(), $request->validatedClinics(), $request->validatedSpecialisations())
                     : $user->patient()->create($request->validatedPatient());
 
-                $user->smsCodes()->create(['code' => mt_rand(1000, 9999)]);
+//                $user->smsCodes()->create(['code' => mt_rand(1000, 9999)]);
             });
             $token = JWTAuth::attempt($request->only(['phone', 'password']));
 
@@ -244,6 +250,12 @@ class AuthController extends Controller
      */
     public function me()
     {
+<<<<<<< HEAD
+        $user = User::query()->with(['city', 'region', 'patient'])->find(auth()->id());
+
+        $duration = new DurationController();
+        $user->pregnanc = $duration->get_duration();
+=======
         $auth = User::find(auth()->id());
         if ($auth->role == 'patient') {
             $user = User::query()->with(['city', 'region', 'patient'])->find(auth()->id());
@@ -258,6 +270,7 @@ class AuthController extends Controller
             $user->specialisations = $user->doctor->specialisations;
             $user->specialisations_translate = $user->doctor->specialisationsTranslate;
         }
+>>>>>>> 93c6244dcde707656a762e4398f8a854566cdaa3
 
         return response()->json($user);
     }

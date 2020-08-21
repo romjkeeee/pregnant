@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SpecialisationRequest extends FormRequest
+class CreateDataNonPregnant extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,9 @@ class SpecialisationRequest extends FormRequest
     public function rules()
     {
         return [
-            'translate'           => ['required', 'array'],
-            'translate.*.lang_id' => ['required', 'exists:langs,id'],
-            'translate.*.name'    => ['required', 'max:192'],
-            'translate.*.description'    => ['required', 'max:192'],
-            'photo'               => ['image'],
+            'start_last_menstruation'        => 'required|date',
+            'duration_menstruation'       => 'required|integer',
+            'duration_cycle'       => 'required|integer',
         ];
     }
 }

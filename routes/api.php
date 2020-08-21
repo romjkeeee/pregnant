@@ -74,6 +74,8 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
 
     /** patient routes */
     Route::apiResource('check-lists', 'CheckListController');
+    Route::post('remember-task', 'CheckListController@remember');
+    Route::delete('remember-task/{id}', 'CheckListController@destroy_remember');
 
     Route::get('bellies/last', 'PatientBellyController@last');
     Route::apiResource('bellies', 'PatientBellyController');
@@ -82,8 +84,11 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::apiResource('patients', 'PatientController');
 
     Route::post('conception-date', 'PatientController@conceptionDate');
+    Route::post('pregnant', 'PatientController@pregnant');
     Route::apiResource('contractions', 'PatientContractionController');
     Route::get('my-duration', 'DurationController@get_duration');
+    Route::get('my-menstruation', 'PatientMenstruationController@index');
+    Route::post('add-menstruation', 'PatientMenstruationController@info');
 
     /** doctor routes */
     Route::get('specializations/doctors', 'DoctorController@specialisationDoctors');
@@ -95,9 +100,12 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     /** clinics routes */
     Route::apiResource('clinics/reviews', 'ClinicReviewController');
     Route::apiResource('clinics', 'ClinicController');
+    Route::get('clinics-search', 'ClinicController@search');
 
     Route::apiResource('specializations', 'SpecializationController');
     Route::apiResource('durations', 'DurationController');
+
+    Route::get('send_push', 'PushNotifyController@sendPush');
 });
 
 

@@ -51,6 +51,14 @@ class Patient extends BaseModel
     }
 
     /**
+     * @return HasOne
+     */
+    public function menstruation(): HasOne
+    {
+        return $this->hasOne(PatientMenstruation::class, 'patient_id', 'id');
+    }
+
+    /**
      * @return HasMany
      */
     public function emergencyContacts(): HasMany
@@ -74,5 +82,9 @@ class Patient extends BaseModel
         return $this->belongsToMany(CheckListTask::class, 'patient_tasks', 'patient_id', 'task_id');
     }
 
+    public function remember(): BelongsToMany
+    {
+        return $this->belongsToMany(CheckListTask::class, 'patient_task_remembers', 'patient_id', 'task_id');
+    }
 
 }

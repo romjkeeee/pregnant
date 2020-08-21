@@ -150,6 +150,7 @@ print_r(json_decode((string) $body));
             "text": "Статья 11",
             "image": "http:\/\/localhost\/images\/articles\/images\/Qc53ukXwMJGTLpIlhsrwggGRdq7iOZ1eSDkGdNzx.png",
             "preview": "http:\/\/localhost\/images\/articles\/previews\/GAHQbc8DaOflcyNRoAexiKfVjDqWrVLfTAazqrJ6.png",
+            "week": null,
             "created_at": "28.05.2020 18:29",
             "updated_at": "28.05.2020 18:29",
             "category": {
@@ -165,6 +166,7 @@ print_r(json_decode((string) $body));
             "text": "Статья 22",
             "image": "http:\/\/localhost\/images\/articles\/images\/asw4M6MFlswZNpGy0ytFZs80fQNUo20PjKqp1Qkv.png",
             "preview": "http:\/\/localhost\/images\/articles\/previews\/RgpM3CSFUQpOt261dZ0V7dz7BBnrEaqGsxo5zXSJ.png",
+            "week": null,
             "created_at": "28.05.2020 18:30",
             "updated_at": "28.05.2020 18:30",
             "category": {
@@ -180,6 +182,7 @@ print_r(json_decode((string) $body));
             "text": "Статья 33",
             "image": "http:\/\/localhost\/images\/articles\/images\/J9pWVrAj1rSfIPXzwiwM8A5mNbdsVfqxINQQyHNU.jpeg",
             "preview": "http:\/\/localhost\/images\/articles\/previews\/yjzfc63bEfm5FB7LPTizMFxL7znnnz1yipJ3xkPv.jpeg",
+            "week": null,
             "created_at": "28.05.2020 18:31",
             "updated_at": "28.05.2020 18:31",
             "category": {
@@ -187,6 +190,22 @@ print_r(json_decode((string) $body));
                 "title": "Роды",
                 "created_at": "15.05.2020 23:59",
                 "updated_at": "26.05.2020 13:00"
+            }
+        },
+        {
+            "id": 9,
+            "title": "ываeweqwwe",
+            "text": "ываваsdfasdfsdfsad",
+            "image": "http:\/\/localhost\/images\/Article\/image\/J19KMMsElcGEhFKRnO2MkN8D9k7KnkqjUUSSGoo7.jpeg",
+            "preview": "http:\/\/localhost\/images\/Article\/preview\/4H2fdIBkQHbX68FwoT3LQ0rfJH5kR2b7HFdOGpTQ.jpeg",
+            "week": null,
+            "created_at": "14.08.2020 22:13",
+            "updated_at": "14.08.2020 22:13",
+            "category": {
+                "id": 3,
+                "title": "Спорт",
+                "created_at": "16.05.2020 00:02",
+                "updated_at": "25.05.2020 18:10"
             }
         }
     ],
@@ -203,8 +222,8 @@ print_r(json_decode((string) $body));
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/articles",
         "per_page": 10,
-        "to": 3,
-        "total": 3
+        "to": 4,
+        "total": 4
     }
 }
 ```
@@ -276,7 +295,7 @@ APIs for
 ```bash
 curl -X POST "http://localhost/api/login" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"cum","password":"dolorum"}'
+    -d '{"phone":"a","password":"perferendis"}'
 
 ```
 
@@ -289,8 +308,8 @@ let headers = {
 }
 
 let body = {
-    "phone": "cum",
-    "password": "dolorum"
+    "phone": "a",
+    "password": "perferendis"
 }
 
 fetch(url, {
@@ -310,8 +329,8 @@ $response = $client->post("http://localhost/api/login", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "phone" => "cum",
-            "password" => "dolorum",
+            "phone" => "a",
+            "password" => "perferendis",
         ],
 ]);
 $body = $response->getBody();
@@ -392,7 +411,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/register" \
     -H "Content-Type: application/json" \
-    -d '{"name":"maxime","last_name":"non","second_name":"necessitatibus","phone":"+74957556981","role":"doctor or patient","email":"nostrum","region_id":18,"city_id":9,"street":"inventore","building":"suscipit","apartment":"debitis","password":"magni","password_confirmation":"quas","lang_id":6}'
+    -d '{"name":"vitae","last_name":"culpa","second_name":"quia","phone":"+74957556981","role":"doctor or patient","email":"quis","region_id":17,"city_id":1,"street":"omnis","building":"occaecati","apartment":"sunt","password":"ipsam","password_confirmation":"aliquam","lang_id":12}'
 
 ```
 
@@ -405,20 +424,20 @@ let headers = {
 }
 
 let body = {
-    "name": "maxime",
-    "last_name": "non",
-    "second_name": "necessitatibus",
+    "name": "vitae",
+    "last_name": "culpa",
+    "second_name": "quia",
     "phone": "+74957556981",
     "role": "doctor or patient",
-    "email": "nostrum",
-    "region_id": 18,
-    "city_id": 9,
-    "street": "inventore",
-    "building": "suscipit",
-    "apartment": "debitis",
-    "password": "magni",
-    "password_confirmation": "quas",
-    "lang_id": 6
+    "email": "quis",
+    "region_id": 17,
+    "city_id": 1,
+    "street": "omnis",
+    "building": "occaecati",
+    "apartment": "sunt",
+    "password": "ipsam",
+    "password_confirmation": "aliquam",
+    "lang_id": 12
 }
 
 fetch(url, {
@@ -438,20 +457,20 @@ $response = $client->post("http://localhost/api/register", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "name" => "maxime",
-            "last_name" => "non",
-            "second_name" => "necessitatibus",
+            "name" => "vitae",
+            "last_name" => "culpa",
+            "second_name" => "quia",
             "phone" => "+74957556981",
             "role" => "doctor or patient",
-            "email" => "nostrum",
-            "region_id" => "18",
-            "city_id" => "9",
-            "street" => "inventore",
-            "building" => "suscipit",
-            "apartment" => "debitis",
-            "password" => "magni",
-            "password_confirmation" => "quas",
-            "lang_id" => "6",
+            "email" => "quis",
+            "region_id" => "17",
+            "city_id" => "1",
+            "street" => "omnis",
+            "building" => "occaecati",
+            "apartment" => "sunt",
+            "password" => "ipsam",
+            "password_confirmation" => "aliquam",
+            "lang_id" => "12",
         ],
 ]);
 $body = $response->getBody();
@@ -497,7 +516,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/verify" \
     -H "Content-Type: application/json" \
-    -d '{"code":"similique"}'
+    -d '{"code":"nesciunt"}'
 
 ```
 
@@ -510,7 +529,7 @@ let headers = {
 }
 
 let body = {
-    "code": "similique"
+    "code": "nesciunt"
 }
 
 fetch(url, {
@@ -530,7 +549,7 @@ $response = $client->post("http://localhost/api/verify", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "code" => "similique",
+            "code" => "nesciunt",
         ],
 ]);
 $body = $response->getBody();
@@ -610,7 +629,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X GET -G "http://localhost/api/send_sms" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"minus"}'
+    -d '{"phone":"eum"}'
 
 ```
 
@@ -623,7 +642,7 @@ let headers = {
 }
 
 let body = {
-    "phone": "minus"
+    "phone": "eum"
 }
 
 fetch(url, {
@@ -643,7 +662,7 @@ $response = $client->get("http://localhost/api/send_sms", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "phone" => "minus",
+            "phone" => "eum",
         ],
 ]);
 $body = $response->getBody();
@@ -777,7 +796,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/me/phone" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"et"}'
+    -d '{"phone":"dolore"}'
 
 ```
 
@@ -790,7 +809,7 @@ let headers = {
 }
 
 let body = {
-    "phone": "et"
+    "phone": "dolore"
 }
 
 fetch(url, {
@@ -810,7 +829,7 @@ $response = $client->post("http://localhost/api/me/phone", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "phone" => "et",
+            "phone" => "dolore",
         ],
 ]);
 $body = $response->getBody();
@@ -838,7 +857,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/me/location" \
     -H "Content-Type: application/json" \
-    -d '{"region_id":"eos","city_id":"adipisci","street":"culpa","building":"omnis","apartment":"quis"}'
+    -d '{"region_id":"ipsum","city_id":"similique","street":"dolorem","building":"qui","apartment":"voluptate"}'
 
 ```
 
@@ -851,11 +870,11 @@ let headers = {
 }
 
 let body = {
-    "region_id": "eos",
-    "city_id": "adipisci",
-    "street": "culpa",
-    "building": "omnis",
-    "apartment": "quis"
+    "region_id": "ipsum",
+    "city_id": "similique",
+    "street": "dolorem",
+    "building": "qui",
+    "apartment": "voluptate"
 }
 
 fetch(url, {
@@ -875,11 +894,11 @@ $response = $client->post("http://localhost/api/me/location", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "region_id" => "eos",
-            "city_id" => "adipisci",
-            "street" => "culpa",
-            "building" => "omnis",
-            "apartment" => "quis",
+            "region_id" => "ipsum",
+            "city_id" => "similique",
+            "street" => "dolorem",
+            "building" => "qui",
+            "apartment" => "voluptate",
         ],
 ]);
 $body = $response->getBody();
@@ -953,7 +972,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/me/name" \
     -H "Content-Type: application/json" \
-    -d '{"name":"quo","last_name":"repellendus","second_name":"inventore"}'
+    -d '{"name":"harum","last_name":"dolorem","second_name":"nobis"}'
 
 ```
 
@@ -966,9 +985,9 @@ let headers = {
 }
 
 let body = {
-    "name": "quo",
-    "last_name": "repellendus",
-    "second_name": "inventore"
+    "name": "harum",
+    "last_name": "dolorem",
+    "second_name": "nobis"
 }
 
 fetch(url, {
@@ -988,9 +1007,9 @@ $response = $client->post("http://localhost/api/me/name", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "name" => "quo",
-            "last_name" => "repellendus",
-            "second_name" => "inventore",
+            "name" => "harum",
+            "last_name" => "dolorem",
+            "second_name" => "nobis",
         ],
 ]);
 $body = $response->getBody();
@@ -1020,7 +1039,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/me/update_photo" \
     -H "Content-Type: application/json" \
-    -d '{"image":"ipsum"}'
+    -d '{"image":"rerum"}'
 
 ```
 
@@ -1033,7 +1052,7 @@ let headers = {
 }
 
 let body = {
-    "image": "ipsum"
+    "image": "rerum"
 }
 
 fetch(url, {
@@ -1053,7 +1072,7 @@ $response = $client->post("http://localhost/api/me/update_photo", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "image" => "ipsum",
+            "image" => "rerum",
         ],
 ]);
 $body = $response->getBody();
@@ -1073,6 +1092,88 @@ Parameter | Type | Status | Description
 
 <!-- END_b05833c7a4a5a2028d1b3794e0fa7f32 -->
 
+<!-- START_46aaed4927dc1af7bc4cd3b85e463c66 -->
+## api/me/set_doctor
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/me/set_doctor" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/me/set_doctor");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post("http://localhost/api/me/set_doctor", [
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+
+### HTTP Request
+`POST api/me/set_doctor`
+
+
+<!-- END_46aaed4927dc1af7bc4cd3b85e463c66 -->
+
+<!-- START_f2bd36658d34a341587ec8913b04ee17 -->
+## api/me/update_email
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/me/update_email" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/me/update_email");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post("http://localhost/api/me/update_email", [
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+
+### HTTP Request
+`POST api/me/update_email`
+
+
+<!-- END_f2bd36658d34a341587ec8913b04ee17 -->
+
 #Chat
 
 
@@ -1085,7 +1186,7 @@ APIs for
 ```bash
 curl -X POST "http://localhost/api/chat/send" \
     -H "Content-Type: application/json" \
-    -d '{"text":"corporis","attaches":"excepturi"}'
+    -d '{"text":"quidem","attaches":"veritatis"}'
 
 ```
 
@@ -1098,8 +1199,8 @@ let headers = {
 }
 
 let body = {
-    "text": "corporis",
-    "attaches": "excepturi"
+    "text": "quidem",
+    "attaches": "veritatis"
 }
 
 fetch(url, {
@@ -1119,8 +1220,8 @@ $response = $client->post("http://localhost/api/chat/send", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "text" => "corporis",
-            "attaches" => "excepturi",
+            "text" => "quidem",
+            "attaches" => "veritatis",
         ],
 ]);
 $body = $response->getBody();
@@ -1202,6 +1303,47 @@ Parameter | Type | Status | Description
 
 <!-- END_e68fb882eee1a84b388c1b17671cb0b5 -->
 
+<!-- START_489041e986b250b352408731f35de84c -->
+## api/chat/visible
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/chat/visible" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/chat/visible");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post("http://localhost/api/chat/visible", [
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+
+### HTTP Request
+`POST api/chat/visible`
+
+
+<!-- END_489041e986b250b352408731f35de84c -->
+
 <!-- START_6d342bbf7c4103bec385380a092a5ce6 -->
 ## List message
 
@@ -1264,7 +1406,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X GET -G "http://localhost/api/chat/messages" \
     -H "Content-Type: application/json" \
-    -d '{"chat_id":14}'
+    -d '{"chat_id":9}'
 
 ```
 
@@ -1277,7 +1419,7 @@ let headers = {
 }
 
 let body = {
-    "chat_id": 14
+    "chat_id": 9
 }
 
 fetch(url, {
@@ -1297,7 +1439,7 @@ $response = $client->get("http://localhost/api/chat/messages", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "chat_id" => "14",
+            "chat_id" => "9",
         ],
 ]);
 $body = $response->getBody();
@@ -1336,7 +1478,7 @@ APIs for
 ```bash
 curl -X GET -G "http://localhost/api/check-lists" \
     -H "Content-Type: application/json" \
-    -d '{"chat_id":20}'
+    -d '{"chat_id":13}'
 
 ```
 
@@ -1349,7 +1491,7 @@ let headers = {
 }
 
 let body = {
-    "chat_id": 20
+    "chat_id": 13
 }
 
 fetch(url, {
@@ -1369,7 +1511,7 @@ $response = $client->get("http://localhost/api/check-lists", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "chat_id" => "20",
+            "chat_id" => "13",
         ],
 ]);
 $body = $response->getBody();
@@ -1404,7 +1546,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/check-lists" \
     -H "Content-Type: application/json" \
-    -d '{"task_id":15}'
+    -d '{"task_id":20}'
 
 ```
 
@@ -1417,7 +1559,7 @@ let headers = {
 }
 
 let body = {
-    "task_id": 15
+    "task_id": 20
 }
 
 fetch(url, {
@@ -1437,7 +1579,7 @@ $response = $client->post("http://localhost/api/check-lists", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "task_id" => "15",
+            "task_id" => "20",
         ],
 ]);
 $body = $response->getBody();
@@ -1498,6 +1640,115 @@ print_r(json_decode((string) $body));
 
 
 <!-- END_fea21f34c8bff578d65a59d05bd1d484 -->
+
+<!-- START_133732db6d154f868f181882d719c5d8 -->
+## Store remember
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/remember-task" \
+    -H "Content-Type: application/json" \
+    -d '{"task_id":13,"remember":false,"date":"expedita"}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/remember-task");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "task_id": 13,
+    "remember": false,
+    "date": "expedita"
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post("http://localhost/api/remember-task", [
+    'headers' => [
+            "Content-Type" => "application/json",
+        ],
+    'json' => [
+            "task_id" => "13",
+            "remember" => "",
+            "date" => "expedita",
+        ],
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+
+### HTTP Request
+`POST api/remember-task`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    task_id | integer |  optional  | 
+    remember | boolean |  optional  | 
+    date | date |  optional  | example: 2020-08-18
+
+<!-- END_133732db6d154f868f181882d719c5d8 -->
+
+<!-- START_7d4ba3e15ea3d2b45c11a4baa6f48a45 -->
+## Destroy remember
+
+> Example request:
+
+```bash
+curl -X DELETE "http://localhost/api/remember-task" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/remember-task");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "DELETE",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->delete("http://localhost/api/remember-task", [
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+
+### HTTP Request
+`DELETE api/remember-task`
+
+
+<!-- END_7d4ba3e15ea3d2b45c11a4baa6f48a45 -->
 
 #Clinic
 
@@ -1642,7 +1893,7 @@ print_r(json_decode((string) $body));
                 }
             ],
             "prices": [],
-            "name": null,
+            "name": "test",
             "text": null,
             "address": null
         },
@@ -1803,7 +2054,6 @@ print_r(json_decode((string) $body));
 ## Show
 Показать клинику
 
-<br><small style="padding: 1px 9px 2px;font-weight: bold;white-space: nowrap;color: #ffffff;-webkit-border-radius: 9px;-moz-border-radius: 9px;border-radius: 9px;background-color: #3a87ad;">Requires authentication</small>
 > Example request:
 
 ```bash
@@ -1937,7 +2187,7 @@ print_r(json_decode((string) $body));
             }
         ],
         "prices": [],
-        "name": null,
+        "name": "test",
         "text": null,
         "address": null
     }
@@ -1964,7 +2214,7 @@ APIs for
 ```bash
 curl -X GET -G "http://localhost/api/clinics/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"clinic_id":14}'
+    -d '{"clinic_id":4}'
 
 ```
 
@@ -1977,7 +2227,7 @@ let headers = {
 }
 
 let body = {
-    "clinic_id": 14
+    "clinic_id": 4
 }
 
 fetch(url, {
@@ -1997,7 +2247,7 @@ $response = $client->get("http://localhost/api/clinics/reviews", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "clinic_id" => "14",
+            "clinic_id" => "4",
         ],
 ]);
 $body = $response->getBody();
@@ -2039,7 +2289,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/clinics/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"clinic_id":18,"rate":19,"text":20}'
+    -d '{"clinic_id":9,"rate":14,"text":11}'
 
 ```
 
@@ -2052,9 +2302,9 @@ let headers = {
 }
 
 let body = {
-    "clinic_id": 18,
-    "rate": 19,
-    "text": 20
+    "clinic_id": 9,
+    "rate": 14,
+    "text": 11
 }
 
 fetch(url, {
@@ -2074,9 +2324,9 @@ $response = $client->post("http://localhost/api/clinics/reviews", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "clinic_id" => "18",
-            "rate" => "19",
-            "text" => "20",
+            "clinic_id" => "9",
+            "rate" => "14",
+            "text" => "11",
         ],
 ]);
 $body = $response->getBody();
@@ -2220,7 +2470,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/contractions" \
     -H "Content-Type: application/json" \
-    -d '{"start":"vel","duration":"velit","interval":"et"}'
+    -d '{"start":"qui","duration":"sed","interval":"reprehenderit"}'
 
 ```
 
@@ -2233,9 +2483,9 @@ let headers = {
 }
 
 let body = {
-    "start": "vel",
-    "duration": "velit",
-    "interval": "et"
+    "start": "qui",
+    "duration": "sed",
+    "interval": "reprehenderit"
 }
 
 fetch(url, {
@@ -2255,9 +2505,9 @@ $response = $client->post("http://localhost/api/contractions", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "start" => "vel",
-            "duration" => "velit",
-            "interval" => "et",
+            "start" => "qui",
+            "duration" => "sed",
+            "interval" => "reprehenderit",
         ],
 ]);
 $body = $response->getBody();
@@ -2382,7 +2632,7 @@ APIs for
 ```bash
 curl -X GET -G "http://localhost/api/specializations/doctors" \
     -H "Content-Type: application/json" \
-    -d '{"clinic_id":14}'
+    -d '{"clinic_id":7}'
 
 ```
 
@@ -2395,7 +2645,7 @@ let headers = {
 }
 
 let body = {
-    "clinic_id": 14
+    "clinic_id": 7
 }
 
 fetch(url, {
@@ -2415,7 +2665,7 @@ $response = $client->get("http://localhost/api/specializations/doctors", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "clinic_id" => "14",
+            "clinic_id" => "7",
         ],
 ]);
 $body = $response->getBody();
@@ -2450,7 +2700,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X GET -G "http://localhost/api/doctors/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"doctor_id":9}'
+    -d '{"doctor_id":19}'
 
 ```
 
@@ -2463,7 +2713,7 @@ let headers = {
 }
 
 let body = {
-    "doctor_id": 9
+    "doctor_id": 19
 }
 
 fetch(url, {
@@ -2483,7 +2733,7 @@ $response = $client->get("http://localhost/api/doctors/reviews", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "doctor_id" => "9",
+            "doctor_id" => "19",
         ],
 ]);
 $body = $response->getBody();
@@ -2518,7 +2768,7 @@ Parameter | Type | Status | Description
 ```bash
 curl -X POST "http://localhost/api/doctors/reviews" \
     -H "Content-Type: application/json" \
-    -d '{"doctor_id":14,"rate":13,"text":"doloribus"}'
+    -d '{"doctor_id":4,"rate":19,"text":"praesentium"}'
 
 ```
 
@@ -2531,9 +2781,9 @@ let headers = {
 }
 
 let body = {
-    "doctor_id": 14,
-    "rate": 13,
-    "text": "doloribus"
+    "doctor_id": 4,
+    "rate": 19,
+    "text": "praesentium"
 }
 
 fetch(url, {
@@ -2553,9 +2803,9 @@ $response = $client->post("http://localhost/api/doctors/reviews", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "doctor_id" => "14",
-            "rate" => "13",
-            "text" => "doloribus",
+            "doctor_id" => "4",
+            "rate" => "19",
+            "text" => "praesentium",
         ],
 ]);
 $body = $response->getBody();
@@ -2635,7 +2885,7 @@ Doctor education
 ```bash
 curl -X GET -G "http://localhost/api/doctors/educations" \
     -H "Content-Type: application/json" \
-    -d '{"doctor_id":19}'
+    -d '{"doctor_id":1}'
 
 ```
 
@@ -2648,7 +2898,7 @@ let headers = {
 }
 
 let body = {
-    "doctor_id": 19
+    "doctor_id": 1
 }
 
 fetch(url, {
@@ -2668,7 +2918,7 @@ $response = $client->get("http://localhost/api/doctors/educations", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "doctor_id" => "19",
+            "doctor_id" => "1",
         ],
 ]);
 $body = $response->getBody();
@@ -2782,16 +3032,7 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
-                {
-                    "id": 1,
-                    "photo": null,
-                    "pivot": {
-                        "doctor_id": 1,
-                        "specialization_id": 1
-                    }
-                }
-            ]
+            "specialisations": []
         },
         {
             "id": 2,
@@ -2839,16 +3080,7 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
-                {
-                    "id": 1,
-                    "photo": null,
-                    "pivot": {
-                        "doctor_id": 2,
-                        "specialization_id": 1
-                    }
-                }
-            ]
+            "specialisations": []
         },
         {
             "id": 3,
@@ -2896,16 +3128,7 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
-                {
-                    "id": 1,
-                    "photo": null,
-                    "pivot": {
-                        "doctor_id": 3,
-                        "specialization_id": 1
-                    }
-                }
-            ]
+            "specialisations": []
         },
         {
             "id": 4,
@@ -2953,16 +3176,7 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
-                {
-                    "id": 1,
-                    "photo": null,
-                    "pivot": {
-                        "doctor_id": 4,
-                        "specialization_id": 1
-                    }
-                }
-            ]
+            "specialisations": []
         },
         {
             "id": 5,
@@ -3010,16 +3224,7 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
-                {
-                    "id": 1,
-                    "photo": null,
-                    "pivot": {
-                        "doctor_id": 5,
-                        "specialization_id": 1
-                    }
-                }
-            ]
+            "specialisations": []
         },
         {
             "id": 6,
@@ -3067,16 +3272,7 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
-                {
-                    "id": 1,
-                    "photo": null,
-                    "pivot": {
-                        "doctor_id": 6,
-                        "specialization_id": 1
-                    }
-                }
-            ]
+            "specialisations": []
         },
         {
             "id": 7,
@@ -3124,16 +3320,7 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
-                {
-                    "id": 1,
-                    "photo": null,
-                    "pivot": {
-                        "doctor_id": 7,
-                        "specialization_id": 1
-                    }
-                }
-            ]
+            "specialisations": []
         },
         {
             "id": 8,
@@ -3181,16 +3368,7 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
-                {
-                    "id": 1,
-                    "photo": null,
-                    "pivot": {
-                        "doctor_id": 8,
-                        "specialization_id": 1
-                    }
-                }
-            ]
+            "specialisations": []
         },
         {
             "id": 9,
@@ -3238,16 +3416,7 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
-                {
-                    "id": 1,
-                    "photo": null,
-                    "pivot": {
-                        "doctor_id": 9,
-                        "specialization_id": 1
-                    }
-                }
-            ]
+            "specialisations": []
         },
         {
             "id": 10,
@@ -3295,16 +3464,7 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
-                {
-                    "id": 1,
-                    "photo": null,
-                    "pivot": {
-                        "doctor_id": 10,
-                        "specialization_id": 1
-                    }
-                }
-            ]
+            "specialisations": []
         },
         {
             "id": 11,
@@ -3352,16 +3512,7 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
-                {
-                    "id": 1,
-                    "photo": null,
-                    "pivot": {
-                        "doctor_id": 11,
-                        "specialization_id": 1
-                    }
-                }
-            ]
+            "specialisations": []
         },
         {
             "id": 12,
@@ -3385,9 +3536,9 @@ print_r(json_decode((string) $body));
                 "last_name": "Иванова",
                 "second_name": "Амировна",
                 "phone": "+79998012661",
-                "image": null,
+                "image": "storage\/user\/JeLWeiV8ax8zSoiu0BToaVzgqhxmJErbkTASNqiG.jpeg",
                 "created_at": "2020-06-25 12:12:03",
-                "updated_at": "2020-06-25 12:12:03"
+                "updated_at": "2020-08-15 00:04:15"
             },
             "clinics": [
                 {
@@ -3409,13 +3560,63 @@ print_r(json_decode((string) $body));
                     }
                 }
             ],
-            "specialisations": [
+            "specialisations": []
+        },
+        {
+            "id": 13,
+            "user_id": 2,
+            "rate": null,
+            "created_at": "2020-08-16 18:34:18",
+            "updated_at": "2020-08-16 18:34:18",
+            "user": {
+                "id": 2,
+                "lang_id": 1,
+                "region_id": 1,
+                "city_id": 1,
+                "street": "1",
+                "building": "1",
+                "apartment": "1",
+                "role": "doctor",
+                "verified": 0,
+                "notification": 1,
+                "email": "admin@admin.com",
+                "name": "admin",
+                "last_name": null,
+                "second_name": null,
+                "phone": null,
+                "image": null,
+                "created_at": "2020-05-13 14:45:13",
+                "updated_at": "2020-05-13 14:45:13"
+            },
+            "clinics": [
                 {
                     "id": 1,
-                    "photo": null,
+                    "region_id": 1,
+                    "city_id": 1,
+                    "rate": 3.75,
+                    "type": "state",
+                    "phone": "+74957556981",
+                    "lng": "1111",
+                    "lat": "2222",
+                    "image": null,
+                    "paid": 0,
+                    "created_at": null,
+                    "updated_at": null,
                     "pivot": {
-                        "doctor_id": 12,
-                        "specialization_id": 1
+                        "doctor_id": 13,
+                        "clinic_id": 1
+                    }
+                }
+            ],
+            "specialisations": [
+                {
+                    "id": 18,
+                    "photo": "storage\/spec\/785sbllKCDMPRFiKrGP0LgQlM66gf8NTjo1DZDeF.jpeg",
+                    "name": null,
+                    "description": null,
+                    "pivot": {
+                        "doctor_id": 13,
+                        "specialization_id": 18
                     }
                 }
             ]
@@ -3429,8 +3630,8 @@ print_r(json_decode((string) $body));
     "path": "http:\/\/localhost\/api\/doctors",
     "per_page": 20,
     "prev_page_url": null,
-    "to": 12,
-    "total": 12
+    "to": 13,
+    "total": 13
 }
 ```
 
@@ -3485,16 +3686,7 @@ print_r(json_decode((string) $body));
         "rate": 4,
         "created_at": "2020-05-13 11:43:10",
         "updated_at": "2020-05-28 14:10:22",
-        "specialisations": [
-            {
-                "id": 1,
-                "photo": null,
-                "pivot": {
-                    "doctor_id": 1,
-                    "specialization_id": 1
-                }
-            }
-        ],
+        "specialisations": [],
         "user": {
             "id": 1,
             "lang_id": 1,
@@ -3730,7 +3922,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X GET -G "http://localhost/api/my-duration" \
     -H "Content-Type: application/json" \
-    -d '{"phone":"est"}'
+    -d '{"phone":"alias"}'
 
 ```
 
@@ -3743,7 +3935,7 @@ let headers = {
 }
 
 let body = {
-    "phone": "est"
+    "phone": "alias"
 }
 
 fetch(url, {
@@ -3763,7 +3955,7 @@ $response = $client->get("http://localhost/api/my-duration", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "phone" => "est",
+            "phone" => "alias",
         ],
 ]);
 $body = $response->getBody();
@@ -4056,7 +4248,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/emergency_contacts" \
     -H "Content-Type: application/json" \
-    -d '{"name":"asperiores","phone":"voluptatem"}'
+    -d '{"name":"asperiores","phone":"consequatur"}'
 
 ```
 
@@ -4070,7 +4262,7 @@ let headers = {
 
 let body = {
     "name": "asperiores",
-    "phone": "voluptatem"
+    "phone": "consequatur"
 }
 
 fetch(url, {
@@ -4091,7 +4283,7 @@ $response = $client->post("http://localhost/api/emergency_contacts", [
         ],
     'json' => [
             "name" => "asperiores",
-            "phone" => "voluptatem",
+            "phone" => "consequatur",
         ],
 ]);
 $body = $response->getBody();
@@ -4385,6 +4577,131 @@ print_r(json_decode((string) $body));
 
 <!-- END_373b99d5481a580b466f97ada8cfceb2 -->
 
+#Menstruation
+
+
+APIs for
+<!-- START_d1a3b671f998878b7cdb1322b19bdcef -->
+## List menstruation for user
+
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/my-menstruation" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/my-menstruation");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get("http://localhost/api/my-menstruation", [
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+> Example response (401):
+
+```json
+{
+    "message": "Unauthenticated."
+}
+```
+
+### HTTP Request
+`GET api/my-menstruation`
+
+
+<!-- END_d1a3b671f998878b7cdb1322b19bdcef -->
+
+<!-- START_276dfe6e2a17872f8697bb750a11fea1 -->
+## Create data for non pregnant
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/add-menstruation" \
+    -H "Content-Type: application/json" \
+    -d '{"start_last_menstruation":"necessitatibus","duration_menstruation":11,"duration_cycle":12}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/add-menstruation");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "start_last_menstruation": "necessitatibus",
+    "duration_menstruation": 11,
+    "duration_cycle": 12
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post("http://localhost/api/add-menstruation", [
+    'headers' => [
+            "Content-Type" => "application/json",
+        ],
+    'json' => [
+            "start_last_menstruation" => "necessitatibus",
+            "duration_menstruation" => "11",
+            "duration_cycle" => "12",
+        ],
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+> Example response (201):
+
+```json
+{}
+```
+
+### HTTP Request
+`POST api/add-menstruation`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    start_last_menstruation | date |  optional  | 
+    duration_menstruation | integer |  optional  | 
+    duration_cycle | integer |  optional  | 
+
+<!-- END_276dfe6e2a17872f8697bb750a11fea1 -->
+
 #Patient
 
 
@@ -4446,7 +4763,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/patient/weight" \
     -H "Content-Type: application/json" \
-    -d '{"weights":"quisquam","date":"totam"}'
+    -d '{"weights":"ut","date":"vero"}'
 
 ```
 
@@ -4459,8 +4776,8 @@ let headers = {
 }
 
 let body = {
-    "weights": "quisquam",
-    "date": "totam"
+    "weights": "ut",
+    "date": "vero"
 }
 
 fetch(url, {
@@ -4480,8 +4797,8 @@ $response = $client->post("http://localhost/api/patient/weight", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "weights" => "quisquam",
-            "date" => "totam",
+            "weights" => "ut",
+            "date" => "vero",
         ],
 ]);
 $body = $response->getBody();
@@ -4652,7 +4969,7 @@ print_r(json_decode((string) $body));
             "doctor_id": 1,
             "date_of_birth": "2010-10-10 00:00:00",
             "conception_date": "2020-01-13",
-            "conception_type": "menstruation",
+            "conception_type": null,
             "pregnant": 0,
             "created_at": "2020-05-14 16:47:29",
             "updated_at": "2020-05-15 11:22:11",
@@ -5132,7 +5449,7 @@ print_r(json_decode((string) $body));
             "doctor_id": 2,
             "date_of_birth": "2010-10-10 00:00:00",
             "conception_date": "2020-06-25",
-            "conception_type": "menstruation",
+            "conception_type": null,
             "pregnant": 1,
             "created_at": "2020-07-02 19:05:20",
             "updated_at": "2020-07-02 19:05:20",
@@ -5786,7 +6103,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/conception-date" \
     -H "Content-Type: application/json" \
-    -d '{"conception_type":"omnis","conception_date":"facere"}'
+    -d '{"conception_type":"asperiores","conception_date":"dolorem"}'
 
 ```
 
@@ -5799,8 +6116,8 @@ let headers = {
 }
 
 let body = {
-    "conception_type": "omnis",
-    "conception_date": "facere"
+    "conception_type": "asperiores",
+    "conception_date": "dolorem"
 }
 
 fetch(url, {
@@ -5820,8 +6137,8 @@ $response = $client->post("http://localhost/api/conception-date", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "conception_type" => "omnis",
-            "conception_date" => "facere",
+            "conception_type" => "asperiores",
+            "conception_date" => "dolorem",
         ],
 ]);
 $body = $response->getBody();
@@ -5841,6 +6158,108 @@ Parameter | Type | Status | Description
     conception_date | string |  required  | date of last menstruatiion or screenenig
 
 <!-- END_92ac1b765fda5f3e24b3db66b3e96cb5 -->
+
+<!-- START_c8367dea21cebb6d382aed6dbae59c9f -->
+## Set pregnant
+
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/pregnant" \
+    -H "Content-Type: application/json" \
+    -d '{"pregnant":true}'
+
+```
+
+```javascript
+const url = new URL("http://localhost/api/pregnant");
+
+let headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
+
+let body = {
+    "pregnant": true
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: body
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post("http://localhost/api/pregnant", [
+    'headers' => [
+            "Content-Type" => "application/json",
+        ],
+    'json' => [
+            "pregnant" => "1",
+        ],
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+
+### HTTP Request
+`POST api/pregnant`
+
+#### Body Parameters
+
+Parameter | Type | Status | Description
+--------- | ------- | ------- | ------- | -----------
+    pregnant | boolean |  required  | 
+
+<!-- END_c8367dea21cebb6d382aed6dbae59c9f -->
+
+<!-- START_3910e72f20b96b52e523d5f70f9b77e4 -->
+## api/doctors/patiens
+> Example request:
+
+```bash
+curl -X POST "http://localhost/api/doctors/patiens" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/doctors/patiens");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "POST",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->post("http://localhost/api/doctors/patiens", [
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+
+### HTTP Request
+`POST api/doctors/patiens`
+
+
+<!-- END_3910e72f20b96b52e523d5f70f9b77e4 -->
 
 #Patient belly
 
@@ -5952,7 +6371,7 @@ print_r(json_decode((string) $body));
 ```bash
 curl -X POST "http://localhost/api/bellies" \
     -H "Content-Type: application/json" \
-    -d '{"uterine_fundus_height":"ratione","girth_abdomen":"non","date":"voluptatum"}'
+    -d '{"uterine_fundus_height":"deleniti","girth_abdomen":"tempore","date":"ea"}'
 
 ```
 
@@ -5965,9 +6384,9 @@ let headers = {
 }
 
 let body = {
-    "uterine_fundus_height": "ratione",
-    "girth_abdomen": "non",
-    "date": "voluptatum"
+    "uterine_fundus_height": "deleniti",
+    "girth_abdomen": "tempore",
+    "date": "ea"
 }
 
 fetch(url, {
@@ -5987,9 +6406,9 @@ $response = $client->post("http://localhost/api/bellies", [
             "Content-Type" => "application/json",
         ],
     'json' => [
-            "uterine_fundus_height" => "ratione",
-            "girth_abdomen" => "non",
-            "date" => "voluptatum",
+            "uterine_fundus_height" => "deleniti",
+            "girth_abdomen" => "tempore",
+            "date" => "ea",
         ],
 ]);
 $body = $response->getBody();
@@ -6105,9 +6524,22 @@ print_r(json_decode((string) $body));
 {
     "data": [
         {
-            "id": 1,
-            "name": null,
-            "photo": null
+            "id": 16,
+            "name": "sadas",
+            "description": "dasdas",
+            "photo": "http:\/\/localhost\/spec\/qOnYp1sbqTPFc5ZPZACUwdB0k4b2rMjze4zE6IRn.jpeg"
+        },
+        {
+            "id": 17,
+            "name": "sadas",
+            "description": "dasdas",
+            "photo": "http:\/\/localhost\/spec\/csKT9N7KUkfAEK3vsYVOzr27DxwYvusFdKTD2amd.jpeg"
+        },
+        {
+            "id": 18,
+            "name": "тест",
+            "description": "тствы",
+            "photo": "http:\/\/localhost\/storage\/spec\/785sbllKCDMPRFiKrGP0LgQlM66gf8NTjo1DZDeF.jpeg"
         }
     ],
     "links": {
@@ -6123,8 +6555,8 @@ print_r(json_decode((string) $body));
         "last_page": 1,
         "path": "http:\/\/localhost\/api\/specializations",
         "per_page": 20,
-        "to": 1,
-        "total": 1
+        "to": 3,
+        "total": 3
     }
 }
 ```
@@ -6170,15 +6602,11 @@ print_r(json_decode((string) $body));
 ```
 
 
-> Example response (200):
+> Example response (404):
 
 ```json
 {
-    "data": {
-        "id": 1,
-        "name": null,
-        "photo": null
-    }
+    "message": "No query results for model [App\\Specialization] 1"
 }
 ```
 
@@ -6234,454 +6662,724 @@ print_r(json_decode((string) $body));
 {
     "data": [
         {
-            "id": 1,
-            "key": "back",
-            "text": "Назад"
+            "ru": {
+                "back_": "Назад"
+            },
+            "en": {
+                "back_": "Назад"
+            }
+        },
+        {
+            "ru": {
+                "next_": "Далее"
+            },
+            "en": {
+                "next_": "Далее"
+            }
+        },
+        {
+            "ru": {
+                "phone_number_": "Номер телефона"
+            },
+            "en": {
+                "phone_number_": "Номер телефона"
+            }
+        },
+        {
+            "ru": {
+                "password_": "Пароль"
+            },
+            "en": {
+                "password_": "Пароль"
+            }
+        },
+        {
+            "ru": {
+                "password.confirm_": "Подтвердите пароль"
+            },
+            "en": {
+                "password.confirm_": "Подтвердите пароль"
+            }
+        },
+        {
+            "ru": {
+                "login_": "Войти"
+            },
+            "en": {
+                "login_": "Войти"
+            }
+        },
+        {
+            "ru": {
+                "register_": "Регистрация"
+            },
+            "en": {
+                "register_": "Регистрация"
+            }
+        },
+        {
+            "ru": {
+                "add.photo_": "Добавить фото"
+            },
+            "en": {
+                "add.photo_": "Добавить фото"
+            }
+        },
+        {
+            "ru": {
+                "your_name_": "Ваше имя"
+            },
+            "en": {
+                "your_name_": "Ваше имя"
+            }
+        },
+        {
+            "ru": {
+                "email_": "Email"
+            },
+            "en": {
+                "email_": "Email"
+            }
+        },
+        {
+            "ru": {
+                "select.region_": "Выберите регион"
+            },
+            "en": {
+                "select.region_": "Выберите регион"
+            }
+        },
+        {
+            "ru": {
+                "select.city_": "Выберите город"
+            },
+            "en": {
+                "select.city_": "Выберите город"
+            }
+        },
+        {
+            "ru": {
+                "street_": "Улица"
+            },
+            "en": {
+                "street_": "Улица"
+            }
         },
         {
-            "id": 2,
-            "key": "next",
-            "text": "Далее"
+            "ru": {
+                "house_": "Дом"
+            },
+            "en": {
+                "house_": "Дом"
+            }
         },
         {
-            "id": 3,
-            "key": "phone_number",
-            "text": "Номер телефона"
+            "ru": {
+                "apartment_": "Квартира"
+            },
+            "en": {
+                "apartment_": "Квартира"
+            }
         },
         {
-            "id": 4,
-            "key": "password",
-            "text": "Пароль"
+            "ru": {
+                "select.lang_": "Выберите язык"
+            },
+            "en": {
+                "select.lang_": "Выберите язык"
+            }
         },
         {
-            "id": 5,
-            "key": "password.confirm",
-            "text": "Подтвердите пароль"
+            "ru": {
+                "pregnant_": "Беременна"
+            },
+            "en": {
+                "pregnant_": "Беременна"
+            }
         },
         {
-            "id": 6,
-            "key": "login",
-            "text": "Войти"
+            "ru": {
+                "not.pregnant_": "Не беременна"
+            },
+            "en": {
+                "not.pregnant_": "Не беременна"
+            }
         },
         {
-            "id": 7,
-            "key": "register",
-            "text": "Регистрация"
+            "ru": {
+                "terms_": "Пользовательское соглашение"
+            },
+            "en": {
+                "terms_": "Пользовательское соглашение"
+            }
         },
         {
-            "id": 8,
-            "key": "add.photo",
-            "text": "Добавить фото"
+            "ru": {
+                "sms.code_": "Смс-код"
+            },
+            "en": {
+                "sms.code_": "Смс-код"
+            }
         },
         {
-            "id": 9,
-            "key": "your_name",
-            "text": "Ваше имя"
+            "ru": {
+                "to.register_": "Зарегистрироваться"
+            },
+            "en": {
+                "to.register_": "Зарегистрироваться"
+            }
         },
         {
-            "id": 10,
-            "key": "email",
-            "text": "Email"
+            "ru": {
+                "resend_": "Отправить повторно"
+            },
+            "en": {
+                "resend_": "Отправить повторно"
+            }
         },
         {
-            "id": 11,
-            "key": "select.region",
-            "text": "Выберите регион"
+            "ru": {
+                "calculate.gestational.age_": "Рассчитать срок беременности"
+            },
+            "en": {
+                "calculate.gestational.age_": "Рассчитать срок беременности"
+            }
         },
         {
-            "id": 12,
-            "key": "select.city",
-            "text": "Выберите город"
+            "ru": {
+                "calculate.gestational.age_": "Рассчитать срок беременности"
+            },
+            "en": {
+                "calculate.gestational.age_": "Рассчитать срок беременности"
+            }
         },
         {
-            "id": 13,
-            "key": "street",
-            "text": "Улица"
+            "ru": {
+                "by.screening_": "По скринигу"
+            },
+            "en": {
+                "by.screening_": "По скринигу"
+            }
         },
         {
-            "id": 14,
-            "key": "house",
-            "text": "Дом"
+            "ru": {
+                "enter.weight.data_": "Введите данные о весе"
+            },
+            "en": {
+                "enter.weight.data_": "Введите данные о весе"
+            }
         },
         {
-            "id": 15,
-            "key": "apartment",
-            "text": "Квартира"
+            "ru": {
+                "before.pregnant_": "До беременности"
+            },
+            "en": {
+                "before.pregnant_": "До беременности"
+            }
         },
         {
-            "id": 16,
-            "key": "select.lang",
-            "text": "Выберите язык"
+            "ru": {
+                "now_": "Сейчас"
+            },
+            "en": {
+                "now_": "Сейчас"
+            }
         },
         {
-            "id": 17,
-            "key": "pregnant",
-            "text": "Беременна"
+            "ru": {
+                "emergency.contacts_": "Контакты для экстренной связи"
+            },
+            "en": {
+                "emergency.contacts_": "Контакты для экстренной связи"
+            }
         },
         {
-            "id": 18,
-            "key": "not.pregnant",
-            "text": "Не беременна"
+            "ru": {
+                "name_": "Имя"
+            },
+            "en": {
+                "name_": "Имя"
+            }
         },
         {
-            "id": 19,
-            "key": "terms",
-            "text": "Пользовательское соглашение"
+            "ru": {
+                "add.contact_": "Добавить контакт"
+            },
+            "en": {
+                "add.contact_": "Добавить контакт"
+            }
         },
         {
-            "id": 20,
-            "key": "sms.code",
-            "text": "Смс-код"
+            "ru": {
+                "start_": "Начать"
+            },
+            "en": {
+                "start_": "Начать"
+            }
         },
         {
-            "id": 21,
-            "key": "to.register",
-            "text": "Зарегистрироваться"
+            "ru": {
+                "measuring_": "Измерения"
+            },
+            "en": {
+                "measuring_": "Измерения"
+            }
         },
         {
-            "id": 22,
-            "key": "resend",
-            "text": "Отправить повторно"
+            "ru": {
+                "measuring_": "Измерения"
+            },
+            "en": {
+                "measuring_": "Измерения"
+            }
         },
         {
-            "id": 23,
-            "key": "calculate.gestational.age",
-            "text": "Рассчитать срок беременности"
+            "ru": {
+                "my.weight_": "Мой вес"
+            },
+            "en": {
+                "my.weight_": "Мой вес"
+            }
         },
         {
-            "id": 24,
-            "key": "calculate.gestational.age",
-            "text": "Рассчитать срок беременности"
+            "ru": {
+                "my.baby_": "Мой малыш"
+            },
+            "en": {
+                "my.baby_": "Мой малыш"
+            }
         },
         {
-            "id": 25,
-            "key": "by.screening",
-            "text": "По скринигу"
+            "ru": {
+                "my.tummy_": "Мой животик"
+            },
+            "en": {
+                "my.tummy_": "Мой животик"
+            }
         },
         {
-            "id": 26,
-            "key": "enter.weight.data",
-            "text": "Введите данные о весе"
+            "ru": {
+                "contractions_": "Схватки"
+            },
+            "en": {
+                "contractions_": "Схватки"
+            }
         },
         {
-            "id": 27,
-            "key": "before.pregnant",
-            "text": "До беременности"
+            "ru": {
+                "clinic_": "Клиники"
+            },
+            "en": {
+                "clinic_": "Клиники"
+            }
         },
         {
-            "id": 28,
-            "key": "now",
-            "text": "Сейчас"
+            "ru": {
+                "recommendations_": "Рекомендации"
+            },
+            "en": {
+                "recommendations_": "Рекомендации"
+            }
         },
         {
-            "id": 29,
-            "key": "emergency.contacts",
-            "text": "Контакты для экстренной связи"
+            "ru": {
+                "chat_": "Чат"
+            },
+            "en": {
+                "chat_": "Чат"
+            }
         },
         {
-            "id": 30,
-            "key": "name",
-            "text": "Имя"
+            "ru": {
+                "personal.cabinet_": "Личный кабинет"
+            },
+            "en": {
+                "personal.cabinet_": "Личный кабинет"
+            }
         },
         {
-            "id": 31,
-            "key": "add.contact",
-            "text": "Добавить контакт"
+            "ru": {
+                "current.weight_": "Текущий вес"
+            },
+            "en": {
+                "current.weight_": "Текущий вес"
+            }
         },
         {
-            "id": 32,
-            "key": "start",
-            "text": "Начать"
+            "ru": {
+                "new.weight_": "Новый вес"
+            },
+            "en": {
+                "new.weight_": "Новый вес"
+            }
         },
         {
-            "id": 33,
-            "key": "measuring",
-            "text": "Измерения"
+            "ru": {
+                "add.weight_": "Добавить вес"
+            },
+            "en": {
+                "add.weight_": "Добавить вес"
+            }
         },
         {
-            "id": 34,
-            "key": "measuring",
-            "text": "Измерения"
+            "ru": {
+                "add_": "Добавить"
+            },
+            "en": {
+                "add_": "Добавить"
+            }
         },
         {
-            "id": 35,
-            "key": "my.weight",
-            "text": "Мой вес"
+            "ru": {
+                "enter.data_": "Введите данные"
+            },
+            "en": {
+                "enter.data_": "Введите данные"
+            }
         },
         {
-            "id": 36,
-            "key": "my.baby",
-            "text": "Мой малыш"
+            "ru": {
+                "when.measurements_": "Когда сделаны замеры"
+            },
+            "en": {
+                "when.measurements_": "Когда сделаны замеры"
+            }
         },
         {
-            "id": 37,
-            "key": "my.tummy",
-            "text": "Мой животик"
+            "ru": {
+                "girth_": "Обхват"
+            },
+            "en": {
+                "girth_": "Обхват"
+            }
         },
         {
-            "id": 38,
-            "key": "contractions",
-            "text": "Схватки"
+            "ru": {
+                "ufh_": "ВДМ"
+            },
+            "en": {
+                "ufh_": "ВДМ"
+            }
         },
         {
-            "id": 39,
-            "key": "clinic",
-            "text": "Клиники"
+            "ru": {
+                "uterine.fundus.height_": "Высота дна матки"
+            },
+            "en": {
+                "uterine.fundus.height_": "Высота дна матки"
+            }
         },
         {
-            "id": 40,
-            "key": "recommendations",
-            "text": "Рекомендации"
+            "ru": {
+                "add.data_": "Добавить данные"
+            },
+            "en": {
+                "add.data_": "Добавить данные"
+            }
         },
         {
-            "id": 41,
-            "key": "chat",
-            "text": "Чат"
+            "ru": {
+                "girth.abdomen_": "Обхват живота"
+            },
+            "en": {
+                "girth.abdomen_": "Обхват живота"
+            }
         },
         {
-            "id": 42,
-            "key": "personal.cabinet",
-            "text": "Личный кабинет"
+            "ru": {
+                "contractions.counter_": "Счетчик схваток"
+            },
+            "en": {
+                "contractions.counter_": "Счетчик схваток"
+            }
         },
         {
-            "id": 43,
-            "key": "current.weight",
-            "text": "Текущий вес"
+            "ru": {
+                "duration_": "Длительность"
+            },
+            "en": {
+                "duration_": "Длительность"
+            }
         },
         {
-            "id": 44,
-            "key": "new.weight",
-            "text": "Новый вес"
+            "ru": {
+                "interval_": "Интервал"
+            },
+            "en": {
+                "interval_": "Интервал"
+            }
         },
         {
-            "id": 45,
-            "key": "add.weight",
-            "text": "Добавить вес"
+            "ru": {
+                "phone_": "Телефон"
+            },
+            "en": {
+                "phone_": "Телефон"
+            }
         },
         {
-            "id": 46,
-            "key": "add",
-            "text": "Добавить"
+            "ru": {
+                "support_": "Помощь и поддержка"
+            },
+            "en": {
+                "support_": "Помощь и поддержка"
+            }
         },
         {
-            "id": 47,
-            "key": "enter.data",
-            "text": "Введите данные"
+            "ru": {
+                "settings_": "Настройки"
+            },
+            "en": {
+                "settings_": "Настройки"
+            }
         },
         {
-            "id": 48,
-            "key": "when.measurements",
-            "text": "Когда сделаны замеры"
+            "ru": {
+                "exit_": "Выход"
+            },
+            "en": {
+                "exit_": "Выход"
+            }
         },
         {
-            "id": 49,
-            "key": "girth",
-            "text": "Обхват"
+            "ru": {
+                "forums_": "Форумы"
+            },
+            "en": {
+                "forums_": "Форумы"
+            }
         },
         {
-            "id": 50,
-            "key": "ufh",
-            "text": "ВДМ"
+            "ru": {
+                "message_": "Сообщение"
+            },
+            "en": {
+                "message_": "Сообщение"
+            }
         },
         {
-            "id": 51,
-            "key": "uterine.fundus.height",
-            "text": "Высота дна матки"
+            "ru": {
+                "rate.quality.service_": "Оцените качество обслуживания"
+            },
+            "en": {
+                "rate.quality.service_": "Оцените качество обслуживания"
+            }
         },
         {
-            "id": 52,
-            "key": "add.data",
-            "text": "Добавить данные"
+            "ru": {
+                "check.lists_": "Чек-листы"
+            },
+            "en": {
+                "check.lists_": "Чек-листы"
+            }
         },
         {
-            "id": 53,
-            "key": "girth.abdomen",
-            "text": "Обхват живота"
+            "ru": {
+                "articles_": "Статьи"
+            },
+            "en": {
+                "articles_": "Статьи"
+            }
         },
         {
-            "id": 54,
-            "key": "contractions.counter",
-            "text": "Счетчик схваток"
+            "ru": {
+                "state_": "Государственные"
+            },
+            "en": {
+                "state_": "Государственные"
+            }
         },
         {
-            "id": 55,
-            "key": "duration",
-            "text": "Длительность"
+            "ru": {
+                "private_": "Частные"
+            },
+            "en": {
+                "private_": "Частные"
+            }
         },
         {
-            "id": 56,
-            "key": "interval",
-            "text": "Интервал"
+            "ru": {
+                "eще_": "more"
+            },
+            "en": {
+                "eще_": "more"
+            }
         },
         {
-            "id": 57,
-            "key": "phone",
-            "text": "Телефон"
+            "ru": {
+                "schedules_": "График работы"
+            },
+            "en": {
+                "schedules_": "График работы"
+            }
         },
         {
-            "id": 58,
-            "key": "support",
-            "text": "Помощь и поддержка"
+            "ru": {
+                "registry_": "Регистратура"
+            },
+            "en": {
+                "registry_": "Регистратура"
+            }
         },
         {
-            "id": 59,
-            "key": "settings",
-            "text": "Настройки"
+            "ru": {
+                "our.specialists_": "Наши спешиалисты"
+            },
+            "en": {
+                "our.specialists_": "Наши спешиалисты"
+            }
         },
         {
-            "id": 60,
-            "key": "exit",
-            "text": "Выход"
+            "ru": {
+                "reviews_": "Отзывы"
+            },
+            "en": {
+                "reviews_": "Отзывы"
+            }
         },
         {
-            "id": 61,
-            "key": "forums",
-            "text": "Форумы"
+            "ru": {
+                "all.reviews_": "Все отзывы"
+            },
+            "en": {
+                "all.reviews_": "Все отзывы"
+            }
         },
         {
-            "id": 62,
-            "key": "message",
-            "text": "Сообщение"
+            "ru": {
+                "price.list_": "Прайс-лист"
+            },
+            "en": {
+                "price.list_": "Прайс-лист"
+            }
         },
         {
-            "id": 63,
-            "key": "rate.quality.service",
-            "text": "Оцените качество обслуживания"
+            "ru": {
+                "good_": "Хорошо"
+            },
+            "en": {
+                "good_": "Хорошо"
+            }
         },
         {
-            "id": 64,
-            "key": "check.lists",
-            "text": "Чек-листы"
+            "ru": {
+                "great_": "Отлично"
+            },
+            "en": {
+                "great_": "Отлично"
+            }
         },
         {
-            "id": 65,
-            "key": "articles",
-            "text": "Статьи"
+            "ru": {
+                "bad_": "Плохо"
+            },
+            "en": {
+                "bad_": "Плохо"
+            }
         },
         {
-            "id": 66,
-            "key": "state",
-            "text": "Государственные"
-        },
-        {
-            "id": 67,
-            "key": "private",
-            "text": "Частные"
-        },
-        {
-            "id": 68,
-            "key": "eще",
-            "text": "more"
-        },
-        {
-            "id": 69,
-            "key": "schedules",
-            "text": "График работы"
-        },
-        {
-            "id": 70,
-            "key": "registry",
-            "text": "Регистратура"
-        },
-        {
-            "id": 71,
-            "key": "our.specialists",
-            "text": "Наши спешиалисты"
-        },
-        {
-            "id": 72,
-            "key": "reviews",
-            "text": "Отзывы"
-        },
-        {
-            "id": 73,
-            "key": "all.reviews",
-            "text": "Все отзывы"
-        },
-        {
-            "id": 74,
-            "key": "price.list",
-            "text": "Прайс-лист"
-        },
-        {
-            "id": 75,
-            "key": "good",
-            "text": "Хорошо"
-        },
-        {
-            "id": 76,
-            "key": "great",
-            "text": "Отлично"
-        },
-        {
-            "id": 77,
-            "key": "bad",
-            "text": "Плохо"
-        },
-        {
-            "id": 78,
-            "key": "call",
-            "text": "Связаться"
-        },
-        {
-            "id": 79,
-            "key": "education",
-            "text": "Образование"
-        },
-        {
-            "id": 80,
-            "key": "account.settings",
-            "text": "Настройки аккаунта"
-        },
-        {
-            "id": 81,
-            "key": "edit",
-            "text": "Изменить"
-        },
-        {
-            "id": 82,
-            "key": "location",
-            "text": "Местоположение"
-        },
-        {
-            "id": 83,
-            "key": "app.settings",
-            "text": "Настройки приложения"
-        },
-        {
-            "id": 84,
-            "key": "lang",
-            "text": "Язык"
-        },
-        {
-            "id": 85,
-            "key": "notification",
-            "text": "Уведомления"
-        },
-        {
-            "id": 86,
-            "key": "feedback",
-            "text": "Обратная связь"
-        },
-        {
-            "id": 87,
-            "key": "change.phone.number",
-            "text": "Изменить номер телефона"
-        },
-        {
-            "id": 88,
-            "key": "new.phone.number",
-            "text": "Новый номер телефона"
-        },
-        {
-            "id": 89,
-            "key": "save",
-            "text": "Сохранить"
-        },
-        {
-            "id": 90,
-            "key": "close",
-            "text": "Закрыть"
+            "ru": {
+                "call_": "Связаться"
+            },
+            "en": {
+                "call_": "Связаться"
+            }
+        },
+        {
+            "ru": {
+                "education_": "Образование"
+            },
+            "en": {
+                "education_": "Образование"
+            }
+        },
+        {
+            "ru": {
+                "account.settings_": "Настройки аккаунта"
+            },
+            "en": {
+                "account.settings_": "Настройки аккаунта"
+            }
+        },
+        {
+            "ru": {
+                "edit_": "Изменить"
+            },
+            "en": {
+                "edit_": "Изменить"
+            }
+        },
+        {
+            "ru": {
+                "location_": "Местоположение"
+            },
+            "en": {
+                "location_": "Местоположение"
+            }
+        },
+        {
+            "ru": {
+                "app.settings_": "Настройки приложения"
+            },
+            "en": {
+                "app.settings_": "Настройки приложения"
+            }
+        },
+        {
+            "ru": {
+                "lang_": "Язык"
+            },
+            "en": {
+                "lang_": "Язык"
+            }
+        },
+        {
+            "ru": {
+                "notification_": "Уведомления"
+            },
+            "en": {
+                "notification_": "Уведомления"
+            }
+        },
+        {
+            "ru": {
+                "feedback_": "Обратная связь"
+            },
+            "en": {
+                "feedback_": "Обратная связь"
+            }
+        },
+        {
+            "ru": {
+                "change.phone.number_": "Изменить номер телефона"
+            },
+            "en": {
+                "change.phone.number_": "Изменить номер телефона"
+            }
+        },
+        {
+            "ru": {
+                "new.phone.number_": "Новый номер телефона"
+            },
+            "en": {
+                "new.phone.number_": "Новый номер телефона"
+            }
+        },
+        {
+            "ru": {
+                "save_": "Сохранить"
+            },
+            "en": {
+                "save_": "Сохранить"
+            }
+        },
+        {
+            "ru": {
+                "close_": "Закрыть"
+            },
+            "en": {
+                "close_": "Закрыть"
+            }
         }
     ]
 }
@@ -6692,5 +7390,117 @@ print_r(json_decode((string) $body));
 
 
 <!-- END_adcc950de2f5b85d8ce657dcefb433a4 -->
+
+#general
+
+
+<!-- START_aff71564981b5476730a3bebde82db7b -->
+## api/orders/list
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/orders/list" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/orders/list");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get("http://localhost/api/orders/list", [
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+> Example response (422):
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "from": [
+            "The from field is required."
+        ],
+        "to": [
+            "The to field is required."
+        ]
+    }
+}
+```
+
+### HTTP Request
+`GET api/orders/list`
+
+
+<!-- END_aff71564981b5476730a3bebde82db7b -->
+
+<!-- START_1e94abaea9c3ffd7c9754b71ff29cd27 -->
+## api/orders/get
+> Example request:
+
+```bash
+curl -X GET -G "http://localhost/api/orders/get" 
+```
+
+```javascript
+const url = new URL("http://localhost/api/orders/get");
+
+let headers = {
+    "Accept": "application/json",
+    "Content-Type": "application/json",
+}
+
+fetch(url, {
+    method: "GET",
+    headers: headers,
+})
+    .then(response => response.json())
+    .then(json => console.log(json));
+```
+
+```php
+
+$client = new \GuzzleHttp\Client();
+$response = $client->get("http://localhost/api/orders/get", [
+]);
+$body = $response->getBody();
+print_r(json_decode((string) $body));
+```
+
+
+> Example response (422):
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "id": [
+            "The id field is required."
+        ]
+    }
+}
+```
+
+### HTTP Request
+`GET api/orders/get`
+
+
+<!-- END_1e94abaea9c3ffd7c9754b71ff29cd27 -->
 
 
