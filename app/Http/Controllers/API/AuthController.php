@@ -250,12 +250,6 @@ class AuthController extends Controller
      */
     public function me()
     {
-
-        $user = User::query()->with(['city', 'region', 'patient'])->find(auth()->id());
-
-        $duration = new DurationController();
-        $user->pregnanc = $duration->get_duration();
-
         $auth = User::find(auth()->id());
         if ($auth->role == 'patient') {
             $user = User::query()->with(['city', 'region', 'patient'])->find(auth()->id());
