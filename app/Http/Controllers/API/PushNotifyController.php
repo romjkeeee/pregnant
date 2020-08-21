@@ -13,14 +13,14 @@ use Illuminate\Http\Request;
  */
 class PushNotifyController extends Controller
 {
-    public function sendPush($body, $id)
+    public function sendPush($body, $id, $title)
     {
         $user = User::query()->where('id',$id)->first();
         $data = [
             "to" => $user->push_key,
             "notification" =>
                 [
-                    "title" => 'Pregnancy',
+                    "title" => $title ?? 'Pregnancy',
                     "body" => $body ?? 'New notification',
 //                    "icon" => url('/logo.png')
                 ],

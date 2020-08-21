@@ -12,6 +12,7 @@ use App\Http\Resources\Chat\ChatCollection;
 use App\Http\Resources\Chat\MessageCollection;
 use App\Http\Resources\Chat\MessageResource;
 use App\Http\Resources\Chat\ChatResource;
+use App\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -70,8 +71,8 @@ class ChatController extends Controller
         $message->attaches()->createMany($request->all()['attaches'] ?? []);
         $sendPush = new PushNotifyController();
         $chat = Chat::query()->where('id', $request->chat_id)->first();
-//        $body = ChatMessage::query()->where('id',$chat->id)->first();
-        $sendPush->sendPush($message->text,$chat->recipient_id);
+        $body = User::query()->where('id',$message->sender_id)->first();
+        $sendPush->sendPush($message->text,$chat->recipient_id, 'Новое сообщение от: '.$body->first_name .' '. $body->second_name);
         return MessageResource::make(ChatMessage::query()->findOrFail($message->id));
     }
 
