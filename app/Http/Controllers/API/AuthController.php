@@ -8,8 +8,6 @@ use App\Http\Requests\AddDoctorRequest;
 use App\Http\Requests\NotificationStateRequest;
 use App\Http\Requests\UpdateEmail;
 use App\Patient;
-use App\Translate\ClinicTranslate;
-use App\Translate\SpecializationTranslate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
