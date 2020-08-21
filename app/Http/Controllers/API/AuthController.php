@@ -27,6 +27,8 @@ use Illuminate\Support\Str;
 use App\Traits\StoreImageTrait;
 use Carbon\Carbon;
 use App\Http\Controllers\API\DurationController;
+use App\Translate\ClinicTranslate;
+use App\Translate\SpecializationTranslate;
 
 /**
  * @group Auth
@@ -257,24 +259,7 @@ class AuthController extends Controller
             $user->pregnanc = $duration->get_duration();
             $user->weight = $user->patient->weight;
         } else {
-            $user = User::query()->with(['city', 'region', 'doctor'])->find(auth()->id());
-            $user->specialisation = $user->doctor->specialisations;
-            $user->clinic = $user->doctor->clinics;
-            $user->specialisations = $user->doctor->specialisations;
-
-            /* Нет времени разбиратся, потом переделать и убрать этот костыль */
-            $specialisations_translate = [];
-            foreach ($user->specialisations as $item) {
-                $specialisations_translate[] = SpecializationTranslate::where('specialization_id', $item->id)->get();
-            }
-            $user->specialisations_translate = $specialisations_translate;
-            /* Нет времени разбиратся, потом переделать и убрать этот костыль */
-            $clinic_translate = [];
-            foreach ($user->clinic as $item) {
-                $clinic_translate[] = ClinicTranslate::where('clinic_id', $item->id)->get();
-            }
-            $user->clinic_translate = $clinic_translate;
-
+            $user = User::query()->with(['city', 'region', 'doctor', 'doctor.specialisations.translates', 'doctor.clinics.translates'])->find(auth()->id());
         }
         /**/
         return response()->json($user);
