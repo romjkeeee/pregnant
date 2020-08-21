@@ -39,7 +39,7 @@ class Doctor extends BaseModel
 
     public function specialisationsTranslate(): hasMany
     {
-        return $this->hasMany(SpecializationTranslate::class, 'specialization_id');
+        return $this->hasMany(SpecializationTranslate::class, 'specialization_id', 'doctor_specializations', 'id');
     }
 
     public function translates(): hasMany
