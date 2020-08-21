@@ -37,7 +37,8 @@ class AuthRequest extends FormRequest
     {
         return [
             'phone'    => ['required', 'exists:users,phone'],
-            'password' => ['required', new AuthCheck($this->__user())]
+            'password' => ['required', new AuthCheck($this->__user())],
+            'push_ley' => ['string']
         ];
     }
 }

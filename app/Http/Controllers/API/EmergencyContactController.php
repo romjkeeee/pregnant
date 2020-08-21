@@ -32,6 +32,6 @@ class EmergencyContactController extends Controller
      */
     public function store(EmergencyContactsRequest $request)
     {
-        return response(auth()->user()->patient()->firstOrFail()->emergencycontacts()->create($request->validated()));
+        return response(['status' => 'success', 'data' => auth()->user()->patient()->firstOrFail()->emergencycontacts()->create($request->validated())], 201);
     }
 }

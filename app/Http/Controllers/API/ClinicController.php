@@ -26,7 +26,7 @@ class ClinicController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['index', 'show']]);
+        $this->middleware('auth:api', ['except' => ['index', 'show', 'search']]);
     }
 
 
@@ -81,5 +81,23 @@ class ClinicController extends Controller
                 ->with(['city', 'region', 'departments', 'schedules', 'prices'])
                 ->findOrFail($id));
         }
+    }
+
+    public function search(Request $request)
+    {
+            return Clinic::query()->with(['region', 'city', 'departments', 'schedules', 'reviews', 'prices', 'translates'])
+                ->when($request->get('type'), function (Builder $query) use ($request) {
+                    $query->where('type', $request->get('type'));
+                })
+                ->when($request->get('search'), function (Builder $query) use ($request) {
+                    $query->whereHas('translates', function (Builder $builder) use ($request) {
+                        $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                    });
+                })->when($request->get('city_id'), function (Builder $query) use ($request) {
+                    $query->whereHas('city', function (Builder $builder) use ($request) {
+                        $builder->where('id', $request->get('city_id'));
+                    });
+                })->orderBy('id', 'desc')->paginate(20);
+
     }
 }

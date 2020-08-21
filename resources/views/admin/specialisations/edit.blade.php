@@ -7,8 +7,16 @@
 @section('fields')
     @method('PUT')
     <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group" style="padding: 5px">
+                <strong style="margin-bottom: 10px!important;">Изображение <span class="req">*</span></strong>
+                <input type="file" name="photo" value="{{ old('photo') }}" class="form-control">
+            </div>
+        </div>
         @include('components.multi-lang', ['fields' => [
                 ['title' => 'Название <span class="req">*</span>', 'name' => 'name'],
+                                ['title' => 'Текст описания <span class="req">*</span>', 'name' => 'description', 'tag' => 'textarea']
+
         ]])
     </div>
 @endsection

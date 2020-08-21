@@ -44,7 +44,11 @@ class UserRequest extends FormRequest
             'verified'    => 'required|in:0,1',
             'email'       => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user->id ?? null)],
             'phone'       => ['required', 'phone_num', Rule::unique('users', 'phone')->ignore($this->user->id ?? null)],
+<<<<<<< HEAD
+            'image'       => ['nullable', 'image', 'max:2048']
+=======
             'image'       => ['nullable', 'image', 'max:10048']
+>>>>>>> 93c6244dcde707656a762e4398f8a854566cdaa3
         ];
     }
 

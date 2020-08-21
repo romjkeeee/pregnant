@@ -69,6 +69,20 @@ class PatientController extends Controller
     }
 
     /**
+     * Set pregnant
+     *
+     * @bodyParam pregnant boolean required
+     *
+     */
+    public function pregnant(Request $request)
+    {
+        $patient = auth()->user()->patient()->firstOrFail();
+        $patient->update(['pregnant' => $request->pregnant]);
+
+        return \response(['Сохранено']);
+    }
+
+    /**
      * @param GetPatiensRequest $request
      * @return ResponseFactory|Application|Response
      */

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\API;
 
 use App\CheckList;
+use App\Http\Requests\RememberTaskRequest;
 use App\Http\Requests\SelectTaskRequest;
 use App\Http\Resources\CheckListResource;
 use App\PatientTask;
+use App\PatientTaskRemember;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Application;
@@ -39,7 +41,7 @@ class CheckListController extends Controller
     public function index(): AnonymousResourceCollection
     {
         return CheckListResource::collection(CheckList::query()->with([
-            'tasks.patient' => function (BelongsToMany $many) {
+            'tasks.patient', 'tasks.remember' => function (BelongsToMany $many) {
                 $many->where('patient_id', auth()->user()->patient->id ?? null);
             }
         ])->get());
@@ -54,6 +56,43 @@ class CheckListController extends Controller
     public function store(SelectTaskRequest $request)
     {
         auth()->user()->patient()->first()->tasks()->attach($request->validated());
+
+        return \response(['Сохранено.']);
+    }
+
+    /**
+     * Store remember
+     *
+     * @bodyParam task_id integer
+     * @bodyParam remember boolean
+     * @bodyParam date date example: 2020-08-18
+     *
+     */
+    public function remember(RememberTaskRequest $request)
+    {
+        $patient = auth()->user()->patient()->first();
+
+        $remember =  new PatientTaskRemember();
+        $remember->task_id = $request->task_id;
+        $remember->patient_id = $patient->id;
+        $remember->remember = $request->remember;
+        $remember->date = $request->date;
+        $remember->save();
+
+        return \response(['Сохранено.']);
+    }
+
+    /**
+     * Destroy remember
+     *
+     *
+     */
+    public function destroy_remember($id)
+    {
+        PatientTaskRemember::query()->where([
+            'patient_id' => auth()->user()->patient()->first()->id,
+            'task_id'    => $id,
+        ])->delete();
 
         return \response(['Сохранено.']);
     }

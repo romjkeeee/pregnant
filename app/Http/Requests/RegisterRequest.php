@@ -32,7 +32,7 @@ class RegisterRequest extends FormRequest
     private function __user(): array
     {
         return [
-            'image'                 => ['nullable', 'image', 'max:2048'],
+            'image'                 => 'nullable|image',
             'name'                  => 'required|min:2|max:192',
             'last_name'             => 'required|min:2|max:192',
             'second_name'           => 'required|min:2|max:192',
@@ -45,7 +45,8 @@ class RegisterRequest extends FormRequest
             'building'              => 'required|min:1|max:32',
             'apartment'             => 'nullable|min:1|max:32',
             'password'              => 'required|min:6|max:24|confirmed',
-            'lang_id'               => 'required|exists:langs,id'
+            'lang_id'               => 'required|exists:langs,id',
+            'push_key'              => 'string'
         ];
     }
 
