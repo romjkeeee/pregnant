@@ -55,10 +55,10 @@ class PatientBellyController extends Controller
     /**
      * Last
      */
-    public function last()
+    public function last($id = false)
     {
-        return \response(PatientBelly::query()->whereHas('patient', function (Builder $builder) {
-            $builder->where('user_id', auth()->id());
+        return \response(PatientBelly::query()->whereHas('patient', function (Builder $builder) use ($id) {
+            $builder->where('user_id', ($id === false) ? auth()->id() : $id);
         })->orderByDesc('date')->first());
     }
 

@@ -28,6 +28,10 @@ class Doctor extends BaseModel
         return $this->belongsToMany(Clinic::class, 'doctor_clinics', 'doctor_id', 'clinic_id');
     }
 
+    public function patients(): HasMany
+    {
+        return $this->hasMany(Patient::class);
+    }
 
     /**
      * @return BelongsToMany

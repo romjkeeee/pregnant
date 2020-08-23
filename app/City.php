@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\MultiLangTrait;
 use App\Translate\CityTranslate;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class City extends BaseModel
@@ -22,5 +23,14 @@ class City extends BaseModel
     public function region(): HasOne
     {
         return $this->hasOne(Region::class, 'id', 'region_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+
+    public function translates(): HasMany
+    {
+        return $this->hasMany($this->translatedClass, $this->translatedForeignKey);
     }
 }
