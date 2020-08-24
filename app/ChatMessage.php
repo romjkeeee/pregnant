@@ -27,4 +27,13 @@ class ChatMessage extends Model
     {
         return $this->hasMany(ChatMessageAttach::class, 'message_id', 'id');
     }
+
+    /**
+     * @return HasOne
+     */
+
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'sender_id');
+    }
 }
