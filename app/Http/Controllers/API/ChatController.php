@@ -48,7 +48,7 @@ class ChatController extends Controller
                 'recipient_id' => $request->recipient_id
             ])->first() ?? false;
         $sendPush = new PushNotifyController();
-        $sendPush->sendPush('You have new chat',$request->recipient_id);
+        $sendPush->sendPush('You have new chat',$request->recipient_id,'Pregnancy');
         if ($chat_id) {
             return json_encode($chat_id);
         } else {
