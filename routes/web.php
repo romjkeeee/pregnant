@@ -93,5 +93,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
     Route::resource('orders', 'OrderController');
     /** my baby routes */
     Route::resource('mybaby', 'MyBabyController');
+
+    Route::resource('chat', 'ChatController');
+
+    /*Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
+
+    });*/
 });
 

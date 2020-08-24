@@ -52,6 +52,14 @@ class Chat extends BaseModel
     /**
      * @return HasOne
      */
+    public function recepient(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'recipient_id');
+    }
+
+    /**
+     * @return HasOne
+     */
     public function lastMessage(): HasOne
     {
         return $this->hasOne(ChatMessage::class, 'chat_id', 'id')->orderByDesc('id');
