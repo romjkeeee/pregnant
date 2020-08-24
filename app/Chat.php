@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Chat extends BaseModel
 {
     public $timestamps = false;
-    protected $fillable = ['sender_id', 'recipient_id'];
+    // protected $fillable = ['sender_id', 'recipient_id'];
+    protected $guarded = [];
 
     /**
      * @return HasOne
