@@ -60,6 +60,13 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::post('visible', 'ChatController@visible');
         Route::get('list', 'ChatController@list');
         Route::get('messages', 'ChatController@messages');
+
+        Route::post('start_group', 'ChatController@startGroup');
+        Route::post('send_group', 'ChatController@sendGroup');
+        Route::post('add_user_group', 'ChatController@addUserGroup');
+        Route::get('list_messages_group', 'ChatController@groupMessages');
+        Route::get('get_groups', 'ChatController@getGroups');
+        Route::post('leave_group', 'ChatController@leaveGroup');
     });
 
     Route::group(['prefix' => 'orders', 'as' => 'order.'], function () {

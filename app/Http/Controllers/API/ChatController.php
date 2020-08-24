@@ -5,14 +5,22 @@ namespace App\Http\Controllers\API;
 use App\Chat;
 use App\ChatMessage;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Chat\AddUserGroupRequest;
+use App\Http\Requests\Chat\GetGroupMessagesRequest;
+use App\Http\Requests\Chat\GetGroupRequest;
+use App\Http\Requests\Chat\LeaveGroupRequest;
 use App\Http\Requests\Chat\ListRequest;
+use App\Http\Requests\Chat\SendGroupRequest;
 use App\Http\Requests\Chat\SendRequest;
+use App\Http\Requests\Chat\StartGroupRequest;
 use App\Http\Requests\Chat\StartRequest;
 use App\Http\Resources\Chat\ChatCollection;
 use App\Http\Resources\Chat\MessageCollection;
 use App\Http\Resources\Chat\MessageResource;
 use App\Http\Resources\Chat\ChatResource;
 use App\User;
+use App\UsersGroup;
+use http\Client\Response;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,6 +63,164 @@ class ChatController extends Controller
             $chat = auth()->user()->senderChats()->create($request->validated());
             return ChatResource::make($chat);
         }
+    }
+
+    /**
+     * @param StartGroupRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function startGroup(StartGroupRequest $request)
+    {
+        $users = [];
+
+        foreach (json_decode($request->users) as $item) {
+            $user = User::find($item);
+            if ($user) {
+                $users[] = $item;
+            }
+        }
+
+        $chat = Chat::create([
+            'group' => 1,
+            'group_users' => json_encode($users),
+            'group_title' => $request->get('title'),
+            'group_type' => $request->type
+        ]);
+
+        foreach ($users as $user) {
+            UsersGroup::create([
+                'chat_id' => $chat->id,
+                'user_id' => $user,
+                'type' => $request->type
+            ]);
+
+            $sendPush = new PushNotifyController();
+            $sendPush->sendPush('Создана новая группа!', $user, $request->get('title'));
+        }
+
+        return response()->json($chat);
+    }
+
+    /**
+     * @param SendGroupRequest $request
+     * @return MessageResource|\Illuminate\Http\JsonResponse
+     */
+
+    public function sendGroup(SendGroupRequest $request)
+    {
+        $chat = Chat::find($request->chat_id);
+        $groupUsers = json_decode($chat->group_users);
+
+        if(!array_search(auth()->user()->id, $groupUsers)) {
+            return \response()->json([
+                'success' => 0,
+                'text' => 'Вы не состоите в этом чате!'
+            ]);
+        }
+        $message = auth()->user()->messages()->create($request->validated());
+        $message->attaches()->createMany($request->all()['attaches'] ?? []);
+
+        $sendPush = new PushNotifyController();
+        $body = User::find($message->sender_id);
+
+        foreach ($groupUsers as $user) {
+            $sendPush->sendPush($message->text, $user, $chat->title);
+        }
+        return MessageResource::make(ChatMessage::query()->findOrFail($message->id));
+    }
+
+    /**
+     * @param AddUserGroupRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function addUserGroup(AddUserGroupRequest $request)
+    {
+        $chat = Chat::find($request->chat_id);
+
+        $users = json_decode($chat->group_users);
+        if (array_search(auth()->user()->id, $users)) {
+            return \response()->json([
+                'success' => 0,
+                'text' => 'Этот пользователь уже в чате!'
+            ]);
+        }
+
+        $users[] = (integer) $request->user_id;
+
+        $sendPush = new PushNotifyController();
+        $body = User::find($request->user_id);
+
+        foreach ($users as $user) {
+            if ($user != $request->user_id) {
+                $sendPush->sendPush('Приветствуем в чате '. $body->name .' '. $body->last_name .'!', $user, $chat->title);
+            }
+        }
+
+        $chat->update([
+            'group_users' => json_encode($users)
+        ]);
+
+        UsersGroup::create([
+            'chat_id' => $chat->id,
+            'user_id' => (integer) $request->user_id,
+            'type' => $chat->group_type
+        ]);
+
+        return \response()->json($chat);
+    }
+
+    /**
+     * @param GetGroupMessagesRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function groupMessages(GetGroupMessagesRequest $request)
+    {
+        return \response()->json(ChatMessage::with('user')->get());
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function getGroups(GetGroupRequest $request)
+    {
+        return \response()->json(UsersGroup::with('chat', 'user')->where([
+            'user_id' => auth()->user()->id,
+            'type' => $request->get('type')
+        ])->get());
+    }
+
+    public function leaveGroup(LeaveGroupRequest $request)
+    {
+        $group = UsersGroup::where([
+            'chat_id' => $request->chat_id,
+            'user_id' => $request->user_id
+        ])->first();
+        $chat = Chat::find($request->chat_id);
+        $users = json_decode($chat->group_users);
+        $search = array_search($request->user_id, $users);
+
+        if($search) {
+            unset($users[$search]);
+        } else {
+            return \response()->json([
+                'success' => 0,
+                'text' => 'Этого пользователя не было в чате!'
+            ]);
+        }
+
+        $chat->update([
+            'group_users' => json_encode($users)
+        ]);
+        if ($group != null) {
+            $group->delete();
+        }
+        $group->delete();
+
+        return \response()->json($chat);
     }
 
     /**

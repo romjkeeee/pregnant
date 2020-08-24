@@ -11,7 +11,7 @@
                     <h5>
                         <a href="{{ route('admin.users.edit', $item->user->id) }}">{{ $item->user->name ." ". $item->user->last_name }}</a>
                     </h5>
-                    <h5>Время отправки:</h5>
+                    <h5>Текст сообщения:</h5>
                     <p>{{ $item->text }}</p>
                     <h5>Время отправки:</h5>
                     <p>{{ $item->send_at }}</p>
