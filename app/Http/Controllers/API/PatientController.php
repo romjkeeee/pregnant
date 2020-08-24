@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Doctor;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PatientConceptionRequest;
 use App\Patient;
@@ -82,71 +83,48 @@ class PatientController extends Controller
         return \response(['Сохранено']);
     }
 
-    /**
-     * @param GetPatiensRequest $request
-     * @return ResponseFactory|Application|Response
-     */
-
     public function getPatiens(GetPatiensRequest $request)
     {
-        $user = User::query()->with(['doctor'])->find(auth()->id());
+        $data = [];
 
-        if ($request->from and $request->to) {
-            $patients = [];
-            $data = Patient::where([
-                'doctor_id' => $user->doctor->id,
-                ['created_at', '>=', $request->from],
-                ['created_at', '<=', $request->to],
-            ])->get();
-
-            foreach ($data as $item) {
-                $patient = User::query()->with(['patient', 'city_translate', 'bellie', 'weight'])->find($item->user_id);
-                if ($patient->role !== 'doctor') {
-                    $patient->duration = $this->duration($patient->id);
-                    $patients[] = $patient ?? false;
-                }
+        $query_patient = function ($query) use ($request) {
+            if (!is_null($request->get('from')) and !is_null($request->get('to'))) {
+                $query->where('created_at', '>=', $request->get('from'));
+                $query->where('created_at', '<=', $request->get('to'));
             }
-        } else {
-            $patients = [];
-            $data = Patient::where([
-                'doctor_id' => $user->doctor->id
-            ])->get();
+        };
 
-            foreach ($data as $item) {
-                $patient = User::query()->with(['patient', 'city_translate', 'bellie', 'weight'])->find($item->user_id);
-                if ($patient->role !== 'doctor') {
-                    $patient->duration = $this->duration($patient->id);
-                    $patients[] = $patient ?? false;
-                }
-            }
-        }
+        $patients = User::query()->with([
+            'doctor.patients' => $query_patient,
+            'doctor.patients.bellies',
+            'doctor.patients.weight',
+            'doctor.patients.user.city.translates',
+            'doctor.patients.user.region.translates'
+        ])->find(auth()->id());
 
-        if ($request->search) {
-            $patients = [];
-            $data = Patient::where([
-                'doctor_id' => $user->doctor->id,
-                ['created_at', '>=', $request->from],
-                ['created_at', '<=', $request->to],
-            ])
-            ->get();
-            $string = explode(' ', $request->search);
-            foreach ($data as $item) {
-                $patient = User::query()->with(['patient', 'city_translate', 'bellie', 'weight'])->find($item->user_id) ?? false;
-                if ($patient->role !== 'doctor') {
-                    for ($i = 0; $i < count($string); $i++) {
-                        if (strripos($patient->name, $string[$i]) !== false) {
-                            $patient->duration = $this->duration($patient->id);
-                            $patients[] = $patient;
-                        } elseif (strripos($patient->last_name, $string[$i]) !== false) {
-                            $patient->duration = $this->duration($patient->id);
-                            $patients[] = $patient;
-                        }
+        $string = explode(' ', $request->search);
+
+        foreach ($patients->doctor->patients as $patient) {
+            if ($request->get('search')) {
+                /* Потом переделать на выборку из БД */
+                for ($i = 0; $i < count($string); $i++) {
+                    if (strripos($patient->user->name, $string[$i]) !== false) {
+                        $patient->duration = $this->duration($patient->user->id);
+                        $data[] = $patient;
+                    } elseif (strripos($patient->last_name, $string[$i]) !== false) {
+                        $patient->duration = $this->duration($patient->user->id);
+                        $data[] = $patient;
                     }
                 }
+            } else {
+                $patient->duration = $this->duration($patient->user->id);
+                $data[] = $patient;
             }
         }
 
-        return $patients;
+        $patients->doctor->patients = $data;
+
+        return $patients->doctor->patients;
     }
 
     public function duration(int $id)
