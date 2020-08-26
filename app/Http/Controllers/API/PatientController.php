@@ -4,8 +4,14 @@ namespace App\Http\Controllers\API;
 
 use App\Doctor;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GetPregnancyPatologyRequest;
 use App\Http\Requests\PatientConceptionRequest;
+use App\Http\Requests\PregnancyNumberRequest;
+use App\Http\Requests\PregnancyPatologyRequest;
 use App\Patient;
+use App\PragnancyNumber;
+use App\PregnancyNumber;
+use App\PregnancyPatologye;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -128,6 +134,11 @@ class PatientController extends Controller
         return $patients->doctor->patients;
     }
 
+    /**
+     * @param int $id
+     * @return array|bool
+     */
+
     public function duration(int $id)
     {
         $user = Patient::where('user_id', $id)->first();
@@ -147,5 +158,51 @@ class PatientController extends Controller
                 'week' => floor($week / 7),
                 'day' => floor($week),
         ] ?? false;
+    }
+
+    /**
+     * @param PregnancyNumberRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function pragnancyNumber(PregnancyNumberRequest $request)
+    {
+        $pregnancy = PregnancyNumber::with('user')->where([
+            'user_id' => $request->user_id
+        ])->first();
+
+        if ($pregnancy) {
+            $pregnancy->update([
+                'count' => $request->count
+            ]);
+
+            return \response()->json($pregnancy);
+        } else {
+            return \response()->json(PregnancyNumber::create($request->validated()));
+        }
+    }
+
+    /**
+     * @param PregnancyPatologyRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function pregnancyPatology(PregnancyPatologyRequest $request)
+    {
+        return \response()->json(
+            PregnancyPatologye::create($request->validated())
+        );
+    }
+
+    /**
+     * @param GetPregnancyPatologyRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function getPregnancyPatology(GetPregnancyPatologyRequest $request)
+    {
+        return \response()->json(
+            PregnancyPatologye::with('user.patient')->where($request->validated())->get()
+        );
     }
 }
