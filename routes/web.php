@@ -73,6 +73,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
     /** articles routes */
     Route::resource('articles', 'ArticleController');
     Route::resource('article-category', 'ArticleCategoryController');
+
     /** helper routes */
     Route::post('destroy', 'AdminController@destroy')->name('destroy');
     /** ajax preload routes */
@@ -95,6 +96,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
     Route::resource('mybaby', 'MyBabyController');
 
     Route::resource('chat', 'ChatController');
+    Route::resource('chat-council', 'ChatCouncilController');
+    Route::resource('chat-forum', 'ChatForumController');
 
     /*Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
 
