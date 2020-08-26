@@ -15,5 +15,17 @@
              ['title' => 'Название <span class="req">*</span>', 'name' => 'title'],
              ['title' => 'Текст статьи <span class="req">*</span>', 'name' => 'text', 'tag' => 'textarea']
         ]])
+        <div class="col-lg-4">
+            <div class="form-group" style="padding: 5px">
+                <strong style="margin-bottom: 10px!important;">Предпоказ <span class="req">*</span></strong>
+                <input type="file" name="preview" value="{{ old('preview') }}" class="form-control">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group" style="padding: 5px">
+                <strong style="margin-bottom: 10px!important;">Картинка <span class="req">*</span></strong>
+                <input type="file" name="image" value="{{ old('image') }}" class="form-control">
+            </div>
+        </div>
     </div>
 @endsection
