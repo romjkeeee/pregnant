@@ -60,6 +60,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::post('visible', 'ChatController@visible');
         Route::get('list', 'ChatController@list');
         Route::get('messages', 'ChatController@messages');
+        Route::post('delete', 'ChatController@deleteChat');
 
         Route::post('start_group', 'ChatController@startGroup');
         Route::post('send_group', 'ChatController@sendGroup');
@@ -90,6 +91,9 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
 
     Route::apiResource('patient/weight', 'PatientWeightController');
     Route::apiResource('patients', 'PatientController');
+    Route::post('patients/set-pregnancy-number', 'PatientController@pragnancyNumber');
+    Route::post('patients/set-pregnancy-patology', 'PatientController@pregnancyPatology');
+    Route::post('patients/get-pregnancy-patology', 'PatientController@getPregnancyPatology');
 
     Route::post('conception-date', 'PatientController@conceptionDate');
     Route::post('pregnant', 'PatientController@pregnant');

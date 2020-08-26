@@ -6,6 +6,7 @@ use App\Chat;
 use App\ChatMessage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Chat\AddUserGroupRequest;
+use App\Http\Requests\Chat\DeleteChatRequest;
 use App\Http\Requests\Chat\GetGroupMessagesRequest;
 use App\Http\Requests\Chat\GetGroupRequest;
 use App\Http\Requests\Chat\LeaveGroupRequest;
@@ -290,6 +291,11 @@ class ChatController extends Controller
             })->orderByDesc('id')->paginate($request->get('perPage') ?? 20));
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\Response
+     */
+
     public function visible(Request $request) {
         foreach ($request->data as $data) {
             ChatMessage::find($data)->update([
@@ -297,5 +303,20 @@ class ChatController extends Controller
             ]);
         }
         return \response(['Ok']);
+    }
+
+    /**
+     * @param DeleteChatRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function deleteChat(DeleteChatRequest $request)
+    {
+        $chat = Chat::where('id', $request->chat_id)->delete();
+
+        return \response()->json([
+            'success' => 1,
+            'text' => 'Чат удален!'
+        ]);
     }
 }

@@ -224,4 +224,22 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasOne(PatientWeight::class, 'id', 'patient_id');
     }
+
+    /**
+     * @return HasOne
+     */
+
+    public function pnumber() : HasOne
+    {
+        return $this->hasOne(PregnancyNumber::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+
+    public function patology() : HasMany
+    {
+        return $this->hasMany(PregnancyPatologye::class, 'user_id', 'id');
+    }
 }
