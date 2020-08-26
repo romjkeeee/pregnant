@@ -6,6 +6,7 @@
     </a>
     <ul class="nav nav-second-level collapse">
         <li @if (Route::current()->getName() == 'admin.chat.index') class="active" @endif><a href="{{ route('admin.chat.index') }}">Список</a></li>
-        {{--<li @if (Route::current()->getName() == 'admin.chats.create') class="active" @endif><a href="{{ route('admin.chats.create') }}">Добавить</a></li>--}}
+        @include('admin.chat-council.links')
+        @include('admin.chat-forum.links')
     </ul>
 </li>

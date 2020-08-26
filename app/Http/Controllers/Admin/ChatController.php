@@ -20,7 +20,7 @@ class ChatController extends Controller
         return view('admin.chat.index', [
             'page_title' => 'Спичок чатов',
             'search' => $request->get('search'),
-            'items' => Chat::query()->with('sender', 'recepient')->when($request->get('search'), function (Builder $chat) use ($request) {
+            'items' => Chat::query()->where('group', 0)->with('sender', 'recepient')->when($request->get('search'), function (Builder $chat) use ($request) {
                 $chat->whereHas('users', function (Builder $builder) use ($request) {
                     $builder->orWhere('name', 'LIKE', "%{$request->get('search')}%");
                     $builder->orWhere('last_name', 'LIKE', "%{$request->get('search')}%");
