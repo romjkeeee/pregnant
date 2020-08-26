@@ -106,7 +106,9 @@ class PatientController extends Controller
             'doctor.patients.weight',
             'doctor.patients.clinic.translates',
             'doctor.patients.user.city.translates',
-            'doctor.patients.user.region.translates'
+            'doctor.patients.user.region.translates',
+            'doctor.patients.user.pnumber',
+            'doctor.patients.user.patology'
         ])->find(auth()->id());
 
         $string = explode(' ', $request->search);
