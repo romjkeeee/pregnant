@@ -98,6 +98,7 @@ class PatientController extends Controller
             'doctor.patients' => $query_patient,
             'doctor.patients.bellies',
             'doctor.patients.weight',
+            'doctor.patients.clinic.translates',
             'doctor.patients.user.city.translates',
             'doctor.patients.user.region.translates'
         ])->find(auth()->id());
