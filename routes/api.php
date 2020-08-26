@@ -60,6 +60,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
         Route::post('visible', 'ChatController@visible');
         Route::get('list', 'ChatController@list');
         Route::get('messages', 'ChatController@messages');
+        Route::post('delete', 'ChatController@deleteChat');
 
         Route::post('start_group', 'ChatController@startGroup');
         Route::post('send_group', 'ChatController@sendGroup');
