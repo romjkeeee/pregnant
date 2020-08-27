@@ -277,7 +277,7 @@ class AuthController extends Controller
             $filename = uniqid().$file->getClientOriginalName(); // image.jpg
 
             Storage::putFileAs($upload_folder, $file, $filename);
-            $user->image =  'https://med.weedoo.ru/storage/avatar/'.$user->id.'/'.$filename;
+            $user->image =  'https://med.weedoo.ru/storage/public/avatar/'.$user->id.'/'.$filename;
             $user->update();
         }
         return response()->json(['status' => 'success' , 'data' => $user]);
