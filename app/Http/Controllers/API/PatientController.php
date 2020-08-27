@@ -57,7 +57,19 @@ class PatientController extends Controller
      */
     public function show($id)
     {
-        return \response(Patient::query()->with(['user.region', 'user.city', 'clinic', 'doctor'])->findOrFail($id));
+        return \response(Patient::query()->with([
+            'user.region',
+            'user.city',
+            'clinic',
+            'doctor',
+            'user.patient.bellies',
+            'user.patient.weight',
+            'user.patient.clinic.translates',
+            'user.city.translates',
+            'user.region.translates',
+            'user.pnumber',
+            'user.patology'
+        ])->findOrFail($id));
     }
 
     /**

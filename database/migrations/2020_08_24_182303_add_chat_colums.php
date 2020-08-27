@@ -16,6 +16,7 @@ class AddChatColums extends Migration
         Schema::table('chats', function (Blueprint $table) {
             $table->integer('group_type')->nullable();
         });
+        //
     }
 
     /**

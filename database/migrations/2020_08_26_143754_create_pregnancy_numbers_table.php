@@ -19,6 +19,7 @@ class CreatePregnancyNumbersTable extends Migration
             $table->integer('count')->default(0);
             $table->timestamps();
         });
+        //
     }
 
     /**

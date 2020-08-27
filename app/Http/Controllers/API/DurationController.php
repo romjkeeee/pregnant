@@ -89,9 +89,7 @@ class DurationController extends Controller
                             'day' => floor($weeks)
                         ] ?? false;
 
-                } elseif ($patient->conception_type === 'screening') {
-                    return \response('Еще учусь как правильно высчитать');
-                } elseif ($patient->conception_type === 'pregnanc') {
+                }  elseif ($patient->conception_type === 'pregnanc' or $patient->conception_type === 'screening') {
                     $now = time();
                     $your_date = strtotime($patient->conception_date);
                     $datediff = $now - $your_date;

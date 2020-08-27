@@ -19,6 +19,7 @@ class CreatePregnancyPatologyTable extends Migration
             $table->text('text');
             $table->timestamps();
         });
+        //
     }
 
     /**
