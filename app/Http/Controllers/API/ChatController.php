@@ -62,6 +62,7 @@ class ChatController extends Controller
             return json_encode($chat_id);
         } else {
             $chat = auth()->user()->senderChats()->create($request->validated());
+
             return ChatResource::make($chat);
         }
     }
