@@ -279,8 +279,6 @@ class AuthController extends Controller
             Storage::putFileAs($upload_folder, $file, $filename);
             $user->image =  'https://med.weedoo.ru/storage/avatar/'.$user->id.'/'.$filename;
             $user->update();
-
-
         }
         return response()->json(['status' => 'success' , 'data' => $user]);
     }

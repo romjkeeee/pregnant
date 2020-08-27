@@ -102,6 +102,7 @@ class DurationController extends Controller
 
                     return [
                         'month' => $date->format('%m'),
+                         'week' => floor($date->format('%d') / 7),
                         'day' => $date->format('%d')
                     ] ?? false;
                 }
