@@ -18,6 +18,7 @@ class AddChatColums extends Migration
             $table->json('group_users')->nullable();
             $table->text('group_title')->nullable();
         });
+        //
     }
 
     /**

@@ -16,6 +16,7 @@ class AddGroupsColums extends Migration
         Schema::table('users_groups', function (Blueprint $table) {
             $table->integer('type')->nullable();
         });
+        //
     }
 
     /**
