@@ -210,7 +210,7 @@ class AuthController extends Controller
 
     public function setDoctor(AddDoctorRequest $request)
     {
-        Patient::query()->update($request->validated());
+        auth()->user()->patient()->update($request->validated());
         return \response([
             'status' => 'success',
             'message'=>'Saved']);
@@ -272,9 +272,15 @@ class AuthController extends Controller
     {
         if ($request->file('image')) {
             $user = User::query()->where('id',auth()->user()->id)->first();
-            $user->image =  'https://med.weedoo.ru/storage/app/'.$request->file('image')
-                    ->store('avatar/'.$user->id);
+            $file = $request->file('image');
+            $upload_folder = 'public/avatar/'.$user->id;
+            $filename = uniqid().$file->getClientOriginalName(); // image.jpg
+
+            Storage::putFileAs($upload_folder, $file, $filename);
+            $user->image =  'https://med.weedoo.ru/storage/avatar/'.$user->id.'/'.$filename;
             $user->update();
+
+
         }
         return response()->json(['status' => 'success' , 'data' => $user]);
     }
