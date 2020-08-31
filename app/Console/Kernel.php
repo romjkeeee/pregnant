@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
          $schedule->command('patient:notify')
-                  ->dailyAt("9:00");
+                  ->cron('* * * * *');
     }
 
     /**
