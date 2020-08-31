@@ -47,12 +47,14 @@ class NotifyTaskPatient extends Command
         $users = PatientTaskRemember::query()->whereNotNull('date')->get();
         foreach($users as $user) {
             if ($user->remember == 1) {
-                $patient = $user->patient;
-                $check_list = CheckListTaskTranslate::query()
-                    ->where('task_id', $user->task_id)->first();
-                $data = User::query()->where('id', $patient->user_id)->first();
-                $push = new PushNotifyController();
-                $push->sendPush($check_list->name, $data->id, 'Вы просили напомнить Вам');
+                if ($user->date == Carbon::now()->toDateString() ) {
+                    $patient = $user->patient;
+                    $check_list = CheckListTaskTranslate::query()
+                        ->where('task_id', $user->task_id)->first();
+                    $data = User::query()->where('id', $patient->user_id)->first();
+                    $push = new PushNotifyController();
+                    $push->sendPush($check_list->name, $data->id, 'Вы просили напомнить Вам');
+                }
             }
         }
     }
