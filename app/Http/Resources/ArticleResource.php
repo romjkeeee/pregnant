@@ -19,6 +19,7 @@ class ArticleResource extends JsonResource
             'id'         => $this->id,
             'title'      => $this->translate->title ?? null,
             'text'       => $this->translate->text ?? null,
+            'source'       => $this->source ?? null,
             'image'      => $this->image ? asset($this->image) : null,
             'preview'    => $this->preview ? asset($this->preview) : null,
             'week'    => $this->week ? asset($this->week) : null,
