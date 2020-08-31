@@ -26,6 +26,7 @@ class ArticleRequest extends FormRequest
         return [
             'category_id'         => ['required', 'exists:article_categories,id'],
             'preview'             => ['image'],
+            'source'              => 'string',
             'image'               => ['image'],
             'translate'           => ['required', 'array'],
             'translate.*.lang_id' => ['required', 'exists:langs,id'],
