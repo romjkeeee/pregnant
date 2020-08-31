@@ -8,6 +8,7 @@ use App\Http\Requests\GetPregnancyPatologyRequest;
 use App\Http\Requests\PatientConceptionRequest;
 use App\Http\Requests\PregnancyNumberRequest;
 use App\Http\Requests\PregnancyPatologyRequest;
+use App\Http\Requests\UpToWeightRequest;
 use App\Patient;
 use App\PragnancyNumber;
 use App\PregnancyNumber;
@@ -218,5 +219,15 @@ class PatientController extends Controller
         return \response()->json(
             PregnancyPatologye::with('user.patient')->where($request->validated())->get()
         );
+    }
+
+    /**
+     * @param UpToWeightRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function updateUpToWeight(UpToWeightRequest $request)
+    {
+        return \response()->json(auth()->user()->patient()->update($request->validated()));
     }
 }

@@ -23,6 +23,12 @@
         </div>
         <div class="col-lg-4">
             <div class="form-group" style="padding: 5px">
+                <strong style="margin-bottom: 10px!important;">Источник <span class="req">*</span></strong>
+                <input type="text" name="source" value="{{ $instance->source }}" class="form-control">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Картинка <span class="req">*</span></strong>
                 <input type="file" name="image" value="{{ old('image') }}" class="form-control">
             </div>
