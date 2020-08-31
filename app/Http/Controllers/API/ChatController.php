@@ -15,10 +15,12 @@ use App\Http\Requests\Chat\SendGroupRequest;
 use App\Http\Requests\Chat\SendRequest;
 use App\Http\Requests\Chat\StartGroupRequest;
 use App\Http\Requests\Chat\StartRequest;
+use App\Http\Requests\GetChatPatientsRequest;
 use App\Http\Resources\Chat\ChatCollection;
 use App\Http\Resources\Chat\MessageCollection;
 use App\Http\Resources\Chat\MessageResource;
 use App\Http\Resources\Chat\ChatResource;
+use App\PatientsChat;
 use App\User;
 use App\UsersGroup;
 use http\Client\Response;
@@ -62,9 +64,32 @@ class ChatController extends Controller
             return json_encode($chat_id);
         } else {
             $chat = auth()->user()->senderChats()->create($request->validated());
+            PatientsChat::create([
+                'doctor_id' => $request->recipient_id,
+                'patient_id' => auth()->id(),
+            ]);
 
             return ChatResource::make($chat);
         }
+    }
+
+    /**
+     * @param GetChatPatientsRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function getChatPatients(GetChatPatientsRequest $request)
+    {
+        return \response()->json(
+            PatientsChat::with([
+                'user' => function ($query) use ($request) {
+                    $query->orWhere('doctor_id', '=', $request->doctor_id);
+                    $query->orWhere('patient_id', '=', $request->patient_id);
+                },
+                'user.patient',
+                'user.doctor'
+            ])->get()
+        );
     }
 
     /**
