@@ -32,7 +32,7 @@ class RememberTaskRequest extends FormRequest
                         ->where('patient_id', auth()->user()->patient->id ?? null)
                 ],
                 'remember' => ['boolean'],
-                'date' => ['date']
+                'date' => ['date_format:Y-m-d H:i:s']
             ];
     }
 }
