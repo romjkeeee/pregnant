@@ -19,7 +19,7 @@
         </div>
         <div class="col-lg-4">
             <div class="form-group" style="padding: 5px">
-                <strong style="margin-bottom: 10px!important;">Источник <span class="req">*</span></strong>
+                <strong style="margin-bottom: 10px!important;">Источник</strong>
                 <input type="text" name="source" value="{{ $instance->source }}" class="form-control">
             </div>
         </div>
