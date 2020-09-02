@@ -200,12 +200,17 @@ class ChatController extends Controller
 
     /**
      * @param GetGroupMessagesRequest $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return MessageCollection
      */
 
     public function groupMessages(GetGroupMessagesRequest $request)
     {
-        return \response()->json(ChatMessage::with('user')->get());
+        return MessageCollection::make(ChatMessage::query()
+            ->where($request->validated())
+            ->when($request->get('search'), function (Builder $builder) use ($request) {
+                $builder->where('text', 'LIKE', "%{$request->get('search')}%");
+            })->orderByDesc('send_at')
+            ->paginate($request->get('perPage') ?? 20));
     }
 
     /**
@@ -214,11 +219,24 @@ class ChatController extends Controller
 
     public function getGroups(GetGroupRequest $request)
     {
-        return \response()->json(UsersGroup::with('chat', 'user')->where([
+        return \response()->json(UsersGroup::with([
+            'chat' => function ($query) use ($request) {
+                $query->orWhere('group_title', '=', $request->get('search'));
+            },
+            'user',
+            'message'
+        ])->where([
             'user_id' => auth()->user()->id,
             'type' => $request->get('type')
-        ])->get());
+        ])
+            ->paginate($request->get('perPage') ?? 20))
+            ->orderBy('created_at', 'desc');
     }
+
+    /**
+     * @param LeaveGroupRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function leaveGroup(LeaveGroupRequest $request)
     {

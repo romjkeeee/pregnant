@@ -28,7 +28,7 @@
             <td class="footable-visible">{{ $item->translate->name ?? null }}</td>
             <td class="footable-visible">{{ $item->list->translate->name ?? null }}</td>
             <td class="text-right footable-visible footable-last-column">
-                @include('components.action', ['edit' => route('admin.check-lists.tasks.edit', $item->id)])
+                @include('components.action', ['edit' => route('admin.articles.edit', $item->id), 'delete' => $item->id])
             </td>
         </tr>
     @endforeach

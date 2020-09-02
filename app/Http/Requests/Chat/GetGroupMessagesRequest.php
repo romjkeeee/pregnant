@@ -24,7 +24,7 @@ class GetGroupMessagesRequest extends FormRequest
     public function rules()
     {
         return [
-            'chat_id' => 'required|exists:users,id'
+            'chat_id' => 'required|exists:chats,id'
         ];
     }
 }
