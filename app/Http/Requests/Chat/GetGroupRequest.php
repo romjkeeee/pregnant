@@ -35,7 +35,6 @@ class GetGroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
             'type' => Rule::in($this->__roles())
         ];
     }

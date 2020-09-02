@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class UsersGroup extends Model
 {
@@ -12,16 +13,29 @@ class UsersGroup extends Model
     protected $guarded = [];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function user() : HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function chat()
+    /**
+     * @return HasOne
+     */
+
+    public function chat() : HasOne
     {
         return $this->hasOne(Chat::class, 'id', 'chat_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+
+    public function message() : HasOne
+    {
+        return $this->hasOne(ChatMessage::class, 'chat_id', 'chat_id');
     }
 }
