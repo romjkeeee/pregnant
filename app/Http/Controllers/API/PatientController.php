@@ -198,6 +198,19 @@ class PatientController extends Controller
     }
 
     /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function getPragnancyNumber()
+    {
+        return \response()->json(
+            PregnancyNumber::with('user')->where([
+                'user_id' => auth()->id()
+            ])->first()
+        );
+    }
+
+    /**
      * @param PregnancyPatologyRequest $request
      * @return \Illuminate\Http\JsonResponse
      */

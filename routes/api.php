@@ -93,6 +93,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::apiResource('patient/weight', 'PatientWeightController');
     Route::apiResource('patients', 'PatientController');
     Route::post('patients/set-pregnancy-number', 'PatientController@pragnancyNumber');
+    Route::get('patients/get-pregnancy-number', 'PatientController@getPragnancyNumber');
     Route::post('patients/set-pregnancy-patology', 'PatientController@pregnancyPatology');
     Route::post('patients/get-pregnancy-patology', 'PatientController@getPregnancyPatology');
     Route::post('patients/up-to-weight', 'PatientController@updateUpToWeight');
