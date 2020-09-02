@@ -24,9 +24,9 @@ class PushNotifyController extends Controller
                     "body" => $body ?? 'New notification',
 //                    "icon" => url('/logo.png')
                     'priority'=>'high',
+                    'sound' => 'default',
+                    'badge' => '1'
                 ],
-            'sound' => 'default',
-            'badge' => '1'
         ];
         $dataString = json_encode($data);
 
