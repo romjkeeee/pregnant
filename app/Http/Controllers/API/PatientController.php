@@ -201,11 +201,11 @@ class PatientController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
 
-    public function getPragnancyNumber()
+    public function getPragnancyNumber(Request $request)
     {
         return \response()->json(
             PregnancyNumber::with('user')->where([
-                'user_id' => auth()->id()
+                'user_id' => $request->user_id
             ])->first()
         );
     }
