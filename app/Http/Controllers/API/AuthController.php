@@ -110,7 +110,7 @@ class AuthController extends Controller
             $token = JWTAuth::attempt($request->only(['phone', 'password']));
 
             if ($request->file('image')) {
-                $user = User::query()->where('id',auth()->user()->id)->first();
+                $user = User::query()->where('id',auth()->id())->first();
                 $user->image =  'https://med.weedoo.ru/storage/app/'.$request->file('image')
                         ->store('avatar/'.$user->id);
                 $user->update();

@@ -49,7 +49,7 @@ class SendGroupRequest extends FormRequest
                 'nullable',
                 'array'
             ],
-            'attaches.*.path' => ['required|image|max:5048']
+            'attaches.*.path' => ['required|image|max:10000']
         ];
     }
 }
