@@ -111,6 +111,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::apiResource('doctors/educations', 'DoctorEducationController');
     Route::apiResource('doctors', 'DoctorController');
     Route::post('doctors/patiens', 'PatientController@getPatiens');
+    Route::post('doctors/get', 'PatientController@getDoctors');
 
     /** clinics routes */
     Route::apiResource('clinics/reviews', 'ClinicReviewController');
@@ -121,6 +122,12 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::apiResource('durations', 'DurationController');
 
     Route::get('send_push', 'PushNotifyController@sendPush');
+
+    /**
+     * Tech
+     */
+
+    Route::post('/tech/create', 'TechController@create');
 });
 
 

@@ -25,9 +25,11 @@ class AddOrderRequest extends FormRequest
     {
         return [
             'id_order' => 'required',
-            'title' => 'required',
             'date' => 'required|date',
-            'text' => 'required',
+            'translate'           => ['required', 'array'],
+            'translate.*.lang_id' => ['required', 'exists:langs,id'],
+            'translate.*.title'   => ['required', 'string'],
+            'translate.*.text'    => ['required', 'between:3,60000'],
         ];
     }
 }

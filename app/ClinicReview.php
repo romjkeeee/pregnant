@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ClinicReview extends BaseModel
 {
-    protected $fillable = ['user_id', 'clinic_id', 'rate', 'text'];
+    protected $fillable = ['user_id', 'clinic_id', 'rate', 'text', 'check'];
 
     protected static function boot()
     {

@@ -21,12 +21,10 @@ class OrderController extends Controller
         return view('admin.orders.index', [
             'page_title' => 'Приказы',
             'search'     => $request->get('search'),
-            'items' => Order::query()->where(function (Builder $lang) use ($request) {
-                if ($request->get('search')) {
-                    $lang->where(function (Builder $builder) use ($request) {
-                        $builder->orWhere('title', 'LIKE', "%{$request->get('search')}%");
-                    });
-                }
+            'items' => Order::query()->when($request->get('search'), function (Builder $article) use ($request) {
+                $article->whereHas('translates', function (Builder $builder) use ($request) {
+                    $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+                });
             })->orderBy('id', 'desc')->paginate(20)
         ]);
     }
@@ -47,7 +45,8 @@ class OrderController extends Controller
 
     public function store(AddOrderRequest $request): RedirectResponse
     {
-        Order::query()->create($request->validated());
+        $order = Order::query()->create($request->validated());
+        $order->syncTranslates($request->get('translate'));
 
         return redirect()->route('admin.orders.index')->with('success', 'Приказ успешно добавлен!');
     }
@@ -61,7 +60,7 @@ class OrderController extends Controller
     {
         return view('admin.orders.edit', [
             'page_title' => 'Редактирование Приказа',
-            'instance'   => Order::query()->findOrFail($id),
+            'instance'   => Order::query()->with('translates')->findOrFail($id),
         ]);
     }
 
@@ -73,7 +72,9 @@ class OrderController extends Controller
 
     public function update(AddOrderRequest $request, $id): RedirectResponse
     {
-        Order::query()->findOrFail($id)->update($request->validated());
+        $article = Order::query()->findOrFail($id);
+        $article->update($request->validated());
+        $article->syncTranslates($request->get('translate'));
 
         return back()->with('success', 'Сохранено!');
     }

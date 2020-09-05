@@ -39,6 +39,7 @@ class ClinicReviewController extends Controller
         return \response(ClinicReview::query()->with(['user.patient'])
             ->whereHas('user.patient')
             ->filter($request->only(['clinic_id']))
+            ->where('check', 1)
             ->paginate($request->get('perPage') ?? 10));
     }
 

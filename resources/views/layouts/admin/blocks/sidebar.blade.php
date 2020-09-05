@@ -16,6 +16,7 @@
         @include('admin.doctors.links')
         @include('admin.patients.links')
         @include('admin.chat.links')
+        @include('admin.tech.links')
         @include('admin.clinics.links')
         @include('admin.mybaby.links')
         @include('admin.articles.links')

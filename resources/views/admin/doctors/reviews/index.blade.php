@@ -20,6 +20,7 @@
     <th data-toggle="true">Доктор</th>
     <th data-toggle="true">Пользователь</th>
     <th data-toggle="true">Оценка</th>
+    <th data-toggle="true">Проверен</th>
     <th class="text-right" data-sort-ignore="true">Действия</th>
 @endsection
 @section('table-body')
@@ -37,6 +38,7 @@
                 @endif
             </td>
             <td class="footable-visible">{{ $item->rate }}</td>
+            <td class="footable-visible">@if($item->check) Проверен @else Не проверен @endif</td>
             <td class="text-right footable-visible footable-last-column">
                 @include('components.action', ['edit' => route('admin.doctors.reviews.edit', $item->id), 'delete' => $item->id])
             </td>

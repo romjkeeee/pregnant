@@ -99,6 +99,11 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
     Route::resource('chat-council', 'ChatCouncilController');
     Route::resource('chat-forum', 'ChatForumController');
 
+    /**
+     * Tech
+     */
+    Route::resource('tech', 'TechController');
+
     /*Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
 
     });*/
