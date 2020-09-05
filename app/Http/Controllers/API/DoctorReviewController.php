@@ -35,6 +35,7 @@ class DoctorReviewController extends Controller
         return \response(DoctorReview::query()->with(['user'])
             ->whereHas('user')
             ->filter($request->only(['doctor_id']))
+            ->where('check', 1)
             ->paginate($request->get('perPage') ?? 10));
     }
 

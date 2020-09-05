@@ -28,6 +28,7 @@ class DoctorReviewRequest extends FormRequest
             'doctor_id' => ['required', 'exists:doctors,id'],
             'rate'      => ['required', 'numeric', 'between:1,5'],
             'text'      => ['required', 'min:3', 'max:192'],
+            'check' => 'required'
         ];
     }
 }

@@ -34,7 +34,7 @@ class LocationController extends Controller
      */
     public function regions(Request $request): RegionCollection
     {
-        return RegionCollection::make(Region::query()->paginate($request->get('perPage') ?? 50));
+        return RegionCollection::make(Region::query()->with('translates')->paginate($request->get('perPage') ?? 50));
     }
 
     /**
@@ -45,6 +45,6 @@ class LocationController extends Controller
      */
     public function cities(Request $request): CityCollection
     {
-        return CityCollection::make(City::query()->filter($request->only('region_id'))->paginate($request->get('perPage') ?? 50));
+        return CityCollection::make(City::query()->with('translates')->filter($request->only('region_id'))->paginate($request->get('perPage') ?? 50));
     }
 }

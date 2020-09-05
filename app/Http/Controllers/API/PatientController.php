@@ -16,6 +16,7 @@ use App\PregnancyPatologye;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -101,6 +102,30 @@ class PatientController extends Controller
 
         return \response(['Сохранено']);
     }
+
+    public function getDoctors(Request $request)
+    {
+        $data = [];
+
+        $doctors = Doctor::query()->with(['user', 'clinics', 'specialisations', 'reviews'])->where(function (Builder $doctor) use ($request) {
+            if ($request->get('search')) {
+                $doctor->whereHas('user', function (Builder $user) use ($request) {
+                    $user->where(function (Builder $builder) use ($request) {
+                        $builder->orWhere('name', 'LIKE', "%{$request->get('search')}%")
+                            ->orWhere('last_name', 'LIKE', "%{$request->get('search')}%")
+                            ->orWhere('second_name', 'LIKE', "%{$request->get('search')}%");
+                    });
+                });
+            }
+        })->orderBy('id', 'desc')->paginate(20);
+
+        return \response()->json($doctors);
+    }
+
+    /**
+     * @param GetPatiensRequest $request
+     * @return array|\Illuminate\Database\Eloquent\HigherOrderBuilderProxy|mixed
+     */
 
     public function getPatiens(GetPatiensRequest $request)
     {

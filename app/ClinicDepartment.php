@@ -4,6 +4,7 @@ namespace App;
 
 use App\Traits\MultiLangTrait;
 use App\Translate\ClinicDepartmentTranslate;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class ClinicDepartment extends BaseModel
@@ -21,5 +22,14 @@ class ClinicDepartment extends BaseModel
     public function clinic(): HasOne
     {
         return $this->hasOne(Clinic::class, 'id', 'clinic_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+
+    public function translates(): HasMany
+    {
+        return $this->hasMany($this->translatedClass, $this->translatedForeignKey);
     }
 }
