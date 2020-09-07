@@ -145,7 +145,7 @@ class ChatController extends Controller
                 'text' => 'Вы не состоите в этом чате!'
             ]);
         }*/
-        
+
         $message = auth()->user()->messages()->create($request->validated());
         $message->attaches()->createMany($request->all()['attaches'] ?? []);
 
