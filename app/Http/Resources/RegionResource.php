@@ -17,7 +17,7 @@ class RegionResource extends JsonResource
     {
         return [
             'id'   => $this->id,
-            'name' => $this->translate->name ?? null,
+            'name' => $this->translates ?? null,
         ];
     }
 }

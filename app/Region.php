@@ -16,12 +16,4 @@ class Region extends BaseModel
     public $timestamps = false;
     protected $fillable = ['name'];
 
-    /**
-     * @return HasMany
-     */
-
-    public function translates(): HasMany
-    {
-        return $this->hasMany($this->translatedClass, $this->translatedForeignKey);
-    }
 }
