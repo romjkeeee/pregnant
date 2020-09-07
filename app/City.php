@@ -25,12 +25,4 @@ class City extends BaseModel
         return $this->hasOne(Region::class, 'id', 'region_id');
     }
 
-    /**
-     * @return HasMany
-     */
-
-    public function translates(): HasMany
-    {
-        return $this->hasMany($this->translatedClass, $this->translatedForeignKey);
-    }
 }
