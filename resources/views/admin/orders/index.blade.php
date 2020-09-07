@@ -13,7 +13,7 @@
     @foreach ($items as $item)
         <tr class="footable-odd">
             <td class="footable-visible">{{ $item->id_order }}</td>
-            <td class="footable-visible">{{ $item->translate->title }}</td>
+            <td class="footable-visible">{{ $item->translate->title ?? 'Нет перевода :(' }}</td>
             <td class="footable-visible">{{ $item->date }}</td>
             <td class="text-right footable-visible footable-last-column">
                 @include('components.action', ['edit' => route('admin.orders.edit', $item->id), 'delete' => $item->id])
