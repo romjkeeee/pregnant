@@ -59,7 +59,7 @@ class ChatController extends Controller
                 'recipient_id' => $request->recipient_id
             ])->first() ?? false;
         $sendPush = new PushNotifyController();
-        $sendPush->sendPush('You have new chat',$request->recipient_id);
+        $sendPush->sendPush('You have new chat',$request->recipient_id,'Pregnancy');
         if ($chat_id) {
             return json_encode($chat_id);
         } else {
@@ -295,7 +295,7 @@ class ChatController extends Controller
         $sendPush = new PushNotifyController();
         $chat = Chat::query()->where('id', $request->chat_id)->first();
         $body = User::query()->where('id',$message->sender_id)->first();
-        $sendPush->sendPush($message->text,$chat->recipient_id, $body->name .' '. $body->second_name);
+        $sendPush->sendPush($message->text,(auth()->id() == $chat->recipient_id ? $chat->sender_id : $chat->recipient_id), $body->name .' '. $body->second_name);
         return MessageResource::make(ChatMessage::query()->findOrFail($message->id));
     }
 
