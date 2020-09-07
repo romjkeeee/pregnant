@@ -84,7 +84,7 @@ class ClinicController extends Controller
 
     public function search(Request $request)
     {
-            return Clinic::query()->with(['region.translates', 'city.translates', 'departments.translates', 'schedules', 'reviews', 'prices', 'translates'])
+            return Clinic::query()->with(['region.translates', 'city.translates', 'departments.translates', 'schedules', 'reviews', 'prices.translates', 'translates'])
                 ->when($request->get('type'), function (Builder $query) use ($request) {
                     $query->where('type', $request->get('type'));
                 })
