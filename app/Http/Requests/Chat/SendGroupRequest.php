@@ -42,14 +42,14 @@ class SendGroupRequest extends FormRequest
                 'min:1',
                 'max:192'
             ],
-            'attaches' => [
+            'attaches'        => [
                 Rule::requiredIf(function () {
                     return !$this->get('text');
                 }),
                 'nullable',
                 'array'
             ],
-            'attaches.*.path' => ['required|image|max:5048']
+            'attaches.*.path' => ['required', 'image', 'max:5048']
         ];
     }
 }
