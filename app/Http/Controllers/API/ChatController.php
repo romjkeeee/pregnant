@@ -139,12 +139,13 @@ class ChatController extends Controller
         $chat = Chat::find($request->chat_id);
         $groupUsers = json_decode($chat->group_users);
 
-        if(!array_search(auth()->user()->id, $groupUsers)) {
+        /*if(!array_search(auth()->user()->id, $groupUsers)) {
             return \response()->json([
                 'success' => 0,
                 'text' => 'Вы не состоите в этом чате!'
             ]);
-        }
+        }*/
+        
         $message = auth()->user()->messages()->create($request->validated());
         $message->attaches()->createMany($request->all()['attaches'] ?? []);
 
@@ -223,10 +224,12 @@ class ChatController extends Controller
         /* Маскимально не оптимизировано, нет времени переделывать норм */
         $user_groups = UsersGroup::where([
             'user_id' => auth()->user()->id
-        ])->get();
+        ])
+            ->orderByDesc('created_at')
+            ->get();
 
         foreach ($user_groups as $key => $item) {
-            $result = Chat::where([
+            $result = Chat::with('lastMessage.attaches')->where([
                 'id' => $item->chat_id,
                 'group_type' => $request->get('type'),
                 ['group_title', 'LIKE', "%{$request->get('search')}%"]
@@ -239,20 +242,7 @@ class ChatController extends Controller
             }
         }
 
-        return $user_groups;
-
-        return \response()->json(UsersGroup::with([
-            'chat' => function ($query) use ($request) {
-                $query->orWhere('group_title', 'LIKE', $request->get('search'));
-                $query->where('group_type', '=', $request->get('type'));
-            },
-            'user',
-            'message'
-        ])->where([
-            'user_id' => auth()->user()->id
-        ])
-            ->orderByDesc('created_at')
-            ->paginate($request->get('perPage') ?? 20));
+        return \response()->json($user_groups);
     }
 
     /**
