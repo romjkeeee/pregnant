@@ -25,9 +25,9 @@ class UsersGroup extends Model
      * @return HasOne
      */
 
-    public function chat() : HasOne
+    public function chat()
     {
-        return $this->hasOne(Chat::class, 'id', 'chat_id');
+        return $this->hasMany(Chat::class, 'id', 'chat_id');
     }
 
     /**

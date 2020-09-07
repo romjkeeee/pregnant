@@ -219,15 +219,37 @@ class ChatController extends Controller
 
     public function getGroups(GetGroupRequest $request)
     {
+
+        /* Маскимально не оптимизировано, нет времени переделывать норм */
+        $user_groups = UsersGroup::where([
+            'user_id' => auth()->user()->id
+        ])->get();
+
+        foreach ($user_groups as $key => $item) {
+            $result = Chat::where([
+                'id' => $item->chat_id,
+                'group_type' => $request->get('type'),
+                ['group_title', 'LIKE', "%{$request->get('search')}%"]
+            ])->first();
+
+            if ($result) {
+                $item->chat = $result;
+            } else {
+                unset($user_groups[$key]);
+            }
+        }
+
+        return $user_groups;
+
         return \response()->json(UsersGroup::with([
             'chat' => function ($query) use ($request) {
-                $query->orWhere('group_title', '=', $request->get('search'));
+                $query->orWhere('group_title', 'LIKE', $request->get('search'));
+                $query->where('group_type', '=', $request->get('type'));
             },
             'user',
             'message'
         ])->where([
-            'user_id' => auth()->user()->id,
-            'type' => $request->get('type')
+            'user_id' => auth()->user()->id
         ])
             ->orderByDesc('created_at')
             ->paginate($request->get('perPage') ?? 20));
