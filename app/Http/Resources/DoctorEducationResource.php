@@ -20,6 +20,7 @@ class DoctorEducationResource extends JsonResource
             'doctor_id'   => $this->doctor_id,
             'title'       => $this->translate->title ?? null,
             'description' => $this->translate->description ?? null,
+            'image' => $this->image,
             'created_at'  => $this->created_at ? $this->created_at->format(config('app.datetime_format')) : null,
             'updated_at'  => $this->updated_at ? $this->updated_at->format(config('app.datetime_format')) : null,
         ];
