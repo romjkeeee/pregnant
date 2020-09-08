@@ -207,6 +207,10 @@ class ChatController extends Controller
     public function groupMessages(GetGroupMessagesRequest $request)
     {
         return MessageCollection::make(ChatMessage::query()
+            ->with([
+                'user.patient',
+                'user.doctor'
+            ])
             ->where($request->validated())
             ->when($request->get('search'), function (Builder $builder) use ($request) {
                 $builder->where('text', 'LIKE', "%{$request->get('search')}%");
@@ -308,6 +312,10 @@ class ChatController extends Controller
     public function messages(ListRequest $request): MessageCollection
     {
         return MessageCollection::make(ChatMessage::query()
+            ->with([
+                'user.patient',
+                'user.doctor'
+            ])
             ->where($request->validated())
             ->when($request->get('search'), function (Builder $builder) use ($request) {
                 $builder->where('text', 'LIKE', "%{$request->get('search')}%");

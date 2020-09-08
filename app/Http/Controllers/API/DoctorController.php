@@ -48,7 +48,11 @@ class DoctorController extends Controller
      */
     public function specialisationDoctors(Request $request)
     {
-        return \response(Specialization::with('doctors.user')
+        return \response(Specialization::with([
+            'doctors.user',
+            'doctors.specialisations.translates',
+            'doctors.schedules'
+        ])
             ->whereHas('doctors', function (Builder $doctors) use ($request) {
                 $doctors->whereHas('clinics', function (Builder $clinic) use ($request) {
                     $clinic->where('id', $request->get('clinic_id'));

@@ -13,5 +13,6 @@
         </li>
         @include('admin.doctors.educations.links')
         @include('admin.doctors.reviews.links')
+        @include('admin.doctors.schedules.links')
     </ul>
 </li>

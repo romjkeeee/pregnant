@@ -91,4 +91,13 @@ class Patient extends BaseModel
         return $this->belongsToMany(CheckListTask::class, 'patient_task_remembers', 'patient_id', 'task_id');
     }
 
+    /**
+     * @return HasOne
+     */
+
+    public function lastMenstruation() : HasOne
+    {
+        return $this->hasOne(PatientLastMenstruation::class, 'patient_id', 'id');
+    }
+
 }

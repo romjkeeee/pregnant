@@ -28,8 +28,8 @@ class RememberTaskRequest extends FormRequest
                 'task_id' => [
                     'required',
                     'exists:check_list_tasks,id',
-                    Rule::unique('patient_tasks', 'task_id')
-                        ->where('patient_id', auth()->user()->patient->id ?? null)
+                    /*Rule::unique('patient_tasks', 'task_id')
+                        ->where('patient_id', auth()->user()->patient->id ?? null)*/
                 ],
                 'remember' => ['boolean'],
                 'date' => ['date_format:Y-m-d H:i:s']
