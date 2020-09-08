@@ -76,6 +76,7 @@ class DoctorController extends Controller
      */
     public function update(DoctorRequest $request, $id): RedirectResponse
     {
+
         ($doctor = Doctor::query()->findOrFail($id))->update($request->except(['clinics', 'specializations']));
         $doctor->clinics()->sync($request->get('clinics'));
         $doctor->specialisations()->sync($request->get('specializations'));

@@ -19,5 +19,11 @@
             @include('components.ajax-select', ['name' => 'specializations[]','title' => 'Специализации<span class="req">*</span>',
                      'route' => 'admin.preload.specializations','multiple' => true, 'default' => ['val' => $instance->selectedSpecialisations]])
         </div>
+        <div class="col-lg-12">
+            <div class="form-group" style="padding: 5px">
+                <strong style="margin-bottom: 10px!important;">Стаж работы</strong>
+                <input type="text" name="experience" value="{{ old('experience', $instance->experience) }}" class="form-control">
+            </div>
+        </div>
     </div>
 @endsection

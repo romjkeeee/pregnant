@@ -30,7 +30,8 @@ class DoctorRequest extends FormRequest
             'clinics.*'         => ['required', 'exists:clinics,id'],
             'specializations'   => ['required', 'array'],
             'specializations.*' => ['required', 'exists:specializations,id'],
-            'image'             => ['image']
+            'image'             => ['image'],
+            'experience' => ['min:1']
         ];
     }
 

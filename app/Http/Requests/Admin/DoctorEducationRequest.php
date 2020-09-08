@@ -29,6 +29,7 @@ class DoctorEducationRequest extends FormRequest
             'translate.*.lang_id'     => ['required', 'exists:langs,id'],
             'translate.*.title'       => ['required', 'string'],
             'translate.*.description' => ['required', 'between:3,60000'],
+            'image'                   => ['image'],
         ];
     }
 
