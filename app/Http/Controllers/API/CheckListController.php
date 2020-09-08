@@ -73,7 +73,8 @@ class CheckListController extends Controller
         $patient = auth()->user()->patient()->first();
 
         $task = PatientTaskRemember::where([
-            'task_id' => $request->task_id
+            'task_id' => $request->task_id,
+            'patient_id' => $patient->id
         ])->first();
 
         if($task) {
