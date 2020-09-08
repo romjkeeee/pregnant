@@ -98,6 +98,14 @@ class ChatForumController extends Controller
         ]);
     }
 
+    function key_compare_func($a, $b)
+    {
+        if ($a === $b) {
+            return 0;
+        }
+        return ($a > $b)? 1:-1;
+    }
+
     /**
      * @param Request $request
      * @param $id
@@ -106,14 +114,34 @@ class ChatForumController extends Controller
 
     public function update(Request $request, $id)
     {
-        $users = [];
+        $chat = Chat::find($id);
+        $users_chat = json_decode($chat->group_users);
+        $add = array_diff($request->users, $users_chat);
+        $delete = array_diff($users_chat, $request->users);
 
-        foreach ($request->users as $item) {
-            $users[] = User::find($item)->id;
+        foreach ($add as $item) {
+            $user = User::find($item)->id;
+            $users_chat[] = $user;
+
+            UsersGroup::create([
+                'chat_id' => $chat->id,
+                'user_id' => $user,
+                'type' => $chat->group_type
+            ]);
         }
 
-        Chat::find($id)->update([
-            'group_users' => json_encode($users),
+        foreach ($delete as $key => $item) {
+            $user = User::find($item)->id;
+            unset($users_chat[$key]);
+
+            UsersGroup::where([
+                'chat_id' => $chat->id,
+                'user_id' => $user
+            ])->delete();
+        }
+
+        $chat->update([
+            'group_users' => json_encode($users_chat),
             'group_title' => $request->get('title')
         ]);
 
