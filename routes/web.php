@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
     Route::group(['prefix' => 'doctors', 'as' => 'doctors.'], function () {
         Route::resource('educations', 'DoctorEducationController');
         Route::resource('reviews', 'DoctorReviewController');
+        Route::resource('schedules', 'DoctorScheduleController');
     });
     Route::resource('doctors', 'DoctorController');
     /** clinics routes */
@@ -60,6 +61,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
         Route::resource('schedules', 'ClinicScheduleController');
         Route::resource('departments', 'ClinicDepartmentsController');
     });
+
     Route::resource('clinics', 'ClinicController');
     /** specialisations routes */
     Route::resource('specialisations', 'SpecialisationController');

@@ -72,12 +72,22 @@ class CheckListController extends Controller
     {
         $patient = auth()->user()->patient()->first();
 
-        $remember =  new PatientTaskRemember();
-        $remember->task_id = $request->task_id;
-        $remember->patient_id = $patient->id;
-        $remember->remember = $request->remember;
-        $remember->date = $request->date;
-        $remember->save();
+        $task = PatientTaskRemember::where([
+            'task_id' => $request->task_id
+        ])->first();
+
+        if($task) {
+            $task->update([
+                'date' => $request->date
+            ]);
+        } else {
+            $remember = new PatientTaskRemember();
+            $remember->task_id = $request->task_id;
+            $remember->patient_id = $patient->id;
+            $remember->remember = $request->remember;
+            $remember->date = $request->date;
+            $remember->save();
+        }
 
         return \response(['Сохранено.']);
     }

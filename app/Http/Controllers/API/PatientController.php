@@ -6,10 +6,12 @@ use App\Doctor;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GetPregnancyPatologyRequest;
 use App\Http\Requests\PatientConceptionRequest;
+use App\Http\Requests\PatientLastMenstruationRequest;
 use App\Http\Requests\PregnancyNumberRequest;
 use App\Http\Requests\PregnancyPatologyRequest;
 use App\Http\Requests\UpToWeightRequest;
 use App\Patient;
+use App\PatientLastMenstruation;
 use App\PragnancyNumber;
 use App\PregnancyNumber;
 use App\PregnancyPatologye;
@@ -142,6 +144,7 @@ class PatientController extends Controller
             'doctor.patients' => $query_patient,
             'doctor.patients.bellies',
             'doctor.patients.weight',
+            'doctor.patients.lastMenstruation',
             'doctor.patients.clinic.translates',
             'doctor.patients.user.city.translates',
             'doctor.patients.user.region.translates',
@@ -267,5 +270,17 @@ class PatientController extends Controller
     public function updateUpToWeight(UpToWeightRequest $request)
     {
         return \response()->json(auth()->user()->patient()->update($request->validated()));
+    }
+
+    /**
+     * @param PatientLastMenstruationRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function setLastMenstruation(PatientLastMenstruationRequest $request)
+    {
+        return \response()->json(
+            PatientLastMenstruation::create($request->validated())
+        );
     }
 }
