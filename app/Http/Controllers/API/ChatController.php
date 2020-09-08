@@ -246,7 +246,7 @@ class ChatController extends Controller
             }
         }
 
-        return \response()->json($user_groups);
+        return \response()->json((array) $user_groups);
     }
 
     /**
