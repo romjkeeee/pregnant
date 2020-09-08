@@ -132,7 +132,6 @@ class ChatForumController extends Controller
 
         foreach ($delete as $key => $item) {
             $user = User::find($item)->id;
-            unset($users_chat[$key]);
 
             UsersGroup::where([
                 'chat_id' => $chat->id,
@@ -141,7 +140,7 @@ class ChatForumController extends Controller
         }
 
         $chat->update([
-            'group_users' => json_encode($users_chat),
+            'group_users' => json_encode($request->users),
             'group_title' => $request->get('title')
         ]);
 
