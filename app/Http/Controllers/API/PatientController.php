@@ -185,7 +185,7 @@ class PatientController extends Controller
 
     public function duration(int $id)
     {
-        $user = Patient::where('user_id', $id)->first();
+        $user = Patient::where('id', $id)->first();
 
         $now = time();
         $your_date = strtotime($user->conception_date);
