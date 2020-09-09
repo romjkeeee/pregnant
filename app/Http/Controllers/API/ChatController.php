@@ -168,7 +168,13 @@ class ChatController extends Controller
         $chat = Chat::find($request->chat_id);
 
         $users = json_decode($chat->group_users);
-        if (array_search( (int) $request->user_id, $users)) {
+
+        $users_group = UsersGroup::where([
+            'chat_id' => $request->chat_id,
+            'user_id' => $request->user_id
+        ])->first();
+
+        if ($users_group) {
             return \response()->json([
                 'success' => 0,
                 'text' => 'Этот пользователь уже в чате!'
