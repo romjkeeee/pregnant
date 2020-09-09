@@ -46,7 +46,7 @@ class NotifyTaskPatient extends Command
     {
         $users = PatientTaskRemember::query()->whereNotNull('date')->get();
         foreach($users as $user) {
-            if ($user->remember == 1) {
+            if ($user->remember != 1) {
                 if ($user->date == Carbon::now()->toDateString() ) {
                     $patient = $user->patient;
                     $check_list = CheckListTaskTranslate::query()
