@@ -110,6 +110,7 @@ class ChatCouncilController extends Controller
         $users_chat = json_decode($chat->group_users);
         $add = array_diff($request->users, $users_chat);
         $delete = array_diff($users_chat, $request->users);
+        $users = [];
 
         foreach ($add as $item) {
             $user = User::find($item)->id;
@@ -131,8 +132,12 @@ class ChatCouncilController extends Controller
             ])->delete();
         }
 
+        foreach ($request->users as $item) {
+            $users[] = (int) $item;
+        }
+
         $chat->update([
-            'group_users' => json_encode($request->users),
+            'group_users' => json_encode($users),
             'group_title' => $request->get('title')
         ]);
 
