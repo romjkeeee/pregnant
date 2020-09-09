@@ -98,6 +98,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::post('patients/get-pregnancy-patology', 'PatientController@getPregnancyPatology');
     Route::post('patients/set-last-menstruation', 'PatientController@setLastMenstruation');
     Route::post('patients/up-to-weight', 'PatientController@updateUpToWeight');
+    Route::post('patients/duration/{id}', 'PatientController@duration');
 
     Route::post('conception-date', 'PatientController@conceptionDate');
     Route::post('pregnant', 'PatientController@pregnant');

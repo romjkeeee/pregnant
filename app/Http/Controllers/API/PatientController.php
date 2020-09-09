@@ -69,6 +69,7 @@ class PatientController extends Controller
             'user.patient.bellies',
             'user.patient.weight',
             'user.patient.clinic.translates',
+            'user.patient.lastMenstruation',
             'user.city.translates',
             'user.region.translates',
             'user.pnumber',
