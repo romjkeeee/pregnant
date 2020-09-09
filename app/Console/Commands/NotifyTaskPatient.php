@@ -54,6 +54,7 @@ class NotifyTaskPatient extends Command
                     $data = User::query()->where('id', $patient->user_id)->first();
                     $push = new PushNotifyController();
                     $push->sendPush($check_list->name, $data->id, 'Вы просили напомнить Вам');
+                    $user->update(['remember' => 1]);
                 }
             }
         }
