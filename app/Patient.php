@@ -97,7 +97,7 @@ class Patient extends BaseModel
 
     public function lastMenstruation() : HasOne
     {
-        return $this->hasOne(PatientLastMenstruation::class, 'patient_id', 'id');
+        return $this->hasOne(PatientLastMenstruation::class, 'patient_id', 'id')->orderByDesc('id');
     }
 
 }
