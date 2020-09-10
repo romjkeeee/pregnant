@@ -174,8 +174,11 @@ class PatientController extends Controller
         }
 
         $patients->doctor->patients = $data;
-
-        return $data;
+        if ($patients->doctor->patients) {
+            return $patients->doctor->patients;
+        }else{
+            return \response()->json(['no data']);
+        }
     }
 
     /**
