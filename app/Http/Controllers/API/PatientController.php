@@ -187,8 +187,8 @@ class PatientController extends Controller
     {
         $user = Patient::where('id', $id)->first();
 
-        if ($user->conception_date == 1) {
-            if ($user->conception_date) {
+        if ($user->pregnant == 1) {
+            if (isset($user->conception_date) && $user->conception_date != '') {
                 $now = time();
                 $your_date = strtotime($user->conception_date);
                 $datediff = $now - $your_date;
