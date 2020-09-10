@@ -205,9 +205,9 @@ class PatientController extends Controller
                         'day' => floor($week),
                     ] ?? false;
             } else {
-                return \response()->json(['Нету данных']);
+                return false;
             }
-            return \response()->json(['Не беременна']);
+            return false;
         }
     }
 
