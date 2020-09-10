@@ -155,21 +155,23 @@ class PatientController extends Controller
 
         $string = explode(' ', $request->search);
 
-        foreach ($patients->doctor()->patients()->get() as $patient) {
-            if ($request->get('search')) {
-                /* Потом переделать на выборку из БД */
-                for ($i = 0; $i < count($string); $i++) {
-                    if (strripos($patient->user->name, $string[$i]) !== false) {
-                        $patient->duration = $this->duration($patient->user->id);
-                        $data[] = $patient;
-                    } elseif (strripos($patient->last_name, $string[$i]) !== false) {
-                        $patient->duration = $this->duration($patient->user->id);
-                        $data[] = $patient;
+        foreach ($patients->doctor->patients as $patient) {
+            if ($patient) {
+                if ($request->get('search')) {
+                    /* Потом переделать на выборку из БД */
+                    for ($i = 0; $i < count($string); $i++) {
+                        if (strripos($patient->user->name, $string[$i]) !== false) {
+                            $patient->duration = $this->duration($patient->user->id);
+                            $data[] = $patient;
+                        } elseif (strripos($patient->last_name, $string[$i]) !== false) {
+                            $patient->duration = $this->duration($patient->user->id);
+                            $data[] = $patient;
+                        }
                     }
+                } else {
+                    $patient->duration = $this->duration($patient->user->id);
+                    $data[] = $patient;
                 }
-            } else {
-                $patient->duration = $this->duration($patient->user->id);
-                $data[] = $patient;
             }
         }
 
