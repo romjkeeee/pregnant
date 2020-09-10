@@ -155,7 +155,7 @@ class PatientController extends Controller
 
         $string = explode(' ', $request->search);
 
-        foreach ($patients->doctor()->patients()->get() as $patient) {
+        foreach ($patients->doctor->patients as $patient) {
             if ($request->get('search')) {
                 /* Потом переделать на выборку из БД */
                 for ($i = 0; $i < count($string); $i++) {
