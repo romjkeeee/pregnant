@@ -58,7 +58,8 @@ class SendRequest extends FormRequest
                 'nullable',
                 'array'
             ],
-            'attaches.*.path' => ['required', 'image', 'max:10000']
+            'attaches.*.path' => ['required', 'image', 'max:10000'],
+            'forwarded_id' => 'nullable|exists:users,id'
         ];
     }
 
