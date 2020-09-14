@@ -21,6 +21,8 @@ class MessageResource extends JsonResource
             'send_at'  => $this->send_at ? $this->send_at->format('Y-m-d H:i:s') : null,
             'sender'   => $this->sender,
             'visible'   => $this->visible,
+            'forward' => $this->forward ?? null,
+            'forwarded_id' => $this->forwarded ?? null,
             'attaches' => AttachResource::collection($this->attaches)
         ];
     }
