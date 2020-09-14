@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\City;
+use App\District;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Collections\CityCollection;
 use App\Http\Resources\Collections\RegionCollection;
@@ -35,6 +36,11 @@ class LocationController extends Controller
     public function regions(Request $request): RegionCollection
     {
         return RegionCollection::make(Region::query()->with('translates')->paginate($request->get('perPage') ?? 50));
+    }
+
+    public function districts($id, Request $request): RegionCollection
+    {
+        return RegionCollection::make(District::query()->where('city_id', $id)->with('translates')->paginate($request->get('perPage') ?? 50));
     }
 
     /**

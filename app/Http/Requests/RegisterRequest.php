@@ -40,6 +40,7 @@ class RegisterRequest extends FormRequest
             'role'                  => ['required', Rule::in($this->__roles())],
             'email'                 => 'required|email|max:192|unique:users,email',
             'region_id'             => 'required|exists:regions,id',
+            'district_id'             => 'nullable|exists:districs,id',
             'city_id'               => 'required|exists:cities,id',
             'street'                => 'required|min:2|max:128',
             'building'              => 'required|min:1|max:32',
