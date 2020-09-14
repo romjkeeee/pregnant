@@ -6,6 +6,7 @@ use App\ArticleCategory;
 use App\CheckList;
 use App\City;
 use App\Clinic;
+use App\District;
 use App\Doctor;
 use App\Lang;
 use App\Patient;
@@ -118,6 +119,21 @@ class PreloadController extends Controller
                 $builder->where('name', 'LIKE', "%{$request->get('search')}%");
             });
         })->orderBy('id', 'desc')->get()->map(function (Region $item) {
+            return ['id' => $item->id, 'text' => $item->translate->name ?? null];
+        }));
+    }
+
+    /**
+     * @param Request $request
+     * @return ResponseFactory|Application|Response
+     */
+    public function districts(Request $request)
+    {
+        return response(District::query()->when($request->get('search'), function (Builder $query) use ($request) {
+            $query->whereHas('translates', function (Builder $builder) use ($request) {
+                $builder->where('name', 'LIKE', "%{$request->get('search')}%");
+            });
+        })->orderBy('id', 'desc')->get()->map(function (District $item) {
             return ['id' => $item->id, 'text' => $item->translate->name ?? null];
         }));
     }

@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
     /** locations routes */
     Route::resource('regions', 'RegionController');
     Route::resource('cities', 'CityController');
+    Route::resource('districs', 'DistrictController');
     /** lang routes */
     Route::resource('languages', 'LangController');
     /** translate routes */
@@ -75,6 +76,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
     /** articles routes */
     Route::resource('articles', 'ArticleController');
     Route::resource('article-category', 'ArticleCategoryController');
+
+    /** Slider routes */
+    Route::resource('slider', 'SliderController');
 
     /** helper routes */
     Route::post('destroy', 'AdminController@destroy')->name('destroy');
@@ -86,6 +90,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'namespace' => 'Admin
         Route::post('patients', 'PreloadController@patients')->name('patients');
         Route::post('cities', 'PreloadController@cities')->name('cities');
         Route::post('regions', 'PreloadController@regions')->name('regions');
+        Route::post('districts', 'PreloadController@districts')->name('districts');
         Route::post('check-list', 'PreloadController@checkList')->name('check-list');
         Route::post('specializations', 'PreloadController@specializations')->name('specializations');
         Route::post('languages', 'PreloadController@langs')->name('langs');

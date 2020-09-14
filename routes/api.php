@@ -46,6 +46,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::group(['prefix' => 'location', 'as' => 'location.'], function () {
         Route::get('regions', 'LocationController@regions');
         Route::get('cities', 'LocationController@cities');
+        Route::get('districts/{id}', 'LocationController@districts');
     });
 
     Route::group(['prefix' => 'duration-articles', 'as' => 'duration-articles.'], function () {
@@ -97,6 +98,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::post('patients/set-pregnancy-patology', 'PatientController@pregnancyPatology');
     Route::post('patients/get-pregnancy-patology', 'PatientController@getPregnancyPatology');
     Route::post('patients/set-last-menstruation', 'PatientController@setLastMenstruation');
+    Route::post('patients/set-clinic-accounting/{id}', 'PatientController@setClinicAccounting');
     Route::post('patients/up-to-weight', 'PatientController@updateUpToWeight');
     Route::post('patients/duration/{id}', 'PatientController@duration');
 
@@ -124,6 +126,8 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::apiResource('durations', 'DurationController');
 
     Route::get('send_push', 'PushNotifyController@sendPush');
+
+    Route::get('sliders', 'SliderController@index');
 
     /**
      * Tech

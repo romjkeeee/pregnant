@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Patient extends BaseModel
 {
     protected $dates = ['date_of_birth'];
-    protected $guarded = ['id'];
+    protected $guarded = [/*'id'*/];
     /**
      * @return HasOne
      */

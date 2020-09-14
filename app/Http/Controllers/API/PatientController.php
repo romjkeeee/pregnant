@@ -298,4 +298,19 @@ class PatientController extends Controller
             PatientLastMenstruation::create($request->validated())
         );
     }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function setClinicAccounting($id, Request $request)
+    {
+        return \response()->json(
+            Patient::query()->findOrFail($id)->update([
+                'clinic_accounting' => $request->clinic_accounting
+            ])
+        );
+    }
 }

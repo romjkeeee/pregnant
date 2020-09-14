@@ -34,6 +34,8 @@ class User extends Authenticatable implements JWTSubject
         'phone',
         'lang_id',
         'region_id',
+        'district_id',
+        'clinic_accounting',
         'city_id',
         'street',
         'building',
@@ -53,6 +55,8 @@ class User extends Authenticatable implements JWTSubject
         'remember_token',
     ];
 
+
+    protected $with = ['district'];
 
     // Rest omitted for brevity
 
@@ -156,6 +160,14 @@ class User extends Authenticatable implements JWTSubject
     public function region(): HasOne
     {
         return $this->hasOne(Region::class, 'id', 'region_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function district(): HasOne
+    {
+        return $this->hasOne(District::class, 'id', 'district_id');
     }
 
     /**
