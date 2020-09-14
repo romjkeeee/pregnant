@@ -16,7 +16,7 @@ class CheckListTask extends BaseModel
 
     protected $fillable = ['list_id'];
 
-    protected $appends = ['selected', 'remembers_last'];
+    protected $appends = ['selected'];
 
     /**
      * @return bool
@@ -24,11 +24,6 @@ class CheckListTask extends BaseModel
     public function getSelectedAttribute(): bool
     {
         return !!$this->patient->count();
-    }
-
-    public function getRemembersLastAttribute()
-    {
-        return $this->relations['remember'][count($this->relations['remember']) - 1];
     }
 
     /**
@@ -51,7 +46,5 @@ class CheckListTask extends BaseModel
     {
         return $this->belongsToMany(Patient::class, 'patient_task_remembers', 'task_id', 'patient_id')->select('remember','date');
     }
-
-
 
 }
