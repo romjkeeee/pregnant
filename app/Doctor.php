@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Doctor extends BaseModel
 {
-    protected $fillable = ['user_id', 'rate', 'experience'];
+    protected $fillable = ['user_id', 'rate', 'experience', 'like', 'dislike'];
 
     /**
      * @return HasOne
