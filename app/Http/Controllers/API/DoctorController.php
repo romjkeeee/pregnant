@@ -74,4 +74,32 @@ class DoctorController extends Controller
     {
         return DoctorRecourse::make(Doctor::query()->with(['user', 'clinics.schedules', 'specialisations.translates', 'educations', 'clinics.translates', 'schedules'])->findOrFail($id));
     }
+
+    /**
+     * Good luck
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function like($id)
+    {
+        return \response()->json(
+            Doctor::query()->findOrFail($id)->increment('like')
+        );
+    }
+
+    /**
+     * Not good luck :)
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function dislike($id)
+    {
+        return \response()->json(
+            Doctor::query()->findOrFail($id)->increment('dislike')
+        );
+    }
 }

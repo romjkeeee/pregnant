@@ -111,6 +111,8 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
 
     /** doctor routes */
     Route::get('specializations/doctors', 'DoctorController@specialisationDoctors');
+    Route::post('doctors/like/{id}', 'DoctorController@like');
+    Route::post('doctors/dislike/{id}', 'DoctorController@dislike');
     Route::apiResource('doctors/reviews', 'DoctorReviewController');
     Route::apiResource('doctors/educations', 'DoctorEducationController');
     Route::apiResource('doctors', 'DoctorController');

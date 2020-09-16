@@ -10,6 +10,7 @@
     <th data-toggle="true">К-ство клиник</th>
     <th data-toggle="true">К-ство специализаций</th>
     <th data-toggle="true">К-ство отзывов</th>
+    <th data-toggle="true">Качество</th>
     <th class="text-right" data-sort-ignore="true">Действия</th>
 @endsection
 @section('table-body')
@@ -25,6 +26,7 @@
             <td class="footable-visible">{{ $item->clinics->count() }}</td>
             <td class="footable-visible">{{ $item->specialisations->count() }}</td>
             <td class="footable-visible">{{ $item->reviews->count() }}</td>
+            <td class="footable-visible"><span style="color: green; display: inline-block">{{ $item->like }}</span> / <span style="color: red">{{ $item->dislike }}</span></td>
             <td class="text-right footable-visible footable-last-column">
                 @include('components.action', ['edit' => route('admin.doctors.edit', $item->id), 'delete' => $item->id])
             </td>

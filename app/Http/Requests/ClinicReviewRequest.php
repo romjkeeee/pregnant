@@ -26,7 +26,7 @@ class ClinicReviewRequest extends FormRequest
         return [
             'clinic_id' => 'required|exists:clinics,id',
             'rate'      => 'required|between:1,5',
-            'text'      => 'required|min:3|max:192',
+            'text'      => 'required|min:3',
         ];
     }
 }
