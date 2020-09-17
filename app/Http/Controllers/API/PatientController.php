@@ -174,8 +174,11 @@ class PatientController extends Controller
         }
 
         $patients->doctor->patients = $data;
-
-        return $patients->doctor->patients;
+        if ($patients->doctor->patients) {
+            return $patients->doctor->patients;
+        }else{
+            return \response()->json(['no data']);
+        }
     }
 
     /**
@@ -187,21 +190,32 @@ class PatientController extends Controller
     {
         $user = Patient::where('id', $id)->first();
 
-        $now = time();
-        $your_date = strtotime($user->conception_date);
-        $datediff = $now - $your_date;
+        if ($user) {
+            if ($user->pregnant == 1) {
+                if (isset($user->conception_date) && $user->conception_date != '') {
+                    $now = time();
+                    $your_date = strtotime($user->conception_date);
+                    $datediff = $now - $your_date;
 
-        $week = $datediff / (60 * 60 * 24);
+                    $week = $datediff / (60 * 60 * 24);
 
-        $date_pregnanc = new Carbon($user->conception_date);
-        $date_now = Carbon::now();
-        $date = $date_now->diff($date_pregnanc);
+                    $date_pregnanc = new Carbon($user->conception_date);
+                    $date_now = Carbon::now();
+                    $date = $date_now->diff($date_pregnanc);
 
-        return [
-                'month' => $date->format('%m'),
-                'week' => floor($week / 7),
-                'day' => floor($week),
-        ] ?? false;
+                    return [
+                            'month' => $date->format('%m'),
+                            'week' => floor($week / 7),
+                            'day' => floor($week),
+                        ] ?? false;
+                } else {
+                    return false;
+                }
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 
     /**

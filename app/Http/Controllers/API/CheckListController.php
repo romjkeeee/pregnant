@@ -77,7 +77,7 @@ class CheckListController extends Controller
             'patient_id' => $patient->id
         ])->first();
 
-        if($task) {
+        if ($task) {
             $task->update([
                 'date' => $request->date
             ]);
@@ -102,7 +102,7 @@ class CheckListController extends Controller
     {
         PatientTaskRemember::query()->where([
             'patient_id' => auth()->user()->patient()->first()->id,
-            'task_id'    => $id,
+            'task_id' => $id,
         ])->delete();
 
         return \response(['Сохранено.']);
@@ -115,11 +115,13 @@ class CheckListController extends Controller
      */
     public function destroy($id)
     {
-        PatientTask::query()->where([
-            'patient_id' => auth()->user()->patient()->first()->id,
-            'task_id'    => $id,
-        ])->delete();
-
-        return \response(['Сохранено.']);
+        if (PatientTask::query()
+            ->where([
+                'patient_id' => auth()->user()->patient()->first()->id,
+                'task_id' => $id,])->delete()) {
+            return \response(['Сохранено.']);
+        }else{
+            return \response(['Ошибка']);
+        }
     }
 }
