@@ -41,8 +41,8 @@ class CheckListController extends Controller
     public function index(): AnonymousResourceCollection
     {
         return CheckListResource::collection(CheckList::query()->with([
-            'tasks.remember', 'tasks.patient' => function (BelongsToMany $many) {
-                $many->where('patient_id', auth()->user()->patient()->first()->id ?? null);
+            'tasks.patient', 'tasks.remember' => function (BelongsToMany $many) {
+                $many->where('patient_id', auth()->user()->patient->id);
             }
         ])->get());
     }
