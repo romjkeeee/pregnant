@@ -39,8 +39,7 @@ class SendGroupRequest extends FormRequest
                     return empty($this->all()['attaches'] ?? []);
                 }),
                 'nullable',
-                'min:1',
-                'max:192'
+                'min:1'
             ],
             'attaches'        => [
                 Rule::requiredIf(function () {

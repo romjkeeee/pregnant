@@ -25,5 +25,11 @@
                 <input type="text" name="experience" value="{{ old('experience') }}" class="form-control">
             </div>
         </div>
+        <div class="col-lg-3">
+            <div class="form-check form-check-inline" style="margin-top: 30px; margin-left: 10px">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" @if(old('is_admin')) checked @endif value="1" name="is_admin">
+                <label class="form-check-label" for="inlineCheckbox1">Администратор больницы?</label>
+            </div>
+        </div>
     </div>
 @endsection
