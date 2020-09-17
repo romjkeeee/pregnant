@@ -101,6 +101,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::post('patients/set-clinic-accounting/{id}', 'PatientController@setClinicAccounting');
     Route::post('patients/up-to-weight', 'PatientController@updateUpToWeight');
     Route::post('patients/duration/{id}', 'PatientController@duration');
+    Route::post('patients/set_usd/{id}', 'PatientController@setUSD');
 
     Route::post('conception-date', 'PatientController@conceptionDate');
     Route::post('pregnant', 'PatientController@pregnant');
@@ -123,6 +124,7 @@ Route::group(['namespace' => 'API', 'as' => 'api.'], function () {
     Route::apiResource('clinics/reviews', 'ClinicReviewController');
     Route::apiResource('clinics', 'ClinicController');
     Route::get('clinics-search', 'ClinicController@search');
+    Route::post('clinics/admin/{id}', 'DoctorController@adminClinic');
 
     Route::apiResource('specializations', 'SpecializationController');
     Route::apiResource('durations', 'DurationController');

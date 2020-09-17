@@ -299,4 +299,19 @@ class PatientController extends Controller
             ])
         );
     }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function setUSD($id, Request $request)
+    {
+        return \response()->json(
+            Patient::query()->findOrFail($id)->update([
+                'usd_date' => $request->usd_date
+            ])
+        );
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Doctor;
+use App\DoctorClinic;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DoctorRecourse;
 use App\Specialization;
@@ -100,6 +101,30 @@ class DoctorController extends Controller
     {
         return \response()->json(
             Doctor::query()->findOrFail($id)->increment('dislike')
+        );
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+
+    public function adminClinic($id)
+    {
+        return \response()->json(
+            DoctorClinic::query()->where(function (Builder $builder) use ($id) {
+                $builder->where('clinic_id', $id);
+                $builder->whereHas('doctor', function (Builder $builder) {
+                    $builder->where('is_admin', 1);
+                });
+            })->with([
+                'doctor.user',
+                'doctor.specialisations.translates',
+                'doctor.reviews',
+                'clinic.region.translates',
+                'clinic.city.translates',
+                'clinic.translates'
+            ])->get()
         );
     }
 }
