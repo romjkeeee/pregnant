@@ -42,7 +42,7 @@ class CheckListController extends Controller
     {
         return CheckListResource::collection(CheckList::query()->with([
             'tasks.patient', 'tasks.remember' => function (BelongsToMany $many) {
-                $many->where('patient_id', auth()->user()->patient->id ?? null);
+                $many->where('patient_id', auth()->user()->patient->id);
             }
         ])->get());
     }
