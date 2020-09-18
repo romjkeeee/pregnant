@@ -116,7 +116,7 @@ class ChatForumController extends Controller
     {
         $chat = Chat::find($id);
         $users_chat = json_decode($chat->group_users);
-        $add = array_diff($request->users, $users_chat);
+        $add = array_diff($request->users, (array) $users_chat);
         $delete = array_diff($users_chat, $request->users);
         $users = [];
 

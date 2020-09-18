@@ -166,7 +166,7 @@ class ChatController extends Controller
     {
         $chat = Chat::find($request->chat_id);
 
-        $users = json_decode($chat->group_users);
+        $users = (array) json_decode($chat->group_users);
 
         $users_group = UsersGroup::where([
             'chat_id' => $request->chat_id,
