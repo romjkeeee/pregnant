@@ -108,20 +108,22 @@ class ChatCouncilController extends Controller
     {
         $chat = Chat::find($id);
         $users_chat = json_decode($chat->group_users);
-        $add = array_diff($request->users, (array) $users_chat);
-        $delete = array_diff($users_chat, $request->users);
-        $users = [];
+        if (!empty($request->users)) {
+            $add = array_diff($request->users, (array) $users_chat);
 
-        foreach ($add as $item) {
-            $user = User::find($item)->id;
-            $users_chat[] = $user;
+            foreach ($add as $item) {
+                $user = User::find($item)->id;
+                $users_chat[] = $user;
 
-            UsersGroup::create([
-                'chat_id' => $chat->id,
-                'user_id' => $user,
-                'type' => $chat->group_type
-            ]);
+                UsersGroup::create([
+                    'chat_id' => $chat->id,
+                    'user_id' => $user,
+                    'type' => $chat->group_type
+                ]);
+            }
         }
+        $delete = array_diff($users_chat, (array) $request->users);
+        $users = [];
 
         foreach ($delete as $key => $item) {
             $user = User::find($item)->id;
@@ -132,8 +134,10 @@ class ChatCouncilController extends Controller
             ])->delete();
         }
 
-        foreach ($request->users as $item) {
-            $users[] = (int) $item;
+        if (!empty($request->users)) {
+            foreach ($request->users as $item) {
+                $users[] = (int) $item;
+            }
         }
 
         $chat->update([
