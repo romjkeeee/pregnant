@@ -110,7 +110,7 @@ class PatientController extends Controller
     {
         $data = [];
 
-        $doctors = Doctor::query()->with(['user', 'clinics', 'specialisations', 'reviews'])->where(function (Builder $doctor) use ($request) {
+        $doctors = Doctor::query()->with(['user', 'clinics.translates', 'specialisations.translates', 'reviews'])->where(function (Builder $doctor) use ($request) {
             if ($request->get('search')) {
                 $doctor->whereHas('user', function (Builder $user) use ($request) {
                     $user->where(function (Builder $builder) use ($request) {

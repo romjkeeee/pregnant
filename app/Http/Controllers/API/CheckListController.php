@@ -79,7 +79,8 @@ class CheckListController extends Controller
 
         if ($task) {
             $task->update([
-                'date' => $request->date
+                'date' => $request->date ?? $task->date,
+                'remember' => $request->remember ?? $task->remember
             ]);
         } else {
             $remember = new PatientTaskRemember();

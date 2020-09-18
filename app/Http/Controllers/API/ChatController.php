@@ -204,11 +204,6 @@ class ChatController extends Controller
         return \response()->json($chat);
     }
 
-    /**
-     * @param GetGroupMessagesRequest $request
-     * @return MessageCollection
-     */
-
     public function groupMessages(GetGroupMessagesRequest $request)
     {
         return MessageCollection::make(ChatMessage::query()
@@ -269,7 +264,7 @@ class ChatController extends Controller
         $users = json_decode($chat->group_users);
         $search = array_search($request->user_id, $users);
 
-        if($search) {
+        if($search !== false) {
             unset($users[$search]);
         } else {
             return \response()->json([
