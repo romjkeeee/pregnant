@@ -25,7 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-         $schedule->command('patient:notify')
+        $schedule->command(NotifyTaskPatient::class, ['--force'])->daily();
+
+        $schedule->command('patient:notify')
                   ->everyMinute();
     }
 
