@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
  */
 class PushNotifyController extends Controller
 {
-    public function sendPush($body, $id, $title = false)
+    public function sendPush($body, $id, $title = false, $badge = false)
     {
         $user = User::query()->where('id',$id)->first();
         $data = [
@@ -25,7 +25,7 @@ class PushNotifyController extends Controller
 //                    "icon" => url('/logo.png')
                     'priority'=>'high',
                     'sound' => 'default',
-                    'badge' => '1'
+                    'badge' => $badge,
                 ],
         ];
         $dataString = json_encode($data);

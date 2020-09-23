@@ -308,6 +308,8 @@ class AuthController extends Controller
      */
     public function logout()
     {
+        $user = User::query()->where('id',auth()->id())->first();
+        $user->update(['push_key' => '']);
         auth()->logout();
 
         return response()->json(['status'=>'success','message' => 'Successfully logged out']);
