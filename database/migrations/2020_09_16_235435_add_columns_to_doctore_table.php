@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnsToPatientsTable extends Migration
+class AddColumnsToDoctoreTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddColumnsToPatientsTable extends Migration
      */
     public function up()
     {
-        Schema::table('patients', function (Blueprint $table) {
-            $table->string('clinic_accounting')->nullable();
+        Schema::table('doctors', function (Blueprint $table) {
+            $table->integer('like')->default(0);
+            $table->integer('dislike')->default(0);
         });
     }
 
@@ -25,7 +26,7 @@ class AddColumnsToPatientsTable extends Migration
      */
     public function down()
     {
-        Schema::table('patients', function (Blueprint $table) {
+        Schema::table('doctors', function (Blueprint $table) {
             //
         });
     }

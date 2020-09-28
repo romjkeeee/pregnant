@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddOrdersTranslatesColums extends Migration
+class AddColumnsToPatientssTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddOrdersTranslatesColums extends Migration
      */
     public function up()
     {
-        Schema::table('orders_translates', function (Blueprint $table) {
-            $table->bigInteger('lang_id')->nullable();
+        Schema::table('patients', function (Blueprint $table) {
+            $table->string('clinic_accounting')->nullable();
         });
     }
 
@@ -25,6 +25,8 @@ class AddOrdersTranslatesColums extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('patients', function (Blueprint $table) {
+            //
+        });
     }
 }
