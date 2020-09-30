@@ -162,7 +162,7 @@ class PatientController extends Controller
                     if (strripos($patient->user->name, $string[$i]) !== false) {
                         $patient->duration = $this->duration($patient->user->id);
                         $data[] = $patient;
-                    } elseif (strripos($patient->last_name, $string[$i]) !== false) {
+                    } elseif (strripos($patient->user->last_name, $string[$i]) !== false) {
                         $patient->duration = $this->duration($patient->user->id);
                         $data[] = $patient;
                     }
