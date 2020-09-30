@@ -31,10 +31,10 @@ class PushNotifyController extends Controller
         $dataString = json_encode($data);
 
         $headers = [
-            'Authorization: key=' . env('FIREBASE_SERVER_KEY'),
+            'Authorization: key=AAAAaTzOGBM:APA91bEwipPyNgtKQo6rWRkcXuA7dPc6pQac0FDb1T44jhuoXBEVL_HhhzcOOoAZrDnfLnTekxe7LbRiSyqyDK33rDCcVYPZYpnOplthsmsC4fNCnaH7i2l-10eynhykLq8mLBAFKh2x',
             'Content-Type: application/json',
         ];
-dd($headers);
+
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
@@ -44,7 +44,6 @@ dd($headers);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
 
         $data = curl_exec($ch);
-        dd($data);
         return response($data);
     }
 }
