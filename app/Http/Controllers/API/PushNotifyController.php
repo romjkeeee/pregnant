@@ -34,7 +34,7 @@ class PushNotifyController extends Controller
             'Authorization: key=' . env('FIREBASE_SERVER_KEY'),
             'Content-Type: application/json',
         ];
-
+dd($headers);
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
