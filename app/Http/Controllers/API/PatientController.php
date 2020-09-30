@@ -157,7 +157,7 @@ class PatientController extends Controller
 
         foreach ($patients->doctor->patients as $patient) {
             if ($request->get('search')) {
-                /* Потом переделать на выборку из БД */
+                /* TODO: Потом переделать на выборку из БД */
                 for ($i = 0; $i < count($string); $i++) {
                     if (strripos($patient->user->name, $string[$i]) !== false) {
                         $patient->duration = $this->duration($patient->user->id);
