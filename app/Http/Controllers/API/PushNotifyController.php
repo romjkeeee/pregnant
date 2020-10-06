@@ -26,6 +26,7 @@ class PushNotifyController extends Controller
                     'priority'=>'high',
                     'sound' => 'default',
                     'badge' => $badge,
+                    'ignoreInForeground' => false
                 ],
         ];
         $dataString = json_encode($data);
