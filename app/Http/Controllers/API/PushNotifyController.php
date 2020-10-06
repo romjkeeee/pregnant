@@ -18,13 +18,15 @@ class PushNotifyController extends Controller
         $user = User::query()->where('id',$id)->first();
         $data = [
             "to" => $user->push_key,
-
+            "notification" =>
+                [
                     "title" => $title ?? 'Pregnancy',
                     "body" => $body ?? 'New notification',
 //                    "icon" => url('/logo.png')
                     'priority'=>'high',
                     'sound' => 'default',
                     'badge' => $badge,
+                ],
         ];
         $dataString = json_encode($data);
 
