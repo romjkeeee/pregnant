@@ -152,7 +152,9 @@ class ChatController extends Controller
         $body = User::find($message->sender_id);
 
         foreach ($groupUsers as $user) {
-            $sendPush->sendPush($message->text, $user, $chat->title,1);
+            if ($user != auth()->id()) {
+                $sendPush->sendPush($message->text, $user, $chat->title, 1);
+            }
         }
         return MessageResource::make(ChatMessage::query()->findOrFail($message->id));
     }
