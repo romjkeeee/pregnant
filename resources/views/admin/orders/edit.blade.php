@@ -20,18 +20,16 @@
                 <input type="date" name="date" value="{{ old('date', $instance->date) }}" class="form-control">
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="form-group" style="padding: 5px">
-                    <strong style="margin-bottom: 10px!important;">Файл <span class="req">*</span></strong>
-                    <input type="file" name="file" value="{{ old('file') }}" class="form-control">
-                </div>
+        <div class="col-lg-6">
+            <div class="form-group" style="padding: 5px">
+                <strong style="margin-bottom: 10px!important;">Файл <span class="req">*</span></strong>
+                <input type="file" name="file" value="{{ old('file') }}" class="form-control">
             </div>
         </div>
         @if($instance->file)
             <div class="form-group">
                 <label>File</label><br>
-                <a href="{{ $instance->file }}"><i class="fas fa-eye"></i></a>
+                <a href="{{ $instance->file }}">Посмотреть</a>
             </div>
         @endif
         @include('components.multi-lang', ['fields' => [
