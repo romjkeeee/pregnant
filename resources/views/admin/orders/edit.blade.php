@@ -31,7 +31,7 @@
         @if($instance->file)
             <div class="form-group">
                 <label>File</label><br>
-                <a href="{{ asset('storage/'.$instance->file) }}"><i class="fas fa-eye"></i></a>
+                <a href="{{ $instance->file }}"><i class="fas fa-eye"></i></a>
             </div>
         @endif
         @include('components.multi-lang', ['fields' => [
