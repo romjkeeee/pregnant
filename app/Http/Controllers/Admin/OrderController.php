@@ -48,7 +48,7 @@ class OrderController extends Controller
         $order = Order::query()->create($request->validated());
         $order->syncTranslates($request->get('translate'));
         if ($request->file('file')){
-            $order->file = env('APP_URL') . $request->file('file')->store('order');
+            $order->file = config('app.url') . $request->file('file')->store('order');
             $order->update();
         }
 
@@ -80,7 +80,7 @@ class OrderController extends Controller
         $article->update($request->validated());
         $article->syncTranslates($request->get('translate'));
         if ($request->file('file')){
-            $article->file = env('APP_URL') . $request->file('file')->store('order');
+            $article->file = config('app.url') . $request->file('file')->store('order');
             $article->update();
         }
 
