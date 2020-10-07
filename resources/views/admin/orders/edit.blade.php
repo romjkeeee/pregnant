@@ -10,7 +10,8 @@
         <div class="col-lg-6">
             <div class="form-group" style="padding: 5px">
                 <strong style="margin-bottom: 10px!important;">Номер приказа <span class="req">*</span></strong>
-                <input type="text" name="id_order" value="{{ old('id_order', $instance->id_order) }}" class="form-control">
+                <input type="text" name="id_order" value="{{ old('id_order', $instance->id_order) }}"
+                       class="form-control">
             </div>
         </div>
         <div class="col-lg-6">
@@ -27,6 +28,12 @@
                 </div>
             </div>
         </div>
+        @if($instance->file)
+            <div class="form-group">
+                <label>File</label><br>
+                <a href="{{ asset('storage/'.$instance->file) }}"><i class="fas fa-eye"></i></a>
+            </div>
+        @endif
         @include('components.multi-lang', ['fields' => [
             ['title' => 'Название <span class="req">*</span>', 'name' => 'title'],
             ['title' => 'Текст статьи <span class="req">*</span>', 'name' => 'text', 'tag' => 'textarea']
