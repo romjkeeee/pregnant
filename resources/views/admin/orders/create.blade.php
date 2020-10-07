@@ -19,6 +19,14 @@
                 <input type="date" name="date" value="{{ old('date') }}" class="form-control">
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group" style="padding: 5px">
+                    <strong style="margin-bottom: 10px!important;">Файл <span class="req">*</span></strong>
+                    <input type="file" name="file" value="{{ old('file') }}" class="form-control">
+                </div>
+            </div>
+        </div>
         <div class="col-lg-12">
 
             @include('components.multi-lang', ['fields' => [

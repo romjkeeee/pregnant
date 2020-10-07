@@ -26,6 +26,7 @@ class AddOrderRequest extends FormRequest
         return [
             'id_order' => 'required',
             'date' => 'required|date',
+            "file" => "required|mimetypes:application/pdf|max:10000",
             'translate'           => ['required', 'array'],
             'translate.*.lang_id' => ['required', 'exists:langs,id'],
             'translate.*.title'   => ['required', 'string'],

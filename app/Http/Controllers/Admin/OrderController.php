@@ -47,6 +47,10 @@ class OrderController extends Controller
     {
         $order = Order::query()->create($request->validated());
         $order->syncTranslates($request->get('translate'));
+        if ($request->file('file')){
+            $order->file = $request->file('file')->store('order');
+            $order->update();
+        }
 
         return redirect()->route('admin.orders.index')->with('success', 'Приказ успешно добавлен!');
     }
@@ -75,6 +79,10 @@ class OrderController extends Controller
         $article = Order::query()->findOrFail($id);
         $article->update($request->validated());
         $article->syncTranslates($request->get('translate'));
+        if ($request->file('file')){
+            $article->file = $request->file('file')->store('order');
+            $article->update();
+        }
 
         return back()->with('success', 'Сохранено!');
     }
